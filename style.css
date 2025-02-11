@@ -9,30 +9,57 @@ body {
 }
 
 header {
-  background-color: #673ab7; /* Темно-фиолетовый заголовок */
-  color: #fff;
+  /* background-color: #673ab7;  Удаляем фиолетовый фон из header */
+  color: #333;  /*  Меняем цвет текста на черный или серый, чтобы он был виден на светлом фоне */
   padding: 1rem 0;
-  text-align: center;
+  background: none; /*  Удаляем фон полностью */
+}
+
+.header-container {
+  display: flex;
+  align-items: center; /* Вертикальное выравнивание по центру */
+  justify-content: space-between; /* Распределение элементов по краям */
+  padding: 0 2rem; /* Отступы слева и справа */
+}
+
+.logo {
+  width: 50px; /* Размер логотипа */
+  height: 50px;
+  margin-right: 1rem; /* Отступ справа от логотипа */
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Масштабирование изображения с сохранением пропорций */
 }
 
 header h1 {
   margin: 0;
+  margin-right: auto; /* Толкает название вправо от логотипа */
+  margin-left: 2rem; /* Дополнительный отступ слева от названия */
+  color: #673ab7; /* Добавляем цвет названия фиолетовым */
 }
 
 nav ul {
   padding: 0;
   margin: 0;
   list-style: none;
+  display: flex; /* Размещаем элементы навигации в строку */
 }
 
 nav ul li {
-  display: inline;
   margin: 0 1rem;
 }
 
 nav a {
-  color: #fff;
+  color: #673ab7; /* Меняем цвет навигации на фиолетовый */
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #512da8; /* Цвет при наведении */
 }
 
 main {
@@ -58,7 +85,7 @@ main {
   transform: translate(-50%, -100%); /* Position above coin */
   font-size: 1.5rem;
   font-weight: 500;
-  color: #fff; /* Белый цвет текста баланса */
+  color: #673ab7; /* Фиолетовый цвет текста баланса */
 }
 
 #coin {
