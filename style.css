@@ -1,18 +1,48 @@
-const navLinks = document.querySelectorAll('nav li');
-const sections = document.querySelectorAll('main section');
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blum Inspired Site</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
 
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        // 1. Deactivate all links and sections
-        navLinks.forEach(link => link.classList.remove('active'));
-        sections.forEach(section => section.classList.remove('active'));
+        <nav>
+            <ul>
+                <li class="active" data-section="home">Главная</li>
+                <li data-section="swap">Обмен</li>
+                <li data-section="portfolio">Портфель</li>
+                <li data-section="earn">Заработок</li>
+            </ul>
+        </nav>
 
-        // 2. Activate the clicked link and corresponding section
-        link.classList.add('active');
-        const sectionId = link.dataset.section;
-        document.getElementById(sectionId).classList.add('active');
-    });
-});
+        <main>
+            <section id="home" class="active">
+                <h2>Главная</h2>
+                <p>Добро пожаловать на Blum Inspired Site!</p>
+            </section>
 
-// Initially activate the "home" section
-document.querySelector('nav li[data-section="home"]').click();
+            <section id="swap">
+                <h2>Обмен</h2>
+                <p>Здесь будет функционал обмена...</p>
+            </section>
+
+            <section id="portfolio">
+                <h2>Портфель</h2>
+                <p>Здесь будет отображаться ваш портфель...</p>
+            </section>
+
+            <section id="earn">
+                <h2>Заработок</h2>
+                <p>Здесь вы сможете зарабатывать токены...</p>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
