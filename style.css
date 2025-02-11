@@ -1,48 +1,91 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Blum Inspired Site</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #181A2A; /* Темно-серый фон */
+    color: #E0E2F1;           /* Светлый текст */
+    line-height: 1.6;          /* Увеличиваем межстрочный интервал */
+}
 
-        <nav>
-            <ul>
-                <li class="active" data-section="home">Главная</li>
-                <li data-section="swap">Обмен</li>
-                <li data-section="portfolio">Портфель</li>
-                <li data-section="earn">Заработок</li>
-            </ul>
-        </nav>
+.container {
+    max-width: 900px;           /* Увеличиваем ширину контейнера */
+    margin: 20px auto;          /* Центрируем и добавляем отступы */
+    padding: 30px;              /* Увеличиваем внутренние отступы */
+}
 
-        <main>
-            <section id="home" class="active">
-                <h2>Главная</h2>
-                <p>Добро пожаловать на Blum Inspired Site!</p>
-            </section>
+/* Стили для навигации */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #26283B; /* Более темный фон для навигации */
+    border-radius: 15px;        /* Увеличиваем скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень */
+    padding: 15px;              /* Увеличиваем внутренние отступы */
+}
 
-            <section id="swap">
-                <h2>Обмен</h2>
-                <p>Здесь будет функционал обмена...</p>
-            </section>
+nav li {
+    color: #9CA3AF;           /* Светло-серый цвет для пунктов меню */
+    border-bottom: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    padding: 12px 15px;        /* Увеличиваем отступы */
+    border-radius: 10px;       /* Скругляем углы */
+}
 
-            <section id="portfolio">
-                <h2>Портфель</h2>
-                <p>Здесь будет отображаться ваш портфель...</p>
-            </section>
+nav li:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* Подсветка при наведении */
+}
 
-            <section id="earn">
-                <h2>Заработок</h2>
-                <p>Здесь вы сможете зарабатывать токены...</p>
-            </section>
-        </main>
+nav li.active {
+    color: #FFFFFF;           /* Белый цвет для активного пункта */
+    font-weight: 700;
+    background-color: rgba(0, 123, 255, 0.1); /* Подсветка активного пункта */
+}
 
-    </div>
+/* Стили для секций */
+main section {
+    display: none;
+    padding: 30px;              /* Увеличиваем внутренние отступы */
+    background-color: #26283B; /* Фон для секций */
+    border-radius: 15px;        /* Увеличиваем скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень */
+    margin-top: 30px;          /* Увеличиваем отступ сверху */
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+main section.active {
+    display: block;
+}
+
+h2 {
+    font-size: 24px;            /* Увеличиваем размер шрифта */
+    font-weight: 700;
+    margin-bottom: 25px;       /* Увеличиваем отступ снизу */
+    color: #FFFFFF;           /* Белый цвет для заголовков */
+}
+
+p {
+    font-size: 16px;            /* Увеличиваем размер шрифта */
+    color: #CBD5E0;           /* Более светлый цвет для текста */
+}
+
+/* Дополнительные стили для кнопок и элементов (если есть) */
+/*
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+*/
