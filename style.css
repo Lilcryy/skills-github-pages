@@ -1,91 +1,143 @@
-/* Общие стили */
+/* style.css */
+
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #181A2A; /* Темно-серый фон */
-    color: #E0E2F1;           /* Светлый текст */
-    line-height: 1.6;          /* Увеличиваем межстрочный интервал */
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-.container {
-    max-width: 900px;           /* Увеличиваем ширину контейнера */
-    margin: 20px auto;          /* Центрируем и добавляем отступы */
-    padding: 30px;              /* Увеличиваем внутренние отступы */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
 }
 
-/* Стили для навигации */
+header h1 {
+  margin: 0;
+}
+
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    background-color: #26283B; /* Более темный фон для навигации */
-    border-radius: 15px;        /* Увеличиваем скругление углов */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень */
-    padding: 15px;              /* Увеличиваем внутренние отступы */
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-nav li {
-    color: #9CA3AF;           /* Светло-серый цвет для пунктов меню */
-    border-bottom: none;
-    transition: color 0.3s ease;
-    font-weight: 500;
-    padding: 12px 15px;        /* Увеличиваем отступы */
-    border-radius: 10px;       /* Скругляем углы */
+nav ul li {
+  display: inline;
+  margin: 0 1rem;
 }
 
-nav li:hover {
-    background-color: rgba(255, 255, 255, 0.05); /* Подсветка при наведении */
+nav a {
+  color: #fff;
+  text-decoration: none;
 }
 
-nav li.active {
-    color: #FFFFFF;           /* Белый цвет для активного пункта */
-    font-weight: 700;
-    background-color: rgba(0, 123, 255, 0.1); /* Подсветка активного пункта */
+main {
+  padding: 2rem;
+  text-align: center;
 }
 
-/* Стили для секций */
-main section {
-    display: none;
-    padding: 30px;              /* Увеличиваем внутренние отступы */
-    background-color: #26283B; /* Фон для секций */
-    border-radius: 15px;        /* Увеличиваем скругление углов */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень */
-    margin-top: 30px;          /* Увеличиваем отступ сверху */
+#balance-section {
+  margin-bottom: 2rem;
 }
 
-main section.active {
-    display: block;
+.balance-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
 }
 
-h2 {
-    font-size: 24px;            /* Увеличиваем размер шрифта */
-    font-weight: 700;
-    margin-bottom: 25px;       /* Увеличиваем отступ снизу */
-    color: #FFFFFF;           /* Белый цвет для заголовков */
+#balance {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%); /* Position above coin */
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
 }
 
-p {
-    font-size: 16px;            /* Увеличиваем размер шрифта */
-    color: #CBD5E0;           /* Более светлый цвет для текста */
+#coin {
+  cursor: pointer;
 }
 
-/* Дополнительные стили для кнопок и элементов (если есть) */
-/*
-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+#coin img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%; /* Make it a circle */
+  transition: transform 0.2s ease-in-out;
 }
 
-button:hover {
-    background-color: #0056b3;
+#coin img:hover {
+  transform: scale(1.1);
 }
-*/
+
+#tasks {
+  margin-top: 2rem;
+}
+
+.tasks-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.task-card {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.task-icon {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.task-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.task-card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.task-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 1rem;
+  display: block;
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+.task-button:hover {
+  background-color: #218838;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
