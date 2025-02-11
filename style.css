@@ -1,162 +1,214 @@
-/* Общие стили */
+/* style.css */
+
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #4B0082; /* Фиолетовый фон */
-    color: #E0E2F1;
-    line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0eafa;
+  color: #333;
 }
 
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 30px;
+/* Header стили */
+header {
+  color: #333;
+  padding: 1rem 0;
+  background: none;
 }
 
-/* Стили для навигации */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+header h1 {
+  margin: 0;
+  margin-right: auto;
+  margin-left: 1rem;
+  color: #673ab7;
+  font-size: 1.5rem;
+}
+
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-around;
-    background-color: #6A0DAD; /* Более темный фиолетовый для навигации */
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
 }
 
-nav li {
-    color: #9CA3AF;
-    border-bottom: none;
-    transition: color 0.3s ease;
-    font-weight: 500;
-    padding: 12px 15px;
-    border-radius: 10px;
+nav ul li {
+  margin: 0 0.5rem;
 }
 
-nav li:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+nav a {
+  color: #673ab7;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.9rem;
 }
 
-nav li.active {
-    color: #FFFFFF;
-    font-weight: 700;
-    background-color: rgba(106, 13, 173, 0.3); /* Фиолетовая подсветка активного пункта */
+nav a:hover {
+  color: #512da8;
 }
 
-/* Стили для секций */
-main section {
-    display: none;
-    padding: 30px;
-    background-color: #6A0DAD; /* Темный фиолетовый фон для секций */
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
+/* Main стили */
+main {
+  padding: 1rem;
+  text-align: center;
 }
 
-main section.active {
-    display: block;
+#balance-section {
+  margin-bottom: 1rem;
 }
 
-h2 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    color: #FFFFFF;
+.balance-container {
+  position: relative;
+  width: 220px; /* Увеличиваем немного ширину контейнера */
+  height: 220px; /* Увеличиваем немного высоту контейнера */
+  margin: 0 auto;
+  display: flex;          /* Используем flexbox для выравнивания */
+  flex-direction: column; /* Размещаем элементы вертикально */
+  justify-content: center; /* Выравниваем по вертикали */
+  align-items: center;    /* Выравниваем по горизонтали */
 }
 
-p {
-    font-size: 16px;
-    color: #CBD5E0;
+#balance {
+  font-family: 'Nunito', sans-serif; /* Заменяем шрифт */
+  font-size: 1.6rem;      /* Увеличиваем размер шрифта */
+  font-weight: 700;       /* Делаем шрифт жирным */
+  color: #fff;           /* Белый цвет текста */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Добавляем тень для объема */
+  margin-bottom: 10px;  /* Отступ между балансом и монетой */
+  position: static;      /* Убираем абсолютное позиционирование */
+  transform: none;       /* Убираем transform */
+  text-align: center;    /* Центрируем текст */
 }
 
-/* Стили для баннера */
+#coin {
+  cursor: pointer;
+  width: 200px;       /* Задаем ширину монеты */
+  height: 200px;      /* Задаем высоту монеты */
+}
+
+#coin img {
+  width: 100%;          /* Монета занимает всю ширину контейнера */
+  height: 100%;         /* Монета занимает всю высоту контейнера */
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); /* Добавляем тень для объема */
+}
+
+#coin img:hover {
+  transform: scale(1.1);
+}
+
+#tasks {
+  margin-top: 1rem;
+}
+
+.tasks-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.task-card {
+  width: calc(50% - 2rem);
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  border: 1px solid #d1c4e9;
+  box-sizing: border-box;
+}
+
+.task-icon {
+  font-size: 1.5rem;
+  color: #673ab7;
+  margin-bottom: 0.5rem;
+}
+
+.task-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.task-card p {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.task-button {
+  background-color: #673ab7;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.task-button:hover {
+  background-color: #512da8;
+}
+
 #banner {
-    width: 100%;
-    text-align: center;
-    margin-top: 30px; /* Отступ от секций */
-    background-color: #800080; /* Фиолетовый фон для баннера */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
 }
 
 #banner img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#banner p {
-    color: #FFFFFF;
-    font-style: italic;
+/* Footer стили */
+footer {
+  background-color: #673ab7;
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.8rem;
 }
 
-/* Стили для баланса и кнопки */
-#balance-container {
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
+/* Медиа запросы для очень маленьких экранов (например, телефонов) */
+@media (max-width: 480px) {
+  .task-card {
+    width: 100%;
+    margin: 1rem 0;
+  }
 
-#click-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin: 0 auto;
-}
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
 
-#click-button:hover {
-    background-color: #0056b3;
-}
-
-/* Стили для заданий */
-#task-list {
-    list-style: none;
-    padding: 0;
-}
-
-#task-list li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
-
-/* Media Queries для адаптивности */
-@media (max-width: 768px) {
-    .container {
-        max-width: 100%;
-        padding: 10px;
-        margin: 0;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    nav li {
-        margin-bottom: 10px;
-        width: 100%;
-        text-align: center;
-    }
-
-    main section {
-        padding: 15px;
-    }
-
-    #banner img {
-        max-width: 100%;
-    }
+  nav ul li {
+    margin: 0.5rem 0;
+  }
 }
