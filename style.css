@@ -1,75 +1,18 @@
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
+const navLinks = document.querySelectorAll('nav li');
+const sections = document.querySelectorAll('main section');
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // 1. Deactivate all links and sections
+        navLinks.forEach(link => link.classList.remove('active'));
+        sections.forEach(section => section.classList.remove('active'));
 
-main {
-    padding: 20px;
-}
+        // 2. Activate the clicked link and corresponding section
+        link.classList.add('active');
+        const sectionId = link.dataset.section;
+        document.getElementById(sectionId).classList.add('active');
+    });
+});
 
-section {
-    margin-bottom: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-}
-
-#mint-token {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-#tasks li {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.task-button {
-    padding: 8px 16px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-}
-
-/* Добавьте стили для логотипа монетки здесь */
-#mint-token {
-  background-image: url('path/to/your/coin.png'); /* Замените на путь к изображению монетки */
-  background-size: contain; /* Подгонка размера изображения под кнопку */
-  background-repeat: no-repeat;
-  background-position: center; /* Центрирование изображения */
-  width: 100px; /* Установите желаемую ширину */
-  height: 100px; /* Установите желаемую высоту */
-  border: none; /* Уберите рамку */
-  cursor: pointer;
-  text-indent: -9999px; /* Скройте текст (если есть) */
-  overflow: hidden; /* Скройте все, что выходит за границы кнопки */
-}
+// Initially activate the "home" section
+document.querySelector('nav li[data-section="home"]').click();
