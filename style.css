@@ -9,43 +9,42 @@ body {
 }
 
 header {
-  /* background-color: #673ab7;  Удаляем фиолетовый фон из header */
-  color: #333;  /*  Меняем цвет текста на черный или серый, чтобы он был виден на светлом фоне */
+  color: #333;
   padding: 1rem 0;
-  background: none; /*  Удаляем фон полностью */
+  background: none;
 }
 
 .header-container {
   display: flex;
-  align-items: center; /* Вертикальное выравнивание по центру */
-  justify-content: space-between; /* Распределение элементов по краям */
-  padding: 0 2rem; /* Отступы слева и справа */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .logo {
-  width: 50px; /* Размер логотипа */
+  width: 50px;
   height: 50px;
-  margin-right: 1rem; /* Отступ справа от логотипа */
+  margin-right: 1rem;
 }
 
 .logo img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Масштабирование изображения с сохранением пропорций */
+  object-fit: contain;
 }
 
 header h1 {
   margin: 0;
-  margin-right: auto; /* Толкает название вправо от логотипа */
-  margin-left: 2rem; /* Дополнительный отступ слева от названия */
-  color: #673ab7; /* Добавляем цвет названия фиолетовым */
+  margin-right: auto;
+  margin-left: 2rem;
+  color: #673ab7;
 }
 
 nav ul {
   padding: 0;
   margin: 0;
   list-style: none;
-  display: flex; /* Размещаем элементы навигации в строку */
+  display: flex;
 }
 
 nav ul li {
@@ -53,13 +52,13 @@ nav ul li {
 }
 
 nav a {
-  color: #673ab7; /* Меняем цвет навигации на фиолетовый */
+  color: #673ab7;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #512da8; /* Цвет при наведении */
+  color: #512da8;
 }
 
 main {
@@ -73,29 +72,33 @@ main {
 
 .balance-container {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 250px; /* Увеличиваем ширину контейнера */
+  height: 250px; /* Увеличиваем высоту контейнера */
   margin: 0 auto;
 }
 
 #balance {
   position: absolute;
-  top: 50%;
+  top: 30%;  /*  Перемещаем баланс выше */
   left: 50%;
-  transform: translate(-50%, -100%); /* Position above coin */
-  font-size: 1.5rem;
+  transform: translate(-50%, -50%); /* Центрируем текст */
+  font-size: 1.8rem; /* Увеличиваем размер текста */
   font-weight: 500;
   color: #673ab7; /* Фиолетовый цвет текста баланса */
 }
 
 #coin {
   cursor: pointer;
+  position: absolute;  /*  Добавляем absolute positioning для размещения ниже */
+  bottom: 0;           /* Размещаем внизу контейнера */
+  left: 50%;
+  transform: translateX(-50%);  /* Центрируем монету горизонтально */
 }
 
 #coin img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%; /* Make it a circle */
+  width: 250px; /* Увеличиваем размер монеты */
+  height: 250px; /* Увеличиваем размер монеты */
+  border-radius: 50%;
   transition: transform 0.2s ease-in-out;
 }
 
