@@ -1,48 +1,226 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blum Inspired Site</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>FPI Token Mini App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #6a1b9a, #4a148c);
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 500px;
+            position: relative; /* For positioning the confetti */
+        }
+
+        .coin-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .coin {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #ffda79, #ffd700);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            transition: transform 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        .coin:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        #balance {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .task-list {
+            margin-top: 30px;
+        }
+
+        .task-button {
+            padding: 12px 25px;
+            background-color: #8e24aa;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 8px;
+            font-size: 1.1em;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .task-button:hover {
+            background-color: #6a1b9a;
+        }
+
+        /* Confetti styles */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            border-radius: 50%;
+            animation: confettiFall 5s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .task-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <div class="confetti-container" id="confettiContainer"></div>
+        <div id="balance">Balance: 0 FPI</div>
 
-        <nav>
-            <ul>
-                <li class="active" data-section="home">Главная</li>
-                <li data-section="swap">Обмен</li>
-                <li data-section="portfolio">Портфель</li>
-                <li data-section="earn">Заработок</li>
-            </ul>
-        </nav>
+        <div class="coin-container">
+            <div class="coin" id="coin">FPI</div>
+        </div>
 
-        <main>
-            <section id="home" class="active">
-                <h2>Главная</h2>
-                <p>Добро пожаловать на Blum Inspired Site!</p>
-            </section>
-
-            <section id="swap">
-                <h2>Обмен</h2>
-                <p>Здесь будет функционал обмена...</p>
-            </section>
-
-            <section id="portfolio">
-                <h2>Портфель</h2>
-                <p>Здесь будет отображаться ваш портфель...</p>
-            </section>
-
-            <section id="earn">
-                <h2>Заработок</h2>
-                <p>Здесь вы сможете зарабатывать токены...</p>
-            </section>
-        </main>
-
+        <div class="task-list">
+            <button class="task-button" onclick="completeTask('daily_visit')">Visit Daily (+5 FPI)</button>
+            <button class="task-button" onclick="completeTask('invite_friend')">Invite a Friend (+10 FPI)</button>
+            <button class="task-button" onclick="completeTask('rate_app')">Rate the App (+15 FPI)</button>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let balance = 0;
+
+        const balanceElement = document.getElementById('balance');
+        const coinElement = document.getElementById('coin');
+        const confettiContainer = document.getElementById('confettiContainer');
+
+        // Load balance from localStorage
+        window.onload = () => {
+            const savedBalance = localStorage.getItem('fpi_balance');
+            if (savedBalance) {
+                balance = parseInt(savedBalance);
+                updateBalance();
+            }
+        };
+
+        function updateBalance() {
+            balanceElement.textContent = Balance: ${balance} FPI;
+            localStorage.setItem('fpi_balance', balance); // Save to localStorage
+        }
+
+        coinElement.addEventListener('click', () => {
+            balance++;
+            updateBalance();
+        });
+
+        function completeTask(taskName) {
+            let reward = 0;
+            switch (taskName) {
+                case 'daily_visit':
+                    reward = 5;
+                    break;
+                case 'invite_friend':
+                    reward = 10;
+                    break;
+                case 'rate_app':
+                    reward = 15;
+                    break;
+            }
+
+            balance += reward;
+            updateBalance();
+            showAlert(You earned ${reward} FPI for completing task: ${taskName}, 'success');
+            startConfetti();
+        }
+
+        function startConfetti() {
+            confettiContainer.innerHTML = ''; // Clear existing confetti
+            const numberOfConfetti = 100;
+
+            for (let i = 0; i < numberOfConfetti; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = ${Math.random() * 100}%;
+                confetti.style.animationDelay = ${Math.random() * 2}s; // Random delay
+                confettiContainer.appendChild(confetti);
+            }
+
+            // Remove confetti after the animation completes (5 seconds)
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        function showAlert(message, type = 'info') {
+            alert(message); // Replace with a more stylish alert for a real app
+        }
+
+
+        updateBalance(); // Initial balance display
+    </script>
+</body>
+</html>
+alert(message); // Replace with a more stylish alert for a real app
+        }
+
+
+        updateBalance(); // Initial balance display
+    </script>
 </body>
 </html>
