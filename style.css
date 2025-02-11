@@ -1,185 +1,162 @@
-/* style.css */
-
+/* Общие стили */
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0eafa; /* Светло-фиолетовый фон */
-  color: #333;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #4B0082; /* Фиолетовый фон */
+    color: #E0E2F1;
+    line-height: 1.6;
 }
 
-header {
-  color: #333;
-  padding: 1rem 0;
-  background: none;
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 30px;
 }
 
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-}
-
-.logo {
-  width: 50px;
-  height: 50px;
-  margin-right: 1rem;
-}
-
-.logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-header h1 {
-  margin: 0;
-  margin-right: auto;
-  margin-left: 2rem;
-  color: #673ab7;
-}
-
+/* Стили для навигации */
 nav ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #6A0DAD; /* Более темный фиолетовый для навигации */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
 }
 
-nav ul li {
-  margin: 0 1rem;
+nav li {
+    color: #9CA3AF;
+    border-bottom: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    padding: 12px 15px;
+    border-radius: 10px;
 }
 
-nav a {
-  color: #673ab7;
-  text-decoration: none;
-  transition: color 0.3s ease;
+nav li:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-nav a:hover {
-  color: #512da8;
+nav li.active {
+    color: #FFFFFF;
+    font-weight: 700;
+    background-color: rgba(106, 13, 173, 0.3); /* Фиолетовая подсветка активного пункта */
 }
 
-main {
-  padding: 2rem;
-  text-align: center;
+/* Стили для секций */
+main section {
+    display: none;
+    padding: 30px;
+    background-color: #6A0DAD; /* Темный фиолетовый фон для секций */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
 }
 
-#balance-section {
-  margin-bottom: 2rem;
+main section.active {
+    display: block;
 }
 
-.balance-container {
-  position: relative;
-  width: 250px; /* Увеличиваем ширину контейнера */
-  height: 250px; /* Увеличиваем высоту контейнера */
-  margin: 0 auto;
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #FFFFFF;
 }
 
-#balance {
-  position: absolute;
-  top: 30%;  /*  Перемещаем баланс выше */
-  left: 50%;
-  transform: translate(-50%, -50%); /* Центрируем текст */
-  font-size: 1.8rem; /* Увеличиваем размер текста */
-  font-weight: 500;
-  color: #673ab7; /* Фиолетовый цвет текста баланса */
+p {
+    font-size: 16px;
+    color: #CBD5E0;
 }
 
-#coin {
-  cursor: pointer;
-  position: absolute;  /*  Добавляем absolute positioning для размещения ниже */
-  bottom: 0;           /* Размещаем внизу контейнера */
-  left: 50%;
-  transform: translateX(-50%);  /* Центрируем монету горизонтально */
-}
-
-#coin img {
-  width: 250px; /* Увеличиваем размер монеты */
-  height: 250px; /* Увеличиваем размер монеты */
-  border-radius: 50%;
-  transition: transform 0.2s ease-in-out;
-}
-
-#coin img:hover {
-  transform: scale(1.1);
-}
-
-#tasks {
-  margin-top: 2rem;
-}
-
-.tasks-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.task-card {
-  width: 300px;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  border: 1px solid #d1c4e9; /* Светло-фиолетовая граница */
-}
-
-.task-icon {
-  font-size: 2rem;
-  color: #673ab7; /* Фиолетовый цвет иконок */
-  margin-bottom: 0.5rem;
-}
-
-.task-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.task-card p {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.task-button {
-  background-color: #673ab7; /* Фиолетовая кнопка */
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  font-size: 1rem;
-  display: block;
-  margin-top: 1rem;
-  width: 100%;
-  text-align: center;
-}
-
-.task-button:hover {
-  background-color: #512da8; /* Более темный фиолетовый при наведении */
-}
-
+/* Стили для баннера */
 #banner {
-  margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px; /* Отступ от секций */
+    background-color: #800080; /* Фиолетовый фон для баннера */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #banner img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
 }
 
-footer {
-  background-color: #673ab7; /* Фиолетовый подвал */
-  color: #fff;
-  text-align: center;
-  padding: 1rem 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+#banner p {
+    color: #FFFFFF;
+    font-style: italic;
+}
+
+/* Стили для баланса и кнопки */
+#balance-container {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#click-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+#click-button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для заданий */
+#task-list {
+    list-style: none;
+    padding: 0;
+}
+
+#task-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* Media Queries для адаптивности */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 10px;
+        margin: 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    main section {
+        padding: 15px;
+    }
+
+    #banner img {
+        max-width: 100%;
+    }
 }
