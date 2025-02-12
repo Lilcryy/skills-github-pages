@@ -139,6 +139,14 @@ section {
     -webkit-tap-highlight-color: transparent;
 }
 
+#coin:active img {
+      transform: scale(0.95); /* Немного уменьшаем при нажатии */
+      transition: transform 0.1s ease-out; /* Более быстрая анимация */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Менее выраженная тень при нажатии */
+}
+    
+
+
 #coin:hover {
     transform: scale(1.05);
 }
