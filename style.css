@@ -74,46 +74,72 @@ main {
   margin-bottom: 1rem;
 }
 
+/* Стили для полоски энергии */
+.energy-bar {
+  width: 220px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 10px;
+  margin: 0 auto 10px; /* Отступ снизу */
+  position: relative;
+  overflow: hidden;
+}
+
+.energy-fill {
+  height: 100%;
+  width: 100%;
+  background-color: #4CAF50;
+  border-radius: 10px;
+  transition: width 0.3s linear;
+}
+
+.energy-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
 .balance-container {
   position: relative;
-  width: 220px; /* Увеличиваем немного ширину контейнера */
-  height: 220px; /* Увеличиваем немного высоту контейнера */
+  width: 220px;
+  height: 220px;
   margin: 0 auto;
-  display: flex;          /* Используем flexbox для выравнивания */
-  flex-direction: column; /* Размещаем элементы вертикально */
-  justify-content: center; /* Выравниваем по вертикали */
-  align-items: center;    /* Выравниваем по горизонтали */
-  /* Добавлено для убирания подсветки при касании */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   -webkit-tap-highlight-color: transparent;
 }
 
 #balance {
-  font-family: 'Nunito', sans-serif; /* Заменяем шрифт */
-  font-size: 1.6rem;      /* Увеличиваем размер шрифта */
-  font-weight: 700;       /* Делаем шрифт жирным */
-  color: #673ab7;           /* Фиолетовый цвет текста */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Добавляем тень для объема */
-  margin-bottom: 10px;  /* Отступ между балансом и монетой */
-  position: static;      /* Убираем абсолютное позиционирование */
-  transform: none;       /* Убираем transform */
-  text-align: center;    /* Центрируем текст */
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #673ab7;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+  position: static;
+  transform: none;
+  text-align: center;
 }
 
 #coin {
   cursor: pointer;
-  width: 200px;       /* Задаем ширину монеты */
-  height: 200px;      /* Задаем высоту монеты */
-  /* Добавлено для убирания подсветки при касании */
+  width: 200px;
+  height: 200px;
   -webkit-tap-highlight-color: transparent;
 }
 
 #coin img {
-  width: 100%;          /* Монета занимает всю ширину контейнера */
-  height: 100%;         /* Монета занимает всю высоту контейнера */
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   transition: transform 0.2s ease-in-out;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); /* Добавляем тень для объема */
-  /* Добавлено для убирания подсветки при касании */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -200,6 +226,26 @@ footer {
   bottom: 0;
   width: 100%;
   font-size: 0.8rem;
+  display: flex; /* Используем flexbox */
+  flex-direction: column; /* Размещаем элементы вертикально */
+  align-items: center; /* Выравниваем по центру */
+}
+
+.footer-nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav li {
+  margin: 0 0.5rem;
+}
+
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 /* Медиа запросы для очень маленьких экранов (например, телефонов) */
