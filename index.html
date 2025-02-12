@@ -14,7 +14,7 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <img src="logo.jpg" alt="Логотип FPI Token">
+        <img src="logo.png" alt="Логотип FPI Token">
       </div>
       <h1>FPI Token</h1>
       <nav>
@@ -30,10 +30,14 @@
 
   <main>
     <section id="balance-section">
+      <div class="energy-bar">
+        <div class="energy-fill" id="energy-fill"></div>
+        <div class="energy-text" id="energy-text">100/100</div>
+      </div>
       <div class="balance-container">
         <div id="balance">0.00 FPI</div>
         <div id="coin">
-          <img src="coin.jpg" alt="Монета FPI">
+          <img src="coin.png" alt="Монета FPI" ontouchstart="increaseBalance()">
         </div>
       </div>
     </section>
