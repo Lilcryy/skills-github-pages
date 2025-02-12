@@ -3,12 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const balanceElement = document.getElementById('balance');
   const coinElement = document.getElementById('coin');
   const taskButtons = document.querySelectorAll('.task-button');
+  const energyFill = document.getElementById('energy-fill');
+  const energyText = document.getElementById('energy-text');
 
   let balance = 0;
+  let energy = 100;
+  const maxEnergy = 100;
+  const energyCost = 1; // Стоимость одного нажатия
+  const recoveryTime = 3; // Время восстановления 1 энергии в секундах
 
   // Функция для обновления баланса на странице
   function updateBalance() {
     balanceElement.textContent = balance.toFixed(2) + ' FPI';
+  }
+
+  // Функция для обновления энергии
+  function updateEnergy() {
+    energyFill.style.width = `${energy}%`;
+    energyText.textContent = `${energy}/${maxEnergy}`;
   }
 
   // Функция для проверки, доступно ли задание
@@ -39,11 +51,28 @@ document.addEventListener('DOMContentLoaded', () => {
     button.classList.remove('task-button-disabled');
   }
 
-    // Функция для увеличения баланса
-    window.increaseBalance = () => {
-        balance += 0.01;
-        updateBalance();
-    };
+  // Функция для увеличения баланса
+  window.increaseBalance = () => {
+    if (energy >= energyCost) {
+      energy -= energyCost;
+      updateEnergy();
+      balance += 0.01;
+      updateBalance();
+    } else {
+      alert('Недостаточно энергии!');
+    }
+  };
+
+  // Функция для восстановления энергии
+  function recoverEnergy() {
+    if (energy < maxEnergy) {
+      energy++;
+      updateEnergy();
+    }
+  }
+
+  // Восстановление энергии каждые recoveryTime секунд
+  setInterval(recoverEnergy, recoveryTime * 1000);
 
   // Обработчики для кнопок заданий
   taskButtons.forEach(button => {
@@ -86,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Вызываем функцию для проверки доступности заданий при загрузке страницы
   checkTasksAvailability();
 
-  // Начальное обновление баланса
+  // Инициализация
   updateBalance();
+  updateEnergy();
 });
