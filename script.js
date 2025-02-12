@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     button.classList.remove('task-button-disabled');
   }
 
-  // Обработчик клика по монете
-  coinElement.addEventListener('click', () => {
-    balance += 0.01;
-    updateBalance();
-  });
+    // Функция для увеличения баланса
+    window.increaseBalance = () => {
+        balance += 0.01;
+        updateBalance();
+    };
 
   // Обработчики для кнопок заданий
   taskButtons.forEach(button => {
