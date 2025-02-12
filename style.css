@@ -83,13 +83,15 @@ main {
   flex-direction: column; /* Размещаем элементы вертикально */
   justify-content: center; /* Выравниваем по вертикали */
   align-items: center;    /* Выравниваем по горизонтали */
+  /* Добавлено для убирания подсветки при касании */
+  -webkit-tap-highlight-color: transparent;
 }
 
 #balance {
   font-family: 'Nunito', sans-serif; /* Заменяем шрифт */
   font-size: 1.6rem;      /* Увеличиваем размер шрифта */
   font-weight: 700;       /* Делаем шрифт жирным */
-  color: #fff;           /* Белый цвет текста */
+  color: #673ab7;           /* Фиолетовый цвет текста */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Добавляем тень для объема */
   margin-bottom: 10px;  /* Отступ между балансом и монетой */
   position: static;      /* Убираем абсолютное позиционирование */
@@ -101,6 +103,8 @@ main {
   cursor: pointer;
   width: 200px;       /* Задаем ширину монеты */
   height: 200px;      /* Задаем высоту монеты */
+  /* Добавлено для убирания подсветки при касании */
+  -webkit-tap-highlight-color: transparent;
 }
 
 #coin img {
@@ -109,6 +113,8 @@ main {
   border-radius: 50%;
   transition: transform 0.2s ease-in-out;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); /* Добавляем тень для объема */
+  /* Добавлено для убирания подсветки при касании */
+  -webkit-tap-highlight-color: transparent;
 }
 
 #coin img:hover {
