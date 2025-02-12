@@ -5,8 +5,12 @@ body {
     font-family: 'Nunito', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #f0f4c3, #d9e1f2); /* Градиентный фон */
-    color: #333;
+    /* background: linear-gradient(to bottom, #f0f4c3, #d9e1f2);  Удаляем градиентный фон */
+    background-image: url('space.jpg'); /* Добавляем изображение космоса */
+    background-size: cover; /* Растягиваем изображение на весь экран */
+    background-repeat: no-repeat; /* Запрещаем повторение изображения */
+    background-attachment: fixed; /* Фиксируем фон при прокрутке */
+    color: #fff; /* Меняем цвет текста на белый, чтобы было видно на фоне космоса */
     line-height: 1.6;
 }
 
@@ -14,10 +18,10 @@ body {
     box-sizing: border-box;
 }
 
-/* Header стили */
+/* Остальные стили */
 header {
-    background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый фон */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон для header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 1rem 0;
     position: sticky;
     top: 0;
@@ -47,7 +51,7 @@ header {
 
 header h1 {
     margin: 0;
-    color: #3f51b5; /* Насыщенный синий цвет */
+    color: #fff; /* Белый цвет для заголовка */
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -72,7 +76,7 @@ section {
 .energy-bar {
     width: 250px;
     height: 25px;
-    background-color: #eee;
+    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый для energy bar */
     border-radius: 15px;
     margin: 0 auto 15px;
     position: relative;
@@ -83,7 +87,7 @@ section {
 .energy-fill {
     height: 100%;
     width: 100%;
-    background-color: #8bc34a; /* Яркий зеленый цвет */
+    background-color: #4caf50; /* Яркий зеленый цвет */
     border-radius: 15px;
     transition: width 0.3s ease-in-out;
 }
@@ -114,8 +118,8 @@ section {
 #balance {
     font-size: 2.2rem;
     font-weight: 800;
-    color: #3f51b5; /* Насыщенный синий цвет */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #fff; /* Белый цвет для баланса */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     margin-bottom: 15px;
 }
 
@@ -131,7 +135,7 @@ section {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Усиленная тень */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Усиленная тень */
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -142,9 +146,10 @@ section {
 /* Задания */
 #tasks h2 {
     font-size: 2.5rem;
-    color: #3f51b5;
+    color: #fff;
     text-align: center;
     margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .tasks-container {
@@ -154,12 +159,13 @@ section {
 }
 
 .task-card {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый для task card */
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease-in-out;
-    border: none; /* Убираем рамку */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 .task-card:hover {
@@ -168,8 +174,9 @@ section {
 
 .task-icon {
     font-size: 2rem;
-    color: #3f51b5;
+    color: #fff;
     margin-bottom: 0.75rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .task-card h3 {
@@ -177,15 +184,16 @@ section {
     margin-bottom: 0.75rem;
     font-size: 1.2rem;
     font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .task-card p {
     font-size: 1rem;
-    color: #555;
+    color: #eee;
 }
 
 .task-button {
-    background-color: #3f51b5;
+    background-color: #4caf50;
     color: #fff;
     border: none;
     padding: 0.75rem 1rem;
@@ -198,11 +206,11 @@ section {
     width: 100%;
     text-align: center;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .task-button:hover {
-    background-color: #303f9f;
+    background-color: #43a047;
 }
 
 .task-button:disabled {
@@ -224,12 +232,12 @@ section {
     max-width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer */
 footer {
-    background-color: #3f51b5;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон для footer */
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -240,7 +248,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .footer-nav {
@@ -267,10 +275,11 @@ footer {
     flex-direction: column;
     align-items: center;
     transition: color 0.3s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .footer-nav a:hover {
-    color: #9fa8da; /* Более светлый оттенок синего */
+    color: #ddd;
 }
 
 .footer-nav a i {
