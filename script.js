@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const energyFill = document.getElementById('energy-fill');
   const energyText = document.getElementById('energy-text');
 
-  let balance = 0;
+  let balance = 100000;
   let energy = 100;
   const maxEnergy = 100;
   const energyCost = 1; // Стоимость одного нажатия
@@ -119,3 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
   updateBalance();
   updateEnergy();
 });
+
+
+const coin = document.getElementById('coin');
+
+    coin.addEventListener('mousedown', () => { // Событие нажатия кнопки мыши
+      coin.classList.add('pressed'); // Добавляем класс 'pressed'
+    });
+
+    coin.addEventListener('mouseup', () => { // Событие отпускания кнопки мыши
+      coin.classList.remove('pressed'); // Удаляем класс 'pressed'
+    });
+
+    coin.addEventListener('touchstart', () => { // Для мобильных устройств (нажатие пальцем)
+      coin.classList.add('pressed');
+    });
+
+    coin.addEventListener('touchend', () => { // Для мобильных устройств (отпускание пальца)
+      coin.classList.remove('pressed');
+    });
