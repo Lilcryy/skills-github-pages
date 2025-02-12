@@ -143,9 +143,10 @@ section {
       transform: scale(0.95); /* Немного уменьшаем при нажатии */
       transition: transform 0.1s ease-out; /* Более быстрая анимация */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Менее выраженная тень при нажатии */
-}
-    
+    }
 
+          
+    
 
 #coin:hover {
     transform: scale(1.05);
@@ -336,3 +337,8 @@ footer {
         font-size: 2rem;
     }
 }
+
+.task-card:hover {
+        transform: rotate(2deg); /* Небольшой поворот */
+        transition: transform 0.3s ease-in-out; /* Плавный переход */
+    }
