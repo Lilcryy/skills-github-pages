@@ -266,3 +266,27 @@ footer {
     font-size: 1rem; /* Уменьшаем размер значка для маленьких экранов */
   }
 }
+/* about.html стили */
+#about-token {
+  padding: 20px;
+  text-align: left;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+#about-token h2 {
+  color: #673ab7;
+  margin-bottom: 10px;
+}
+
+#about-token ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+#about-token li {
+  margin-bottom: 5px;
+}
