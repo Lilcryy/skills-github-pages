@@ -33,7 +33,7 @@ header {
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;  /* Изменил на flex-start */
     padding: 0 2rem;
 }
 
@@ -47,14 +47,6 @@ header {
     width: 100%;
     height: 100%;
     object-fit: contain;
-}
-
-header h1 {
-    margin: 0;
-    color: #fff; /* Белый цвет для заголовка */
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
 }
 
 /* Main стили */
@@ -123,12 +115,22 @@ section {
     margin-bottom: 15px;
 }
 
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 #coin {
     cursor: pointer;
     width: 220px;
     height: 220px;
     -webkit-tap-highlight-color: transparent;
     transition: transform 0.2s ease-in-out;
+    animation: rotate 10s linear infinite; /* Добавили анимацию вращения */
 }
 
 #coin img {
@@ -139,17 +141,14 @@ section {
     -webkit-tap-highlight-color: transparent;
 }
 
-#coin:active img {
-      transform: scale(0.95); /* Немного уменьшаем при нажатии */
-      transition: transform 0.1s ease-out; /* Более быстрая анимация */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Менее выраженная тень при нажатии */
-    }
-
-          
-    
-
 #coin:hover {
     transform: scale(1.05);
+}
+
+#coin:active img {
+  transform: scale(0.95); /* Немного уменьшаем при нажатии */
+  transition: transform 0.1s ease-out; /* Более быстрая анимация */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Менее выраженная тень при нажатии */
 }
 
 /* Задания */
@@ -179,6 +178,9 @@ section {
 
 .task-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .task-icon {
@@ -246,7 +248,7 @@ section {
 
 /* Footer */
 footer {
-    background-color: black; /* Полупрозрачный черный фон для footer */
+    background-color: black; /* Делаем фон черным */
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -337,8 +339,3 @@ footer {
         font-size: 2rem;
     }
 }
-
-.task-card:hover {
-        transform: rotate(2deg); /* Небольшой поворот */
-        transition: transform 0.3s ease-in-out; /* Плавный переход */
-    }
