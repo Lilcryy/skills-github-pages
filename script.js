@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const balanceElement = document.getElementById('balance');
+    const coinImage = document.getElementById('coin-image'); // Получаем ссылку на изображение монеты
     const coinElement = document.getElementById('coin');
     const energyFill = document.getElementById('energy-fill');
     const energyText = document.getElementById('energy-text');
@@ -23,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Баланс при загрузке:', balance);
     console.log('Энергия при загрузке:', energy);
+
+    // Загрузка SVG
+    function loadSvg(path) {
+      coinImage.src = path;
+    }
 
     // Функция для отображения уведомления
     function showNotification(message) {
@@ -160,6 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Вызываем функцию для проверки доступности заданий при загрузке страницы
     checkTasksAvailability();
+
+    // Загружаем SVG при загрузке страницы
+    loadSvg('c yoy.svg');
 });
 
 const coin = document.getElementById('coin');
