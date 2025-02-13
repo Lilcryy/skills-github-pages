@@ -150,4 +150,3 @@ coin.addEventListener('touchstart', () => { // Для мобильных уст�
 coin.addEventListener('touchend', () => { // Для мобильных устройств (отпускание пальца)
   coin.classList.remove('pressed');
 });
-
