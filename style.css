@@ -350,3 +350,9 @@ footer {
         font-size: 2rem;
     }
 }
+<div id="notification-container">
+    <div id="notification-box">
+      <p id="notification-message"></p>
+      <button id="notification-close-button">OK</button>
+    </div>
+  </div>
