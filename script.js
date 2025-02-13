@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const energyText = document.getElementById('energy-text');
     const tasksContainer = document.querySelector('.tasks-container');
 
+    // Получаем элементы уведомлений
+    const notificationContainer = document.getElementById('notification-container');
+    const notificationBox = document.getElementById('notification-box');
+    const notificationMessage = document.getElementById('notification-message');
+    const notificationCloseButton = document.getElementById('notification-close-button');
+
     let balance = parseFloat(localStorage.getItem('balance')) || 0;
     let energy = parseFloat(localStorage.getItem('energy')) || 100;
     const maxEnergy = 100;
@@ -17,6 +23,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Баланс при загрузке:', balance);
     console.log('Энергия при загрузке:', energy);
+
+    // Функция для отображения уведомления
+    function showNotification(message) {
+        notificationMessage.textContent = message;
+        notificationContainer.style.display = 'flex'; // Показываем контейнер
+    }
+
+    // Функция для скрытия уведомления
+    function hideNotification() {
+        notificationContainer.style.display = 'none'; // Скрываем контейнер
+    }
+
+    // Обработчик нажатия на кнопку закрытия уведомления
+    notificationCloseButton.addEventListener('click', hideNotification);
 
     // Функция для обновления баланса на странице
     function updateBalance() {
@@ -76,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateBalance();
             console.log('Баланс увеличен, энергия уменьшена. Новый баланс:', balance, 'Новая энергия:', energy);
         } else {
-            alert('Недостаточно энергии!');
+            showNotification('Недостаточно энергии!'); // Отображаем наше уведомление
             console.log('Недостаточно энергии!');
         }
     };
@@ -113,14 +133,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const taskName = taskCard.dataset.task;
 
             if (!isTaskAvailable(taskName)) {
-                alert('Это задание можно выполнить только через 24 часа!');
+                showNotification('Это задание можно выполнить только через 24 часа!'); // Отображаем наше уведомление
                 return;
             }
 
             const reward = parseFloat(button.dataset.reward);
             balance += reward;
             updateBalance();
-            alert(`Вы получили ${reward} FPI за выполнение задания!`);
+            showNotification(`Вы получили ${reward} FPI за выполнение задания!`); // Отображаем наше уведомление
 
             // Сохраняем время выполнения задания
             localStorage.setItem(`task_${taskName}_claimed`, new Date().toISOString());
