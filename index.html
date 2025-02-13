@@ -14,7 +14,7 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <img src="logo.png" alt="Логотип FPI Token">
+        <img src="logo.jpg" alt="Логотип FPI Token">
       </div>
     </div>
   </header>
@@ -28,7 +28,7 @@
       <div class="balance-container">
         <div id="balance">0.00 FPI</div>
         <div id="coin">
-          <img src="coin.png" alt="Монета FPI" ontouchstart="increaseBalance()">
+          <img src="coin.jpg" alt="Монета FPI" ontouchstart="increaseBalance()">
         </div>
       </div>
     </section>
@@ -37,48 +37,46 @@
       <h2>Задания</h2>
       <div class="tasks-container">
 
-        <div class="task-card">
+        <div class="task-card" data-task="share-twitter">
           <i class="fas fa-share-alt task-icon"></i>
           <h3>Поделиться в Twitter</h3>
           <p>Поделитесь новостью о FPI Token в Twitter и получите 0.1 FPI.</p>
-          <button class="task-button" data-reward="0.1" data-task="share-twitter">Выполнить</button>
+          <button class="task-button" data-reward="0.1">Выполнить</button>
         </div>
 
-        <div class="task-card">
+        <div class="task-card" data-task="join-telegram">
           <i class="fas fa-paper-plane task-icon"></i>
           <h3>Подписаться на Telegram</h3>
           <p>Присоединитесь к нашему Telegram-каналу и получите 0.2 FPI.</p>
-          <a href="https://t.me/Alekszovru" class="task-button" target="_blank" data-reward="0.2" data-task="join-telegram">Выполнить</a>
+          <a href="https://t.me/Alekszovru" class="task-button" target="_blank">Выполнить</a>
         </div>
 
-        <!-- Заменили "Оставить комментарий" на "Подписаться на Twitter" -->
-        <div class="task-card">
+        <div class="task-card" data-task="follow-twitter">
           <i class="fab fa-twitter task-icon"></i>
           <h3>Подписаться на Twitter</h3>
           <p>Подпишитесь на наш Twitter и получите 0.3 FPI.</p>
-          <button class="task-button" data-reward="0.3" data-task="follow-twitter">Выполнить</button>
+          <button class="task-button" data-reward="0.3">Выполнить</button>
         </div>
 
-        <!-- Добавили "Подписаться на ВКонтакте" -->
-        <div class="task-card">
+        <div class="task-card" data-task="join-vk">
           <i class="fab fa-vk task-icon"></i>
           <h3>Подписаться на ВКонтакте</h3>
           <p>Подпишитесь на нашу группу ВКонтакте и получите 0.25 FPI.</p>
-          <button class="task-button" data-reward="0.25" data-task="join-vk">Выполнить</button>
+          <button class="task-button" data-reward="0.25">Выполнить</button>
         </div>
 
-        <div class="task-card">
+        <div class="task-card" data-task="retweet">
           <i class="fas fa-retweet task-icon"></i>
           <h3>Сделать ретвит</h3>
           <p>Сделайте ретвит нашей последней записи и получите 0.15 FPI.</p>
-          <button class="task-button" data-reward="0.15" data-task="retweet">Выполнить</button>
+          <button class="task-button" data-reward="0.15">Выполнить</button>
         </div>
 
-        <div class="task-card">
+        <div class="task-card" data-task="like-facebook">
           <i class="fas fa-heart task-icon"></i>
           <h3>Поставить лайк в Facebook</h3>
           <p>Поставьте лайк нашей странице в Facebook и получите 0.25 FPI.</p>
-          <button class="task-button" data-reward="0.25" data-task="like-facebook">Выполнить</button>
+          <button class="task-button" data-reward="0.25">Выполнить</button>
         </div>
 
       </div>
