@@ -55,6 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //Обновленный updateUI
     function updateUI() {
         const energyPercentage = (energy / maxEnergy) * 100;
+
+        console.log("energyFill:", energyFill); // Проверяем, найден ли элемент
+        console.log("energyText:", energyText); // Проверяем, найден ли элемент
+        console.log("fpiLabel:", fpiLabel); // Проверяем, найден ли элемент
+        console.log("balanceElement:", balanceElement); // Проверяем, найден ли элемент
+
         energyFill.style.width = `${energyPercentage}%`;
         energyText.textContent = `${energy}/${maxEnergy}`;
         fpiLabel.textContent = `FPI: ${fpi.toFixed(2)}`;
@@ -255,9 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem(`task_${taskName}_claimed`, new Date().toISOString());
             disableTaskButton(taskCard);
 
-            if (taskName === 'join-telegram') {
-                window.open('https://t.me/Alekszovru', '_blank');
-            }
         }
     });
    //loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
