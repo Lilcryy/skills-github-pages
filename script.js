@@ -56,15 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateUI() {
         const energyPercentage = (energy / maxEnergy) * 100;
 
-        console.log("energyFill:", energyFill); // Проверяем, найден ли элемент
-        console.log("energyText:", energyText); // Проверяем, найден ли элемент
-        console.log("fpiLabel:", fpiLabel); // Проверяем, найден ли элемент
-        console.log("balanceElement:", balanceElement); // Проверяем, найден ли элемент
+        if (energyFill) {
+            energyFill.style.width = `${energyPercentage}%`;
+        }
+        if (energyText) {
+            energyText.textContent = `${energy}/${maxEnergy}`;
+        }
+        if (fpiLabel) {
+            fpiLabel.textContent = `FPI: ${fpi.toFixed(2)}`;
+        }
+        if (balanceElement) {
+            balanceElement.textContent = `${fpi.toFixed(2)} FPI`;
+        }
 
-        energyFill.style.width = `${energyPercentage}%`;
-        energyText.textContent = `${energy}/${maxEnergy}`;
-        fpiLabel.textContent = `FPI: ${fpi.toFixed(2)}`;
-        balanceElement.textContent = `${fpi.toFixed(2)} FPI`;
         localStorage.setItem('fpi', fpi.toFixed(2));
         localStorage.setItem('energy', energy.toFixed(2));
         localStorage.setItem('autoFpiRate', autoFpiRate.toFixed(2));
