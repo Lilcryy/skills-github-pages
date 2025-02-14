@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Загрузка SVG
     function loadSvg(path) {
-        coinImage.src = path;
+        coinImage.svg = path;
     }
 
     // Функция для отображения уведомления
