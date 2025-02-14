@@ -429,3 +429,33 @@ footer {
 .buy-button:hover {
     background-color: #43a047;
 }
+
+
+/* Стили для карточки увеличения лимита энергии */
+.energy-upgrade-card {
+    background-color: rgba(100, 149, 237, 0.2); /* Мягкий синий цвет */
+    border: 1px solid rgba(100, 149, 237, 0.5); /* Более яркая синяя рамка */
+    box-shadow: 0 4px 8px rgba(100, 149, 237, 0.3); /* Синяя тень */
+    color: #fff; /* Белый текст */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.energy-upgrade-card:hover {
+    transform: scale(1.03); /* Небольшое увеличение при наведении */
+    box-shadow: 0 6px 12px rgba(100, 149, 237, 0.5); /* Более выраженная синяя тень при наведении */
+}
+
+.energy-upgrade-card img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.energy-upgrade-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.energy-upgrade-card .price {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
