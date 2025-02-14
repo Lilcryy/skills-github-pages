@@ -1,437 +1,266 @@
-/* style.ss */
+document.addEventListener('DOMContentLoaded', () => {
+    // Переменные
+    const balanceElement = document.getElementById('balance');
+    const coinImage = document.getElementById('coin-image');
+    const coinElement = document.getElementById('coin');
+    const energyFill = document.getElementById('energy-fill');
+    const energyText = document.getElementById('energy-text');
+    const tasksContainer = document.querySelector('.tasks-container');
+    const notificationContainer = document.getElementById('notification-container');
+    const notificationBox = document.getElementById('notification-box');
+    const notificationMessage = document.getElementById('notification-message');
+    const notificationCloseButton = document.getElementById('notification-close-button');
 
-/* Общие стили */
-body {
-    font-family: 'Nunito', sans-serif;
-    margin: 0;
-    padding: 0;
-    /* background: linear-gradient(to bottom, #f0f4c3, #d9e1f2);  Удаляем градиентный фон */
-    background-image: url('space.jpg'); /* Добавляем изображение космоса */
-    background-size: cover; /* Растягиваем изображение на весь экран */
-    background-repeat: no-repeat; /* Запрещаем повторение изображения */
-    background-attachment: fixed; /* Фиксируем фон при прокрутке */
-    color: #fff; /* Меняем цвет текста на белый, чтобы было видно на фоне космоса */
-    line-height: 1.6;
-}
+    // Получаем все кнопки "Купить" в магазине
+    const buyButtons = document.querySelectorAll('.buy-button');
+    const fpiUpgradeButton = document.getElementById('fpi-upgrade-button');
+    const autoFpiUpgradeButton = document.getElementById('auto-fpi-upgrade-button');
+    const energyUpgradeButton = document.getElementById('energy-upgrade-button');
+    const fpiButton = document.getElementById('fpi-button');
+    const fpiLabel = document.getElementById('fpi-label');
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+    let fpi = parseFloat(localStorage.getItem('fpi')) || 0; // Использовать fpi вместо balance
+    let energy = parseFloat(localStorage.getItem('energy')) || 100;
+    let maxEnergy = parseFloat(localStorage.getItem('maxEnergy')) || 100;
+    let fpiPerClick = 1;
+    const energyCost = 1;
+    const recoveryTime = 3;
+    let autoFpiRate = parseFloat(localStorage.getItem('autoFpiRate')) || 0;
+    let autoEnergyRate = 0;
 
-/* Остальные стили */
-header {
-    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон для header */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+    const energyUpgradeAmount = 200;
+    const energyUpgradeCost = 100;
+    const energyIncreaseCost = 500; // Цена увеличения maxEnergy
+    const energyIncreaseAmount = 50; // Количество, на которое увеличивается maxEnergy
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;  /* Изменил на flex-start */
-    padding: 0 2rem;
-}
 
-.logo {
-    width: 50px;
-    height: 50px;
-    margin-right: 1rem;
-}
+    updateUI(); // Вызываем updateUI, а не отдельные функции
+    checkTasksAvailability();
 
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-/* Main стили */
-main {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-section {
-    margin-bottom: 3rem;
-}
-
-/* Баланс */
-#balance-section {
-    text-align: center;
-}
-
-.energy-bar {
-    width: 250px;
-    height: 25px;
-    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый для energy bar */
-    border-radius: 15px;
-    margin: 0 auto 15px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.energy-fill {
-    height: 100%;
-    width: 100%;
-    background-color: #4caf50; /* Яркий зеленый цвет */
-    border-radius: 15px;
-    transition: width 0.3s ease-in-out;
-}
-
-.energy-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.balance-container {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    -webkit-tap-highlight-color: transparent;
-}
-
-#balance {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #fff; /* Белый цвет для баланса */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 15px;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-#coin {
-    cursor: pointer;
-    width: 220px;
-    height: 220px;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 0.2s ease-in-out;
-    animation: rotate 10s linear infinite; /* Добавили анимацию вращения */
-}
-
-#coin img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Усиленная тень */
-    -webkit-tap-highlight-color: transparent;
-}
-
-#coin:hover {
-    transform: scale(1.05);
-}
-
-#coin:active img {
-  transform: scale(0.95); /* Немного уменьшаем при нажатии */
-  transition: transform 0.1s ease-out; /* Более быстрая анимация */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Менее выраженная тень при нажатии */
-}
-
-/* Задания */
-#tasks h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.tasks-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.task-card {
-    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый для task card */
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-}
-
-.task-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.task-card.completed {
-    opacity: 0.6; /* Сделаем карточку менее яркой */
-    pointer-events: none; /* Отключим взаимодействие */
-}
-
-.task-card.completed .task-button {
-    background-color: gray; /* Серый цвет для кнопки */
-    cursor: default;
-}
-
-.task-icon {
-    font-size: 2rem;
-    color: #fff;
-    margin-bottom: 0.75rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.task-card h3 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.task-card p {
-    font-size: 1rem;
-    color: #eee;
-}
-
-.task-button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    font-size: 1rem;
-    display: block;
-    margin-top: 1rem;
-    width: 100%;
-    text-align: center;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none; /* Убираем подчеркивание у ссылки */
-}
-
-.task-button:hover {
-    background-color: #43a047;
-}
-
-.task-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.task-button-disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Баннер */
-#banner {
-    text-align: center;
-}
-
-#banner img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Footer */
-footer {
-    background-color: black; /* Делаем фон черным */
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    opacity: 1; /* Убираем прозрачность */
-}
-
-.footer-nav {
-    width: 100%;
-}
-
-.footer-nav ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    padding: 0.75rem 0;
-    margin: 0;
-}
-
-.footer-nav li {
-    margin: 0;
-}
-
-.footer-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: color 0.3s ease-in-out;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.footer-nav a:hover {
-    color: #ddd;
-}
-
-.footer-nav a i {
-    margin-bottom: 0.5rem;
-    font-size: 1.4rem;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .header-container {
-        padding: 0 1rem;
+    function loadSvg(path) {
+        coinImage.src = path;
     }
 
-    header h1 {
-        font-size: 1.75rem;
+    function showNotification(message) {
+        notificationMessage.textContent = message;
+        notificationContainer.style.display = 'flex';
     }
 
-    main {
-        padding: 1.5rem;
+    function hideNotification() {
+        notificationContainer.style.display = 'none';
     }
 
-    .tasks-container {
-        grid-template-columns: 1fr;
+    notificationCloseButton.addEventListener('click', hideNotification);
+
+    //Обновленный updateUI
+    function updateUI() {
+        const energyPercentage = (energy / maxEnergy) * 100;
+        energyFill.style.width = `${energyPercentage}%`;
+        energyText.textContent = `${energy}/${maxEnergy}`;
+        fpiLabel.textContent = `FPI: ${fpi.toFixed(2)}`;
+        balanceElement.textContent = `${fpi.toFixed(2)} FPI`;
+        localStorage.setItem('fpi', fpi.toFixed(2));
+        localStorage.setItem('energy', energy.toFixed(2));
+        localStorage.setItem('autoFpiRate', autoFpiRate.toFixed(2));
+        localStorage.setItem('maxEnergy', maxEnergy.toFixed(2)); // Сохраняем maxEnergy
     }
 
-    .task-card {
-        padding: 1.25rem;
+    function isTaskAvailable(taskName) {
+        const lastClaimed = localStorage.getItem(`task_${taskName}_claimed`);
+        if (!lastClaimed) {
+            return true;
+        }
+
+        const lastClaimedDate = new Date(lastClaimed);
+        const now = new Date();
+        const diffInHours = (now.getTime() - lastClaimedDate.getTime()) / (1000 * 60 * 60);
+
+        return diffInHours >= 24;
     }
 
-    .footer-nav a {
-        font-size: 1rem;
+    function disableTaskButton(taskCard) {
+        const button = taskCard.querySelector('.task-button');
+        button.disabled = true;
+        button.textContent = 'Выполнено';
+        button.classList.add('task-button-disabled');
+        taskCard.classList.add('completed');
     }
 
-    .footer-nav a i {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 576px) {
-    header h1 {
-        font-size: 1.5rem;
+    function enableTaskButton(taskCard) {
+        const button = taskCard.querySelector('.task-button');
+        button.disabled = false;
+        button.textContent = 'Выполнить';
+        button.classList.remove('task-button-disabled');
+        taskCard.classList.remove('completed');
     }
 
-    #balance {
-        font-size: 2rem;
+    function increaseBalanceFromClick() {
+        if (energy >= energyCost) {
+            energy -= energyCost;
+            fpi += 0.01;
+            updateUI();
+        } else {
+            showNotification('Недостаточно энергии!');
+        }
+    };
+
+    function recoverEnergy() {
+        if (energy < maxEnergy) {
+            energy = Math.min(maxEnergy, energy + 1);
+            updateUI();
+        }
     }
-}
-<div id="notification-container">
-    <div id="notification-box">
-      <p id="notification-message"></p>
-      <button id="notification-close-button">OK</button>
-    </div>
-  </div>
-/* Стили для магазина */
-#shop {
-    padding: 2rem;
-    text-align: center;
-}
 
-#shop h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
+    setInterval(recoverEnergy, recoveryTime * 1000);
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
+    function checkTasksAvailability() {
+        document.querySelectorAll('.task-card').forEach(taskCard => {
+            const taskName = taskCard.dataset.task;
+            if (isTaskAvailable(taskName)) {
+                enableTaskButton(taskCard);
+            } else {
+                disableTaskButton(taskCard);
+            }
+        });
+    }
 
-.product-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    text-align: center;
-}
+    // Обновленные функции улучшений
+    function upgradeFPI() {
+        if (fpi >= 10) {
+            fpi -= 10;
+            fpiPerClick++;
+            updateUI();
+            fpiButton.textContent = `Generate FPI (+${fpiPerClick})`;
+        } else {
+            showNotification("Недостаточно FPI для улучшения!");
+        }
+    }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.15);
-}
+    function unlockAutoFPI() {
+        if (fpi >= 50) {
+            fpi -= 50;
+            autoFpiRate = 1;
+            updateUI();
+        } else {
+            showNotification("Недостаточно FPI для разблокировки автоматической генерации!");
+        }
+    }
 
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
+    function refillEnergy() {
+        if (fpi >= energyUpgradeCost) {
+            fpi -= energyUpgradeCost;
+            energy = Math.min(maxEnergy, energy + energyUpgradeAmount);
+            updateUI();
+        } else {
+            showNotification("Недостаточно FPI для пополнения энергии!");
+        }
+    }
 
-.product-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
+    function buyCoin(price) {
+        if (fpi >= price) {
+            fpi -= price;
+            updateUI();
+            showNotification("Спасибо за покупку!");
+        } else {
+            showNotification("Недостаточно FPI для покупки этой монеты!");
+        }
+    }
 
-.product-card .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #ddd;
-    margin-bottom: 1.25rem;
-}
+     function increaseMaxEnergy(price) {
+        if (fpi >= price) {
+            fpi -= price;
+            maxEnergy += energyIncreaseAmount;
+            energy = Math.min(maxEnergy, energy + energyIncreaseAmount); // Увеличиваем текущую энергию до нового максимума
+            updateUI();
+            showNotification(`Максимальный запас энергии увеличен на ${energyIncreaseAmount}!`);
+        } else {
+            showNotification("Недостаточно FPI для увеличения запаса энергии!");
+        }
+    }
 
-.buy-button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    font-size: 1rem;
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-    text-align: center;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-}
+    // Функция для автоматической генерации
+    function autoGenerate() {
+        if (energy < maxEnergy) {
+            energy = Math.min(maxEnergy, energy + autoEnergyRate / 10);
+        }
+        fpi += autoFpiRate / 10;
+        updateUI();
+    }
 
-.buy-button:hover {
-    background-color: #43a047;
-}
+    // Привязываем функции к кнопкам
+    fpiButton.addEventListener('click', () => {
+        if (energy >= energyCost) {
+            energy -= energyCost;
+            fpi += fpiPerClick;
+            updateUI();
+        } else {
+            showNotification('Недостаточно энергии!');
+        }
+    });
+
+    fpiUpgradeButton.addEventListener('click', upgradeFPI);
+    autoFpiUpgradeButton.addEventListener('click', unlockAutoFPI);
+    energyUpgradeButton.addEventListener('click', refillEnergy);
+    coinElement.addEventListener('click', () => {
+        increaseBalanceFromClick();
+    });
+
+    // Привязываем функцию покупки к кнопкам
+    buyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const price = parseInt(this.dataset.price);
+            const action = this.dataset.action; // Получаем action
+            if (action === 'increaseMaxEnergy') {
+                increaseMaxEnergy(price);
+            } else {
+                buyCoin(price); // Для старых кнопок - купить монету
+            }
+        });
+    });
+
+        //Обработчики для touch
+    coinElement.addEventListener('mousedown', () => {
+        coinElement.classList.add('pressed');
+    });
+
+    coinElement.addEventListener('mouseup', () => {
+        coinElement.classList.remove('pressed');
+    });
+
+    coinElement.addEventListener('touchstart', () => {
+        coinElement.classList.add('pressed');
+    });
+
+    coinElement.addEventListener('touchend', () => {
+        coinElement.classList.remove('pressed');
+    });
+
+    tasksContainer.addEventListener('click', (event) => {
+        const button = event.target.closest('.task-button');
+
+        if (button) {
+            const taskCard = button.closest('.task-card');
+            const taskName = taskCard.dataset.task;
+
+            if (!isTaskAvailable(taskName)) {
+                showNotification('Это задание можно выполнить только через 24 часа!');
+                return;
+            }
+
+            const reward = parseFloat(button.dataset.reward);
+            fpi += reward;
+            updateUI();
+            showNotification(`Вы получили ${reward} FPI за выполнение задания!`);
+
+            localStorage.setItem(`task_${taskName}_claimed`, new Date().toISOString());
+            disableTaskButton(taskCard);
+
+            if (taskName === 'join-telegram') {
+                window.open('https://t.me/Alekszovru', '_blank');
+            }
+        }
+    });
+   //loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
+
+        setInterval(autoGenerate, 100);
+});
