@@ -301,10 +301,8 @@ footer {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-
-/* Дополнительные стили для ссылок при наведении */
 .footer-nav a:hover {
-  text-decoration: underline;
+    color: #ddd;
 }
 
 .footer-nav a i {
