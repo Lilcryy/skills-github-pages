@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Загрузка SVG
     function loadSvg(path) {
-      coinImage.src = path;
+        coinImage.src = path;
     }
 
     // Функция для отображения уведомления
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkTasksAvailability();
 
     // Загружаем SVG при загрузке страницы
-    loadSvg('c yoy.svg');
+    loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
 });
 
 const coin = document.getElementById('coin');
