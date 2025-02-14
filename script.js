@@ -1,80 +1,66 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Переменные
     const balanceElement = document.getElementById('balance');
-    const coinImage = document.getElementById('coin-image');
+    const coinImage = document.getElementById('coin-image'); // Получаем ссылку на изображение монеты
     const coinElement = document.getElementById('coin');
     const energyFill = document.getElementById('energy-fill');
     const energyText = document.getElementById('energy-text');
     const tasksContainer = document.querySelector('.tasks-container');
+
+    // Получаем элементы уведомлений
     const notificationContainer = document.getElementById('notification-container');
     const notificationBox = document.getElementById('notification-box');
     const notificationMessage = document.getElementById('notification-message');
     const notificationCloseButton = document.getElementById('notification-close-button');
 
-    // Получаем все кнопки "Купить" в магазине
-    const buyButtons = document.querySelectorAll('.buy-button');
-    const fpiUpgradeButton = document.getElementById('fpi-upgrade-button');
-    const autoFpiUpgradeButton = document.getElementById('auto-fpi-upgrade-button');
-    const energyUpgradeButton = document.getElementById('energy-upgrade-button');
-    const fpiButton = document.getElementById('fpi-button');
-    const fpiLabel = document.getElementById('fpi-label');
-
-    let fpi = parseFloat(localStorage.getItem('fpi')) || 0; // Использовать fpi вместо balance
+    let balance = parseFloat(localStorage.getItem('balance')) || 0;
     let energy = parseFloat(localStorage.getItem('energy')) || 100;
-    let maxEnergy = parseFloat(localStorage.getItem('maxEnergy')) || 100;
-    let fpiPerClick = 1;
+    const maxEnergy = 100;
     const energyCost = 1;
     const recoveryTime = 3;
-    let autoFpiRate = parseFloat(localStorage.getItem('autoFpiRate')) || 0;
-    let autoEnergyRate = 0;
 
-    const energyUpgradeAmount = 200;
-    const energyUpgradeCost = 100;
-    const energyIncreaseCost = 500; // Цена увеличения maxEnergy
-    const energyIncreaseAmount = 50; // Количество, на которое увеличивается maxEnergy
+    // Инициализация баланса и энергии при загрузке страницы
+    updateBalance();
+    updateEnergy();
 
+    console.log('Баланс при загрузке:', balance);
+    console.log('Энергия при загрузке:', energy);
 
-    updateUI(); // Вызываем updateUI, а не отдельные функции
-    checkTasksAvailability();
-
+    // Загрузка SVG
     function loadSvg(path) {
         coinImage.src = path;
     }
 
+    // Функция для отображения уведомления
     function showNotification(message) {
         notificationMessage.textContent = message;
-        notificationContainer.style.display = 'flex';
+        notificationContainer.style.display = 'flex'; // Показываем контейнер
     }
 
+    // Функция для скрытия уведомления
     function hideNotification() {
-        notificationContainer.style.display = 'none';
+        notificationContainer.style.display = 'none'; // Скрываем контейнер
     }
 
+    // Обработчик нажатия на кнопку закрытия уведомления
     notificationCloseButton.addEventListener('click', hideNotification);
 
-    //Обновленный updateUI
-    function updateUI() {
-        const energyPercentage = (energy / maxEnergy) * 100;
-
-        if (energyFill) {
-            energyFill.style.width = `${energyPercentage}%`;
-        }
-        if (energyText) {
-            energyText.textContent = `${energy}/${maxEnergy}`;
-        }
-        if (fpiLabel) {
-            fpiLabel.textContent = `FPI: ${fpi.toFixed(2)}`;
-        }
-        if (balanceElement) {
-            balanceElement.textContent = `${fpi.toFixed(2)} FPI`;
-        }
-
-        localStorage.setItem('fpi', fpi.toFixed(2));
-        localStorage.setItem('energy', energy.toFixed(2));
-        localStorage.setItem('autoFpiRate', autoFpiRate.toFixed(2));
-        localStorage.setItem('maxEnergy', maxEnergy.toFixed(2)); // Сохраняем maxEnergy
+    // Функция для обновления баланса на странице
+    function updateBalance() {
+        balanceElement.textContent = balance.toFixed(2) + ' FPI';
+        localStorage.setItem('balance', balance.toFixed(2));
+        console.log('Баланс обновлен:', balance);
     }
 
+    // Функция для обновления энергии
+    function updateEnergy() {
+        const energyPercentage = (energy / maxEnergy) * 100;
+        energyFill.style.width = `${energyPercentage}%`;
+        energyText.textContent = `${energy}/${maxEnergy}`;
+        localStorage.setItem('energy', energy.toFixed(2));
+        console.log('Энергия обновлена:', energy);
+    }
+
+    // Функция для проверки, доступно ли задание
     function isTaskAvailable(taskName) {
         const lastClaimed = localStorage.getItem(`task_${taskName}_claimed`);
         if (!lastClaimed) {
@@ -88,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return diffInHours >= 24;
     }
 
+    // Функция для блокировки кнопки задания
     function disableTaskButton(taskCard) {
         const button = taskCard.querySelector('.task-button');
         button.disabled = true;
@@ -96,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskCard.classList.add('completed');
     }
 
+    // Функция для разблокировки кнопки задания
     function enableTaskButton(taskCard) {
         const button = taskCard.querySelector('.task-button');
         button.disabled = false;
@@ -104,25 +92,33 @@ document.addEventListener('DOMContentLoaded', () => {
         taskCard.classList.remove('completed');
     }
 
+    // Функция для увеличения баланса
     function increaseBalanceFromClick() {
+        console.log('Нажата монетка. Текущая энергия:', energy);
         if (energy >= energyCost) {
             energy -= energyCost;
-            fpi += 0.01;
-            updateUI();
+            updateEnergy();
+            balance += 0.01;
+            updateBalance();
+            console.log('Баланс увеличен, энергия уменьшена. Новый баланс:', balance, 'Новая энергия:', energy);
         } else {
-            showNotification('Недостаточно энергии!');
+            showNotification('Недостаточно энергии!'); // Отображаем наше уведомление
+            console.log('Недостаточно энергии!');
         }
     };
 
+    // Функция для восстановления энергии
     function recoverEnergy() {
         if (energy < maxEnergy) {
-            energy = Math.min(maxEnergy, energy + 1);
-            updateUI();
+            energy = Math.min(maxEnergy, energy + 1); // Убедимся, что энергия не превышает maxEnergy
+            updateEnergy();
         }
     }
 
+    // Восстановление энергии каждые recoveryTime секунд
     setInterval(recoverEnergy, recoveryTime * 1000);
 
+    // Функция для проверки и обновления состояния кнопок заданий при загрузке страницы
     function checkTasksAvailability() {
         document.querySelectorAll('.task-card').forEach(taskCard => {
             const taskName = taskCard.dataset.task;
@@ -134,117 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Обновленные функции улучшений
-    function upgradeFPI() {
-        if (fpi >= 10) {
-            fpi -= 10;
-            fpiPerClick++;
-            updateUI();
-            fpiButton.textContent = `Generate FPI (+${fpiPerClick})`;
-        } else {
-            showNotification("Недостаточно FPI для улучшения!");
-        }
-    }
-
-    function unlockAutoFPI() {
-        if (fpi >= 50) {
-            fpi -= 50;
-            autoFpiRate = 1;
-            updateUI();
-        } else {
-            showNotification("Недостаточно FPI для разблокировки автоматической генерации!");
-        }
-    }
-
-    function refillEnergy() {
-        if (fpi >= energyUpgradeCost) {
-            fpi -= energyUpgradeCost;
-            energy = Math.min(maxEnergy, energy + energyUpgradeAmount);
-            updateUI();
-        } else {
-            showNotification("Недостаточно FPI для пополнения энергии!");
-        }
-    }
-
-    function buyCoin(price) {
-        if (fpi >= price) {
-            fpi -= price;
-            updateUI();
-            showNotification("Спасибо за покупку!");
-        } else {
-            showNotification("Недостаточно FPI для покупки этой монеты!");
-        }
-    }
-
-     function increaseMaxEnergy(price) {
-        if (fpi >= price) {
-            fpi -= price;
-            maxEnergy += energyIncreaseAmount;
-            energy = Math.min(maxEnergy, energy + energyIncreaseAmount); // Увеличиваем текущую энергию до нового максимума
-            updateUI();
-            showNotification(`Максимальный запас энергии увеличен на ${energyIncreaseAmount}!`);
-        } else {
-            showNotification("Недостаточно FPI для увеличения запаса энергии!");
-        }
-    }
-
-    // Функция для автоматической генерации
-    function autoGenerate() {
-        if (energy < maxEnergy) {
-            energy = Math.min(maxEnergy, energy + autoEnergyRate / 10);
-        }
-        fpi += autoFpiRate / 10;
-        updateUI();
-    }
-
-    // Привязываем функции к кнопкам
-    fpiButton.addEventListener('click', () => {
-        if (energy >= energyCost) {
-            energy -= energyCost;
-            fpi += fpiPerClick;
-            updateUI();
-        } else {
-            showNotification('Недостаточно энергии!');
-        }
-    });
-
-    fpiUpgradeButton.addEventListener('click', upgradeFPI);
-    autoFpiUpgradeButton.addEventListener('click', unlockAutoFPI);
-    energyUpgradeButton.addEventListener('click', refillEnergy);
-    coinElement.addEventListener('click', () => {
-        increaseBalanceFromClick();
-    });
-
-    // Привязываем функцию покупки к кнопкам
-    buyButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const price = parseInt(this.dataset.price);
-            const action = this.dataset.action; // Получаем action
-            if (action === 'increaseMaxEnergy') {
-                increaseMaxEnergy(price);
-            } else {
-                buyCoin(price); // Для старых кнопок - купить монету
-            }
-        });
-    });
-
-        //Обработчики для touch
-    coinElement.addEventListener('mousedown', () => {
-        coinElement.classList.add('pressed');
-    });
-
-    coinElement.addEventListener('mouseup', () => {
-        coinElement.classList.remove('pressed');
-    });
-
-    coinElement.addEventListener('touchstart', () => {
-        coinElement.classList.add('pressed');
-    });
-
-    coinElement.addEventListener('touchend', () => {
-        coinElement.classList.remove('pressed');
-    });
-
+    // Обработчики для кнопок заданий
     tasksContainer.addEventListener('click', (event) => {
         const button = event.target.closest('.task-button');
 
@@ -253,21 +139,52 @@ document.addEventListener('DOMContentLoaded', () => {
             const taskName = taskCard.dataset.task;
 
             if (!isTaskAvailable(taskName)) {
-                showNotification('Это задание можно выполнить только через 24 часа!');
+                showNotification('Это задание можно выполнить только через 24 часа!'); // Отображаем наше уведомление
                 return;
             }
 
             const reward = parseFloat(button.dataset.reward);
-            fpi += reward;
-            updateUI();
-            showNotification(`Вы получили ${reward} FPI за выполнение задания!`);
+            balance += reward;
+            updateBalance();
+            showNotification(`Вы получили ${reward} FPI за выполнение задания!`); // Отображаем наше уведомление
 
+            // Сохраняем время выполнения задания
             localStorage.setItem(`task_${taskName}_claimed`, new Date().toISOString());
             disableTaskButton(taskCard);
 
+            // Открываем ссылку на Telegram в новой вкладке
+            if (taskName === 'join-telegram') {
+                window.open('https://t.me/Alekszovru', '_blank');
+            }
         }
     });
-   //loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
 
-        setInterval(autoGenerate, 100);
+    // Обработчик клика на монету
+    coinElement.addEventListener('click', () => {
+        increaseBalanceFromClick();
+    });
+
+    // Вызываем функцию для проверки доступности заданий при загрузке страницы
+    checkTasksAvailability();
+
+    // Загружаем SVG при загрузке страницы
+    loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
+});
+
+const coin = document.getElementById('coin');
+
+coin.addEventListener('mousedown', () => { // Событие нажатия кнопки мыши
+    coin.classList.add('pressed'); // Добавляем класс 'pressed'
+});
+
+coin.addEventListener('mouseup', () => { // Событие отпускания кнопки мыши
+    coin.classList.remove('pressed'); // Удаляем класс 'pressed'
+});
+
+coin.addEventListener('touchstart', () => { // Для мобильных устройств (нажатие пальцем)
+    coin.classList.add('pressed');
+});
+
+coin.addEventListener('touchend', () => { // Для мобильных устройств (отпускание пальца)
+    coin.classList.remove('pressed');
 });
