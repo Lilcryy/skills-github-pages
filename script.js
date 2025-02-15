@@ -234,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Загружаем SVG при загрузке страницы
     loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
-});
 
 const coin = document.getElementById('coin');
 
