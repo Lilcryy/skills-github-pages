@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const energyFill = document.getElementById('energy-fill');
     const energyText = document.getElementById('energy-text');
     const tasksContainer = document.querySelector('.tasks-container');
+    const contentDiv = document.getElementById('content'); // Получаем элемент для контента
+    const loadingIndicator = document.getElementById('loading-indicator');
 
     // Получаем элементы уведомлений
     const notificationContainer = document.getElementById('notification-container');
