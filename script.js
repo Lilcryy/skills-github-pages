@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tasksContainer = document.querySelector('.tasks-container');
     const contentDiv = document.getElementById('content'); // Получаем элемент для контента
     const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator = document.getElementById('loading-indicator'); // Получаем индикатор загрузки
+    
 
     // Получаем элементы уведомлений
     const notificationContainer = document.getElementById('notification-container');
