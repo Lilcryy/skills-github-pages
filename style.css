@@ -215,7 +215,7 @@ section {
 
 .task-button {
     background-color: #4caf50;
-    color: #006400;
+    color: gray;
     border: none;
     padding: 0.75rem 1rem;
     border-radius: 8px;
