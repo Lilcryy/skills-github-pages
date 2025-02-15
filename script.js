@@ -250,4 +250,3 @@ coin.addEventListener('touchend', () => { // Для мобильных устр�
             targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     }
-});
