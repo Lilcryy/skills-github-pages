@@ -167,73 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
         increaseBalanceFromClick();
     });
 
-    // Вызываем функцию для проверки доступности заданий при загрузке страницы
-    checkTasksAvailability();
-
-        // Функция для отображения индикатора загрузки
-    function showLoadingIndicator() {
-        loadingIndicator.style.display = 'block';
-    }
-
-    // Функция для скрытия индикатора загрузки
-    function hideLoadingIndicator() {
-        loadingIndicator.style.display = 'none';
-    }
-
-    // Функция для загрузки контента страницы
-    async function loadPage(url) {
-        showLoadingIndicator(); // Показываем индикатор загрузки
-
-        try {
-            const response = await fetch(url);
-            const html = await response.text();
-
-            // Извлекаем содержимое <main id="content">...</main> из загруженной страницы
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const newContent = doc.getElementById('content').innerHTML;
-
-            contentDiv.innerHTML = newContent; // Заменяем контент
-
-            history.pushState({ url: url }, '', url); // Обновляем URL в адресной строке
-        } catch (error) {
-            console.error('Ошибка при загрузке страницы:', error);
-            contentDiv.innerHTML = '<p>Ошибка при загрузке контента.</p>'; // Обработка ошибок
-        } finally {
-            hideLoadingIndicator(); // Скрываем индикатор загрузки после завершения
-            window.scrollTo(0, 0); // Прокручиваем в начало страницы
-        }
-    }
-
-    // Перехватываем клики по ссылкам в футере
-    const footerLinks = document.querySelectorAll('footer a');
-    footerLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault(); // Предотвращаем обычный переход по ссылке
-            const pageUrl = this.getAttribute('data-page'); // Получаем URL страницы из атрибута data-page
-            loadPage(pageUrl); // Загружаем страницу
-        });
-    });
-
-    // Обработка навигации по истории (кнопки "назад" и "вперед" в браузере)
-    window.addEventListener('popstate', function (event) {
-        if (event.state) {
-            loadPage(event.state.url); // Загружаем страницу из состояния истории
-        }
-    });
-
-    // Загрузка контента при загрузке страницы (если есть хеш)
-    if (window.location.hash) {
-        const targetId = window.location.hash.substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-    });
 
     // Загружаем SVG при загрузке страницы
     loadSvg(localStorage.getItem('selectedCoin') || 'coin.png');
+});
 
 const coin = document.getElementById('coin');
 
