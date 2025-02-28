@@ -1,145 +1,68 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-     <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FPI Token</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" 
-referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Монетка - Создание Лобби</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <img src="logo.jpg" alt="Логотип FPI Token">
-      </div>
-    </div>
-  </header>
-  <main>
-    <section id="balance-section">
-      <div class="energy-bar">
-        <div class="energy-fill" id="energy-fill"></div>
-        <div class="energy-text" id="energy-text">100/100</div>
-      </div>
-      <div class="balance-container">
-        <div id="balance">0.00 FPI</div>
-        <div id="coin">
-          <img src="coin.jpg" alt="Монета FPI"">
-        </div>
-      </div>
-    </section>
+    <header>
+        <h1>Монетка</h1>
+        <nav>
+            <a href="#">Главная</a>
+            <a href="#">Лобби</a>
+            <a href="#">Правила</a>
+        </nav>
+    </header>
 
-    <section id="tasks">
-      <h2>Задания</h2>
-      <div class="tasks-container">
+    <main>
+        <section id="create-lobby">
+            <h2>Создать Лобби</h2>
+            <form id="lobby-form">
+                <div class="form-group">
+                    <label for="lobby-name">Название Лобби:</label>
+                    <input type="text" id="lobby-name" name="lobby-name" placeholder="Например: Вечерняя монетка" required>
+                </div>
 
-        <div class="task-card" data-task="share-twitter">
-          <i class="fas fa-share-alt task-icon"></i>
-          <h3>Поделиться в Twitter</h3>
-          <p>Поделитесь новостью о FPI Token в Twitter и получите 0.1 FPI.</p>
-          <button class="task-button" data-reward="0.1">Выполнить</button>
-        </div>
+                <div class="form-group">
+                    <label for="bet-amount">Сумма ставки:</label>
+                    <input type="number" id="bet-amount" name="bet-amount" placeholder="Введите сумму в рублях" min="1" required>
+                </div>
 
-        <div class="task-card" data-task="join-telegram">
-          <i class="fas fa-paper-plane task-icon"></i>
-          <h3>Подписаться на Telegram</h3>
-          <p>Присоединитесь к нашему Telegram-каналу и получите 0.2 FPI.</p>
-          <a href="https://t.me/Alekszovru" class="task-button" target="_blank">Выполнить</a>
-        </div>
+                <div class="form-group">
+                    <label for="rounds">Количество раундов:</label>
+                    <input type="number" id="rounds" name="rounds" placeholder="Количество игр в лобби" min="1" required>
+                </div>
 
-        <div class="task-card" data-task="follow-twitter">
-          <i class="fab fa-twitter task-icon"></i>
-          <h3>Подписаться на Twitter</h3>
-          <p>Подпишитесь на наш Twitter и получите 0.3 FPI.</p>
-          <button class="task-button" data-reward="0.3">Выполнить</button>
-        </div>
+                <button type="submit" class="create-button">Создать Лобби</button>
+            </form>
 
-        <div class="task-card" data-task="join-vk">
-          <i class="fab fa-vk task-icon"></i>
-          <h3>Подписаться на ВКонтакте</h3>
-          <p>Подпишитесь на нашу группу ВКонтакте и получите 0.25 FPI.</p>
-          <button class="task-button" data-reward="0.25">Выполнить</button>
-        </div>
+            <div id="lobby-preview">
+                <h3>Предпросмотр Лобби</h3>
+                <p><b>Название:</b> <span id="preview-lobby-name"></span></p>
+                <p><b>Ставка:</b> <span id="preview-bet-amount"></span> руб.</p>
+                <p><b>Раунды:</b> <span id="preview-rounds"></span></p>
+            </div>
 
-        <div class="task-card" data-task="retweet">
-          <i class="fas fa-retweet task-icon"></i>
-          <h3>Сделать ретвит</h3>
-          <p>Сделайте ретвит нашей последней записи и получите 0.15 FPI.</p>
-          <button class="task-button" data-reward="0.15">Выполнить</button>
-        </div>
+        </section>
 
-        <div class="task-card" data-task="like-facebook">
-          <i class="fas fa-heart task-icon"></i>
-          <h3>Поставить лайк в Facebook</h3>
-          <p>Поставьте лайк нашей странице в Facebook и получите 0.25 FPI.</p>
-          <button class="task-button" data-reward="0.25">Выполнить</button>
-        </div>
+        <section id="existing-lobbies">
+            <h2>Существующие Лобби</h2>
+            <div class="lobby-list">
+                <!-- Здесь будут отображаться созданные лобби (динамически, с помощью JavaScript) -->
+            </div>
+        </section>
 
-      </div>
-    </section>
+    </main>
 
-    <section id="banner">
-      <img src="banner.png" alt="Баннер FPI Token">
-    </section>
-  </main>
+    <footer>
+        <p>&copy; 2023 Монетка. Все права защищены.</p>
+    </footer>
 
-  <footer>
-      <nav class="footer-nav">
-          <ul>
-            <li><a href="index.html" data-page="index.html"><i class="fas fa-home"></i> Главная</a></li>
-            <li><a href="index.html#tasks" data-page="index.html#tasks"><i class="fas fa-list-ul"></i> Задания</a></li>
-            <li><a href="about.html" data-page="about.html"><i class="fas fa-info-circle"></i> О токене</a></li>
-            <li><a href="shop.html" data-page="shop.html"><i class="fas fa-shopping-cart"></i> Магазин</a></li>
-          </ul>
-      </nav>
-  </footer>
- <style>
-      /* Стили для индикатора загрузки */
-      #loading-indicator {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 5px;
-          background-color: #4CAF50; /* Цвет индикатора */
-          z-index: 1000;
-          overflow: hidden;
-          display: none; /* Скрываем по умолчанию */
-      }
-
-      #loading-indicator::before {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          left: -100%;
-          height: 100%;
-          width: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-          animation: loading 1.5s infinite;
-      }
-
-      @keyframes loading {
-          0% { left: -100%; }
-          100% { left: 100%; }
-      }
-
-      /* Стили для основного контента */
-      #content {
-          padding-top: 20px; /* Чтобы контент не перекрывался индикатором загрузки */
-      }
-  </style>
-  <script src="script.js"></script>
-    <div id="notification-container">
-    <div id="notification-box">
-      <p id="notification-message"></p>
-      <button id="notification-close-button">OK</button>
-    </div>
-  </div>
+    <script src="script.js"></script>
 </body>
 </html>
