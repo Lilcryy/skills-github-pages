@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lobbyIdElement.textContent = lobbyId;
 
     // Подключаемся к WebSocket (ЗАМЕНИТЕ ЭТО НА ВАШ URL)
-    const websocket = new WebSocket('http://localhost:8080'); // Пример URL
+    const websocket = new WebSocket('ws://ваш-сервер:8080'); // Пример URL
 
     websocket.addEventListener('open', () => {
         console.log('Подключено к WebSocket');
