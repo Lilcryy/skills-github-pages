@@ -41,8 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для присоединения к лобби
     function joinLobby(lobbyId) {
-        //  Здесь должен быть код для присоединения к лобби
-        alert(`Присоединяемся к лобби с ID: ${lobbyId}`);
+        // Получаем данные о лобби по ID
+        const lobby = lobbies[lobbyId];
+
+        // Проверяем, что лобби существует
+        if (!lobby) {
+            alert('Лобби не найдено!');
+            return;
+        }
+
+        // Здесь нужно отправить запрос на сервер, чтобы присоединиться к лобби
+        // (пока что просто перенаправляем на страницу lobby.html)
+        const url = `lobby.html?lobbyId=${lobbyId}&name=${encodeURIComponent(lobby.name)}&betAmount=${lobby.betAmount}&rounds=${lobby.rounds}`;
+        window.location.href = url; // Перенаправляем в lobby.html
     }
 
 
@@ -64,28 +75,110 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Создаем объект лобби
-        const newLobby = {
-            name: lobbyName,
-            betAmount: betAmount,
-            rounds: rounds
-        };
-
-        // Добавляем лобби в массив
-        lobbies.push(newLobby);
-
-        // Обновляем отображение лобби
-        displayLobbies();
-
-        // Очищаем форму
-        lobbyForm.reset();
-
-        // Очищаем предпросмотр
-        previewLobbyName.textContent = '';
-        previewBetAmount.textContent = '';
-        previewRounds.textContent = '';
+        // Отправляем запрос на сервер для создания лобби (ЗАМЕНИТЕ ЭТО НА ВАШ URL)
+        fetch('/createLobby', { // Пример URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: lobbyName,
+                betAmount: betAmount,
+                rounds: rounds
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Перенаправляем на страницу ожидания с ID лобби
+                window.location.href = `waiting.html?lobbyId=${data.lobbyId}`;
+            } else {
+                alert('Ошибка при создании лобби: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при создании лобби.');
+        });
     });
 
     // Первоначальное отображение лобби (если есть)
     displayLobbies();
+});
+// server.js
+const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server, {
+    cors: {
+        origin: "*" //Разрешите все источники в целях разработки.
+    }
+});
+
+app.use(express.json());
+
+// Для простоты, храним лобби в памяти (В РЕАЛЬНОМ ПРИЛОЖЕНИИ - БАЗА ДАННЫХ)
+const lobbies = {};
+
+// API endpoint для создания лобби
+app.post('/createLobby', (req, res) => {
+    const { name, betAmount, rounds } = req.body;
+
+    if (!name || !betAmount || !rounds) {
+        return res.status(400).json({ success: false, message: 'Не все поля заполнены' });
+    }
+
+    const lobbyId = generateLobbyId(); // Функция для генерации уникального ID
+    lobbies[lobbyId] = {
+        name,
+        betAmount,
+        rounds,
+        players: [],
+        status: 'waiting'
+    };
+
+    res.json({ success: true, lobbyId: lobbyId });
+});
+
+io.on('connection', (socket) => {
+    console.log('Новый клиент подключился');
+
+    socket.on('message', (message) => {
+        const data = JSON.parse(message);
+
+        if (data.type === 'waiting') {
+            const lobbyId = data.lobbyId;
+            if (lobbies[lobbyId]) {
+                lobbies[lobbyId].players.push(socket.id); // Добавляем ID сокета игрока
+                socket.join(lobbyId); // Присоединяем сокет к "комнате" лобби
+                console.log(`Игрок ${socket.id} ожидает в лобби ${lobbyId}`);
+
+                // Если в лобби уже 2 игрока, начинаем игру
+                if (lobbies[lobbyId].players.length === 2) {
+                    io.to(lobbyId).emit('message', JSON.stringify({ type: 'gameStart' })); // Отправляем всем в комнате
+                    lobbies[lobbyId].status = 'playing';
+                    console.log(`Игра начинается в лобби ${lobbyId}`);
+                }
+            } else {
+                console.log(`Лобби ${lobbyId} не найдено`);
+            }
+        }
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Клиент отключился');
+        // TODO: Удалить игрока из лобби, если он был в нем
+    });
+});
+
+function generateLobbyId() {
+    return Math.random().toString(36).substring(2, 15); //  Простая генерация ID
+}
+
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
 });
