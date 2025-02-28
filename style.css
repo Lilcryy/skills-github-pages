@@ -1,469 +1,125 @@
-/* style.ss */
+/* style.css */
 
-/* Общие стили */
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    /* background: linear-gradient(to bottom, #f0f4c3, #d9e1f2);  Удаляем градиентный фон */
-    background-image: url('space.jpg'); /* Добавляем изображение космоса */
-    background-size: cover; /* Растягиваем изображение на весь экран */
-    background-repeat: no-repeat; /* Запрещаем повторение изображения */
-    background-attachment: fixed; /* Фиксируем фон при прокрутке */
-    color: #eee; /* Меняем цвет текста на белый, чтобы было видно на фоне космоса */
-    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-/* Остальные стили */
 header {
-    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон для header */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
 }
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;  /* Изменил на flex-start */
-    padding: 0 2rem;
+header h1 {
+    margin: 0;
 }
 
-.logo {
-    width: 50px;
-    height: 50px;
-    margin-right: 1rem;
+nav {
+    margin-top: 1em;
 }
 
-.logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1em;
 }
 
-/* Main стили */
 main {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 section {
-    margin-bottom: 3rem;
-}
-
-/* Баланс */
-#balance-section {
-    text-align: center;
-}
-
-.energy-bar {
-    width: 250px;
-    height: 25px;
-    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый для energy bar */
-    border-radius: 15px;
-    margin: 0 auto 15px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.energy-fill {
-    height: 100%;
-    width: 100%;
-    background-color: #4caf50; /* Яркий зеленый цвет */
-    border-radius: 15px;
-    transition: width 0.3s ease-in-out;
-}
-
-.energy-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.balance-container {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    -webkit-tap-highlight-color: transparent;
-}
-
-#balance {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #fff; /* Белый цвет для баланса */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 15px;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-#coin {
-    cursor: pointer;
-    width: 220px;
-    height: 220px;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 0.2s ease-in-out;
-    animation: rotate 10s linear infinite; /* Добавили анимацию вращения */
-}
-
-#coin img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Усиленная тень */
-    -webkit-tap-highlight-color: transparent;
-}
-
-#coin:hover {
-    transform: scale(1.05);
-}
-
-#coin:active img {
-  transform: scale(0.95); /* Немного уменьшаем при нажатии */
-  transition: transform 0.1s ease-out; /* Более быстрая анимация */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Менее выраженная тень при нажатии */
-}
-
-/* Задания */
-#tasks h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.tasks-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.task-card {
-    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый для task card */
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-}
-
-.task-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.task-card.completed {
-    opacity: 0.6; /* Сделаем карточку менее яркой */
-    pointer-events: none; /* Отключим взаимодействие */
-}
-
-.task-card.completed .task-button {
-    background-color: gray; /* Серый цвет для кнопки */
-    cursor: default;
-}
-
-.task-icon {
-    font-size: 2rem;
-    color: #fff;
-    margin-bottom: 0.75rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.task-card h3 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.task-card p {
-    font-size: 1rem;
-    color: #fff;
-}
-
-.task-button {
-    background-color: #4caf50;
-    color: #000;
-    border: none;
-    padding: 0.75rem 1rem;
+    background-color: #fff;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    font-size: 1rem;
-    display: block;
-    margin-top: 1rem;
-    width: 100%;
+    padding: 2em;
+    margin-bottom: 2em;
+    width: 80%; /* Или другая ширина, которая вам нравится */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#create-lobby h2, #existing-lobbies h2 {
     text-align: center;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    margin-bottom: 1em;
 }
 
-.task-button:hover {
-    background-color: #43a047;
-}
-
-.task-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-.task-button-disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Баннер */
-#banner {
-    text-align: center;
-}
-
-#banner img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Footer */
-footer {
-    background-color: rgba(51, 51, 51, 0.5); /* Делаем фон черным */
-    color: #fff;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 3px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-size: 0.9rem;
+#lobby-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    margin: 0;
-    backdrop-filter: blur(3px);
-    opacity: 1; /* Убираем прозрачность */
 }
 
-.footer-nav {
-    width: 100%;
+.form-group {
+    margin-bottom: 1em;
 }
 
-.footer-nav ul {
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.form-group input {
+    width: 95%;
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.create-button {
+    background-color: #5cb85c; /* Зеленый */
+    color: #fff;
+    padding: 1em;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #449d44;
+}
+
+#lobby-preview {
+    margin-top: 2em;
+    border: 1px solid #ddd;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.lobby-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
-    list-style: none;
-    padding: 0.75rem 0;
-    margin: 0;
 }
 
-.footer-nav li {
-    margin: 0;
-}
-
-.footer-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: color 0.3s ease-in-out;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.footer-nav a:hover {
-    color: #ddd;
-}
-
-.footer-nav a i {
-    margin-bottom: 0.5rem;
-    font-size: 1.4rem;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .header-container {
-        padding: 0 1rem;
-    }
-
-    header h1 {
-        font-size: 1.75rem;
-    }
-
-    main {
-        padding: 1.5rem;
-    }
-
-    .tasks-container {
-        grid-template-columns: 1fr;
-    }
-
-    .task-card {
-        padding: 1.25rem;
-    }
-
-    .footer-nav a {
-        font-size: 1rem;
-    }
-
-    .footer-nav a i {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 576px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    #balance {
-        font-size: 2rem;
-    }
-}
-/* Стили для магазина */
-#shop {
-    padding: 2rem;
+.lobby-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 1em;
+    margin: 1em;
+    width: 300px; /* или другую подходящую ширину */
     text-align: center;
 }
 
-#shop h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+.lobby-item h3 {
+    margin-top: 0;
 }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.product-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+footer {
+    background-color: #333;
     color: #fff;
     text-align: center;
+    padding: 1em 0;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-.product-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.product-card .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #ddd;
-    margin-bottom: 1.25rem;
-}
-
-.buy-button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    font-size: 1rem;
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-    text-align: center;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-}
-
-.buy-button:hover {
-    background-color: #43a047;
-}
-
-
-/* Стили для карточки увеличения лимита энергии */
-.energy-upgrade-card {
-    background-color: rgba(100, 149, 237, 0.2); /* Мягкий синий цвет */
-    border: 1px solid rgba(100, 149, 237, 0.5); /* Более яркая синяя рамка */
-    box-shadow: 0 4px 8px rgba(100, 149, 237, 0.3); /* Синяя тень */
-    color: #fff; /* Белый текст */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.energy-upgrade-card:hover {
-    transform: scale(1.03); /* Небольшое увеличение при наведении */
-    box-shadow: 0 6px 12px rgba(100, 149, 237, 0.5); /* Более выраженная синяя тень при наведении */
-}
-
-.energy-upgrade-card img {
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.energy-upgrade-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-.energy-upgrade-card .price {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-/* Стили для основного контента */
-#content {
-    padding-top: 20px; /* Чтобы контент не перекрывался индикатором загрузки */
-}
+/* Дополнительные стили (цвета, шрифты и т.д.) по вашему вкусу */
