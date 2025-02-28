@@ -1,22 +1,39 @@
 /* style.css */
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+:root {
+    --primary-color: #2980b9; /* Синий */
+    --secondary-color: #34495e; /* Темно-серый */
+    --light-color: #f5f5f5; /* Светло-серый */
+    --text-color: #333;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* HEADER */
 header {
-    background-color: #333;
+    background-color: var(--primary-color);
     color: #fff;
-    padding: 1em 0;
+    padding: 1.5em 0;
     text-align: center;
+    box-shadow: var(--box-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2.5em;
+    font-weight: 600;
 }
 
 nav {
@@ -26,100 +43,293 @@ nav {
 nav a {
     color: #fff;
     text-decoration: none;
-    margin: 0 1em;
+    margin: 0 1.5em;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
+nav a:hover {
+    color: #ddd;
+}
+
+/* MAIN */
 main {
     padding: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 section {
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     padding: 2em;
     margin-bottom: 2em;
-    width: 80%; /* Или другая ширина, которая вам нравится */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Или другая ширина, которая вам нравится */
+    max-width: 800px;
+    box-shadow: var(--box-shadow);
 }
 
 #create-lobby h2, #existing-lobbies h2 {
     text-align: center;
     margin-bottom: 1em;
+    color: var(--secondary-color);
+    font-size: 2em;
+    font-weight: 600;
 }
 
+/* FORM */
 #lobby-form {
     display: flex;
     flex-direction: column;
 }
 
 .form-group {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
 .form-group label {
     display: block;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 0.5em;
+    color: var(--secondary-color);
 }
 
 .form-group input {
     width: 95%;
-    padding: 0.75em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 1em;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
     font-size: 1em;
+    transition: border-color 0.3s ease;
 }
 
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* BUTTON */
 .create-button {
-    background-color: #5cb85c; /* Зеленый */
+    background-color: var(--primary-color);
     color: #fff;
-    padding: 1em;
+    padding: 1em 2em;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     font-size: 1.2em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-weight: 500;
 }
 
 .create-button:hover {
-    background-color: #449d44;
+    background-color: #21618c;
 }
 
+/* LOBBY PREVIEW */
 #lobby-preview {
     margin-top: 2em;
-    border: 1px solid #ddd;
-    padding: 1em;
-    border-radius: 4px;
+    border: 1px solid #eee;
+    padding: 1.5em;
+    border-radius: var(--border-radius);
+    background-color: var(--light-color);
 }
 
+#lobby-preview h3 {
+    margin-top: 0;
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+#lobby-preview p {
+    margin-bottom: 0.75em;
+}
+
+/* LOBBY LIST */
 .lobby-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center; /* Изменено на center */
+    gap: 1.5em; /* Добавлено для отступов между элементами */
 }
 
 .lobby-item {
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #eee;
-    border-radius: 4px;
-    padding: 1em;
-    margin: 1em;
+    border-radius: var(--border-radius);
+    padding: 1.5em;
     width: 300px; /* или другую подходящую ширину */
     text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease;
+}
+
+.lobby-item:hover {
+    transform: translateY(-5px);
 }
 
 .lobby-item h3 {
     margin-top: 0;
+    color: var(--secondary-color);
+    font-weight: 500;
 }
 
+.lobby-item p {
+    margin-bottom: 0.75em;
+}
+
+.join-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.join-button:hover {
+    background-color: #21618c;
+}
+
+/* FOOTER */
 footer {
-    background-color: #333;
+    background-color: var(--secondary-color);
     color: #fff;
     text-align: center;
     padding: 1em 0;
+    margin-top: 2em;
 }
 
-/* Дополнительные стили (цвета, шрифты и т.д.) по вашему вкусу */
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    main {
+        padding: 1em;
+    }
+
+    section {
+        width: 95%;
+        padding: 1.5em;
+    }
+
+    #create-lobby h2, #existing-lobbies h2 {
+        font-size: 1.75em;
+    }
+
+    .lobby-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lobby-item {
+        width: 80%;
+    }
+}
+
+/* Стили для lobby.html */
+.lobby-container {
+    text-align: center;
+    padding: 2em;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 600px;
+    margin: 2em auto;
+}
+
+.lobby-details {
+    margin-bottom: 2em;
+}
+
+.lobby-details img {
+    width: 150px;
+    margin-bottom: 1em;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+}
+
+.lobby-details p {
+    margin-bottom: 0.75em;
+    font-size: 1.1em;
+}
+
+#ready-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+#ready-button:hover {
+    background-color: #21618c;
+}
+/* lobby.css */
+
+:root {
+    --primary-color: #2980b9; /* Синий */
+    --secondary-color: #34495e; /* Темно-серый */
+    --light-color: #f5f5f5; /* Светло-серый */
+    --text-color: #333;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.lobby-container {
+    text-align: center;
+    padding: 2em;
+    background-color: #fff; /* Белый фон */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    max-width: 600px;
+    margin: 2em auto;
+}
+
+.lobby-details {
+    margin-bottom: 2em;
+}
+
+.lobby-details img {
+    width: 150px;
+    margin-bottom: 1em;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+}
+
+.lobby-details p {
+    margin-bottom: 0.75em;
+    font-size: 1.1em;
+}
+
+#ready-button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+#ready-button:hover {
+    background-color: #21618c;
+}
