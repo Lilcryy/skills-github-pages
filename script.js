@@ -1,107 +1,108 @@
+// client.js
+
 document.addEventListener('DOMContentLoaded', () => {
-    const lobbyForm = document.getElementById('lobby-form');
-    const lobbyNameInput = document.getElementById('lobby-name');
-    const betAmountInput = document.getElementById('bet-amount');
-    const roundsInput = document.getElementById('rounds');
-    const previewLobbyName = document.getElementById('preview-lobby-name');
-    const previewBetAmount = document.getElementById('preview-bet-amount');
-    const previewRounds = document.getElementById('preview-rounds');
-    const lobbyList = document.querySelector('lobbyList');
+    const lobbyList = document.getElementById('lobbyList'); // Получаем ссылку на элемент, где будем отображать список лобби
+    const createLobbyForm = document.getElementById('createLobbyForm'); // Форма создания лобби
+    const errorMessage = document.getElementById('errorMessage');
 
-    // Массив для хранения лобби (в реальной разработке это будет база данных)
-    const lobbies = [];
+    // Функция для получения списка лобби с сервера
+    async function fetchLobbies() {
+        try {
+            const response = await fetch('/lobbies'); // Запрос к серверу на получение списка лобби
+            const data = await response.json(); // Преобразуем ответ в JSON
 
-    // Функция для отображения лобби
-    function displayLobbies() {
-        if (!lobbyList) {
-            console.error("Элемент с классом '.lobby-list' не найден в DOM.");
+            if (data.success) {
+                displayLobbies(data.lobbies); // Отображаем список лобби
+            } else {
+                // Выводим сообщение об ошибке, если запрос не удался
+                errorMessage.textContent = 'Ошибка при получении списка лобби: ' + data.message;
+            }
+        } catch (error) {
+            // Обрабатываем ошибки сети или другие непредвиденные ошибки
+            errorMessage.textContent = 'Произошла ошибка при получении списка лобби.';
+            console.error('Ошибка:', error);
+        }
+    }
+
+    // Функция для отображения списка лобби на странице
+    function displayLobbies(lobbies) {
+        // Очищаем список лобби перед добавлением новых элементов
+        lobbyList.innerHTML = '';
+
+        // Если лобби не найдены, выводим сообщение
+        if (!lobbies || lobbies.length === 0) {
+            lobbyList.innerHTML = '<p>Нет доступных лобби.</p>';
             return;
         }
 
-        lobbyList.innerHTML = ''; // Очищаем список
-
-        lobbies.forEach((lobby, index) => { // Используем index для lobbyId
+        // Для каждого лобби создаем HTML-элемент
+        lobbies.forEach(lobby => {
             const lobbyItem = document.createElement('div');
-            lobbyItem.classList.add('lobby-item');
+            lobbyItem.classList.add('lobby-item'); // Добавляем класс для стилизации
             lobbyItem.innerHTML = `
                 <h3>${lobby.name}</h3>
                 <p>Ставка: ${lobby.betAmount} руб.</p>
                 <p>Раунды: ${lobby.rounds}</p>
-                <button class="join-button" data-lobby-id="${index}">Присоединиться</button>
+                <button class="joinButton" data-lobby-id="${lobby.id}">Присоединиться</button>
             `;
-            lobbyList.appendChild(lobbyItem);
+            lobbyList.appendChild(lobbyItem); // Добавляем элемент в список
         });
 
         // Добавляем обработчики событий для кнопок "Присоединиться"
-        const joinButtons = document.querySelectorAll('.join-button');
+        const joinButtons = document.querySelectorAll('.joinButton');
         joinButtons.forEach(button => {
             button.addEventListener('click', function() {
-                const lobbyId = this.dataset.lobbyId;
-                joinLobby(lobbyId);
+                const lobbyId = this.dataset.lobbyId; // Получаем ID лобби из атрибута data-lobby-id
+                joinLobby(lobbyId); // Вызываем функцию для присоединения к лобби
             });
         });
     }
 
     // Функция для присоединения к лобби
     function joinLobby(lobbyId) {
-        // Получаем данные о лобби по ID
-        const lobby = lobbies[lobbyId];
-
-        // Проверяем, что лобби существует
-        if (!lobby) {
-            alert('Лобби не найдено!');
-            return;
-        }
-
-        // Здесь нужно отправить запрос на сервер, чтобы присоединиться к лобби
-        // (пока что просто перенаправляем на страницу lobby.html)
-        const url = `lobby.html?lobbyId=${lobbyId}&name=${encodeURIComponent(lobby.name)}&betAmount=${lobby.betAmount}&rounds=${lobby.rounds}`;
-        window.location.href = url; // Перенаправляем в lobby.html
+        // Выполняем перенаправление на страницу лобби
+        // Используем window.location.href для изменения URL
+        window.location.href = `lobby.html?lobbyId=${lobbyId}`;
     }
 
-
-    // Обновление предпросмотра при изменении значений полей
-    lobbyNameInput.addEventListener('input', () => previewLobbyName.textContent = lobbyNameInput.value);
-    betAmountInput.addEventListener('input', () => previewBetAmount.textContent = betAmountInput.value);
-    roundsInput.addEventListener('input', () => previewRounds.textContent = roundsInput.value);
-
-    lobbyForm.addEventListener('submit', function(event) {
+    // Функция для создания лобби
+    async function createLobby(event) {
         event.preventDefault(); // Предотвращаем отправку формы по умолчанию
 
-        const lobbyName = lobbyNameInput.value;
-        const betAmount = parseInt(betAmountInput.value);
-        const rounds = parseInt(roundsInput.value);
+        // Получаем значения из полей формы
+        const name = document.getElementById('lobbyName').value;
+        const betAmount = document.getElementById('betAmount').value;
+        const rounds = document.getElementById('rounds').value;
 
-        // Валидация данных (можно добавить более сложные проверки)
-        if (!lobbyName || isNaN(betAmount) || isNaN(rounds)) {
-            alert('Пожалуйста, заполните все поля корректно.');
-            return;
+        try {
+            // Отправляем POST-запрос на сервер для создания лобби
+            const response = await fetch('/lobbies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, betAmount, rounds })
+            });
+
+            const data = await response.json(); // Преобразуем ответ в JSON
+
+            if (data.success) {
+                // Перенаправляем на страницу лобби после успешного создания
+                window.location.href = `lobby.html?lobbyId=${data.lobbyId}`;
+            } else {
+                // Выводим сообщение об ошибке, если создание не удалось
+                errorMessage.textContent = 'Ошибка при создании лобби: ' + data.message;
+            }
+        } catch (error) {
+            // Обрабатываем ошибки сети или другие непредвиденные ошибки
+            errorMessage.textContent = 'Произошла ошибка при создании лобби.';
+            console.error('Ошибка:', error);
         }
+    }
 
-        // Создаем новый объект лобби
-        const newLobby = {
-            name: lobbyName,
-            betAmount: betAmount,
-            rounds: rounds
-        };
+    // Добавляем обработчик события для отправки формы создания лобби
+    createLobbyForm.addEventListener('submit', createLobby);
 
-        // Добавляем лобби в массив
-        lobbies.push(newLobby);
-
-        // Отображаем обновленный список лобби
-        displayLobbies();
-
-        // Очищаем поля формы
-        lobbyNameInput.value = '';
-        betAmountInput.value = '';
-        roundsInput.value = '';
-
-        // Обновляем предпросмотр
-        previewLobbyName.textContent = '';
-        previewBetAmount.textContent = '';
-        previewRounds.textContent = '';
-    });
-
-    // Изначальное отображение лобби (если есть какие-то данные по умолчанию)
-    displayLobbies();
+    // Вызываем функцию для получения списка лобби при загрузке страницы
+    fetchLobbies();
 });
