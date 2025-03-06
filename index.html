@@ -3,61 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игра в монетку</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-         #lobbyList {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
+    <title>Монетка - Создание Лобби</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        .lobby-item {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-
-        .lobby-item:last-child {
-            border-bottom: none;
-        }
-
-        .joinButton {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
-    <h1>Игра в монетку</h1>
 
-    <h2>Создать лобби</h2>
-    <form id="createLobbyForm">
-        <label for="lobbyName">Название лобби:</label>
-        <input type="text" id="lobbyName" name="lobbyName" required><br><br>
+    <header>
+        <h1>Монетка</h1>
+        <nav>
+            <a href="#">Главная</a>
+            <a href="#">Лобби</a>
+            <a href="#">Правила</a>
+        </nav>
+    </header>
 
-        <label for="betAmount">Сумма ставки:</label>
-        <input type="number" id="betAmount" name="betAmount" required><br><br>
+    <main>
+        <section id="create-lobby">
+            <h2>Создать Лобби</h2>
+            <form id="lobby-form">
+                <div class="form-group">
+                    <label for="lobby-name">Название Лобби:</label>
+                    <input type="text" id="lobby-name" name="lobby-name" placeholder="Например: Вечерняя монетка" required>
+                </div>
 
-        <label for="rounds">Количество раундов:</label>
-        <input type="number" id="rounds" name="rounds" required><br><br>
+                <div class="form-group">
+                    <label for="bet-amount">Сумма ставки:</label>
+                    <input type="number" id="bet-amount" name="bet-amount" placeholder="Введите сумму в рублях" min="1" required>
+                </div>
 
-        <button type="submit">Создать лобби</button>
-    </form>
+                <div class="form-group">
+                    <label for="rounds">Количество раундов:</label>
+                    <input type="number" id="rounds" name="rounds" placeholder="Количество игр в лобби" min="1" required>
+                </div>
 
+                <button type="submit" class="create-button">Создать Лобби</button>
+            </form>
+
+            <div id="lobby-preview">
+                <h3>Предпросмотр Лобби</h3>
+                <p><b>Название:</b> <span id="preview-lobby-name"></span></p>
+                <p><b>Ставка:</b> <span id="preview-bet-amount"></span> руб.</p>
+                <p><b>Раунды:</b> <span id="preview-rounds"></span></p>
+            </div>
+
+        </section>
+
+        <section id="existing-lobbies">
     <h2 >Список доступных лобби</h2>
     <div id="errorMessage" style="color: red;"></div>
     <div id="lobbyList">
         <!-- Здесь будет отображаться список лобби -->
     </div>
 
-    <script src="/js/script.js"></script>
+    </main>
+
+    <footer>
+        <p>&copy;Bro, why the fuck did you come here?.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
