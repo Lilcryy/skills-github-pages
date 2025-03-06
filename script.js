@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Отправляем запрос на сервер для создания лобби (ЗАМЕНИТЕ ЭТО НА ВАШ URL)
-        fetch('/createLobby', { // Пример URL
+        fetch('http://localhost:8080/lobbies', { // Пример URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
