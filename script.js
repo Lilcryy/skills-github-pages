@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const previewLobbyName = document.getElementById('preview-lobby-name');
     const previewBetAmount = document.getElementById('preview-bet-amount');
     const previewRounds = document.getElementById('preview-rounds');
-    const lobbyList = document.querySelector('.lobby-list');
+    const lobbyList = document.querySelector('lobbyList');
 
     // Массив для хранения лобби (в реальной разработке это будет база данных)
     const lobbies = [];
