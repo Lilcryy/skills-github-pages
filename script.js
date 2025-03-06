@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функция для получения списка лобби с сервера
     async function fetchLobbies() {
         try {
-            const response = await fetch('/lobbies'); // Запрос к серверу на получение списка лобби
+            const response = await fetch('http://localhost:8080/lobbies'); // Запрос к серверу на получение списка лобби
             const data = await response.json(); // Преобразуем ответ в JSON
 
             if (data.success) {
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Отправляем POST-запрос на сервер для создания лобби
-            const response = await fetch('/lobbies', {
+            const response = await fetch('http://localhost:8080/lobbies', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
