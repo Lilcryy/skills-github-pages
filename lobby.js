@@ -1,36 +1,16 @@
-/* lobby.js */
+const mongoose = require('mongoose');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const lobbyNameElement = document.getElementById('lobby-name');
-    const betAmountElement = document.getElementById('bet-amount');
-    const roundsElement = document.getElementById('rounds');
-    const readyButton = document.getElementById('ready-button');
-
-    // Функция для получения параметров из URL
-    function getParameterByName(name, url = window.location.href) {
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-
-    // Получаем параметры из URL
-    const lobbyName = getParameterByName('name');
-    const betAmount = getParameterByName('betAmount');
-    const rounds = getParameterByName('rounds');
-
-    // Отображаем информацию о лобби на странице
-    lobbyNameElement.textContent = lobbyName;
-    betAmountElement.textContent = betAmount;
-    roundsElement.textContent = rounds;
-
-    // Обработчик кнопки "Готово"
-    readyButton.addEventListener('click', () => {
-        //  Реализуйте здесь логику после нажатия кнопки "Готово"
-        alert('Вы готовы!');
-    });
+// Схема лобби для MongoDB
+const lobbySchema = new mongoose.Schema({
+  name: { type: String, required: true, trim: true }, // Название лобби, обязательно, убирает пробелы в начале и конце
+  creator: { type: String, required: true }, // ID создателя лобби (обычно ObjectId пользователя)
+  players: [{ type: String }], // Массив ID игроков, находящихся в лобби (обычно ObjectId пользователей)
+  maxPlayers: { type: Number, default: 2, min: 2, max: 10 }, // Максимальное количество игроков (по умолчанию 2, минимум 2, максимум 10)
+  status: { type: String, enum: ['waiting', 'playing', 'finished'], default: 'waiting' }, // Статус лобби (ожидание, игра, завершено)
+  createdAt: { type: Date, default: Date.now }, // Дата создания лобби
+  // Дополнительные поля, если необходимо:
+  // coinFlipAmount: { type: Number, default: 10 }, // Сумма ставки в монетку (например)
 });
 
-
+// Создаем модель "Lobby" на основе схемы
+module.exports = mongoose.model('Lobby', lobbySchema);
