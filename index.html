@@ -202,8 +202,7 @@
         const betAmount = document.getElementById('bet-amount').value;
         const rounds = document.getElementById('rounds').value;
 
-        const lob
-byData = {
+        const lobbyData = {
             name: lobbyName,
             betAmount: betAmount,
             rounds: rounds,
@@ -219,9 +218,9 @@ byData = {
 
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-            const data = await response.json();
-            console.log('Lobby created:', data);
-            currentLobbyId = data.lobbyId;
+             const data = await response.json();
+             console.log('Lobby created:', data);
+             currentLobbyId = data.lobbyId;
 
             // Перенаправляем на страницу ожидания
             window.location.href = `/waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`; // Pass userId
@@ -271,9 +270,9 @@ byData = {
             });
 
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            const data = await response.json();
 
-            window.location.href = `/game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
+             const data = await response.json();
+             window.location.href = `/game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
         } catch (error) {
             console.error('Error joining lobby:', error);
             alert('Failed to join lobby. Please try again.');
