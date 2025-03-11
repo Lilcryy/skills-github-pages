@@ -1,13 +1,112 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ожидание игрока</title>
-</head>
-<body>
-    <h1>Ожидание другого игрока...</h1>
-    <p>ID Лобби: <span id="lobby-id"></span></p>
-    <script src="waiting.js"></script>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ожидание Игрока</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+           body {
+                font-family: 'Arial', sans-serif;
+                background-color: #222;
+                margin: 0;
+                padding: 0;
+                color: #fff;
+                background-image: url('https://img.freepik.com/premium-vector/dark-texture-background-with-bokeh-effect_53876-97502.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+
+            .container {
+                width: 80%;
+                margin: 20px auto;
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+                text-align: center; /* Center content */
+            }
+
+            h1 {
+                text-align: center;
+                color: #f1c40f; /* Золотой цвет */
+                text-shadow: 2px 2px 4px #000000;
+            }
+
+            p {
+                font-size: 1.2em; /* Increase font size for better visibility */
+                color: #ddd;
+                margin-top: 20px; /* Add some spacing above the message */
+            }
+
+            /* Optional: Style the loading spinner */
+            .spinner {
+                border: 5px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                border-top: 5px solid #fff;
+                width: 50px;
+                height: 50px;
+                animation: spin 2s linear infinite;
+                margin: 20px auto; /* Center the spinner */
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Ожидание Игрока...</h1>
+            <p>Пожалуйста, подождите, пока кто-нибудь присоединится к вашей игре.</p>
+            <div class="spinner"></div> <!-- Optional loading spinner -->
+        </div>
+
+        <script>
+            const API_URL = 'http://localhost:3000/lobbies';
+
+            // Function to extract query parameters from the URL
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Function to periodically check lobby status
+            async function checkLobbyStatus() {
+                const lobbyId = getQueryParam('lobbyId');
+                const userId = getQueryParam('userId'); // Get userId
+              
+
+                if (!lobbyId || !userId) {
+                    console.error('No lobby ID or user ID provided.');
+                    alert('Invalid lobby or user. Please return to the lobby list.');
+                    window.location.href = '/';  // Redirect to the main page
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_URL}/${lobbyId}`);
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                    const lobby = await response.json();
+
+                    if (lobby.players && lobby.players.length === 2) {
+                        // Redirect to game page when two players are present
+                        window.location.href = `/game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
+                    } else {
+                        // Continue checking every 3 seconds
+                        setTimeout(checkLobbyStatus, 3000);
+                    }
+                } catch (error) {
+                    console.error('Error checking lobby status:', error);
+                    alert('Failed to check lobby status. Please try again.');
+                    window.location.href = '/'; // Redirect to main page on error
+                }
+            }
+
+            // Start checking lobby status when the page loads
+            window.onload = checkLobbyStatus;
+        </script>
+    </body>
+    </html>
