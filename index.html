@@ -1,285 +1,133 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лобби Монетки</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Coin Flip</title>
     <style>
-        /* Стили (как в предыдущем примере) */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #222;
-            margin: 0;
-            padding: 0;
-            color: #fff;
-            background-image: url('https://img.freepik.com/premium-vector/dark-texture-background-with-bokeh-effect_53876-97502.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        h1 {
-            text-align: center;
-            color: #f1c40f; /* Золотой цвет */
-            text-shadow: 2px 2px 4px #000000;
-        }
-
-        nav {
-            background-color: rgba(52, 73, 94, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: rgba(44, 62, 80, 1);
-        }
-
-        .lobby-list {
+        #lobbies {
+            width: 80%;
             margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
         }
 
-        .lobby-item {
-            background-color: rgba(44, 62, 80, 0.7);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
+        .lobby {
+            border-bottom: 1px solid #eee;
+            padding: 5px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #34495e;
         }
 
-        .lobby-item h3 {
-            margin: 0;
-            color: #fff;
-            text-shadow: 1px 1px 2px #000000;
+        .lobby:last-child {
+            border-bottom: none;
         }
 
-        .lobby-item p {
-            margin: 5px 0;
-            color: #ddd;
-        }
-
-        .lobby-item a {
-            background-color: #e67e22; /* Оранжевый цвет */
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .lobby-item a:hover {
-            background-color: #d35400; /* Более темный оранжевый */
-        }
-
-        #create-lobby-form {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: rgba(44, 62, 80, 0.5);
-            border-radius: 5px;
-        }
-
-        #create-lobby-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        #create-lobby-form input[type="text"],
-        #create-lobby-form input[type="number"] {
-            width: 95%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background-color: #333;
-            color: #fff;
-        }
-
-        #create-lobby-form button {
-            background-color: #f39c12; /* Оранжевый цвет */
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+        button {
+            padding: 8px 12px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #create-lobby-form button:hover {
-            background-color: #e67e22; /* Оранжевый цвет */
-        }
-
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background-color: rgba(52, 73, 94, 0.8);
-            color: #fff;
-            border-radius: 5px;
-            margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
-<div class="container">
-    <h1><i class="fas fa-coins"></i> Лобби Монетки</h1>
+    <h1>Coin Flip Game</h1>
 
-    <nav>
-        <ul>
-            <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
-            <li><a href="#lobbies"><i class="fas fa-list"></i> Лобби</a></li>
-            <li><a href="#create"><i class="fas fa-plus"></i> Создать Лобби</a></li>
-            <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
-        </ul>
-    </nav>
-
-    <section id="lobbies" class="lobby-list">
-        <h2>Доступные Лобби</h2>
-        <!-- Здесь будут отображаться лобби, полученные с сервера -->
-    </section>
-
-    <section id="create">
-        <h2>Создать Лобби</h2>
-        <form id="create-lobby-form">
-            <label for="lobby-name">Название Лобби:</label>
-            <input type="text" id="lobby-name" name="lobby-name" required>
-
-            <label for="bet-amount">Сумма Ставки (монеты):</label>
-            <input type="number" id="bet-amount" name="bet-amount" min="1" value="10" required>
-
-            <label for="rounds">Количество Раундов:</label>
-            <input type="number" id="rounds" name="rounds" min="1" value="5" required>
-
-            <button type="submit"><i class="fas fa-plus-circle"></i> Создать Лобби</button>
-        </form>
-    </section>
-
-    <div class="footer">
-        &copy; 2023 Лобби Монетки
+    <div>
+        <h2>Create Lobby</h2>
+        <input type="text" id="lobbyName" placeholder="Lobby Name">
+        <input type="number" id="betAmount" placeholder="Bet Amount">
+        <input type="number" id="rounds" placeholder="Number of Rounds">
+        <input type="text" id="creatorId" placeholder="Your User ID">
+        <button onclick="createLobby()">Create Lobby</button>
     </div>
 
-</div>
+    <div id="lobbies">
+        <h2>Available Lobbies</h2>
+        <!-- Lobbies will be displayed here -->
+    </div>
 
-<script>
-    const API_URL = 'http://localhost:3000/lobbies';
-    let currentLobbyId = null; // ID текущего лобби пользователя
-    let userId = 'user1'; // Replace with actual user ID after authentication
+    <script>
+        const API_BASE_URL = 'http://localhost:3000'; // Use a constant for base URL
 
-    document.getElementById('create-lobby-form').addEventListener('submit', async function (event) {
-        event.preventDefault();
+        async function createLobby() {
+            const name = document.getElementById('lobbyName').value;
+            const betAmount = document.getElementById('betAmount').value;
+            const rounds = document.getElementById('rounds').value;
+            const creatorId = document.getElementById('creatorId').value;
 
-        const lobbyName = document.getElementById('lobby-name').value;
-        const betAmount = document.getElementById('bet-amount').value;
-        const rounds = document.getElementById('rounds').value;
-
-        const lobbyData = {
-            name: lobbyName,
-            betAmount: betAmount,
-            rounds: rounds,
-            creatorId: userId  // Use the userId here
-        };
-
-        try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(`${API_BASE_URL}/lobbies`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(lobbyData)
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    betAmount: betAmount,
+                    rounds: rounds,
+                    creatorId: creatorId
+                }),
             });
 
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-             const data = await response.json();
-             console.log('Lobby created:', data);
-             currentLobbyId = data.lobbyId;
-
-            // Перенаправляем на страницу ожидания
-            window.location.href = `/waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`; // Pass userId
-        } catch (error) {
-            console.error('Error creating lobby:', error);
-            alert('Failed to create lobby. Please try again.');
+            const data = await response.json();
+            console.log(data);
+            fetchLobbies(); // Refresh lobby list after creating a lobby
         }
-    });
-
-    // Function to fetch and display lobbies
-    async function fetchLobbies() {
-        try {
-            const response = await fetch(API_URL);
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        async function fetchLobbies() {
+            const response = await fetch(`${API_BASE_URL}/lobbies`);
             const lobbies = await response.json();
-            displayLobbies(lobbies);
-        } catch (error) {
-            console.error('Error fetching lobbies:', error);
-            alert('Failed to load lobbies. Please try again.');
-        }
-    }
 
-    // Function to display the fetched lobbies
-    function displayLobbies(lobbies) {
-        const lobbyList = document.getElementById('lobbies');
-        lobbyList.innerHTML = '<h2>Available Lobbies</h2>';
+            const lobbiesDiv = document.getElementById('lobbies');
+            lobbiesDiv.innerHTML = '<h2>Available Lobbies</h2>'; // Clear existing lobbies
 
-        lobbies.forEach(lobby => {
-            const lobbyItem = document.createElement('div');
-            lobbyItem.classList.add('lobby-item');
-            lobbyItem.innerHTML = `
-                <h3><i class="fas fa-gamepad"></i> ${lobby.name}</h3>
-                <p><i class="fas fa-coins"></i> Bet: ${lobby.betAmount} coins</p>
-                <p><i class="fas fa-sync-alt"></i> Rounds: ${lobby.rounds}</p>
-                <button onclick="joinLobby('${lobby._id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
-            `;
-            lobbyList.appendChild(lobbyItem);
-        });
-    }
-
-    async function joinLobby(lobbyId) {
-        try {
-            const response = await fetch(`${API_URL}/${lobbyId}/join`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({userId: userId})
+            lobbies.forEach(lobby => {
+                const lobbyDiv = document.createElement('div');
+                lobbyDiv.classList.add('lobby');
+                lobbyDiv.innerHTML = `
+                    <span>${lobby.name} (Bet: ${lobby.bet_amount}, Rounds: ${lobby.rounds})</span>
+                    <button onclick="joinLobby(${lobby.id}, '${document.getElementById('creatorId').value}')">Join Lobby</button>
+                `;  // Pass lobby.id and userId
+                lobbiesDiv.appendChild(lobbyDiv);
             });
-
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-             const data = await response.json();
-             window.location.href = `/game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
-        } catch (error) {
-            console.error('Error joining lobby:', error);
-            alert('Failed to join lobby. Please try again.');
         }
-    }
 
-    window.onload = fetchLobbies;
-</script>
+        async function joinLobby(lobbyId, userId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/lobbies/${lobbyId}/join`, { // Correct URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId: userId }) // Send userId in the body
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error joining lobby: HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Lobby joined:', data);
+                alert(data.message); // Display a message to the user
+
+            } catch (error) {
+                console.error('Error joining lobby:', error);
+                alert("Failed to join lobby. See console for details."); // Display a user-friendly error
+            }
+        }
+
+        // Fetch lobbies on page load
+        fetchLobbies();
+    </script>
 </body>
+
 </html>
