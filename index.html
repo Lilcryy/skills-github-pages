@@ -1,133 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Flip Game</title>
+    <title>Лобби Монетки</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
+        /* Стили (как в предыдущем примере) */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #222;
             margin: 0;
-            color: #333;
+            padding: 0;
+            color: #fff;
+            background-image: url('https://img.freepik.com/premium-vector/dark-texture-background-with-bokeh-effect_53876-97502.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            text-align: center;
-            width: 600px; /* Increased width */
+            width: 80%;
+            margin: 20px auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         h1 {
-            margin-bottom: 20px;
-            color: #3498db;
+            text-align: center;
+            color: #f1c40f; /* Золотой цвет */
+            text-shadow: 2px 2px 4px #000000;
         }
 
-        .coin {
-            width: 100px;
-            height: 100px;
-            margin: 20px auto;
-            position: relative;
-            transition: transform 0.8s ease-in-out;
-            transform-style: preserve-3d;
-        }
-
-        .coin .front,
-        .coin .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .coin .front {
-            background-color: #f39c12;
-            transform: rotateY(0deg);
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/2006_Quarter_Proof.png/1200px-2006_Quarter_Proof.png'); /* Replace with your heads image */
-            background-size: cover;
-        }
-
-        .coin .back {
-            background-color: #2c3e50;
-            transform: rotateY(180deg);
-            background-image: url('https://en.numista.com/catalogue/photos/united_states/original/5563a66125f4f1.53802817.jpg'); /* Replace with your tails image */
-            background-size: cover;
-
-        }
-
-        .coin.flipping {
-            transform: rotateY(3600deg);
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
+        nav {
+            background-color: rgba(52, 73, 94, 0.8);
+            padding: 10px;
             border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            margin: 0 10px;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
-            color: white;
         }
 
-        .btn-primary {
-            background-color: #3498db;
+        nav a:hover {
+            background-color: rgba(44, 62, 80, 1);
         }
 
-        .btn-secondary {
-            background-color: #e74c3c;
-        }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
-
-        .btn-secondary:hover {
-            background-color: #c0392b;
-        }
-
-        #result {
+        .lobby-list {
             margin-top: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        /* Lobby Styles */
-        #lobby-list {
-            margin-top: 20px;
-            text-align: left;
         }
 
         .lobby-item {
-            border: 1px solid #ddd;
+            background-color: rgba(44, 62, 80, 0.7);
+            padding: 15px;
             border-radius: 5px;
-            padding: 10px;
             margin-bottom: 10px;
-            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #34495e;
         }
 
-        /* Form Styles */
+        .lobby-item h3 {
+            margin: 0;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+        .lobby-item p {
+            margin: 5px 0;
+            color: #ddd;
+        }
+
+        .lobby-item a {
+            background-color: #e67e22; /* Оранжевый цвет */
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .lobby-item a:hover {
+            background-color: #d35400; /* Более темный оранжевый */
+        }
+
         #create-lobby-form {
             margin-top: 20px;
-            text-align: left;
+            padding: 15px;
+            background-color: rgba(44, 62, 80, 0.5);
+            border-radius: 5px;
         }
 
         #create-lobby-form label {
@@ -136,228 +115,178 @@
             font-weight: bold;
         }
 
-        #create-lobby-form input {
-            width: 100%;
+        #create-lobby-form input[type="text"],
+        #create-lobby-form input[type="number"] {
+            width: 95%;
             padding: 8px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #555;
             border-radius: 4px;
-            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+            background-color: #333;
+            color: #fff;
         }
 
         #create-lobby-form button {
-            background-color: #2ecc71;
-            color: white;
-            padding: 10px 15px;
+            background-color: #f39c12; /* Оранжевый цвет */
+            color: #fff;
+            padding: 10px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         #create-lobby-form button:hover {
-            background-color: #27ae60;
+            background-color: #e67e22; /* Оранжевый цвет */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(52, 73, 94, 0.8);
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+<div class="container">
+    <h1><i class="fas fa-coins"></i> Лобби Монетки</h1>
 
-    <div class="container">
-        <h1>Coin Flip Game</h1>
+    <nav>
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+            <li><a href="#lobbies"><i class="fas fa-list"></i> Лобби</a></li>
+            <li><a href="#create"><i class="fas fa-plus"></i> Создать Лобби</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> О нас</a></li>
+        </ul>
+    </nav>
 
-        <div id="coin" class="coin">
-            <div class="front"></div>
-            <div class="back"></div>
-        </div>
+    <section id="lobbies" class="lobby-list">
+        <h2>Доступные Лобби</h2>
+        <!-- Здесь будут отображаться лобби, полученные с сервера -->
+    </section>
 
-        <div class="buttons">
-            <button id="heads-button" class="btn btn-primary">Heads</button>
-            <button id="tails-button" class="btn btn-secondary">Tails</button>
-        </div>
-
-        <p id="result"></p>
-        <p>Wins: <span id="wins">0</span> | Losses: <span id="losses">0</span></p>
-
-        <h2>Available Lobbies</h2>
-        <div id="lobby-list">
-            <!-- Lobbies will be displayed here -->
-        </div>
-
-        <h2>Create New Lobby</h2>
+    <section id="create">
+        <h2>Создать Лобби</h2>
         <form id="create-lobby-form">
-            <label for="lobby-name">Lobby Name:</label>
+            <label for="lobby-name">Название Лобби:</label>
             <input type="text" id="lobby-name" name="lobby-name" required>
 
-            <label for="bet-amount">Bet Amount:</label>
-            <input type="number" id="bet-amount" name="bet-amount" required>
+            <label for="bet-amount">Сумма Ставки (монеты):</label>
+            <input type="number" id="bet-amount" name="bet-amount" min="1" value="10" required>
 
-            <label for="rounds">Number of Rounds:</label>
-            <input type="number" id="rounds" name="rounds" required>
+            <label for="rounds">Количество Раундов:</label>
+            <input type="number" id="rounds" name="rounds" min="1" value="5" required>
 
-            <button type="submit">Create Lobby</button>
+            <button type="submit"><i class="fas fa-plus-circle"></i> Создать Лобби</button>
         </form>
+    </section>
+
+    <div class="footer">
+        &copy; 2023 Лобби Монетки
     </div>
 
-    <script>
-        const coin = document.getElementById('coin');
-        const headsButton = document.getElementById('heads-button');
-        const tailsButton = document.getElementById('tails-button');
-        const resultText = document.getElementById('result');
-        const winsText = document.getElementById('wins');
-        const lossesText = document.getElementById('losses');
+</div>
 
-        let wins = 0;
-        let losses = 0;
+<script>
+    const API_URL = 'http://localhost:3000/lobbies';
+    let currentLobbyId = null; // ID текущего лобби пользователя
+    let userId = 'user1'; // Replace with actual user ID after authentication
 
-        function flipCoin(choice) {
-            coin.classList.add('flipping');
-            headsButton.disabled = true;
-            tailsButton.disabled = true;
+    document.getElementById('create-lobby-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
 
-            setTimeout(() => {
-                coin.classList.remove('flipping');
-                const randomNumber = Math.random();
-                const result = randomNumber < 0.5 ? 'heads' : 'tails';
+        const lobbyName = document.getElementById('lobby-name').value;
+        const betAmount = document.getElementById('bet-amount').value;
+        const rounds = document.getElementById('rounds').value;
 
-                if (result === choice) {
-                    resultText.textContent = 'You Win!';
-                    wins++;
-                    winsText.textContent = wins;
-                } else {
-                    resultText.textContent = 'You Lose!';
-                    losses++;
-                    lossesText.textContent = losses;
-                }
+        const lob
+byData = {
+            name: lobbyName,
+            betAmount: betAmount,
+            rounds: rounds,
+            creatorId: userId  // Use the userId here
+        };
 
-                headsButton.disabled = false;
-                tailsButton.disabled = false;
-            }, 1000); // Matches the CSS transition duration
-        }
-
-        headsButton.addEventListener('click', () => flipCoin('heads'));
-        tailsButton.addEventListener('click', () => flipCoin('tails'));
-
-        // Lobby Management
-        const lobbyList = document.getElementById('lobby-list');
-        const createLobbyForm = document.getElementById('create-lobby-form');
-
-        const userId = createUUID(); // Generate UUID for userId
-
-        // Function to fetch and display lobbies
-        async function fetchLobbies() {
-            try {
-                const response = await fetch('http://localhost:3000/lobbies'); // Get Lobbies
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const lobbies = await response.json();
-                displayLobbies(lobbies);
-            } catch (error) {
-                console.error('Error fetching lobbies:', error);
-                lobbyList.textContent = 'Error loading lobbies.';
-            }
-        }
-
-        // Function to display lobbies in the list
-        function displayLobbies(lobbies) {
-            lobbyList.innerHTML = ''; // Clear existing lobbies
-
-            lobbies.forEach(lobby => {
-                const lobbyItem = document.createElement('div');
-                lobbyItem.classList.add('lobby-item');
-                lobbyItem.innerHTML = `
-                    <h3>${lobby.name}</h3>
-                    <p>Bet Amount: ${lobby.bet_amount}</p>
-                    <p>Rounds: ${lobby.rounds}</p>
-                    <button class="btn btn-primary join-lobby-button" data-lobby-id="${lobby.id}">Join Lobby</button>
-                `;
-                lobbyList.appendChild(lobbyItem);
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(lobbyData)
             });
 
-            // Attach event listeners to the "Join Lobby" buttons
-            document.querySelectorAll('.join-lobby-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const lobbyId = this.dataset.lobbyId;
-                    joinLobby(lobbyId);
-                });
-            });
-        }
-
-        // Function to handle lobby creation
-        createLobbyForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const lobbyName = document.getElementById('lobby-name').value;
-            const betAmount = document.getElementById('bet-amount').value;
-            const rounds = document.getElementById('rounds').value;
-
-            try {
-                const response = await fetch('http://localhost:3000/lobbies', { // Create Lobbies
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: lobbyName,
-                        betAmount: betAmount,
-                        rounds: rounds,
-                        creatorId: userId  // Use userId here
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Lobby created:', data);
-                fetchLobbies(); // Refresh the lobby list
-            } catch (error) {
-                console.err
-
-ChatGPT4 | Midjourney, [14.03.2025 19:28]
-or('Error creating lobby:', error);
-                alert('Failed to create lobby.');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
+
+            const data = await response.json();
+            console.log('Lobby created:', data);
+            currentLobbyId = data.lobbyId;
+
+            // Перенаправляем на страницу ожидания
+            window.location.href = `waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`; // Pass userId
+        } catch (error) {
+            console.error('Error creating lobby:', error);
+            alert('Failed to create lobby. Please try again.');
+        }
+    });
+
+    // Function to fetch and display lobbies
+    async function fetchLobbies() {
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const lobbies = await response.json();
+            displayLobbies(lobbies);
+        } catch (error) {
+            console.error('Error fetching lobbies:', error);
+            alert('Failed to load lobbies. Please try again.');
+        }
+    }
+
+    // Function to display the fetched lobbies
+    function displayLobbies(lobbies) {
+        const lobbyList = document.getElementById('lobbies');
+        lobbyList.innerHTML = '<h2>Available Lobbies</h2>';
+
+        lobbies.forEach(lobby => {
+            const lobbyItem = document.createElement('div');
+            lobbyItem.classList.add('lobby-item');
+            lobbyItem.innerHTML = `
+                <h3><i class="fas fa-gamepad"></i> ${lobby.name}</h3>
+                <p><i class="fas fa-coins"></i> Bet: ${lobby.betAmount} coins</p>
+                <p><i class="fas fa-sync-alt"></i> Rounds: ${lobby.rounds}</p>
+                <button onclick="joinLobby('${lobby._id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
+            `;
+            lobbyList.appendChild(lobbyItem);
         });
+    }
 
-        async function joinLobby(lobbyId) {
-            const apiUrl = `http://localhost:3000/lobbies/${lobbyId}/join`;
-            const requestBody = {
-                userId: userId,
-            };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Joined lobby:', data);
-                alert(`Successfully joined lobby ${lobbyId}!`);
-                // Here you might want to redirect the user to the game page
-            } catch (error) {
-                console.error('Error joining lobby:', error);
-                alert('Failed to join lobby.');
-            }
-        }
-
-        function createUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
+    async function joinLobby(lobbyId) {
+        try {
+            const response = await fetch(`${API_URL}/${lobbyId}/join`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({userId: userId})
             });
-        }
 
-        // Fetch lobbies on page load
-        fetchLobbies();
-    </script>
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            window.location.href = `game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
+        } catch (error) {
+            console.error('Error joining lobby:', error);
+            alert('Failed to join lobby. Please try again.');
+        }
+    }
+
+    window.onload = fetchLobbies;
+</script>
 </body>
 </html>
