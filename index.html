@@ -1,133 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Flip</title>
+    <title>Coin Flip Game</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
         }
 
-        #lobbies {
-            width: 80%;
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .coin {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            position: relative;
+            transition: transform 0.8s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        .coin .front,
+        .coin .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .coin .front {
+            background-color: #f39c12;
+            transform: rotateY(0deg);
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/2006_Quarter_Proof.png/1200px-2006_Quarter_Proof.png'); /* Replace with your heads image */
+            background-size: cover;
+        }
+
+        .coin .back {
+            background-color: #2c3e50;
+            transform: rotateY(180deg);
+            background-image: url('https://en.numista.com/catalogue/photos/united_states/original/5563a66125f4f1.53802817.jpg'); /* Replace with your tails image */
+            background-size: cover;
+
+        }
+
+        .coin.flipping {
+            transform: rotateY(3600deg);
+        }
+
+        .buttons {
             margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
         }
 
-        .lobby {
-            border-bottom: 1px solid #eee;
-            padding: 5px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .lobby:last-child {
-            border-bottom: none;
-        }
-
-        button {
-            padding: 8px 12px;
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
             cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+        }
+
+        .btn-secondary {
+            background-color: #e74c3c;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c0392b;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
         }
     </style>
 </head>
-
 <body>
-    <h1>Coin Flip Game</h1>
 
-    <div>
-        <h2>Create Lobby</h2>
-        <input type="text" id="lobbyName" placeholder="Lobby Name">
-        <input type="number" id="betAmount" placeholder="Bet Amount">
-        <input type="number" id="rounds" placeholder="Number of Rounds">
-        <input type="text" id="creatorId" placeholder="Your User ID">
-        <button onclick="createLobby()">Create Lobby</button>
-    </div>
+    <div class="container">
+        <h1>Coin Flip Game</h1>
 
-    <div id="lobbies">
-        <h2>Available Lobbies</h2>
-        <!-- Lobbies will be displayed here -->
+        <div id="coin" class="coin">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+
+        <div class="buttons">
+            <button id="heads-button" class="btn btn-primary">Heads</button>
+            <button id="tails-button" class="btn btn-secondary">Tails</button>
+        </div>
+
+        <p id="result"></p>
+        <p>Wins: <span id="wins">0</span> | Losses: <span id="losses">0</span></p>
     </div>
 
     <script>
-        const API_BASE_URL = 'http://localhost:3000'; // Use a constant for base URL
+        const coin = document.getElementById('coin');
+        const headsButton = document.getElementById('heads-button');
+        const tailsButton = document.getElementById('tails-button');
+        const resultText = document.getElementById('result');
+        const winsText = document.getElementById('wins');
+        const lossesText = document.getElementById('losses');
 
-        async function createLobby() {
-            const name = document.getElementById('lobbyName').value;
-            const betAmount = document.getElementById('betAmount').value;
-            const rounds = document.getElementById('rounds').value;
-            const creatorId = document.getElementById('creatorId').value;
+        let wins = 0;
+        let losses = 0;
 
-            const response = await fetch(`${API_BASE_URL}/lobbies`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    betAmount: betAmount,
-                    rounds: rounds,
-                    creatorId: creatorId
-                }),
-            });
+        function flipCoin(choice) {
+            coin.classList.add('flipping');
+            headsButton.disabled = true;
+            tailsButton.disabled = true;
 
-            const data = await response.json();
-            console.log(data);
-            fetchLobbies(); // Refresh lobby list after creating a lobby
-        }
-        async function fetchLobbies() {
-            const response = await fetch(`${API_BASE_URL}/lobbies`);
-            const lobbies = await response.json();
+            setTimeout(() => {
+                coin.classList.remove('flipping');
+                const randomNumber = Math.random();
+                const result = randomNumber < 0.5 ? 'heads' : 'tails';
 
-            const lobbiesDiv = document.getElementById('lobbies');
-            lobbiesDiv.innerHTML = '<h2>Available Lobbies</h2>'; // Clear existing lobbies
-
-            lobbies.forEach(lobby => {
-                const lobbyDiv = document.createElement('div');
-                lobbyDiv.classList.add('lobby');
-                lobbyDiv.innerHTML = `
-                    <span>${lobby.name} (Bet: ${lobby.bet_amount}, Rounds: ${lobby.rounds})</span>
-                    <button onclick="joinLobby(${lobby.id}, '${document.getElementById('creatorId').value}')">Join Lobby</button>
-                `;  // Pass lobby.id and userId
-                lobbiesDiv.appendChild(lobbyDiv);
-            });
-        }
-
-        async function joinLobby(lobbyId, userId) {
-            try {
-                const response = await fetch(`${API_BASE_URL}/lobbies/${lobbyId}/join`, { // Correct URL
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userId: userId }) // Send userId in the body
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Error joining lobby: HTTP error! Status: ${response.status}`);
+                if (result === choice) {
+                    resultText.textContent = 'You Win!';
+                    wins++;
+                    winsText.textContent = wins;
+                } else {
+                    resultText.textContent = 'You Lose!';
+                    losses++;
+                    lossesText.textContent = losses;
                 }
 
-                const data = await response.json();
-                console.log('Lobby joined:', data);
-                alert(data.message); // Display a message to the user
-
-            } catch (error) {
-                console.error('Error joining lobby:', error);
-                alert("Failed to join lobby. See console for details."); // Display a user-friendly error
-            }
+                headsButton.disabled = false;
+                tailsButton.disabled = false;
+            }, 1000); // Matches the CSS transition duration
         }
 
-        // Fetch lobbies on page load
-        fetchLobbies();
+        headsButton.addEventListener('click', () => flipCoin('heads'));
+        tailsButton.addEventListener('click', () => flipCoin('tails'));
     </script>
 </body>
-
 </html>
