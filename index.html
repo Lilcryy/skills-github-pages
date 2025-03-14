@@ -225,8 +225,8 @@ byData = {
             console.log('Lobby created:', data);
             currentLobbyId = data.lobbyId;
 
-            // Перенаправляем на страницу ожидания
-            window.location.href = `waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`; // Pass userId
+            // Redirect the creator to the waiting page
+            window.location.href = `waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`;
         } catch (error) {
             console.error('Error creating lobby:', error);
             alert('Failed to create lobby. Please try again.');
@@ -251,7 +251,7 @@ byData = {
     // Function to display the fetched lobbies
     function displayLobbies(lobbies) {
         const lobbyList = document.getElementById('lobbies');
-        lobbyList.innerHTML = '<h2>Available Lobbies</h2>';
+        lobbyList.innerHTML = '<h2>Доступные Лобби</h2>';
 
         lobbies.forEach(lobby => {
             const lobbyItem = document.createElement('div');
@@ -260,7 +260,7 @@ byData = {
                 <h3><i class="fas fa-gamepad"></i> ${lobby.name}</h3>
                 <p><i class="fas fa-coins"></i> Bet: ${lobby.betAmount} coins</p>
                 <p><i class="fas fa-sync-alt"></i> Rounds: ${lobby.rounds}</p>
-                <button onclick="joinLobby('${lobby._id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
+                <button onclick="joinLobby('${lobby.id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
             `;
             lobbyList.appendChild(lobbyItem);
         });
@@ -279,7 +279,11 @@ byData = {
             }
 
             const data = await response.json();
-            window.location.href = `game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
+             if (data.status === 'ready') {
+                  window.location.href = `game.html?lobbyId=${lobbyId}&userId=${userId}`;
+              } else {
+                  window.location.href = `waiting.html?lobbyId=${lobbyId}&userId=${userId}`;
+              }
         } catch (error) {
             console.error('Error joining lobby:', error);
             alert('Failed to join lobby. Please try again.');
