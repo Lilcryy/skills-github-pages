@@ -22,7 +22,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
             text-align: center;
-            width: 400px;
+            width: 600px; /* Increased width */
         }
 
         h1 {
@@ -109,6 +109,54 @@
             font-size: 1.2em;
             font-weight: bold;
         }
+
+        /* Lobby Styles */
+        #lobby-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .lobby-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        /* Form Styles */
+        #create-lobby-form {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #create-lobby-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #create-lobby-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+        }
+
+        #create-lobby-form button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #create-lobby-form button:hover {
+            background-color: #27ae60;
+        }
     </style>
 </head>
 <body>
@@ -128,6 +176,25 @@
 
         <p id="result"></p>
         <p>Wins: <span id="wins">0</span> | Losses: <span id="losses">0</span></p>
+
+        <h2>Available Lobbies</h2>
+        <div id="lobby-list">
+            <!-- Lobbies will be displayed here -->
+        </div>
+
+        <h2>Create New Lobby</h2>
+        <form id="create-lobby-form">
+            <label for="lobby-name">Lobby Name:</label>
+            <input type="text" id="lobby-name" name="lobby-name" required>
+
+            <label for="bet-amount">Bet Amount:</label>
+            <input type="number" id="bet-amount" name="bet-amount" required>
+
+            <label for="rounds">Number of Rounds:</label>
+            <input type="number" id="rounds" name="rounds" required>
+
+            <button type="submit">Create Lobby</button>
+        </form>
     </div>
 
     <script>
@@ -169,25 +236,94 @@
         headsButton.addEventListener('click', () => flipCoin('heads'));
         tailsButton.addEventListener('click', () => flipCoin('tails'));
 
-        //  *****************************************************************
-        //  ВАЖНО:  Теперь функция `joinLobby` ИСПРАВЛЕНА!
-        //  *****************************************************************
+        // Lobby Management
+        const lobbyList = document.getElementById('lobby-list');
+        const createLobbyForm = document.getElementById('create-lobby-form');
 
-        function createUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
+        const userId = createUUID(); // Generate UUID for userId
+
+        // Function to fetch and display lobbies
+        async function fetchLobbies() {
+            try {
+                const response = await fetch('http://localhost:3000/lobbies'); // Get Lobbies
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const lobbies = await response.json();
+                displayLobbies(lobbies);
+            } catch (error) {
+                console.error('Error fetching lobbies:', error);
+                lobbyList.textContent = 'Error loading lobbies.';
+            }
+        }
+
+        // Function to display lobbies in the list
+        function displayLobbies(lobbies) {
+            lobbyList.innerHTML = ''; // Clear existing lobbies
+
+            lobbies.forEach(lobby => {
+                const lobbyItem = document.createElement('div');
+                lobbyItem.classList.add('lobby-item');
+                lobbyItem.innerHTML = `
+                    <h3>${lobby.name}</h3>
+                    <p>Bet Amount: ${lobby.bet_amount}</p>
+                    <p>Rounds: ${lobby.rounds}</p>
+                    <button class="btn btn-primary join-lobby-button" data-lobby-id="${lobby.id}">Join Lobby</button>
+                `;
+                lobbyList.appendChild(lobbyItem);
+            });
+
+            // Attach event listeners to the "Join Lobby" buttons
+            document.querySelectorAll('.join-lobby-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lobbyId = this.dataset.lobbyId;
+                    joinLobby(lobbyId);
+                });
             });
         }
 
-        const userId = createUUID(); //  Генерируем UUID для userId
-        const lobbyId = 1; //  ВАЖНО:  Замените это на актуальный ID лобби, к которой хотите присоединиться!
+        // Function to handle lobby creation
+        createLobbyForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-        async function joinLobby() {
-            // Replace with your actual API endpoint
-            const apiUrl = `http://localhost:3000/lobbies/${lobbyId}/join`;  //  <-----  !!!  Исправлено !!!
+            const lobbyName = document.getElementById('lobby-name').value;
+            const betAmount = document.getElementById('bet-amount').value;
+            const rounds = document.getElementById('rounds').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/lobbies', { // Create Lobbies
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: lobbyName,
+                        betAmount: betAmount,
+                        rounds: rounds,
+                        creatorId: userId  // Use userId here
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Lobby created:', data);
+                fetchLobbies(); // Refresh the lobby list
+            } catch (error) {
+                console.err
+
+ChatGPT4 | Midjourney, [14.03.2025 19:28]
+or('Error creating lobby:', error);
+                alert('Failed to create lobby.');
+            }
+        });
+
+        async function joinLobby(lobbyId) {
+            const apiUrl = `http://localhost:3000/lobbies/${lobbyId}/join`;
             const requestBody = {
-                userId: userId,  //  <-----  !!!  Отправляем userId !!!
+                userId: userId,
             };
 
             try {
@@ -205,17 +341,23 @@
 
                 const data = await response.json();
                 console.log('Joined lobby:', data);
-                // Handle the response data here
+                alert(`Successfully joined lobby ${lobbyId}!`);
+                // Here you might want to redirect the user to the game page
             } catch (error) {
                 console.error('Error joining lobby:', error);
-                // Handle the error here
+                alert('Failed to join lobby.');
             }
         }
 
-        // Call joinLobby when the page loads
-        joinLobby();
+        function createUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
 
-
+        // Fetch lobbies on page load
+        fetchLobbies();
     </script>
 </body>
 </html>
