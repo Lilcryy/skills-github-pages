@@ -1,3 +1,4 @@
+Lilcryy developer #gavno, [14.03.2025 19:03]
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    const someVariable = someValue; // Правильно
     <style>
         /* Стили (как в предыдущем примере) */
         body {
@@ -141,7 +141,8 @@
             background-color: #e67e22; /* Оранжевый цвет */
         }
 
-        .footer {
+Lilcryy developer #gavno, [14.03.2025 19:03]
+.footer {
             text-align: center;
             padding: 10px;
             background-color: rgba(52, 73, 94, 0.8);
@@ -203,8 +204,7 @@
         const betAmount = document.getElementById('bet-amount').value;
         const rounds = document.getElementById('rounds').value;
 
-        const lob
-byData = {
+        const lobbyData = {
             name: lobbyName,
             betAmount: betAmount,
             rounds: rounds,
@@ -218,16 +218,14 @@ byData = {
                 body: JSON.stringify(lobbyData)
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(HTTP error! Status: ${response.status});
 
-            const data = await response.json();
-            console.log('Lobby created:', data);
-            currentLobbyId = data.lobbyId;
+             const data = await response.json();
+             console.log('Lobby created:', data);
+             currentLobbyId = data.lobbyId;
 
-            // Redirect the creator to the waiting page
-            window.location.href = `waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`;
+            // Перенаправляем на страницу ожидания
+            window.location.href = /waiting.html?lobbyId=${currentLobbyId}&userId=${userId}; // Pass userId
         } catch (error) {
             console.error('Error creating lobby:', error);
             alert('Failed to create lobby. Please try again.');
@@ -238,9 +236,7 @@ byData = {
     async function fetchLobbies() {
         try {
             const response = await fetch(API_URL);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(HTTP error! Status: ${response.status});
             const lobbies = await response.json();
             displayLobbies(lobbies);
         } catch (error) {
@@ -252,16 +248,17 @@ byData = {
     // Function to display the fetched lobbies
     function displayLobbies(lobbies) {
         const lobbyList = document.getElementById('lobbies');
-        lobbyList.innerHTML = '<h2>Доступные Лобби</h2>';
+        lobbyList.innerHTML = '<h2>Available Lobbies</h2>';
 
-        lobbies.forEach(lobby => {
+Lilcryy developer #gavno, [14.03.2025 19:03]
+lobbies.forEach(lobby => {
             const lobbyItem = document.createElement('div');
             lobbyItem.classList.add('lobby-item');
             lobbyItem.innerHTML = `
                 <h3><i class="fas fa-gamepad"></i> ${lobby.name}</h3>
                 <p><i class="fas fa-coins"></i> Bet: ${lobby.betAmount} coins</p>
                 <p><i class="fas fa-sync-alt"></i> Rounds: ${lobby.rounds}</p>
-                <button onclick="joinLobby('${lobby.id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
+                <button onclick="joinLobby('${lobby._id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
             `;
             lobbyList.appendChild(lobbyItem);
         });
@@ -275,16 +272,10 @@ byData = {
                 body: JSON.stringify({userId: userId})
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(HTTP error! Status: ${response.status});
 
-            const data = await response.json();
-             if (data.status === 'ready') {
-                  window.location.href = `game.html?lobbyId=${lobbyId}&userId=${userId}`;
-              } else {
-                  window.location.href = `waiting.html?lobbyId=${lobbyId}&userId=${userId}`;
-              }
+             const data = await response.json();
+             window.location.href = /game.html?lobbyId=${lobbyId}&userId=${userId}; // Pass userId
         } catch (error) {
             console.error('Error joining lobby:', error);
             alert('Failed to join lobby. Please try again.');
