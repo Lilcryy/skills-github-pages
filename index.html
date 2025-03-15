@@ -141,7 +141,6 @@
             background-color: #e67e22; /* Оранжевый цвет */
         }
 
-Lilcryy developer #gavno, [14.03.2025 19:03]
 .footer {
             text-align: center;
             padding: 10px;
@@ -193,95 +192,84 @@ Lilcryy developer #gavno, [14.03.2025 19:03]
 </div>
 
 <script>
-const API_URL = 'http://localhost:3000/lobbies';
-let currentLobbyId = null; // ID текущего лобби пользователя
-let userId = 'user1'; // Replace with actual user ID after authentication
+        const API_BASE_URL = 'http://localhost:3000'; // Use a constant for base URL
+        const userId = document.getElementById('creatorId').value;   // Get User id
 
-document.getElementById('create-lobby-form').addEventListener('submit', async function (event) {
-    event.preventDefault();
+        async function createLobby() {
+            const name = document.getElementById('lobbyName').value;
+            const betAmount = document.getElementById('betAmount').value;
+            const rounds = document.getElementById('rounds').value;
+            const creatorId = document.getElementById('creatorId').value;
 
-    const lobbyName = document.getElementById('lobby-name').value;
-    const betAmount = document.getElementById('bet-amount').value;
-    const rounds = document.getElementById('rounds').value;
+            const response = await fetch(`${API_BASE_URL}/lobbies`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    betAmount: betAmount,
+                    rounds: rounds,
+                    creatorId: creatorId
+                }),
+            });
 
-    const lobbyData = {
-        name: lobbyName,
-        betAmount: betAmount,
-        rounds: rounds,
-        creatorId: userId  // Use the userId here
-    };
+            const data = await response.json();
+            console.log(data);            if (data.lobbyId) {
+                window.location.href = `/waiting.html?lobbyId=${data.lobbyId}&userId=${creatorId}`;
+            }
+            fetchLobbies(); // Refresh lobby list after creating a lobby
+        }
 
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(lobbyData)
-        });
+        async function fetchLobbies() {
+            const response = await fetch(`${API_BASE_URL}/lobbies`);
+            const lobbies = await response.json();
 
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            const lobbiesDiv = document.getElementById('lobbies');
+            lobbiesDiv.innerHTML = '<h2>Available Lobbies</h2>'; // Clear existing lobbies
 
-        const data = await response.json();
-        console.log('Lobby created:', data);
-        currentLobbyId = data.lobbyId;
+            lobbies.forEach(lobby => {
+                const lobbyDiv = document.createElement('div');
+                lobbyDiv.classList.add('lobby');
+                lobbyDiv.innerHTML = `
+                    <span>${lobby.name} (Bet: ${lobby.bet_amount}, Rounds: ${lobby.rounds})</span>
+                    <button onclick="joinLobby(${lobby.id}, '${document.getElementById('creatorId').value}')">Join Lobby</button>
+                `;  // Pass lobby.id and userId
+                lobbiesDiv.appendChild(lobbyDiv);
+            });
+        }
 
-        // Перенаправляем на страницу ожидания
-        window.location.href = `/waiting.html?lobbyId=${currentLobbyId}&userId=${userId}`; // Pass userId
-    } catch (error) {
-        console.error('Error creating lobby:', error);
-        alert('Failed to create lobby. Please try again.');
-    }
-});
+        async function joinLobby(lobbyId, userId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/lobbies/${lobbyId}/join`, { // Correct URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId: userId }) // Send userId in the body
+                });
 
-// Function to fetch and display lobbies
-async function fetchLobbies() {
-    try {
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const lobbies = await response.json();
-        displayLobbies(lobbies);
-    } catch (error) {
-        console.error('Error fetching lobbies:', error);
-        alert('Failed to load lobbies. Please try again.');
-    }
-}
+                if (!response.ok) {
+                    throw new Error(`Error joining lobby: HTTP error! Status: ${response.status}`);
+                }
 
-// Function to display the fetched lobbies
-function displayLobbies(lobbies) {
-    const lobbyList = document.getElementById('lobbies');
-    lobbyList.innerHTML = '<h2>Available Lobbies</h2>';
+                const data = await response.json();
+                console.log('Lobby joined:', data);
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
 
-    lobbies.forEach(lobby => {
-        const lobbyItem = document.createElement('div');
-        lobbyItem.classList.add('lobby-item');
-        lobbyItem.innerHTML = `
-            <h3><i class="fas fa-gamepad"></i> ${lobby.name}</h3>
-            <p><i class="fas fa-coins"></i> Bet: ${lobby.betAmount} coins</p>
-            <p><i class="fas fa-sync-alt"></i> Rounds: ${lobby.rounds}</p>
-            <button onclick="joinLobby('${lobby.id}')"><i class="fas fa-sign-in-alt"></i> Join</button>
-        `;
-        lobbyList.appendChild(lobbyItem);
-    });
-}
+                    alert(data.message); // Display a message to the user
+                }
 
-async function joinLobby(lobbyId) {
-    try {
-        const response = await fetch(`${API_URL}/${lobbyId}/join`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId: userId })
-        });
+            } catch (error) {
+                console.error('Error joining lobby:', error);
+                alert("Failed to join lobby. See console for details."); // Display a user-friendly error
+            }
+        }
 
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const data = await response.json();
-        window.location.href = `/game.html?lobbyId=${lobbyId}&userId=${userId}`; // Pass userId
-    } catch (error) {
-        console.error('Error joining lobby:', error);
-        alert('Failed to join lobby. Please try again.');
-    }
-}
-
-window.onload = fetchLobbies;
+        // Fetch lobbies on page load
+        fetchLobbies();
 </script>
 </body>
 </html>
