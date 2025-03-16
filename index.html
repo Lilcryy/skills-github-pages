@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lobby Management</title>
     <script>
+        // Generate random IDs for lobby and user
+        function generateId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
         async function createLobby() {
             const name = document.getElementById('lobbyName').value;
             const betAmount = document.getElementById('betAmount').value;
             const rounds = document.getElementById('rounds').value;
-            const creatorId = document.getElementById('creatorId').value;
+            const creatorId = generateId(); // Generate creator ID
 
             const response = await fetch('http://localhost:3000/lobbies', {
                 method: 'POST',
@@ -23,9 +28,24 @@
             alert(data.message);
         }
 
+        async function listLobbies() {
+            const response = await fetch('http://localhost:3000/lobbies');
+            const lobbies = await response.json();
+
+            const lobbySelect = document.getElementById('availableLobbies');
+            lobbySelect.innerHTML = '';
+
+            lobbies.forEach(lobby => {
+                const option = document.createElement('option');
+                option.value = lobby.id;
+                option.textContent = `ID: ${lobby.id}, Name: ${lobby.name}, Bet: ${lobby.bet_amount}, Rounds: ${lobby.rounds}`;
+                lobbySelect.appendChild(option);
+            });
+        }
+
         async function joinLobby() {
-            const lobbyId = document.getElementById('joinLobbyId').value;
-            const userId = document.getElementById('joinUserId').value;
+            const lobbyId = document.getElementById('availableLobbies').value;
+            const userId = generateId(); // Generate user ID
 
             const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}/join`, {
                 method: 'POST',
@@ -40,20 +60,6 @@
             if (data.redirect) {
                 window.location.href = data.redirect;
             }
-        }
-
-        async function listLobbies() {
-            const response = await fetch('http://localhost:3000/lobbies');
-            const lobbies = await response.json();
-
-            const lobbyList = document.getElementById('lobbyList');
-            lobbyList.innerHTML = '';
-
-            lobbies.forEach(lobby => {
-                const li = document.createElement('li');
-                li.textContent = `ID: ${lobby.id}, Name: ${lobby.name}, Bet: ${lobby.bet_amount}, Rounds: ${lobby.rounds}`;
-                lobbyList.appendChild(li);
-            });
         }
     </script>
 </head>
@@ -72,30 +78,17 @@
             <label for="rounds">Rounds:</label>
             <input type="number" id="rounds" required><br>
 
-            <label for="creatorId">Creator ID:</label>
-            <input type="text" id="creatorId" required><br>
-
             <button type="submit">Create</button>
         </form>
     </section>
 
     <section>
         <h2>Join Lobby</h2>
-        <form onsubmit="event.preventDefault(); joinLobby();">
-            <label for="joinLobbyId">Lobby ID:</label>
-            <input type="number" id="joinLobbyId" required><br>
-
-            <label for="joinUserId">User ID:</label>
-            <input type="text" id="joinUserId" required><br>
-
-            <button type="submit">Join</button>
-        </form>
-    </section>
-
-    <section>
-        <h2>Available Lobbies</h2>
-        <button onclick="listLobbies()">Refresh List</button>
-        <ul id="lobbyList"></ul>
+        <button onclick="listLobbies()">Refresh Available Lobbies</button>
+        <select id="availableLobbies" required>
+            <option value="" disabled selected>Select a lobby</option>
+        </select><br>
+        <button onclick="joinLobby()">Join Selected Lobby</button>
     </section>
 </body>
 </html>
