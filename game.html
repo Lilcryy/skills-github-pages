@@ -1,103 +1,86 @@
-    <!DOCTYPE html>
-    <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Игра в Монетку</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <style>
-            /* Добавьте стили для страницы игры */
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Игра в Монетку</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Sestertius_of_Hadrian_reverse.jpg/330px-Sestertius_of_Hadrian_reverse.jpg" alt="Coin">
-            <button id="readyButton">Готов</button>
-            <div id="result"></div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+            display: flex; /* Добавлено для центрирования по вертикали */
+            flex-direction: column; /* Добавлено для центрирования по вертикали */
+            align-items: center; /* Добавлено для центрирования по горизонтали */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .coin-image {
+            width: 100px;
+            height: 100px;
+            /* Убрано margin: 20px auto; и display: block; */
+            /* Используем align-self: center; в .container для центрирования */
+        }
+
+        .lobby-info {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .ready-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .ready-button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Игра</h1>
+
+        <img src="coin.png" alt="Монетка" class="coin-image">
+
+        <div class="lobby-info">
+            <h2>Информация о лобби:</h2>
+            <p><b>ID лобби:</b> 12345</p>
+            <p><b>Игроки:</b>  Игрок1, Игрок2, Игрок3</p>
+            <p><b>Статус:</b> Ожидание игроков...</p>
         </div>
 
-        <script>
-            const API_URL = 'http://localhost:3000/lobbies';
-            let lobbyId = null;
-            let userId = null;
-            let isReady = false;
-            const someVariable = someValue; // Правильно
+        <button class="ready-button">Готов!</button>
 
-             // Function to extract query parameters from the URL
-            function getQueryParam(name) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(name);
-            }
+    </div>
 
-            document.addEventListener('DOMContentLoaded', () => {
-                lobbyId = getQueryParam('lobbyId');
-                userId = getQueryParam('userId');
+</body>
+</html>
 
-                if (!lobbyId || !userId) {
-                    console.error('No lobby ID or user ID provided.');
-                    alert('Invalid lobby. Please return to the lobby list.');
-                    window.location.href = '/';  // Redirect to the main page
-                    return;
-                }
-
-                const readyButton = document.getElementById('readyButton');
-                readyButton.addEventListener('click', handleReady);
-            });
-
-            async function handleReady() {
-                if (isReady) return;
-
-                try {
-                    const response = await fetch(`${API_URL}/${lobbyId}/ready`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ userId: userId })
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                    const data = await response.json();
-                    isReady = true;
-                    document.getElementById('readyButton').innerText = 'В ожидании другого игрока...';
-                    startWaitForOpponent();
-                } catch (error) {
-                    console.error('Error marking ready:', error);
-                    alert('Failed to set ready status. Please try again.');
-                }
-            }
-
-            async function startWaitForOpponent() {
-                while (true) {
-                    try {
-                        const response = await fetch(`${API_URL}/${lobbyId}`);
-                        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                        const lobby = await response.json();
-
-                        if (lobby.playersReady && lobby.playersReady.length === 2) {
-                            // Both players are ready, start the game
-                            startGame();
-                            break;
-                        } else {
-                            // Wait and check again
-                            await new Promise(resolve => setTimeout(resolve, 3000));
-                        }
-                    } catch (error) {
-                        console.error('Error checking lobby:', error);
-                        alert('Error checking lobby status. Please try again.');
-                        break;
-                    }
-                }
-            }
-
-           function startGame() {
-                alert("Игра начинается!");
-                // Добавьте сюда логику начала игры
-                // Здесь должна быть логика выбора стороны монетки,
-                // отправки этой информации на сервер,
-                // и получения результата игры.
-
-                // ВАЖНО: Реализация самой игры выходит за рамки этого примера.
-            }
-        </script>
-    </body>
-    </html>
