@@ -11,25 +11,30 @@
         }
 
         async function createLobby() {
-            const name = document.getElementById('lobbyName').value;
+            const lobbyName = document.getElementById('lobbyName').value;
             const betAmount = document.getElementById('betAmount').value;
             const rounds = document.getElementById('rounds').value;
-            const creatorId = generateId(); // Generate creator ID
+            const creatorId = 'user_' + Date.now(); // Генерация уникального идентификатора для создателя
 
             const response = await fetch('http://localhost:3000/lobbies', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, betAmount, rounds, creatorId })
+                body: JSON.stringify({
+                    name: lobbyName,
+                    betAmount: betAmount,
+                    rounds: rounds,
+                    creatorId: creatorId
+                }),
             });
 
             const data = await response.json();
-            alert(data.message);
-
-            if (data.lobbyId) {
-                // Redirect creator to waiting.html
-                window.location.href = `/waiting.html?lobbyId=${data.lobbyId}&userId=${creatorId}`;
+            if (response.ok) {
+                // Перенаправление на game.html с lobbyId и creatorId
+                window.location.href = `game.html?lobbyId=${data.lobbyId}&userId=${creatorId}`;
+            } else {
+                alert(data.message);
             }
         }
 
@@ -98,4 +103,4 @@
         <button onclick="joinLobby()">Join Selected Lobby</button>
     </section>
 </body>
-</
+</html>
