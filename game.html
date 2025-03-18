@@ -2,85 +2,142 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Игра</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
         }
-
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 80%;
-            max-width: 800px;
-            display: flex; /* Добавлено для центрирования по вертикали */
-            flex-direction: column; /* Добавлено для центрирования по вертикали */
-            align-items: center; /* Добавлено для центрирования по горизонтали */
-        }
-
         h1 {
             color: #333;
         }
-
-        .coin-image {
+        #lobbyInfo {
+            margin: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        #coin {
             width: 100px;
             height: 100px;
-            /* Убрано margin: 20px auto; и display: block; */
-            /* Используем align-self: center; в .container для центрирования */
+            background-color: gold;
+            border-radius: 50%;
+            display: none;
+            margin: 20px auto;
+            transition: transform 1s;
         }
-
-        .lobby-info {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-align: left;
+        .flip {
+            transform: rotateY(360deg);
         }
-
-        .ready-button {
-            background-color: #4CAF50;
-            color: white;
+        #result {
+            font-size: 24px;
+            margin: 20px;
+            color: #333;
+        }
+        #timer {
+            font-size: 20px;
+            color: #d9534f;
+        }
+        button {
             padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #5cb85c;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
+            margin: 10px;
         }
-
-        .ready-button:hover {
-            background-color: #3e8e41;
+        button:hover {
+            background-color: #4cae4c;
+        }
+        #readyStatus {
+            margin: 10px;
+            font-size: 18px;
+            color: #007bff;
         }
     </style>
+    <script>
+        let userId;
+        let lobbyId;
+        let isReady = false;
+        let timer;
+        let timeLeft = 60; // 1 минута
+
+        async function getLobbyDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            lobbyId = urlParams.get('lobbyId');
+            userId = urlParams.get('userId');
+
+            // Получение информации о лобби
+            const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}`);
+            const lobbyData = await response.json();
+
+            if (response.ok) {
+                document.getElementById('lobbyInfo').innerText = `Лобби: ${lobbyData.name}, Ставка: ${lobbyData.bet_amount}, Раунды: ${lobbyData.rounds}`;
+            } else {
+                alert(lobbyData.message);
+            }
+        }
+
+        async function markReady() {
+            if (!isReady) {
+                isReady = true;
+                document.getElementById('readyStatus').innerText = '1 игрок готов';
+                startTimer();
+
+                // Отправка запроса на сервер для отметки готовности
+                const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}/ready`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId: userId }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    if (data.winner) {
+                        document.getElementById('result').innerText = `Победитель: ${data.winner}`;
+                    }
+                } else {
+                    alert(data.message);
+                }
+            }
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('readyStatus').innerText = 'Время вышло!';
+                    return;
+                }
+                document.getElementById('timer').innerText = `Осталось времени: ${timeLeft} секунд`;
+                timeLeft--;
+            }, 1000);
+        }
+
+        function leaveLobby() {
+            window.location.href = 'https://www.monet-ka.online/';
+        }
+
+        window.onload = getLobbyDetails;
+    </script>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Игра</h1>
-
-        <img src="coin.png" alt="Монетка" class="coin-image">
-
-        <div class="lobby-info">
-            <h2>Информация о лобби:</h2>
-            <p><b>ID лобби:</b> 12345</p>
-            <p><b>Игроки:</b>  Игрок1, Игрок2, Игрок3</p>
-            <p><b>Статус:</b> Ожидание игроков...</p>
-        </div>
-
-        <button class="ready-button">Готов!</button>
-
-    </div>
-
+    <h1>Игра для игрока</h1>
+    <div id="lobbyInfo"></div>
+    <div id="coin"></div>
+    <div id="result"></div>
+    <div id="readyStatus"></div>
+    <div id="timer"></div>
+    <button onclick="markReady()">Готов</button>
+    <button onclick="leaveLobby()">Выйти из лобби</button>
 </body>
 </html>
-
