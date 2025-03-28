@@ -1,16 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lobby Management</title>
+    <title>Создание и Присоединение к Лобби</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            position: relative; /* Для позиционирования баланса */
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        .lobby-list {
+            margin-top: 20px;
+            width: 300px;
+            text-align: left;
+        }
+        .lobby-item {
+            background: #e9ecef;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .join-button {
+            background-color: #28a745;
+        }
+        .join-button:hover {
+            background-color: #218838;
+        }
+        /* Стиль для баланса */
+        .balance {
+            position: absolute;
+            bottom: 20px; /* Позиционирование ниже */
+            right: 20px;
+            background: #fff;
+            border-radius: 25px; /* Овальная форма */
+            padding: 10px 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        .balance i {
+            margin-right: 5px;
+            color: #007bff;
+        }
+        .balance-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .balance-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="balance">
+        <i class="fas fa-wallet"></i>
+        <span id="balanceAmount">Баланс: 1000</span>
+        <button class="balance-button" onclick="addBalance()">+</button>
+    </div>
+
+    <div class="container">
+        <h1>Создание Лобби</h1>
+        <input type="text" id="lobbyName" placeholder="Имя лобби" required>
+        <div class="error" id="nameError"></div>
+        <input type="number" id="betAmount" placeholder="Ставка" required>
+        <div class="error" id="betError"></div>
+        <input type="number" id="rounds" placeholder="Количество раундов" required>
+        <div class="error" id="roundsError"></div>
+        <button onclick="createLobby()">Создать Лобби</button>
+    </div>
+
+    <div class="lobby-list" id="lobbyList">
+        <h2>Доступные Лобби</h2>
+        <!-- Список лобби будет добавлен здесь -->
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Miniapps. Все права защищены.</p>
+    </div>
+
     <script>
-        // Generate random IDs for lobby and user
-        function generateId() {
-            return Math.random().toString(36).substr(2, 9);
+        function validateInputs() {
+            const lobbyName = document.getElementById('lobbyName').value;
+            const betAmount = document.getElementById('betAmount').value;
+            const rounds = document.getElementById('rounds').value;
+            let isValid = true;
+
+            // Сброс ошибок
+            document.getElementById('nameError').innerText = '';
+            document.getElementById('betError').innerText = '';
+            document.getElementById('roundsError').innerText = '';
+
+            // Проверка имени лобби
+            if (lobbyName.length > 5 || !/^[a-zA-Zа-яА-ЯёЁ]+$/.test(lobbyName)) {
+                document.getElementById('nameError').innerText = 'Имя лобби должно содержать не более 5 букв и не может содержать цифры.';
+                isValid = false;
+            }
+
+            // Проверка ставки
+            if (betAmount < 1 || betAmount > 10000) {
+                document.getElementById('betError').innerText = 'Ставка должна быть от 1 до 10,000.';
+                isValid = false;
+            }
+
+            // Проверка раундов
+            if (rounds < 1 || rounds > 5) {
+                document.getElementById('roundsError').innerText = 'Количество раундов должно быть от 1 до 5.';
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         async function createLobby() {
+            if (!validateInputs()) {
+                return; // Если валидация не прошла, не продолжаем
+            }
+
             const lobbyName = document.getElementById('lobbyName').value;
             const betAmount = document.getElementById('betAmount').value;
             const rounds = document.getElementById('rounds').value;
@@ -24,83 +186,65 @@
                 body: JSON.stringify({
                     name: lobbyName,
                     betAmount: betAmount,
-                    rounds: rounds,
+rounds: rounds,
                     creatorId: creatorId
                 }),
             });
 
             const data = await response.json();
             if (response.ok) {
-                // Перенаправление на game.html с lobbyId и creatorId
-                window.location.href = `game.html?lobbyId=${data.lobbyId}&userId=${creatorId}`;
+                alert(`Лобби создано! ID: ${data.lobbyId}`);
+                // Перенаправление на waiting.html с lobbyId и creatorId
+                window.location.href = `waiting.html?lobbyId=${data.lobbyId}&userId=${creatorId}`;
             } else {
                 alert(data.message);
             }
         }
 
-        async function listLobbies() {
+        async function loadLobbies() {
             const response = await fetch('http://localhost:3000/lobbies');
             const lobbies = await response.json();
-
-            const lobbySelect = document.getElementById('availableLobbies');
-            lobbySelect.innerHTML = '';
+            const lobbyList = document.getElementById('lobbyList');
+            lobbyList.innerHTML = '<h2>Доступные Лобби</h2>'; // Сброс списка
 
             lobbies.forEach(lobby => {
-                const option = document.createElement('option');
-                option.value = lobby.id;
-                option.textContent = `ID: ${lobby.id}, Name: ${lobby.name}, Bet: ${lobby.bet_amount}, Rounds: ${lobby.rounds}`;
-                lobbySelect.appendChild(option);
+                const lobbyItem = document.createElement('div');
+                lobbyItem.className = 'lobby-item';
+                lobbyItem.innerHTML = `
+                    <span>${lobby.name} (Ставка: ${lobby.bet_amount}, Раунды: ${lobby.rounds})</span>
+                    <button class="join-button" onclick="joinLobby(${lobby.id})">Присоединиться</button>
+                `;
+                lobbyList.appendChild(lobbyItem);
             });
         }
 
-        async function joinLobby() {
-            const lobbyId = document.getElementById('availableLobbies').value;
-            const userId = generateId(); // Generate user ID
-
+        async function joinLobby(lobbyId) {
+            const userId = 'user_' + Date.now(); // Генерация уникального идентификатора для пользователя
             const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}/join`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userId })
+                body: JSON.stringify({ userId: userId }),
             });
 
             const data = await response.json();
-            alert(data.message);
-
-            if (data.redirect) {
-                // Redirect to the appropriate page based on the server response
-                window.location.href = data.redirect;
+            if (response.ok) {
+                alert(data.message);
+                // Перенаправление на waiting.html с lobbyId и userId
+                window.location.href = `waiting.html?lobbyId=${lobbyId}&userId=${userId}`;
+            } else {
+                alert(data.message);
             }
         }
+
+        function addBalance() {
+            // Логика для пополнения баланса
+            alert('Пополнение баланса не реализовано.');
+        }
+
+        // Загрузка лобби при загрузке страницы
+        window.onload = loadLobbies;
     </script>
-</head>
-<body>
-    <h1>Lobby Management</h1>
-
-    <section>
-        <h2>Create Lobby</h2>
-        <form onsubmit="event.preventDefault(); createLobby();">
-            <label for="lobbyName">Lobby Name:</label>
-            <input type="text" id="lobbyName" required><br>
-
-            <label for="betAmount">Bet Amount:</label>
-            <input type="number" id="betAmount" required><br>
-
-            <label for="rounds">Rounds:</label>
-            <input type="number" id="rounds" required><br>
-
-            <button type="submit">Create</button>
-        </form>
-    </section>
-
-    <section>
-        <h2>Join Lobby</h2>
-        <button onclick="listLobbies()">Refresh Available Lobbies</button>
-        <select id="availableLobbies" required>
-            <option value="" disabled selected>Select a lobby</option>
-        </select><br>
-        <button onclick="joinLobby()">Join Selected Lobby</button>
-    </section>
 </body>
 </html>
