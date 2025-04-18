@@ -2,142 +2,302 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Игра</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            color: #333;
-        }
-        #lobbyInfo {
-            margin: 20px;
-            font-size: 18px;
-            color: #555;
-        }
-        #coin {
-            width: 100px;
-            height: 100px;
-            background-color: gold;
-            border-radius: 50%;
-            display: none;
-            margin: 20px auto;
-            transition: transform 1s;
-        }
-        .flip {
-            transform: rotateY(360deg);
-        }
-        #result {
-            font-size: 24px;
-            margin: 20px;
-            color: #333;
-        }
-        #timer {
-            font-size: 20px;
-            color: #d9534f;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #5cb85c;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        button:hover {
-            background-color: #4cae4c;
-        }
-        #readyStatus {
-            margin: 10px;
-            font-size: 18px;
-            color: #007bff;
-        }
-    </style>
-    <script>
-        let userId;
-        let lobbyId;
-        let isReady = false;
-        let timer;
-        let timeLeft = 60; // 1 минута
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание и Присоединение к Лобби</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        color: #333;
+        position: relative; /* Для позиционирования баланса */
+    }
 
-        async function getLobbyDetails() {
-            const urlParams = new URLSearchParams(window.location.search);
-            lobbyId = urlParams.get('lobbyId');
-            userId = urlParams.get('userId');
+    h1 {
+        margin-bottom: 20px;
+        color: #007bff;
+    }
 
-            // Получение информации о лобби
-            const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}`);
-            const lobbyData = await response.json();
+    .container {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+    }
 
-            if (response.ok) {
-                document.getElementById('lobbyInfo').innerText = `Лобби: ${lobbyData.name}, Ставка: ${lobbyData.bet_amount}, Раунды: ${lobbyData.rounds}`;
-            } else {
-                alert(lobbyData.message);
-            }
-        }
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
 
-        async function markReady() {
-            if (!isReady) {
-                isReady = true;
-                document.getElementById('readyStatus').innerText = '1 игрок готов';
-                startTimer();
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
 
-                // Отправка запроса на сервер для отметки готовности
-                const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}/ready`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userId: userId }),
-                });
+    button:hover {
+        background-color: #0056b3;
+    }
 
-                const data = await response.json();
-                if (response.ok) {
-                    if (data.winner) {
-                        document.getElementById('result').innerText = `Победитель: ${data.winner}`;
-                    }
-                } else {
-                    alert(data.message);
-                }
-            }
-        }
+    .footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #777;
+    }
 
-        function startTimer() {
-            timer = setInterval(() => {
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    document.getElementById('readyStatus').innerText = 'Время вышло!';
-                    return;
-                }
-                document.getElementById('timer').innerText = `Осталось времени: ${timeLeft} секунд`;
-                timeLeft--;
-            }, 1000);
-        }
+    .lobby-list {
+        margin-top: 20px;
+        width: 300px;
+        text-align: left;
+    }
 
-        function leaveLobby() {
-            window.location.href = 'https://www.monet-ka.online/';
-        }
+    .lobby-item {
+        background: #e9ecef;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        window.onload = getLobbyDetails;
-    </script>
+    .join-button {
+        background-color: #28a745;
+    }
+
+    .join-button:hover {
+        background-color: #218838;
+    }
+
+    /* Стиль для баланса */
+    .balance {
+        position: fixed; /* Фиксированное положение */
+        bottom: 10px;  /* Отступ от нижнего края */
+        right: 10px;   /* Отступ от правого края */
+        background: #fff;
+        border-radius: 25px;
+        padding: 10px 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        z-index: 1000;  /* Чтобы баланс был над всем */
+    }
+
+    .balance i {
+        margin-right: 5px;
+        color: #007bff;
+    }
+
+    .balance-button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    .balance-button:hover {
+        background-color: #218838;
+    }
+
+    /* Стили для аватарки */
+    .avatar-container {
+        position: fixed; /* Фиксированное положение */
+        top: 10px;      /* Отступ от верхнего края */
+        left: 10px;     /* Отступ от левого края */
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #ccc;
+        cursor: pointer;
+        z-index: 1000;
+        background-color: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .avatar-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .avatar-container span {
+        font-size: 12px;
+        color: #555;
+        text-align: center;
+    }
+ </style>
+
+
 </head>
 <body>
-    <h1>Игра для игрока</h1>
-    <div id="lobbyInfo"></div>
-    <div id="coin"></div>
-    <div id="result"></div>
-    <div id="readyStatus"></div>
-    <div id="timer"></div>
-    <button onclick="markReady()">Готов</button>
-    <button onclick="leaveLobby()">Выйти из лобби</button>
+    
+    
+    <div class="avatar-container" onclick="handleAvatarClick()">
+        <img id="avatar-image" src="avatarka.jpg" alt="Аватарка">
+        <span id="registration-text" style="display: none;">+Регистрация</span>
+        class="balance">
+        <i class="fas fa-wallet"></i>
+        <span id="balanceAmount">Баланс: 1000</span>
+        <button class="balance-button" onclick="addBalance()">+</button>
+    </div>
+
+    <div class="container">
+        <h1>Создание Лобби</h1>
+        <input type="text" id="lobbyName" placeholder="Имя лобби" required>
+        <div class="error" id="nameError"></div>
+        <input type="number" id="betAmount" placeholder="Ставка" required>
+        <div class="error" id="betError"></div>
+        <input type="number" id="rounds" placeholder="Количество раундов" required>
+        <div class="error" id="roundsError"></div>
+        <button onclick="createLobby()">Создать Лобби</button>
+    </div>
+
+    <div class="lobby-list" id="lobbyList">
+        <h2>Доступные Лобби</h2>
+        <!-- Список лобби будет добавлен здесь -->
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Miniapps. Все права защищены.</p>
+    </div>
+
+    <script>
+        function validateInputs() {
+            const lobbyName = document.getElementById('lobbyName').value;
+            const betAmount = document.getElementById('betAmount').value;
+            const rounds = document.getElementById('rounds').value;
+            let isValid = true;
+
+            // Сброс ошибок
+            document.getElementById('nameError').innerText = '';
+            document.getElementById('betError').innerText = '';
+            document.getElementById('roundsError').innerText = '';
+
+            // Проверка имени лобби
+            if (lobbyName.length > 5 || !/^[a-zA-Zа-яА-ЯёЁ]+$/.test(lobbyName)) {
+                document.getElementById('nameError').innerText = 'Имя лобби должно содержать не более 5 букв и не может содержать цифры.';
+                isValid = false;
+            }
+
+            // Проверка ставки
+            if (betAmount < 1 || betAmount > 10000) {
+                document.getElementById('betError').innerText = 'Ставка должна быть от 1 до 10,000.';
+                isValid = false;
+            }
+
+            // Проверка раундов
+            if (rounds < 1 || rounds > 5) {
+                document.getElementById('roundsError').innerText = 'Количество раундов должно быть от 1 до 5.';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        async function createLobby() {
+            if (!validateInputs()) {
+                return; // Если валидация не прошла, не продолжаем
+            }
+
+            const lobbyName = document.getElementById('lobbyName').value;
+            const betAmount = document.getElementById('betAmount').value;
+            const rounds = document.getElementById('rounds').value;
+            const creatorId = 'user_' + Date.now(); // Генерация уникального идентификатора для создателя
+
+            const response = await fetch('http://localhost:3000/lobbies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: lobbyName,
+                    betAmount: betAmount,
+rounds: rounds,
+                    creatorId: creatorId
+                }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert(`Лобби создано! ID: ${data.lobbyId}`);
+                // Перенаправление на waiting.html с lobbyId и creatorId
+                window.location.href = `waiting.html?lobbyId=${data.lobbyId}&userId=${creatorId}`;
+            } else {
+                alert(data.message);
+            }
+        }
+
+        async function loadLobbies() {
+            const response = await fetch('http://localhost:3000/lobbies');
+            const lobbies = await response.json();
+            const lobbyList = document.getElementById('lobbyList');
+            lobbyList.innerHTML = '<h2>Доступные Лобби</h2>'; // Сброс списка
+
+            lobbies.forEach(lobby => {
+                const lobbyItem = document.createElement('div');
+                lobbyItem.className = 'lobby-item';
+                lobbyItem.innerHTML = `
+                    <span>${lobby.name} (Ставка: ${lobby.bet_amount}, Раунды: ${lobby.rounds})</span>
+                    <button class="join-button" onclick="joinLobby(${lobby.id})">Присоединиться</button>
+                `;
+                lobbyList.appendChild(lobbyItem);
+            });
+        }
+
+        async function joinLobby(lobbyId) {
+            const userId = 'user_' + Date.now(); // Генерация уникального идентификатора для пользователя
+            const response = await fetch(`http://localhost:3000/lobbies/${lobbyId}/join`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId: userId }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message);
+                // Перенаправление на waiting.html с lobbyId и userId
+                window.location.href = `waiting.html?lobbyId=${lobbyId}&userId=${userId}`;
+            } else {
+                alert(data.message);
+            }
+        }
+
+        function addBalance() {
+            // Логика для пополнения баланса
+            alert('Пополнение баланса не реализовано.');
+        }
+
+        // Загрузка лобби при загрузке страницы
+        window.onload = loadLobbies;
+    </script>
 </body>
 </html>
