@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA Province Forum | Сообщество игроков</title>
+    <title>FLASH BY LILCRYY | GTA Форум</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #8a2be2;
+            --secondary: #00ff7f;
+            --dark: #0f0c24;
+            --darker: #080617;
+            --light: #f0f0ff;
+            --gray: #8a8abc;
+            --card-bg: rgba(30, 15, 70, 0.7);
+            --border: rgba(138, 43, 226, 0.3);
+            --neon-shadow: 0 0 10px var(--secondary), 0 0 20px rgba(0, 255, 127, 0.5);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
-        :root {
-            --primary: #1e3a8a;
-            --secondary: #ff8c00;
-            --dark: #0f172a;
-            --darker: #0a1121;
-            --light: #f8fafc;
-            --gray: #94a3b8;
-            --success: #10b981;
-            --danger: #ef4444;
-            --card-bg: rgba(30, 41, 59, 0.8);
-            --border: rgba(148, 163, 184, 0.2);
-        }
-        
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: var(--light);
             min-height: 100vh;
             background-attachment: fixed;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* Шапка */
+        /* Шапка с неоновым эффектом */
         header {
-            background-color: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 12, 36, 0.95);
             backdrop-filter: blur(10px);
             padding: 0.8rem 1.5rem;
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--neon-shadow);
         }
         
         .header-container {
@@ -59,20 +59,26 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             font-size: 1.8rem;
             color: var(--light);
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: var(--neon-shadow);
         }
         
         .logo i {
             color: var(--secondary);
             font-size: 2rem;
+            animation: pulse 2s infinite;
         }
         
-        .logo span {
-            color: var(--secondary);
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px var(--secondary); }
+            50% { text-shadow: 0 0 20px var(--secondary), 0 0 30px rgba(0, 255, 127, 0.6); }
+            100% { text-shadow: 0 0 5px var(--secondary); }
         }
         
         nav ul {
@@ -86,14 +92,30 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
             padding: 0.5rem;
             border-radius: 4px;
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
         }
         
         nav a:hover, nav a.active {
             color: var(--secondary);
-            background: rgba(255, 140, 0, 0.1);
         }
         
         .user-actions {
@@ -111,16 +133,18 @@
             padding: 0.6rem 1rem 0.6rem 2.5rem;
             border-radius: 50px;
             border: 1px solid var(--border);
-            background: rgba(30, 41, 59, 0.6);
+            background: rgba(30, 15, 70, 0.6);
             color: var(--light);
             width: 200px;
-            transition: width 0.3s;
+            transition: all 0.3s;
+            font-family: 'Roboto', sans-serif;
         }
         
         .search-box input:focus {
             width: 250px;
             outline: none;
             border-color: var(--secondary);
+            box-shadow: var(--neon-shadow);
         }
         
         .search-box i {
@@ -134,12 +158,13 @@
         .btn {
             padding: 0.7rem 1.5rem;
             border-radius: 50px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             border: none;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
         }
         
         .btn-login {
@@ -149,20 +174,44 @@
         }
         
         .btn-login:hover {
-            background: rgba(255, 140, 0, 0.1);
+            background: rgba(0, 255, 127, 0.1);
             border-color: var(--secondary);
+            box-shadow: var(--neon-shadow);
         }
         
         .btn-register {
-            background: var(--secondary);
-            color: var(--dark);
-            font-weight: 600;
+            background: var(--primary);
+            color: var(--light);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-register::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 127, 0.4), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        
+        .btn-register:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
         }
         
         .btn-register:hover {
-            background: #ff9e2d;
+            background: #9a4cff;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+            box-shadow: var(--neon-shadow);
+        }
+        
+        .btn-register span {
+            position: relative;
+            z-index: 1;
         }
         
         /* Основной контент */
@@ -171,7 +220,7 @@
             margin: 2rem auto;
             padding: 0 1.5rem;
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: 1fr;
             gap: 2rem;
         }
         
@@ -182,31 +231,48 @@
         }
         
         .welcome-banner {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, #4b0082 100%);
             border-radius: 12px;
             padding: 2rem;
             display: flex;
             align-items: center;
             gap: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--neon-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            opacity: 0.1;
         }
         
         .welcome-text h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
+            text-shadow: var(--neon-shadow);
+            position: relative;
         }
         
         .welcome-text p {
             font-size: 1.1rem;
             max-width: 600px;
             opacity: 0.9;
+            position: relative;
         }
         
         .welcome-image img {
             max-width: 200px;
             border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            box-shadow: var(--neon-shadow);
+            border: 2px solid var(--secondary);
         }
         
         .forum-stats {
@@ -217,11 +283,26 @@
             padding: 1.5rem;
             border: 1px solid var(--border);
             backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         .stat-item {
             text-align: center;
             flex: 1;
+            position: relative;
+            padding: 0.5rem;
+        }
+        
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--secondary);
+            box-shadow: var(--neon-shadow);
         }
         
         .stat-number {
@@ -229,12 +310,15 @@
             font-weight: 700;
             color: var(--secondary);
             margin-bottom: 0.5rem;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.7);
         }
         
         .stat-label {
             font-size: 1rem;
             color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .categories {
@@ -244,7 +328,7 @@
         }
         
         .section-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
@@ -252,10 +336,15 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
         }
         
         .section-title i {
             color: var(--secondary);
+            animation: pulse 2s infinite;
         }
         
         .category {
@@ -264,31 +353,36 @@
             border: 1px solid var(--border);
             overflow: hidden;
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         .category-header {
-            background: rgba(30, 58, 138, 0.3);
+            background: rgba(138, 43, 226, 0.2);
             padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 12px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border-bottom: 1px solid var(--border);
         }
         
         .category-header:hover {
-            background: rgba(30, 58, 138, 0.4);
+            background: rgba(138, 43, 226, 0.3);
         }
         
         .category-header h2 {
             font-size: 1.4rem;
             font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary);
+            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
         }
         
         .category-header i {
             color: var(--secondary);
             font-size: 1.4rem;
+            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
         }
         
         .forums {
@@ -299,8 +393,10 @@
             display: flex;
             padding: 1.2rem;
             border-bottom: 1px solid var(--border);
-            transition: background 0.3s;
+            transition: all 0.3s;
             gap: 1rem;
+            align-items: center;
+            position: relative;
         }
         
         .forum-item:last-child {
@@ -308,22 +404,25 @@
         }
         
         .forum-item:hover {
-            background: rgba(30, 58, 138, 0.1);
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateX(5px);
         }
         
         .forum-icon {
-            min-width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            background: rgba(255, 140, 0, 0.1);
+            min-width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: rgba(0, 255, 127, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 255, 127, 0.2);
         }
         
         .forum-icon i {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: var(--secondary);
+            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
         }
         
         .forum-info {
@@ -331,16 +430,19 @@
         }
         
         .forum-title {
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1.3rem;
+            font-weight: 600;
             margin-bottom: 0.3rem;
             color: var(--light);
             text-decoration: none;
             display: block;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
         }
         
         .forum-title:hover {
             color: var(--secondary);
+            text-shadow: var(--neon-shadow);
         }
         
         .forum-desc {
@@ -365,159 +467,196 @@
             color: var(--light);
             font-size: 0.9rem;
             margin-top: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
         }
         
         .forum-lastpost a {
             color: var(--secondary);
             text-decoration: none;
+            text-shadow: 0 0 5px rgba(0, 255, 127, 0.5);
         }
         
-        /* Боковая панель */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .admin-badge {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff5555;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid rgba(255, 0, 0, 0.3);
         }
         
-        .widget {
-            background: var(--card-bg);
+        /* Специальный раздел для 1 сервера */
+        .server-section {
+            background: linear-gradient(135deg, #1a0638 0%, #0d0220 100%);
             border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--neon-shadow);
             border: 1px solid var(--border);
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
         }
         
-        .widget-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 1.2rem;
-            color: var(--light);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .server-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
         }
         
-        .widget-title i {
-            color: var(--secondary);
-        }
-        
-        .online-users {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        
-        .user-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(30, 58, 138, 0.3);
-            padding: 0.5rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-        }
-        
-        .user-status {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--success);
-        }
-        
-        .recent-posts {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .post-item {
-            display: flex;
-            gap: 12px;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .post-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        
-        .post-content {
-            flex: 1;
-        }
-        
-        .post-title {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-        }
-        
-        .post-title a {
-            color: var(--light);
-            text-decoration: none;
-        }
-        
-        .post-title a:hover {
-            color: var(--secondary);
-        }
-        
-        .post-meta {
-            display: flex;
-            font-size: 0.85rem;
-            color: var(--gray);
-            gap: 1rem;
-        }
-        
-        .post-author {
-            color: var(--secondary);
-        }
-        
-        .server-status {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        
-        .server-item {
+        .server-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem;
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
-        .server-name {
+        .server-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--secondary);
+            text-shadow: var(--neon-shadow);
+            letter-spacing: 1px;
+        }
+        
+        .server-info {
+            display: flex;
+            gap: 1rem;
+            background: rgba(138, 43, 226, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+        
+        .server-stat {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.5rem;
         }
         
-        .server-status-indicator {
-            width: 12px;
-            height: 12px;
+        .server-stat i {
+            color: var(--secondary);
+        }
+        
+        .server-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .server-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .server-category {
+            background: rgba(30, 15, 70, 0.6);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .server-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--neon-shadow);
+            background: rgba(138, 43, 226, 0.2);
+        }
+        
+        .server-category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .server-category-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
+        }
+        
+        .add-topic-btn {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background: var(--primary);
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1.2rem;
+            box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
         }
         
-        .online {
-            background: var(--success);
+        .add-topic-btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: rotate(90deg);
+            box-shadow: var(--neon-shadow);
         }
         
-        .offline {
-            background: var(--danger);
+        .server-topics {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
         
-        .server-players {
-            font-size: 0.9rem;
+        .server-topic {
+            padding: 0.8rem;
+            background: rgba(15, 12, 36, 0.4);
+            border-radius: 8px;
+            transition: all 0.3s;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .server-topic:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .topic-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--light);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .topic-title:hover {
+            color: var(--secondary);
+        }
+        
+        .topic-meta {
+            display: flex;
+            justify-content: space-between;
             color: var(--gray);
+            font-size: 0.85rem;
         }
         
         /* Подвал */
         footer {
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 12, 36, 0.95);
             padding: 3rem 1.5rem 2rem;
             margin-top: 3rem;
             border-top: 1px solid var(--border);
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .footer-container {
@@ -529,10 +668,11 @@
         }
         
         .footer-col h3 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
-            color: var(--light);
+            color: var(--secondary);
+            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
         }
         
         .footer-col ul {
@@ -546,12 +686,27 @@
         .footer-col a {
             color: var(--gray);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
             font-size: 0.95rem;
+            position: relative;
+            padding-left: 0;
+        }
+        
+        .footer-col a::before {
+            content: '»';
+            margin-right: 8px;
+            color: var(--secondary);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
         .footer-col a:hover {
             color: var(--secondary);
+            padding-left: 15px;
+        }
+        
+        .footer-col a:hover::before {
+            opacity: 1;
         }
         
         .social-links {
@@ -567,15 +722,17 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(148, 163, 184, 0.2);
+            background: rgba(138, 43, 226, 0.2);
             color: var(--light);
             font-size: 1.2rem;
             transition: all 0.3s;
+            border: 1px solid var(--border);
         }
         
         .social-links a:hover {
-            background: var(--secondary);
+            background: var(--primary);
             transform: translateY(-3px);
+            box-shadow: var(--neon-shadow);
         }
         
         .copyright {
@@ -589,10 +746,6 @@
         
         /* Мобильная адаптация */
         @media (max-width: 1100px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            
             .welcome-banner {
                 flex-direction: column;
                 text-align: center;
@@ -618,10 +771,6 @@
         @media (max-width: 768px) {
             .header-container {
                 flex-wrap: wrap;
-            }
-            
-            .logo {
-                font-size: 1.5rem;
             }
             
             nav ul {
@@ -671,6 +820,18 @@
             .footer-container {
                 grid-template-columns: 1fr;
             }
+            
+            .server-info {
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 8px;
+            }
+            
+            .server-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -704,6 +865,7 @@
             .forum-item {
                 flex-direction: column;
                 gap: 0.8rem;
+                text-align: center;
             }
             
             .forum-stats {
@@ -713,6 +875,11 @@
             .forum-icon {
                 align-self: center;
             }
+            
+            .forum-stats {
+                align-items: center;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -721,16 +888,16 @@
     <header>
         <div class="header-container">
             <a href="#" class="logo">
-                <i class="fas fa-gamepad"></i>
-                GTA<span>Province</span>
+                <i class="fas fa-bolt"></i>
+                FLASH BY LILCRYY
             </a>
             
             <nav>
                 <ul>
                     <li><a href="#" class="active">Форум</a></li>
                     <li><a href="#">Новости</a></li>
-                    <li><a href="#">База знаний</a></li>
-                    <li><a href="#">Скачать</a></li>
+                    <li><a href="#">1 Сервер</a></li>
+                    <li><a href="#">Правила</a></li>
                     <li><a href="#">Поддержка</a></li>
                 </ul>
             </nav>
@@ -741,7 +908,7 @@
                     <input type="text" placeholder="Поиск по форуму">
                 </div>
                 <button class="btn btn-login">Войти</button>
-                <button class="btn btn-register">Регистрация</button>
+                <button class="btn btn-register"><span>Регистрация</span></button>
             </div>
         </div>
     </header>
@@ -751,8 +918,8 @@
         <div class="main-content">
             <div class="welcome-banner">
                 <div class="welcome-text">
-                    <h1>Добро пожаловать в GTA Province!</h1>
-                    <p>Крупнейшее русскоязычное сообщество игроков в Grand Theft Auto. Обсуждайте игру, находите единомышленников, получайте помощь и делитесь своими достижениями.</p>
+                    <h1>Добро пожаловать на FLASH BY LILCRYY!</h1>
+                    <p>Эксклюзивное сообщество для игроков Grand Theft Auto. Обсуждайте игровой процесс, находите команду для миссий, получайте помощь и делитесь своими достижениями.</p>
                 </div>
                 <div class="welcome-image">
                     <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="GTA Game">
@@ -761,20 +928,20 @@
             
             <div class="forum-stats">
                 <div class="stat-item">
-                    <div class="stat-number">24,589</div>
-                    <div class="stat-label">Пользователей</div>
+                    <div class="stat-number">18,245</div>
+                    <div class="stat-label">Игроков</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">12,467</div>
-                    <div class="stat-label">Тем на форуме</div>
+                    <div class="stat-number">8,762</div>
+                    <div class="stat-label">Тем</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">98,245</div>
+                    <div class="stat-number">42,589</div>
                     <div class="stat-label">Сообщений</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">1,248</div>
-                    <div class="stat-label">Онлайн сейчас</div>
+                    <div class="stat-number">1,024</div>
+                    <div class="stat-label">Онлайн</div>
                 </div>
             </div>
             
@@ -784,60 +951,17 @@
                 <div class="category">
                     <div class="category-header">
                         <i class="fas fa-newspaper"></i>
-                        <h2>Новости и анонсы</h2>
+                        <h2>Основные обсуждения</h2>
                     </div>
                     <div class="forums">
                         <div class="forum-item">
                             <div class="forum-icon">
-                                <i class="fas fa-bullhorn"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">Официальные новости</a>
-                                <p class="forum-desc">Важные анонсы и обновления от администрации проекта</p>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 247</div>
-                                <div class="forum-posts">Сообщения: 1,245</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Обновление сервера 3.2.1</a>
-                                    <div>сегодня, 14:30</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">События и мероприятия</a>
-                                <p class="forum-desc">Информация о предстоящих ивентах на сервере</p>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 98</div>
-                                <div class="forum-posts">Сообщения: 587</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Гонки на выживание</a>
-                                    <div>вчера, 20:15</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="category">
-                    <div class="category-header">
-                        <i class="fas fa-gamepad"></i>
-                        <h2>Игровые разделы</h2>
-                    </div>
-                    <div class="forums">
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-users"></i>
+                                <i class="fas fa-gamepad"></i>
                             </div>
                             <div class="forum-info">
                                 <a href="#" class="forum-title">Игровой процесс</a>
                                 <p class="forum-desc">Обсуждение игровых механик, стратегий и тактик</p>
+                                <div class="admin-badge">Только для чтения</div>
                             </div>
                             <div class="forum-stats">
                                 <div class="forum-topics">Темы: 1,245</div>
@@ -866,30 +990,12 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-fist-raised"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">Боевые действия</a>
-                                <p class="forum-desc">Тактики ведения боя, оружие и военная техника</p>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 642</div>
-                                <div class="forum-posts">Сообщения: 5,874</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Лучшее оружие для PvP</a>
-                                    <div>вчера, 18:30</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="category">
                     <div class="category-header">
-                        <i class="fas fa-hands-helping"></i>
+                        <i class="fas fa-users"></i>
                         <h2>Сообщество</h2>
                     </div>
                     <div class="forums">
@@ -931,126 +1037,116 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Боковая панель -->
-        <div class="sidebar">
-            <div class="widget">
-                <h3 class="widget-title"><i class="fas fa-users"></i> Сейчас онлайн</h3>
-                <div class="online-users">
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>PlayerOne</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>GTA_Master</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>LosSantosKing</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>ViceCityPro</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>Mike_1984</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>BikerGang</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>CopChaser</span>
-                    </div>
-                    <div class="user-badge">
-                        <div class="user-status"></div>
-                        <span>HeistPro</span>
-                    </div>
-                </div>
-            </div>
             
-            <div class="widget">
-                <h3 class="widget-title"><i class="fas fa-fire"></i> Популярные темы</h3>
-                <div class="recent-posts">
-                    <div class="post-item">
-                        <div class="post-content">
-                            <h4 class="post-title"><a href="#">Как получить скрытые автомобили в обновлении 1.45</a></h4>
-                            <div class="post-meta">
-                                <span class="post-author">GTA_Expert</span>
-                                <span>245 ответов</span>
-                            </div>
+            <!-- Раздел 1 Сервера -->
+            <div class="server-section">
+                <div class="server-header">
+                    <h2 class="server-title">1 Сервер FLASH BY LILCRYY</h2>
+                    <div class="server-info">
+                        <div class="server-stat">
+                            <i class="fas fa-users"></i>
+                            <span>Онлайн: 842/1000</span>
                         </div>
-                    </div>
-                    
-                    <div class="post-item">
-                        <div class="post-content">
-                            <h4 class="post-title"><a href="#">Лучшие места для заработка в начале игры</a></h4>
-                            <div class="post-meta">
-                                <span class="post-author">MoneyMaker</span>
-                                <span>187 ответов</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="post-item">
-                        <div class="post-content">
-                            <h4 class="post-title"><a href="#">Гайд по прохождению новой миссии "Банковский прорыв"</a></h4>
-                            <div class="post-meta">
-                                <span class="post-author">MissionPro</span>
-                                <span>124 ответа</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="post-item">
-                        <div class="post-content">
-                            <h4 class="post-title"><a href="#">Сравнение нового оружия: что стоит покупать?</a></h4>
-                            <div class="post-meta">
-                                <span class="post-author">WeaponMaster</span>
-                                <span>98 ответов</span>
-                            </div>
+                        <div class="server-stat">
+                            <i class="fas fa-signal"></i>
+                            <span>Ping: 24ms</span>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="widget">
-                <h3 class="widget-title"><i class="fas fa-server"></i> Статус серверов</h3>
-                <div class="server-status">
-                    <div class="server-item">
-                        <div class="server-name">
-                            <div class="server-status-indicator online"></div>
-                            <span>Основной сервер #1</span>
-                        </div>
-                        <div class="server-players">1,245/1,500</div>
-                    </div>
+                
+                <div class="server-content">
+                    <h3 class="section-title"><i class="fas fa-layer-group"></i> Разделы сервера</h3>
                     
-                    <div class="server-item">
-                        <div class="server-name">
-                            <div class="server-status-indicator online"></div>
-                            <span>Основной сервер #2</span>
+                    <div class="server-categories">
+                        <div class="server-category">
+                            <div class="server-category-header">
+                                <h3 class="server-category-title">Общие обсуждения</h3>
+                                <button class="add-topic-btn">+</button>
+                            </div>
+                            <div class="server-topics">
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Добро пожаловать на сервер!</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: LilCryy</span>
+                                        <span>24 ответа</span>
+                                    </div>
+                                </div>
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Правила сервера - обязательно к прочтению</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: Admin</span>
+                                        <span>56 ответов</span>
+                                    </div>
+                                </div>
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Как присоединиться к фракции?</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: Player23</span>
+                                        <span>18 ответов</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="server-players">1,087/1,500</div>
-                    </div>
-                    
-                    <div class="server-item">
-                        <div class="server-name">
-                            <div class="server-status-indicator online"></div>
-                            <span>RP-сервер</span>
+                        
+                        <div class="server-category">
+                            <div class="server-category-header">
+                                <h3 class="server-category-title">Техническая поддержка</h3>
+                                <button class="add-topic-btn">+</button>
+                            </div>
+                            <div class="server-topics">
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Проблемы с подключением к серверу</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: Support</span>
+                                        <span>42 ответа</span>
+                                    </div>
+                                </div>
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Как установить моды?</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: TechGuru</span>
+                                        <span>31 ответ</span>
+                                    </div>
+                                </div>
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Оптимизация производительности</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: Admin</span>
+                                        <span>27 ответов</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="server-players">987/1,000</div>
-                    </div>
-                    
-                    <div class="server-item">
-                        <div class="server-name">
-                            <div class="server-status-indicator offline"></div>
-                            <span>Тестовый сервер</span>
+                        
+                        <div class="server-category">
+                            <div class="server-category-header">
+                                <h3 class="server-category-title">Ивенты и мероприятия</h3>
+                                <button class="add-topic-btn">+</button>
+                            </div>
+                            <div class="server-topics">
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Гонки на выживание - 15 июня</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: EventManager</span>
+                                        <span>64 ответа</span>
+                                    </div>
+                                </div>
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Розыгрыш игровой валюты</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: LilCryy</span>
+                                        <span>89 ответов</span>
+                                    </div>
+                                </div>
+                                <div class="server-topic">
+                                    <a href="#" class="topic-title">Турнир PvP "Король Лос-Сантоса"</a>
+                                    <div class="topic-meta">
+                                        <span>Автор: Admin</span>
+                                        <span>47 ответов</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="server-players">0/200</div>
                     </div>
                 </div>
             </div>
@@ -1061,7 +1157,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <h3>GTA Province</h3>
+                <h3>FLASH BY LILCRYY</h3>
                 <ul>
                     <li><a href="#">О проекте</a></li>
                     <li><a href="#">Команда</a></li>
@@ -1077,19 +1173,17 @@
                     <li><a href="#">База знаний</a></li>
                     <li><a href="#">Гайды и руководства</a></li>
                     <li><a href="#">Моды и дополнения</a></li>
-                    <li><a href="#">Читы и коды</a></li>
                     <li><a href="#">Система репортов</a></li>
                 </ul>
             </div>
             
             <div class="footer-col">
-                <h3>Сообщество</h3>
+                <h3>1 Сервер</h3>
                 <ul>
-                    <li><a href="#">Группы и фракции</a></li>
-                    <li><a href="#">Соревнования</a></li>
-                    <li><a href="#">Мероприятия</a></li>
-                    <li><a href="#">Партнерская программа</a></li>
-                    <li><a href="#">Помощь новичкам</a></li>
+                    <li><a href="#">Статус сервера</a></li>
+                    <li><a href="#">Правила сервера</a></li>
+                    <li><a href="#">Фракции и кланы</a></li>
+                    <li><a href="#">Техническая поддержка</a></li>
                 </ul>
             </div>
             
@@ -1111,8 +1205,47 @@
         </div>
         
         <div class="copyright">
-            &copy; 2023 GTA Province Forum. Все права защищены. Grand Theft Auto является зарегистрированной торговой маркой компании Rockstar Games.
+            &copy; 2023 FLASH BY LILCRYY. Все права защищены. Grand Theft Auto является зарегистрированной торговой маркой компании Rockstar Games.
         </div>
     </footer>
+    
+    <script>
+        // Имитация функционала администратора
+        document.addEventListener('DOMContentLoaded', function() {
+            const addButtons = document.querySelectorAll('.add-topic-btn');
+            
+            addButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.closest('.server-category');
+                    const topicsContainer = category.querySelector('.server-topics');
+                    
+                    const newTopic = document.createElement('div');
+                    newTopic.className = 'server-topic';
+                    newTopic.innerHTML = `
+                        <a href="#" class="topic-title">Новая тема</a>
+                        <div class="topic-meta">
+                            <span>Автор: Admin</span>
+                            <span>0 ответов</span>
+                        </div>
+                    `;
+                    
+                    topicsContainer.prepend(newTopic);
+                    
+                    // Анимация добавления
+                    newTopic.style.opacity = '0';
+                    newTopic.style.transform = 'translateY(-10px)';
+                    
+                    setTimeout(() => {
+                        newTopic.style.transition = 'all 0.3s';
+                        newTopic.style.opacity = '1';
+                        newTopic.style.transform = 'translateY(0)';
+                    }, 10);
+                    
+                    // Показываем уведомление
+                    alert('Новая тема создана! Только администраторы могут создавать темы на этом сервере.');
+                });
+            });
+        });
+    </script>
 </body>
-  </html>
+    </html>
