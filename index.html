@@ -3,1247 +3,1099 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLASH BY LILCRYY | GTA Форум</title>
+    <title>Lilcryy - Профессиональные услуги программирования</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #8a2be2;
-            --secondary: #00ff7f;
-            --dark: #0f0c24;
-            --darker: #080617;
-            --light: #f0f0ff;
-            --gray: #8a8abc;
-            --card-bg: rgba(30, 15, 70, 0.7);
-            --border: rgba(138, 43, 226, 0.3);
-            --neon-shadow: 0 0 10px var(--secondary), 0 0 20px rgba(0, 255, 127, 0.5);
+            --primary: #6C63FF;
+            --primary-dark: #564fd6;
+            --secondary: #FF6584;
+            --dark: #2A2A3C;
+            --light: #F5F7FA;
+            --gray: #A1A1B5;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --transition: all 0.3s ease;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: var(--light);
-            min-height: 100vh;
-            background-attachment: fixed;
             line-height: 1.6;
             overflow-x: hidden;
         }
-        
-        /* Шапка с неоновым эффектом */
-        header {
-            background: rgba(15, 12, 36, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.8rem 1.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--neon-shadow);
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
         }
-        
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
         }
-        
+
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
             text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: var(--neon-shadow);
         }
-        
-        .logo i {
-            color: var(--secondary);
-            font-size: 2rem;
-            animation: pulse 2s infinite;
+
+        .logo span {
+            color: var(--primary);
         }
-        
-        @keyframes pulse {
-            0% { text-shadow: 0 0 5px var(--secondary); }
-            50% { text-shadow: 0 0 20px var(--secondary), 0 0 30px rgba(0, 255, 127, 0.6); }
-            100% { text-shadow: 0 0 5px var(--secondary); }
-        }
-        
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
         }
-        
-        nav a {
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
             color: var(--light);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            padding: 0.5rem;
-            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
             position: relative;
-            font-family: 'Orbitron', sans-serif;
         }
-        
-        nav a::after {
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--secondary);
-            transition: width 0.3s;
+            background: var(--primary);
+            transition: var(--transition);
         }
-        
-        nav a:hover::after, nav a.active::after {
+
+        nav ul li a:hover::after {
             width: 100%;
         }
-        
-        nav a:hover, nav a.active {
-            color: var(--secondary);
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
         }
-        
-        .user-actions {
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
             display: flex;
-            gap: 1rem;
             align-items: center;
-        }
-        
-        .search-box {
             position: relative;
-            margin-right: 1rem;
+            overflow: hidden;
         }
-        
-        .search-box input {
-            padding: 0.6rem 1rem 0.6rem 2.5rem;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            background: rgba(30, 15, 70, 0.6);
-            color: var(--light);
-            width: 200px;
-            transition: all 0.3s;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .search-box input:focus {
-            width: 250px;
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: var(--neon-shadow);
-        }
-        
-        .search-box i {
+
+        .hero::before {
+            content: '';
             position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.2) 0%, rgba(108, 99, 255, 0) 70%);
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
             color: var(--gray);
         }
-        
-        .btn {
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
         }
-        
-        .btn-login {
-            background: transparent;
-            color: var(--light);
-            border: 1px solid var(--border);
+
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
         }
-        
-        .btn-login:hover {
-            background: rgba(0, 255, 127, 0.1);
-            border-color: var(--secondary);
-            box-shadow: var(--neon-shadow);
-        }
-        
-        .btn-register {
-            background: var(--primary);
-            color: var(--light);
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
-        
-        .btn-register::before {
+
+        .section-title h2::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 127, 0.4), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
         }
-        
-        .btn-register:hover::before {
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-        
-        .btn-register:hover {
-            background: #9a4cff;
-            transform: translateY(-2px);
-            box-shadow: var(--neon-shadow);
-        }
-        
-        .btn-register span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Основной контент */
-        .container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+
+        .services-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .welcome-banner {
-            background: linear-gradient(90deg, var(--primary) 0%, #4b0082 100%);
-            border-radius: 12px;
-            padding: 2rem;
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-filters {
             display: flex;
-            align-items: center;
-            gap: 2rem;
-            box-shadow: var(--neon-shadow);
-            position: relative;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .portfolio-filters button {
+            padding: 8px 20px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--light);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .portfolio-filters button.active,
+        .portfolio-filters button:hover {
+            background: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            border-radius: 15px;
             overflow: hidden;
+            position: relative;
+            height: 300px;
         }
-        
-        .welcome-banner::before {
-            content: '';
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-            opacity: 0.1;
-        }
-        
-        .welcome-text h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: var(--neon-shadow);
-            position: relative;
-        }
-        
-        .welcome-text p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            opacity: 0.9;
-            position: relative;
-        }
-        
-        .welcome-image img {
-            max-width: 200px;
-            border-radius: 8px;
-            box-shadow: var(--neon-shadow);
-            border: 2px solid var(--secondary);
-        }
-        
-        .forum-stats {
+            background: rgba(42, 42, 60, 0.8);
             display: flex;
-            gap: 1.5rem;
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .stat-item {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
             text-align: center;
-            flex: 1;
-            position: relative;
-            padding: 0.5rem;
+            opacity: 0;
+            transition: var(--transition);
         }
-        
-        .stat-item::after {
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .review-stars {
+            color: var(--warning);
+            margin-left: auto;
+        }
+
+        /* Order Section */
+        .order-section {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .order-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .order-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .price-estimate {
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid var(--primary);
+        }
+
+        .price-estimate h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .price-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .order-summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-total {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 15px;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f1e;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: var(--secondary);
-            box-shadow: var(--neon-shadow);
-        }
-        
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px rgba(0, 255, 127, 0.7);
-        }
-        
-        .stat-label {
-            font-size: 1rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .categories {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--secondary);
-            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
-        }
-        
-        .section-title i {
-            color: var(--secondary);
-            animation: pulse 2s infinite;
-        }
-        
-        .category {
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .category-header {
-            background: rgba(138, 43, 226, 0.2);
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .category-header:hover {
-            background: rgba(138, 43, 226, 0.3);
-        }
-        
-        .category-header h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            font-family: 'Orbitron', sans-serif;
-            color: var(--secondary);
-            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
-        }
-        
-        .category-header i {
-            color: var(--secondary);
-            font-size: 1.4rem;
-            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
-        }
-        
-        .forums {
-            padding: 1rem;
-        }
-        
-        .forum-item {
-            display: flex;
-            padding: 1.2rem;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s;
-            gap: 1rem;
-            align-items: center;
-            position: relative;
-        }
-        
-        .forum-item:last-child {
-            border-bottom: none;
-        }
-        
-        .forum-item:hover {
-            background: rgba(138, 43, 226, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .forum-icon {
-            min-width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            background: rgba(0, 255, 127, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(0, 255, 127, 0.2);
-        }
-        
-        .forum-icon i {
-            font-size: 1.8rem;
-            color: var(--secondary);
-            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
-        }
-        
-        .forum-info {
-            flex: 1;
-        }
-        
-        .forum-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--light);
-            text-decoration: none;
-            display: block;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
-        }
-        
-        .forum-title:hover {
-            color: var(--secondary);
-            text-shadow: var(--neon-shadow);
-        }
-        
-        .forum-desc {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-        
-        .forum-stats {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            min-width: 120px;
-            text-align: right;
-        }
-        
-        .forum-topics, .forum-posts {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .forum-lastpost {
-            color: var(--light);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .forum-lastpost a {
-            color: var(--secondary);
-            text-decoration: none;
-            text-shadow: 0 0 5px rgba(0, 255, 127, 0.5);
-        }
-        
-        .admin-badge {
-            background: rgba(255, 0, 0, 0.2);
-            color: #ff5555;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-family: 'Orbitron', sans-serif;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-        }
-        
-        /* Специальный раздел для 1 сервера */
-        .server-section {
-            background: linear-gradient(135deg, #1a0638 0%, #0d0220 100%);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: var(--neon-shadow);
-            border: 1px solid var(--border);
-            margin-top: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .server-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-            opacity: 0.1;
-            z-index: 0;
-        }
-        
-        .server-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .server-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            color: var(--secondary);
-            text-shadow: var(--neon-shadow);
-            letter-spacing: 1px;
-        }
-        
-        .server-info {
-            display: flex;
-            gap: 1rem;
-            background: rgba(138, 43, 226, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-        }
-        
-        .server-stat {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .server-stat i {
-            color: var(--secondary);
-        }
-        
-        .server-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .server-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .server-category {
-            background: rgba(30, 15, 70, 0.6);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .server-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--neon-shadow);
-            background: rgba(138, 43, 226, 0.2);
-        }
-        
-        .server-category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .server-category-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--secondary);
-            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
-        }
-        
-        .add-topic-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            width: 40px;
+            height: 3px;
             background: var(--primary);
-            color: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-size: 1.2rem;
-            box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
         }
-        
-        .add-topic-btn:hover {
-            background: var(--secondary);
-            color: var(--dark);
-            transform: rotate(90deg);
-            box-shadow: var(--neon-shadow);
-        }
-        
-        .server-topics {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .server-topic {
-            padding: 0.8rem;
-            background: rgba(15, 12, 36, 0.4);
-            border-radius: 8px;
-            transition: all 0.3s;
-            border-left: 3px solid var(--secondary);
-        }
-        
-        .server-topic:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateX(5px);
-        }
-        
-        .topic-title {
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-            color: var(--light);
-            text-decoration: none;
-            display: block;
-        }
-        
-        .topic-title:hover {
-            color: var(--secondary);
-        }
-        
-        .topic-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        /* Подвал */
-        footer {
-            background: rgba(15, 12, 36, 0.95);
-            padding: 3rem 1.5rem 2rem;
-            margin-top: 3rem;
-            border-top: 1px solid var(--border);
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-        
-        .footer-col h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            text-shadow: 0 0 8px rgba(0, 255, 127, 0.5);
-        }
-        
-        .footer-col ul {
+
+        .footer-links {
             list-style: none;
         }
-        
-        .footer-col li {
-            margin-bottom: 0.8rem;
+
+        .footer-links li {
+            margin-bottom: 10px;
         }
-        
-        .footer-col a {
+
+        .footer-links a {
             color: var(--gray);
             text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-            position: relative;
-            padding-left: 0;
+            transition: var(--transition);
         }
-        
-        .footer-col a::before {
-            content: '»';
-            margin-right: 8px;
-            color: var(--secondary);
-            opacity: 0;
-            transition: opacity 0.3s;
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
         }
-        
-        .footer-col a:hover {
-            color: var(--secondary);
-            padding-left: 15px;
-        }
-        
-        .footer-col a:hover::before {
-            opacity: 1;
-        }
-        
+
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 15px;
+            margin-top: 20px;
         }
-        
+
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 40px;
             height: 40px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
-            background: rgba(138, 43, 226, 0.2);
-            color: var(--light);
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
+            color: white;
+            transition: var(--transition);
         }
-        
+
         .social-links a:hover {
             background: var(--primary);
             transform: translateY(-3px);
-            box-shadow: var(--neon-shadow);
         }
-        
+
         .copyright {
             text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 14px;
         }
-        
-        /* Мобильная адаптация */
-        @media (max-width: 1100px) {
-            .welcome-banner {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .welcome-text p {
-                max-width: 100%;
-            }
-            
-            .forum-stats {
-                flex-wrap: wrap;
-            }
-            
-            .stat-item {
-                min-width: calc(50% - 0.75rem);
-            }
-            
-            .footer-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
-            }
-            
-            nav ul {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-                margin-top: 1rem;
-                gap: 0.5rem;
-            }
-            
-            nav a {
-                font-size: 0.95rem;
-                padding: 0.3rem 0.6rem;
-            }
-            
-            .search-box {
-                margin-right: 0;
-                margin-left: auto;
-            }
-            
-            .search-box input {
-                width: 160px;
-            }
-            
-            .search-box input:focus {
-                width: 180px;
-            }
-            
-            .user-actions {
-                gap: 0.5rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .forum-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            
-            .stat-item {
-                min-width: 100%;
-            }
-            
-            .footer-container {
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .order-container {
                 grid-template-columns: 1fr;
             }
             
-            .server-info {
-                flex-direction: column;
-                align-items: flex-start;
-                border-radius: 8px;
-            }
-            
-            .server-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
+            .hero h1 {
+                font-size: 42px;
             }
         }
-        
-        @media (max-width: 480px) {
-            .header-container {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
             }
             
             nav ul {
-                order: 0;
-                width: auto;
-                margin-top: 0;
-                justify-content: flex-start;
-            }
-            
-            .user-actions {
+                position: fixed;
+                top: 80px;
+                left: 0;
                 width: 100%;
-                justify-content: space-between;
-            }
-            
-            .search-box {
-                flex: 1;
-                margin-right: 0.5rem;
-            }
-            
-            .search-box input {
-                width: 100%;
-            }
-            
-            .forum-item {
+                background: rgba(26, 26, 46, 0.95);
                 flex-direction: column;
-                gap: 0.8rem;
-                text-align: center;
-            }
-            
-            .forum-stats {
-                text-align: center;
-            }
-            
-            .forum-icon {
-                align-self: center;
-            }
-            
-            .forum-stats {
                 align-items: center;
-                text-align: center;
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            
+            nav ul.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
+    <!-- Header -->
     <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <i class="fas fa-bolt"></i>
-                FLASH BY LILCRYY
-            </a>
-            
+        <div class="container header-container">
+            <a href="#" class="logo">Lil<span>cryy</span></a>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
             <nav>
                 <ul>
-                    <li><a href="#" class="active">Форум</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">1 Сервер</a></li>
-                    <li><a href="#">Правила</a></li>
-                    <li><a href="#">Поддержка</a></li>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#order">Заказать</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
                 </ul>
             </nav>
-            
-            <div class="user-actions">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Поиск по форуму">
-                </div>
-                <button class="btn btn-login">Войти</button>
-                <button class="btn btn-register"><span>Регистрация</span></button>
-            </div>
         </div>
     </header>
-    
-    <!-- Основной контент -->
-    <div class="container">
-        <div class="main-content">
-            <div class="welcome-banner">
-                <div class="welcome-text">
-                    <h1>Добро пожаловать на FLASH BY LILCRYY!</h1>
-                    <p>Эксклюзивное сообщество для игроков Grand Theft Auto. Обсуждайте игровой процесс, находите команду для миссий, получайте помощь и делитесь своими достижениями.</p>
-                </div>
-                <div class="welcome-image">
-                    <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="GTA Game">
-                </div>
-            </div>
-            
-            <div class="forum-stats">
-                <div class="stat-item">
-                    <div class="stat-number">18,245</div>
-                    <div class="stat-label">Игроков</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">8,762</div>
-                    <div class="stat-label">Тем</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">42,589</div>
-                    <div class="stat-label">Сообщений</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">1,024</div>
-                    <div class="stat-label">Онлайн</div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Профессиональные услуги программирования</h1>
+                <p>Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.</p>
+                <div class="hero-buttons">
+                    <a href="#order" class="btn">Заказать сейчас</a>
+                    <a href="#portfolio" class="btn btn-secondary">Портфолио</a>
                 </div>
             </div>
-            
-            <div class="categories">
-                <h2 class="section-title"><i class="fas fa-list"></i> Категории форума</h2>
-                
-                <div class="category">
-                    <div class="category-header">
-                        <i class="fas fa-newspaper"></i>
-                        <h2>Основные обсуждения</h2>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Мои Услуги</h2>
+                <p>Предоставляю широкий спектр услуг в области разработки ПО</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-python"></i>
                     </div>
-                    <div class="forums">
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-gamepad"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">Игровой процесс</a>
-                                <p class="forum-desc">Обсуждение игровых механик, стратегий и тактик</p>
-                                <div class="admin-badge">Только для чтения</div>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 1,245</div>
-                                <div class="forum-posts">Сообщения: 12,458</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Как быстро заработать $</a>
-                                    <div>2 часа назад</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-car"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">Транспорт</a>
-                                <p class="forum-desc">Обсуждение автомобилей, мотоциклов, самолетов и другой техники</p>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 874</div>
-                                <div class="forum-posts">Сообщения: 7,421</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Тюнинг новых авто</a>
-                                    <div>сегодня, 10:45</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h3>Python Разработка</h3>
+                    <p>Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.</p>
                 </div>
-                
-                <div class="category">
-                    <div class="category-header">
-                        <i class="fas fa-users"></i>
-                        <h2>Сообщество</h2>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-js"></i>
                     </div>
-                    <div class="forums">
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-images"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">Галерея и видео</a>
-                                <p class="forum-desc">Делитесь своими скриншотами и видеороликами из игры</p>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 487</div>
-                                <div class="forum-posts">Сообщения: 3,214</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Мой новый тачка!</a>
-                                    <div>сегодня, 12:20</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="forum-item">
-                            <div class="forum-icon">
-                                <i class="fas fa-microphone-alt"></i>
-                            </div>
-                            <div class="forum-info">
-                                <a href="#" class="forum-title">Творчество</a>
-                                <p class="forum-desc">Рисунки, рассказы и другие творческие работы по мотивам GTA</p>
-                            </div>
-                            <div class="forum-stats">
-                                <div class="forum-topics">Темы: 215</div>
-                                <div class="forum-posts">Сообщения: 1,587</div>
-                                <div class="forum-lastpost">
-                                    <a href="#">Фан-арт: Тревор</a>
-                                    <div>вчера, 22:10</div>
-                                </div>
-                            </div>
-                        </div>
+                    <h3>JavaScript & Frontend</h3>
+                    <p>Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-java"></i>
                     </div>
+                    <h3>Java Разработка</h3>
+                    <p>Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Работа с Базами Данных</h3>
+                    <p>Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Full Stack Разработка</h3>
+                    <p>Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Тестирование и Отладка</h3>
+                    <p>Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.</p>
                 </div>
             </div>
-            
-            <!-- Раздел 1 Сервера -->
-            <div class="server-section">
-                <div class="server-header">
-                    <h2 class="server-title">1 Сервер FLASH BY LILCRYY</h2>
-                    <div class="server-info">
-                        <div class="server-stat">
-                            <i class="fas fa-users"></i>
-                            <span>Онлайн: 842/1000</span>
-                        </div>
-                        <div class="server-stat">
-                            <i class="fas fa-signal"></i>
-                            <span>Ping: 24ms</span>
-                        </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Мое Портфолио</h2>
+                <p>Примеры моих последних работ и проектов</p>
+            </div>
+            <div class="portfolio-filters">
+                <button class="active">Все</button>
+                <button>Python</button>
+                <button>JavaScript</button>
+                <button>Java</button>
+                <button>Веб-приложения</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Python проект">
+                    <div class="portfolio-overlay">
+                        <h3>Анализ данных для e-commerce</h3>
+                        <p>Python, Pandas, Matplotlib</p>
                     </div>
                 </div>
-                
-                <div class="server-content">
-                    <h3 class="section-title"><i class="fas fa-layer-group"></i> Разделы сервера</h3>
-                    
-                    <div class="server-categories">
-                        <div class="server-category">
-                            <div class="server-category-header">
-                                <h3 class="server-category-title">Общие обсуждения</h3>
-                                <button class="add-topic-btn">+</button>
-                            </div>
-                            <div class="server-topics">
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Добро пожаловать на сервер!</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: LilCryy</span>
-                                        <span>24 ответа</span>
-                                    </div>
-                                </div>
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Правила сервера - обязательно к прочтению</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: Admin</span>
-                                        <span>56 ответов</span>
-                                    </div>
-                                </div>
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Как присоединиться к фракции?</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: Player23</span>
-                                        <span>18 ответов</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="server-category">
-                            <div class="server-category-header">
-                                <h3 class="server-category-title">Техническая поддержка</h3>
-                                <button class="add-topic-btn">+</button>
-                            </div>
-                            <div class="server-topics">
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Проблемы с подключением к серверу</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: Support</span>
-                                        <span>42 ответа</span>
-                                    </div>
-                                </div>
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Как установить моды?</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: TechGuru</span>
-                                        <span>31 ответ</span>
-                                    </div>
-                                </div>
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Оптимизация производительности</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: Admin</span>
-                                        <span>27 ответов</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="server-category">
-                            <div class="server-category-header">
-                                <h3 class="server-category-title">Ивенты и мероприятия</h3>
-                                <button class="add-topic-btn">+</button>
-                            </div>
-                            <div class="server-topics">
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Гонки на выживание - 15 июня</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: EventManager</span>
-                                        <span>64 ответа</span>
-                                    </div>
-                                </div>
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Розыгрыш игровой валюты</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: LilCryy</span>
-                                        <span>89 ответов</span>
-                                    </div>
-                                </div>
-                                <div class="server-topic">
-                                    <a href="#" class="topic-title">Турнир PvP "Король Лос-Сантоса"</a>
-                                    <div class="topic-meta">
-                                        <span>Автор: Admin</span>
-                                        <span>47 ответов</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="JavaScript проект">
+                    <div class="portfolio-overlay">
+                        <h3>Интерактивная карта для сайта</h3>
+                        <p>JavaScript, Leaflet.js, API</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Java проект">
+                    <div class="portfolio-overlay">
+                        <h3>Корпоративное приложение</h3>
+                        <p>Java, Spring Boot, PostgreSQL</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fullstack проект">
+                    <div class="portfolio-overlay">
+                        <h3>Платформа для онлайн-курсов</h3>
+                        <p>React, Node.js, MongoDB</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Python проект">
+                    <div class="portfolio-overlay">
+                        <h3>Автоматизация отчетов</h3>
+                        <p>Python, Django, Celery</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="JavaScript проект">
+                    <div class="portfolio-overlay">
+                        <h3>Дашборд аналитики</h3>
+                        <p>JavaScript, D3.js, Chart.js</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Подвал -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>FLASH BY LILCRYY</h3>
-                <ul>
-                    <li><a href="#">О проекте</a></li>
-                    <li><a href="#">Команда</a></li>
-                    <li><a href="#">Правила форума</a></li>
-                    <li><a href="#">Пользовательское соглашение</a></li>
-                    <li><a href="#">Контакты</a></li>
-                </ul>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2>Отзывы Клиентов</h2>
+                <p>Что говорят люди о моей работе</p>
             </div>
-            
-            <div class="footer-col">
-                <h3>Игровые ресурсы</h3>
-                <ul>
-                    <li><a href="#">База знаний</a></li>
-                    <li><a href="#">Гайды и руководства</a></li>
-                    <li><a href="#">Моды и дополнения</a></li>
-                    <li><a href="#">Система репортов</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>1 Сервер</h3>
-                <ul>
-                    <li><a href="#">Статус сервера</a></li>
-                    <li><a href="#">Правила сервера</a></li>
-                    <li><a href="#">Фракции и кланы</a></li>
-                    <li><a href="#">Техническая поддержка</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Мы в соцсетях</h3>
-                <ul>
-                    <li><a href="#">VKontakte</a></li>
-                    <li><a href="#">Telegram</a></li>
-                    <li><a href="#">YouTube</a></li>
-                    <li><a href="#">Discord</a></li>
-                </ul>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-vk"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Алексей Петров</h4>
+                            <p>CEO, TechStart</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p>"Lilcryy разработал для нас сложную систему анализа данных. Работа была выполнена качественно и в срок. Отличное понимание задачи и проактивное решение возникающих проблем. Обязательно буду сотрудничать снова!"</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Мария Иванова</h4>
+                            <p>Директор, EduPro</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p>"Заказывали разработку платформы для онлайн-обучения. Lilcryy не только выполнил все требования, но и предложил улучшения, о которых мы даже не думали. Результат превзошел ожидания. Профессионал высокого уровня!"</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Дмитрий Смирнов</h4>
+                            <p>CTO, FinTech Solutions</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p>"Отличный специалист! Разработал для нас модуль интеграции с банковскими API. Код чистый, хорошо документирован, с подробными комментариями. Все сроки были соблюдены, а цена более чем адекватная за такую сложную работу."</p>
                 </div>
             </div>
         </div>
-        
-        <div class="copyright">
-            &copy; 2023 FLASH BY LILCRYY. Все права защищены. Grand Theft Auto является зарегистрированной торговой маркой компании Rockstar Games.
+    </section>
+
+    <!-- Order Section -->
+    <section class="order-section" id="order">
+        <div class="container">
+            <div class="section-title">
+                <h2>Оформить Заказ</h2>
+                <p>Расскажите о своем проекте и получите оценку стоимости</p>
+            </div>
+            <div class="order-container">
+                <div class="order-form">
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="name">Ваше Имя</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telegram">Telegram (для связи)</label>
+                            <input type="text" id="telegram" class="form-control" placeholder="@username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Язык программирования</label>
+                            <select id="language" class="form-control" required>
+                                <option value="">Выберите язык</option>
+                                <option value="python">Python</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="java">Java</option>
+                                <option value="php">PHP</option>
+                                <option value="csharp">C#</option>
+                                <option value="other">Другой</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="complexity">Сложность проекта</label>
+                            <select id="complexity" class="form-control" required>
+                                <option value="">Выберите сложность</option>
+                                <option value="1">Простой (до 20 часов)</option>
+                                <option value="2">Средний (20-50 часов)</option>
+                                <option value="3">Сложный (50-100 часов)</option>
+                                <option value="4">Очень сложный (100+ часов)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline">Желаемый срок выполнения (дней)</label>
+                            <input type="number" id="deadline" class="form-control" min="1" value="14">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Описание проекта</label>
+                            <textarea id="description" class="form-control" placeholder="Подробно опишите ваш проект, его цели и требования..." required></textarea>
+                        </div>
+                        <div class="price-estimate">
+                            <h3>Примерная стоимость</h3>
+                            <div class="price-value" id="priceEstimate">0 руб.</div>
+                            <p>Оценка на основе описания проекта и выбранных параметров</p>
+                        </div>
+                        <button type="submit" class="btn">Отправить заказ</button>
+                    </form>
+                </div>
+                <div class="order-summary">
+                    <h3>Как работает оценка стоимости</h3>
+                    <p>Наша система анализирует ваш проект на основе:</p>
+                    <ul>
+                        <li>Выбранного языка программирования</li>
+                        <li>Сложности реализации</li>
+                        <li>Ориентировочного времени работы</li>
+                        <li>Срочности выполнения</li>
+                        <li>Сложности описанных задач</li>
+                    </ul>
+                    <div class="summary-item">
+                        <span>Базовый тариф:</span>
+                        <span>1500 руб./час</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Коэффициент языка:</span>
+                        <span id="languageFactor">x1.0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Коэффициент сложности:</span>
+                        <span id="complexityFactor">x1.0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Коэффициент срочности:</span>
+                        <span id="urgencyFactor">x1.0</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Итого:</span>
+                        <span id="totalEstimate">0 руб.</span>
+                    </div>
+                    <h3>После отправки заказа</h3>
+                    <p>1. Вы получите подтверждение на email</p>
+                    <p>2. Я свяжусь с вами в Telegram для уточнения деталей</p>
+                    <p>3. Мы согласуем точную стоимость и сроки</p>
+                    <p>4. После оплаты 30% я приступлю к работе</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</p>
+                        <p><i class="fab fa-telegram"></i> @lilcryy (Telegram)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Lilcryy</h3>
+                    <p>Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#portfolio">Портфолио</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="#order">Заказать</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Python Разработка</a></li>
+                        <li><a href="#">JavaScript & Frontend</a></li>
+                        <li><a href="#">Java Разработка</a></li>
+                        <li><a href="#">Работа с Базами Данных</a></li>
+                        <li><a href="#">Full Stack Разработка</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
+                        <li><i class="fab fa-telegram"></i> @lilcryy</li>
+                        <li><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Россия</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Lilcryy. Все права защищены.</p>
+            </div>
         </div>
     </footer>
-    
+
     <script>
-        // Имитация функционала администратора
-        document.addEventListener('DOMContentLoaded', function() {
-            const addButtons = document.querySelectorAll('.add-topic-btn');
+        // Mobile Navigation Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Price Estimation Logic
+        const languageSelect = document.getElementById('language');
+        const complexitySelect = document.getElementById('complexity');
+        const deadlineInput = document.getElementById('deadline');
+        const descriptionInput = document.getElementById('description');
+        const priceEstimate = document.getElementById('priceEstimate');
+        const languageFactor = document.getElementById('languageFactor');
+        const complexityFactor = document.getElementById('complexityFactor');
+        const urgencyFactor = document.getElementById('urgencyFactor');
+        const totalEstimate = document.getElementById('totalEstimate');
+        
+        // Language multipliers
+        const languageMultipliers = {
+            'python': 1.0,
+            'javascript': 1.1,
+            'java': 1.2,
+            'php': 0.9,
+            'csharp': 1.15,
+            'other': 1.0
+        };
+        
+        // Complexity multipliers (value is index)
+        const complexityMultipliers = [1.0, 1.3, 1.7, 2.2];
+        
+        function calculatePrice() {
+            const baseRate = 1500; // руб/час
+            const language = languageSelect.value;
+            const complexityValue = complexitySelect.value ? parseInt(complexitySelect.value) : 0;
+            const deadline = parseInt(deadlineInput.value) || 14;
+            const description = descriptionInput.value;
             
-            addButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const category = this.closest('.server-category');
-                    const topicsContainer = category.querySelector('.server-topics');
-                    
-                    const newTopic = document.createElement('div');
-                    newTopic.className = 'server-topic';
-                    newTopic.innerHTML = `
-                        <a href="#" class="topic-title">Новая тема</a>
-                        <div class="topic-meta">
-                            <span>Автор: Admin</span>
-                            <span>0 ответов</span>
-                        </div>
-                    `;
-                    
-                    topicsContainer.prepend(newTopic);
-                    
-                    // Анимация добавления
-                    newTopic.style.opacity = '0';
-                    newTopic.style.transform = 'translateY(-10px)';
-                    
-                    setTimeout(() => {
-                        newTopic.style.transition = 'all 0.3s';
-                        newTopic.style.opacity = '1';
-                        newTopic.style.transform = 'translateY(0)';
-                    }, 10);
-                    
-                    // Показываем уведомление
-                    alert('Новая тема создана! Только администраторы могут создавать темы на этом сервере.');
-                });
+            // Default values
+            let langMult = 1.0;
+            let compMult = 1.0;
+            let hours = 10; // Default hours
+            
+            // Adjust based on language
+            if (language && languageMultipliers[language]) {
+                langMult = languageMultipliers[language];
+                languageFactor.textContent = `x${langMult.toFixed(1)}`;
+            }
+            
+            // Adjust based on complexity
+            if (complexityValue > 0 && complexityValue <= 4) {
+                compMult = complexityMultipliers[complexityValue - 1];
+                complexityFactor.textContent = `x${compMult.toFixed(1)}`;
+            }
+            
+            // Adjust based on deadline (urgency)
+            let urgencyMult = 1.0;
+            if (deadline < 7) urgencyMult = 1.4;
+            else if (deadline < 14) urgencyMult = 1.2;
+            else if (deadline > 30) urgencyMult = 0.9;
+            urgencyFactor.textContent = `x${urgencyMult.toFixed(1)}`;
+            
+            // Estimate hours based on description length and complexity
+            if (description) {
+                // More sophisticated logic could be implemented here
+                const wordCount = description.split(/\s+/).length;
+                hours = Math.max(5, Math.min(wordCount * 0.5, 200)); // 0.5 hours per word, max 200 hours
+                hours *= compMult; // Apply complexity multiplier
+            }
+            
+            // Calculate total price
+            const total = baseRate * hours * langMult * compMult * urgencyMult;
+            
+            // Update estimates
+            priceEstimate.textContent = `${Math.round(total).toLocaleString('ru-RU')} руб.`;
+            totalEstimate.textContent = `${Math.round(total).toLocaleString('ru-RU')} руб.`;
+        }
+        
+        // Event listeners for form changes
+        languageSelect.addEventListener('change', calculatePrice);
+        complexitySelect.addEventListener('change', calculatePrice);
+        deadlineInput.addEventListener('input', calculatePrice);
+        descriptionInput.addEventListener('input', calculatePrice);
+        
+        // Initial calculation
+        calculatePrice();
+        
+        // Form submission
+        const orderForm = document.getElementById('orderForm');
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const telegram = document.getElementById('telegram').value;
+            const language = languageSelect.options[languageSelect.selectedIndex].text;
+            const complexity = complexitySelect.options[complexitySelect.selectedIndex].text;
+            const deadline = deadlineInput.value;
+            const description = descriptionInput.value;
+            const price = priceEstimate.textContent;
+            
+            // Show success message
+            alert(`Спасибо, ${name}! Ваш заказ успешно отправлен.\n\nЯ свяжусь с вами в Telegram (@${telegram}) в ближайшее время для уточнения деталей.`);
+            
+            // In a real implementation, you would send this data to your server
+            // and then to your email maks.amirov.10@mail.ru
+            console.log('Order Details:', {
+                name, email, telegram, language, complexity, deadline, description, price
+            });
+            
+            // Reset form
+            orderForm.reset();
+            calculatePrice();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
