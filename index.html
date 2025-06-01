@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA Province Forum | Сообщество игроков</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #ff8c00;
+            --dark: #0f172a;
+            --darker: #0a1121;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --border: rgba(148, 163, 184, 0.2);
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+            background: rgba(255, 140, 0, 0.1);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-right: 1rem;
+        }
+        
+        .search-box input {
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: rgba(30, 41, 59, 0.6);
+            color: var(--light);
+            width: 200px;
+            transition: width 0.3s;
+        }
+        
+        .search-box input:focus {
+            width: 250px;
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .btn-login {
+            background: transparent;
+            color: var(--light);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-login:hover {
+            background: rgba(255, 140, 0, 0.1);
+            border-color: var(--secondary);
+        }
+        
+        .btn-register {
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .btn-register:hover {
+            background: #ff9e2d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .welcome-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-text p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+        
+        .welcome-image img {
+            max-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        .forum-stats {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--secondary);
+        }
+        
+        .category {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-header {
+            background: rgba(30, 58, 138, 0.3);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .category-header:hover {
+            background: rgba(30, 58, 138, 0.4);
+        }
+        
+        .category-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .category-header i {
+            color: var(--secondary);
+            font-size: 1.4rem;
+        }
+        
+        .forums {
+            padding: 1rem;
+        }
+        
+        .forum-item {
+            display: flex;
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+            gap: 1rem;
+        }
+        
+        .forum-item:last-child {
+            border-bottom: none;
+        }
+        
+        .forum-item:hover {
+            background: rgba(30, 58, 138, 0.1);
+        }
+        
+        .forum-icon {
+            min-width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: rgba(255, 140, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .forum-icon i {
+            font-size: 1.6rem;
+            color: var(--secondary);
+        }
+        
+        .forum-info {
+            flex: 1;
+        }
+        
+        .forum-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--light);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .forum-title:hover {
+            color: var(--secondary);
+        }
+        
+        .forum-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .forum-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            min-width: 120px;
+            text-align: right;
+        }
+        
+        .forum-topics, .forum-posts {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .forum-lastpost {
+            color: var(--light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .forum-lastpost a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        /* Боковая панель */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .widget {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .widget-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .widget-title i {
+            color: var(--secondary);
+        }
+        
+        .online-users {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(30, 58, 138, 0.3);
+            padding: 0.5rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .user-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+        
+        .recent-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .post-item {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .post-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .post-content {
+            flex: 1;
+        }
+        
+        .post-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .post-title a {
+            color: var(--light);
+            text-decoration: none;
+        }
+        
+        .post-title a:hover {
+            color: var(--secondary);
+        }
+        
+        .post-meta {
+            display: flex;
+            font-size: 0.85rem;
+            color: var(--gray);
+            gap: 1rem;
+        }
+        
+        .post-author {
+            color: var(--secondary);
+        }
+        
+        .server-status {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .server-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+        }
+        
+        .server-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .server-status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .online {
+            background: var(--success);
+        }
+        
+        .offline {
+            background: var(--danger);
+        }
+        
+        .server-players {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Подвал */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 3rem 1.5rem 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .footer-col a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.2);
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 1100px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .welcome-text p {
+                max-width: 100%;
+            }
+            
+            .forum-stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                min-width: calc(50% - 0.75rem);
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                font-size: 0.95rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .search-box {
+                margin-right: 0;
+                margin-left: auto;
+            }
+            
+            .search-box input {
+                width: 160px;
+            }
+            
+            .search-box input:focus {
+                width: 180px;
+            }
+            
+            .user-actions {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .forum-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .stat-item {
+                min-width: 100%;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                order: 0;
+                width: auto;
+                margin-top: 0;
+                justify-content: flex-start;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-box {
+                flex: 1;
+                margin-right: 0.5rem;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .forum-item {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .forum-stats {
+                text-align: center;
+            }
+            
+            .forum-icon {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-gamepad"></i>
+                GTA<span>Province</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Форум</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">База знаний</a></li>
+                    <li><a href="#">Скачать</a></li>
+                    <li><a href="#">Поддержка</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Поиск по форуму">
+                </div>
+                <button class="btn btn-login">Войти</button>
+                <button class="btn btn-register">Регистрация</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <div class="main-content">
+            <div class="welcome-banner">
+                <div class="welcome-text">
+                    <h1>Добро пожаловать в GTA Province!</h1>
+                    <p>Крупнейшее русскоязычное сообщество игроков в Grand Theft Auto. Обсуждайте игру, находите единомышленников, получайте помощь и делитесь своими достижениями.</p>
+                </div>
+                <div class="welcome-image">
+                    <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="GTA Game">
+                </div>
+            </div>
+            
+            <div class="forum-stats">
+                <div class="stat-item">
+                    <div class="stat-number">24,589</div>
+                    <div class="stat-label">Пользователей</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12,467</div>
+                    <div class="stat-label">Тем на форуме</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98,245</div>
+                    <div class="stat-label">Сообщений</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,248</div>
+                    <div class="stat-label">Онлайн сейчас</div>
+                </div>
+            </div>
+            
+            <div class="categories">
+                <h2 class="section-title"><i class="fas fa-list"></i> Категории форума</h2>
+                
+                <div class="category">
+                    <div class="category-header">
+                        <i class="fas fa-newspaper"></i>
+                        <h2>Новости и анонсы</h2>
+                    </div>
+                    <div class="forums">
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">Официальные новости</a>
+                                <p class="forum-desc">Важные анонсы и обновления от администрации проекта</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 247</div>
+                                <div class="forum-posts">Сообщения: 1,245</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Обновление сервера 3.2.1</a>
+                                    <div>сегодня, 14:30</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">События и мероприятия</a>
+                                <p class="forum-desc">Информация о предстоящих ивентах на сервере</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 98</div>
+                                <div class="forum-posts">Сообщения: 587</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Гонки на выживание</a>
+                                    <div>вчера, 20:15</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header">
+                        <i class="fas fa-gamepad"></i>
+                        <h2>Игровые разделы</h2>
+                    </div>
+                    <div class="forums">
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">Игровой процесс</a>
+                                <p class="forum-desc">Обсуждение игровых механик, стратегий и тактик</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 1,245</div>
+                                <div class="forum-posts">Сообщения: 12,458</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Как быстро заработать $</a>
+                                    <div>2 часа назад</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">Транспорт</a>
+                                <p class="forum-desc">Обсуждение автомобилей, мотоциклов, самолетов и другой техники</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 874</div>
+                                <div class="forum-posts">Сообщения: 7,421</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Тюнинг новых авто</a>
+                                    <div>сегодня, 10:45</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-fist-raised"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">Боевые действия</a>
+                                <p class="forum-desc">Тактики ведения боя, оружие и военная техника</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 642</div>
+                                <div class="forum-posts">Сообщения: 5,874</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Лучшее оружие для PvP</a>
+                                    <div>вчера, 18:30</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-header">
+                        <i class="fas fa-hands-helping"></i>
+                        <h2>Сообщество</h2>
+                    </div>
+                    <div class="forums">
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">Галерея и видео</a>
+                                <p class="forum-desc">Делитесь своими скриншотами и видеороликами из игры</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 487</div>
+                                <div class="forum-posts">Сообщения: 3,214</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Мой новый тачка!</a>
+                                    <div>сегодня, 12:20</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="forum-item">
+                            <div class="forum-icon">
+                                <i class="fas fa-microphone-alt"></i>
+                            </div>
+                            <div class="forum-info">
+                                <a href="#" class="forum-title">Творчество</a>
+                                <p class="forum-desc">Рисунки, рассказы и другие творческие работы по мотивам GTA</p>
+                            </div>
+                            <div class="forum-stats">
+                                <div class="forum-topics">Темы: 215</div>
+                                <div class="forum-posts">Сообщения: 1,587</div>
+                                <div class="forum-lastpost">
+                                    <a href="#">Фан-арт: Тревор</a>
+                                    <div>вчера, 22:10</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Боковая панель -->
+        <div class="sidebar">
+            <div class="widget">
+                <h3 class="widget-title"><i class="fas fa-users"></i> Сейчас онлайн</h3>
+                <div class="online-users">
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>PlayerOne</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>GTA_Master</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>LosSantosKing</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>ViceCityPro</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>Mike_1984</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>BikerGang</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>CopChaser</span>
+                    </div>
+                    <div class="user-badge">
+                        <div class="user-status"></div>
+                        <span>HeistPro</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="widget">
+                <h3 class="widget-title"><i class="fas fa-fire"></i> Популярные темы</h3>
+                <div class="recent-posts">
+                    <div class="post-item">
+                        <div class="post-content">
+                            <h4 class="post-title"><a href="#">Как получить скрытые автомобили в обновлении 1.45</a></h4>
+                            <div class="post-meta">
+                                <span class="post-author">GTA_Expert</span>
+                                <span>245 ответов</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-item">
+                        <div class="post-content">
+                            <h4 class="post-title"><a href="#">Лучшие места для заработка в начале игры</a></h4>
+                            <div class="post-meta">
+                                <span class="post-author">MoneyMaker</span>
+                                <span>187 ответов</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-item">
+                        <div class="post-content">
+                            <h4 class="post-title"><a href="#">Гайд по прохождению новой миссии "Банковский прорыв"</a></h4>
+                            <div class="post-meta">
+                                <span class="post-author">MissionPro</span>
+                                <span>124 ответа</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-item">
+                        <div class="post-content">
+                            <h4 class="post-title"><a href="#">Сравнение нового оружия: что стоит покупать?</a></h4>
+                            <div class="post-meta">
+                                <span class="post-author">WeaponMaster</span>
+                                <span>98 ответов</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="widget">
+                <h3 class="widget-title"><i class="fas fa-server"></i> Статус серверов</h3>
+                <div class="server-status">
+                    <div class="server-item">
+                        <div class="server-name">
+                            <div class="server-status-indicator online"></div>
+                            <span>Основной сервер #1</span>
+                        </div>
+                        <div class="server-players">1,245/1,500</div>
+                    </div>
+                    
+                    <div class="server-item">
+                        <div class="server-name">
+                            <div class="server-status-indicator online"></div>
+                            <span>Основной сервер #2</span>
+                        </div>
+                        <div class="server-players">1,087/1,500</div>
+                    </div>
+                    
+                    <div class="server-item">
+                        <div class="server-name">
+                            <div class="server-status-indicator online"></div>
+                            <span>RP-сервер</span>
+                        </div>
+                        <div class="server-players">987/1,000</div>
+                    </div>
+                    
+                    <div class="server-item">
+                        <div class="server-name">
+                            <div class="server-status-indicator offline"></div>
+                            <span>Тестовый сервер</span>
+                        </div>
+                        <div class="server-players">0/200</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>GTA Province</h3>
+                <ul>
+                    <li><a href="#">О проекте</a></li>
+                    <li><a href="#">Команда</a></li>
+                    <li><a href="#">Правила форума</a></li>
+                    <li><a href="#">Пользовательское соглашение</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Игровые ресурсы</h3>
+                <ul>
+                    <li><a href="#">База знаний</a></li>
+                    <li><a href="#">Гайды и руководства</a></li>
+                    <li><a href="#">Моды и дополнения</a></li>
+                    <li><a href="#">Читы и коды</a></li>
+                    <li><a href="#">Система репортов</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Сообщество</h3>
+                <ul>
+                    <li><a href="#">Группы и фракции</a></li>
+                    <li><a href="#">Соревнования</a></li>
+                    <li><a href="#">Мероприятия</a></li>
+                    <li><a href="#">Партнерская программа</a></li>
+                    <li><a href="#">Помощь новичкам</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Мы в соцсетях</h3>
+                <ul>
+                    <li><a href="#">VKontakte</a></li>
+                    <li><a href="#">Telegram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Discord</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 GTA Province Forum. Все права защищены. Grand Theft Auto является зарегистрированной торговой маркой компании Rockstar Games.
+        </div>
+    </footer>
+</body>
+  </html>
