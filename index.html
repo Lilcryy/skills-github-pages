@@ -383,9 +383,11 @@
 
         .order-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 50px;
             align-items: flex-start;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .order-form {
@@ -447,28 +449,96 @@
             color: var(--primary);
         }
 
-        .order-summary {
+        .ai-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ai-explanation h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loader .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .telegram-process {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: sticky;
-            top: 100px;
+            margin-top: 30px;
+            border: 1px solid var(--primary);
+            display: none;
         }
 
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .summary-total {
-            font-size: 20px;
-            font-weight: 700;
-            margin-top: 15px;
+        .telegram-process h3 {
             color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .telegram-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .telegram-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .telegram-bot-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #0088cc;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+
+        .telegram-bot-link:hover {
+            background: #0077b3;
+            transform: translateY(-3px);
         }
 
         /* Footer */
@@ -608,10 +678,6 @@
 
         /* Responsive */
         @media (max-width: 992px) {
-            .order-container {
-                grid-template-columns: 1fr;
-            }
-            
             .hero h1 {
                 font-size: 42px;
             }
@@ -650,6 +716,10 @@
             .hero-buttons {
                 justify-content: center;
             }
+            
+            .order-form {
+                padding: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -665,12 +735,12 @@
                 padding: 20px;
             }
             
-            .order-form {
-                padding: 20px;
-            }
-            
             .footer-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .telegram-step {
+                flex-direction: column;
             }
         }
     </style>
@@ -794,13 +864,6 @@
                     <div class="section-title">
                         <h2>Мое Портфолио</h2>
                         <p>Примеры моих последних работ и проектов</p>
-                    </div>
-                    <div class="portfolio-filters">
-                        <button class="active">Все</button>
-                        <button>Python</button>
-                        <button>JavaScript</button>
-                        <button>Java</button>
-                        <button>Веб-приложения</button>
                     </div>
                     <div class="portfolio-grid">
                         <div class="portfolio-item">
@@ -970,7 +1033,7 @@
                 <div class="container">
                     <div class="section-title">
                         <h2>Оформить Заказ</h2>
-                        <p>Расскажите о своем проекте и получите оценку стоимости</p>
+                        <p>Расскажите о своем проекте и получите оценку стоимости с помощью ChatGPT</p>
                     </div>
                     <div class="order-container">
                         <div class="order-form">
@@ -991,22 +1054,22 @@
                                     <label for="language">Язык программирования</label>
                                     <select id="language" class="form-control" required>
                                         <option value="">Выберите язык</option>
-                                        <option value="python">Python</option>
-                                        <option value="javascript">JavaScript</option>
-                                        <option value="java">Java</option>
-                                        <option value="php">PHP</option>
-                                        <option value="csharp">C#</option>
-                                        <option value="other">Другой</option>
+                                        <option value="Python">Python</option>
+                                        <option value="JavaScript">JavaScript</option>
+                                        <option value="Java">Java</option>
+                                        <option value="PHP">PHP</option>
+                                        <option value="C#">C#</option>
+                                        <option value="Другой">Другой</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="complexity">Сложность проекта</label>
                                     <select id="complexity" class="form-control" required>
                                         <option value="">Выберите сложность</option>
-                                        <option value="1">Простой (до 20 часов)</option>
-                                        <option value="2">Средний (20-50 часов)</option>
-                                        <option value="3">Сложный (50-100 часов)</option>
-                                        <option value="4">Очень сложный (100+ часов)</option>
+                                        <option value="Простой">Простой (до 20 часов)</option>
+                                        <option value="Средний">Средний (20-50 часов)</option>
+                                        <option value="Сложный">Сложный (50-100 часов)</option>
+                                        <option value="Очень сложный">Очень сложный (100+ часов)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -1017,52 +1080,87 @@
                                     <label for="description">Описание проекта</label>
                                     <textarea id="description" class="form-control" placeholder="Подробно опишите ваш проект, его цели и требования..." required></textarea>
                                 </div>
+                                
+                                <div class="loader" id="loader">
+                                    <div class="spinner"></div>
+                                    <p>Анализируем ваш проект с помощью ChatGPT...</p>
+                                </div>
+                                
                                 <div class="price-estimate">
                                     <h3>Примерная стоимость</h3>
                                     <div class="price-value" id="priceEstimate">0 руб.</div>
-                                    <p>Оценка на основе описания проекта и выбранных параметров</p>
+                                    <p>Оценка сгенерирована искусственным интеллектом ChatGPT</p>
                                 </div>
-                                <button type="submit" class="btn">Отправить заказ</button>
+                                
+                                <div class="ai-explanation" id="aiExplanation">
+                                    <h4>Объяснение расчета:</h4>
+                                    <p id="explanationText">Здесь будет подробное объяснение расчета стоимости от ChatGPT</p>
+                                </div>
+                                
+                                <button type="button" class="btn" id="calculateBtn" style="margin-bottom: 20px; width: 100%;">
+                                    <i class="fas fa-robot"></i> Рассчитать стоимость с ChatGPT
+                                </button>
+                                
+                                <button type="submit" class="btn" style="background-color: var(--success); width: 100%;">
+                                    <i class="fas fa-paper-plane"></i> Отправить заказ
+                                </button>
                             </form>
-                        </div>
-                        <div class="order-summary">
-                            <h3>Как работает оценка стоимости</h3>
-                            <p>Наша система анализирует ваш проект на основе:</p>
-                            <ul>
-                                <li>Выбранного языка программирования</li>
-                                <li>Сложности реализации</li>
-                                <li>Ориентировочного времени работы</li>
-                                <li>Срочности выполнения</li>
-                                <li>Сложности описанных задач</li>
-                            </ul>
-                            <div class="summary-item">
-                                <span>Базовый тариф:</span>
-                                <span>1500 руб./час</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Коэффициент языка:</span>
-                                <span id="languageFactor">x1.0</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Коэффициент сложности:</span>
-                                <span id="complexityFactor">x1.0</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Коэффициент срочности:</span>
-                                <span id="urgencyFactor">x1.0</span>
-                            </div>
-                            <div class="summary-total">
-                                <span>Итого:</span>
-                                <span id="totalEstimate">0 руб.</span>
-                            </div>
-                            <h3>После отправки заказа</h3>
-                            <p>1. Вы получите подтверждение на email</p>
-                            <p>2. Я свяжусь с вами в Telegram для уточнения деталей</p>
-                            <p>3. Мы согласуем точную стоимость и сроки</p>
-                            <p>4. После оплаты 30% я приступлю к работе</p>
-                            <div class="contact-info">
-                                <p><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</p>
-                                <p><i class="fab fa-telegram"></i> @lilcryy (Telegram)</p>
+                            
+                            <!-- Telegram Bot Process -->
+                            <div class="telegram-process" id="telegramProcess">
+                                <h3>Дальнейшие шаги через Telegram-бота</h3>
+                                
+                                <div class="telegram-steps">
+                                    <div class="telegram-step">
+                                        <div class="step-number">1</div>
+                                        <div>
+                                            <p>Напишите в Telegram боту <strong>@LilcryyDevloperBot</strong> команду <code>/start</code></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="telegram-step">
+                                        <div class="step-number">2</div>
+                                        <div>
+                                            <p>Бот запросит детали вашего заказа:</p>
+                                            <ul>
+                                                <li>Тип проекта</li>
+                                                <li>Технические требования</li>
+                                                <li>Бюджетные ограничения</li>
+                                                <li>Сроки выполнения</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="telegram-step">
+                                        <div class="step-number">3</div>
+                                        <div>
+                                            <p>ChatGPT проанализирует информацию и предоставит:</p>
+                                            <ul>
+                                                <li>Окончательную стоимость</li>
+                                                <li>Примерные сроки выполнения</li>
+                                                <li>Детализированный план работы</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="telegram-step">
+                                        <div class="step-number">4</div>
+                                        <div>
+                                            <p>Если вам нужна помощь оператора, напишите команду <code>/operator</code></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="telegram-step">
+                                        <div class="step-number">5</div>
+                                        <div>
+                                            <p>После подтверждения заказа, детали будут отправлены мне на <strong>@YTLILCRYY</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <a href="https://t.me/LilcryyDevloperBot" class="telegram-bot-link" target="_blank">
+                                    <i class="fab fa-telegram"></i> Перейти к боту @LilcryyDevloperBot
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1083,7 +1181,7 @@
                             <h3>Lilcryy</h3>
                             <p>Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса.</p>
                             <div class="social-links">
-                                <a href="#"><i class="fab fa-telegram"></i></a>
+                                <a href="https://t.me/YTLILCRYY" target="_blank"><i class="fab fa-telegram"></i></a>
                                 <a href="#"><i class="fab fa-github"></i></a>
                                 <a href="#"><i class="fab fa-linkedin"></i></a>
                                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -1113,8 +1211,8 @@
                             <h3>Контакты</h3>
                             <ul class="footer-links">
                                 <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
-                                <li><i class="fab fa-telegram"></i> @lilcryy</li>
-                                <li><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</li>
+                                <li><i class="fab fa-telegram"></i> @YTLILCRYY (основной)</li>
+                                <li><i class="fab fa-telegram"></i> @LilcryyDevloperBot (бот)</li>
                                 <li><i class="fas fa-map-marker-alt"></i> Россия</li>
                             </ul>
                         </div>
@@ -1159,6 +1257,9 @@
             
             // Close mobile menu
             mobileNav.classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // Add event listeners to navigation links
@@ -1167,94 +1268,13 @@
                 e.preventDefault();
                 const pageId = `${link.getAttribute('data-page')}-page`;
                 switchPage(pageId);
-                
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
         
-        // Price Estimation Logic
-        const languageSelect = document.getElementById('language');
-        const complexitySelect = document.getElementById('complexity');
-        const deadlineInput = document.getElementById('deadline');
-        const descriptionInput = document.getElementById('description');
-        const priceEstimate = document.getElementById('priceEstimate');
-        const languageFactor = document.getElementById('languageFactor');
-        const complexityFactor = document.getElementById('complexityFactor');
-        const urgencyFactor = document.getElementById('urgencyFactor');
-        const totalEstimate = document.getElementById('totalEstimate');
-        
-        // Language multipliers
-        const languageMultipliers = {
-            'python': 1.0,
-            'javascript': 1.1,
-            'java': 1.2,
-            'php': 0.9,
-            'csharp': 1.15,
-            'other': 1.0
-        };
-        
-        // Complexity multipliers (value is index)
-        const complexityMultipliers = [1.0, 1.3, 1.7, 2.2];
-        
-        function calculatePrice() {
-            const baseRate = 1500; // руб/час
-            const language = languageSelect.value;
-            const complexityValue = complexitySelect.value ? parseInt(complexitySelect.value) : 0;
-            const deadline = parseInt(deadlineInput.value) || 14;
-            const description = descriptionInput.value;
-            
-            // Default values
-            let langMult = 1.0;
-            let compMult = 1.0;
-            let hours = 10; // Default hours
-            
-            // Adjust based on language
-            if (language && languageMultipliers[language]) {
-                langMult = languageMultipliers[language];
-                languageFactor.textContent = `x${langMult.toFixed(1)}`;
-            }
-            
-            // Adjust based on complexity
-            if (complexityValue > 0 && complexityValue <= 4) {
-                compMult = complexityMultipliers[complexityValue - 1];
-                complexityFactor.textContent = `x${compMult.toFixed(1)}`;
-            }
-            
-            // Adjust based on deadline (urgency)
-            let urgencyMult = 1.0;
-            if (deadline < 7) urgencyMult = 1.4;
-            else if (deadline < 14) urgencyMult = 1.2;
-            else if (deadline > 30) urgencyMult = 0.9;
-            urgencyFactor.textContent = `x${urgencyMult.toFixed(1)}`;
-            
-            // Estimate hours based on description length and complexity
-            if (description) {
-                // More sophisticated logic could be implemented here
-                const wordCount = description.split(/\s+/).length;
-                hours = Math.max(5, Math.min(wordCount * 0.5, 200)); // 0.5 hours per word, max 200 hours
-                hours *= compMult; // Apply complexity multiplier
-            }
-            
-            // Calculate total price
-            const total = baseRate * hours * langMult * compMult * urgencyMult;
-            
-            // Update estimates
-            priceEstimate.textContent = `${Math.round(total).toLocaleString('ru-RU')} руб.`;
-            totalEstimate.textContent = `${Math.round(total).toLocaleString('ru-RU')} руб.`;
-        }
-        
-        // Event listeners for form changes
-        languageSelect.addEventListener('change', calculatePrice);
-        complexitySelect.addEventListener('change', calculatePrice);
-        deadlineInput.addEventListener('input', calculatePrice);
-        descriptionInput.addEventListener('input', calculatePrice);
-        
-        // Initial calculation
-        calculatePrice();
-        
         // Order Form submission
         const orderForm = document.getElementById('orderForm');
+        const telegramProcess = document.getElementById('telegramProcess');
+        
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1262,24 +1282,25 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const telegram = document.getElementById('telegram').value;
-            const language = languageSelect.options[languageSelect.selectedIndex].text;
-            const complexity = complexitySelect.options[complexitySelect.selectedIndex].text;
-            const deadline = deadlineInput.value;
-            const description = descriptionInput.value;
-            const price = priceEstimate.textContent;
+            const language = document.getElementById('language').value;
+            const complexity = document.getElementById('complexity').value;
+            const deadline = document.getElementById('deadline').value;
+            const description = document.getElementById('description').value;
+            const price = document.getElementById('priceEstimate').textContent;
             
-            // Show success message
-            alert(`Спасибо, ${name}! Ваш заказ успешно отправлен.\n\nЯ свяжусь с вами в Telegram (@${telegram}) в ближайшее время для уточнения деталей.`);
+            // Generate order number
+            const orderNumber = `ORD-${Math.floor(Math.random() * 90000) + 10000}`;
+            
+            // Show success message and Telegram instructions
+            telegramProcess.style.display = 'block';
+            
+            // Scroll to Telegram instructions
+            telegramProcess.scrollIntoView({ behavior: 'smooth' });
             
             // In a real implementation, you would send this data to your server
-            // and then to your email maks.amirov.10@mail.ru
             console.log('Order Details:', {
-                name, email, telegram, language, complexity, deadline, description, price
+                name, email, telegram, language, complexity, deadline, description, price, orderNumber
             });
-            
-            // Reset form
-            orderForm.reset();
-            calculatePrice();
         });
         
         // Review Form submission
@@ -1305,6 +1326,88 @@
             reviewForm.reset();
         });
         
+        // ChatGPT Integration via Proxy API
+        const calculateBtn = document.getElementById('calculateBtn');
+        const loader = document.getElementById('loader');
+        const priceEstimate = document.getElementById('priceEstimate');
+        const explanationText = document.getElementById('explanationText');
+        const aiExplanation = document.getElementById('aiExplanation');
+        
+        calculateBtn.addEventListener('click', async function() {
+            // Get form values
+            const name = document.getElementById('name').value;
+            const language = document.getElementById('language').value;
+            const complexity = document.getElementById('complexity').value;
+            const deadline = document.getElementById('deadline').value;
+            const description = document.getElementById('description').value;
+            
+            if (!name || !language || !complexity || !deadline || !description) {
+                alert('Пожалуйста, заполните все поля формы перед расчетом стоимости');
+                return;
+            }
+            
+            // Show loader
+            loader.style.display = 'block';
+            aiExplanation.style.display = 'none';
+            
+            try {
+                // Формируем промпт для ChatGPT
+                const prompt = `Оцени стоимость разработки проекта по следующим параметрам:
+- Имя клиента: ${name}
+- Язык программирования: ${language}
+- Сложность: ${complexity}
+- Срок выполнения: ${deadline} дней
+- Описание проекта: ${description}
+
+Рассчитай примерную стоимость в рублях и предоставь краткое объяснение расчета. 
+Учти: почасовая ставка разработчика 1500 руб/час. 
+Ответ должен быть в формате: "Стоимость: [число] руб. | Объяснение: [текст]"`;
+                
+                // Отправляем запрос на Proxy API
+                const response = await fetch('https://api-proxy-server.example.com/chatgpt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer YOUR_PROXY_API_KEY' // Замените на реальный ключ
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo",
+                        messages: [
+                            {"role": "system", "content": "Ты опытный оценщик проектов в IT"},
+                            {"role": "user", "content": prompt}
+                        ],
+                        max_tokens: 500
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Ошибка сервера');
+                }
+                
+                const data = await response.json();
+                const chatResponse = data.choices[0].message.content;
+                
+                // Парсим ответ от ChatGPT
+                const priceMatch = chatResponse.match(/Стоимость:\s*(\d+)\s*руб/);
+                const explanationMatch = chatResponse.split('| Объяснение:')[1];
+                
+                const price = priceMatch ? parseInt(priceMatch[1]) : 0;
+                const explanation = explanationMatch ? explanationMatch.trim() : chatResponse;
+                
+                // Display the results
+                priceEstimate.textContent = `${price.toLocaleString('ru-RU')} руб.`;
+                explanationText.textContent = explanation;
+                aiExplanation.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Произошла ошибка при расчете стоимости. Пожалуйста, попробуйте снова.');
+            } finally {
+                // Hide loader
+                loader.style.display = 'none';
+            }
+        });
+        
         // Initialize page based on hash
         function initPage() {
             const hash = window.location.hash.replace('#', '');
@@ -1319,4 +1422,4 @@
         window.addEventListener('load', initPage);
     </script>
 </body>
-                                                                                        </html>
+        </html>
