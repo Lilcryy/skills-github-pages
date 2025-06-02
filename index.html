@@ -194,6 +194,7 @@
         .hero-buttons {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         /* Services Section */
@@ -288,42 +289,42 @@
         }
 
         .portfolio-item {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            height: 300px;
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            padding: 30px;
             transition: var(--transition);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(42, 42, 60, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 300px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            opacity: 0;
-            transition: var(--transition);
         }
 
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: rgba(108, 99, 255, 0.3);
         }
 
-        .portfolio-item:hover img {
-            transform: scale(1.1);
+        .portfolio-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .portfolio-item .tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-item .tech span {
+            background: rgba(108, 99, 255, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
         }
 
         /* Reviews Section */
@@ -366,6 +367,15 @@
             margin-left: auto;
         }
 
+        .add-review-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         /* Order Section */
         .order-section {
             background: rgba(0, 0, 0, 0.1);
@@ -375,7 +385,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            align-items: center;
+            align-items: flex-start;
         }
 
         .order-form {
@@ -443,6 +453,8 @@
             padding: 30px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 100px;
         }
 
         .summary-item {
@@ -539,6 +551,61 @@
             font-size: 14px;
         }
 
+        /* Page Sections */
+        .page-section {
+            display: none;
+            padding-top: 100px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        .mobile-nav.active {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mobile-nav ul li {
+            margin: 15px 0;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav ul li a:hover,
+        .mobile-nav ul li a.active {
+            background: var(--primary);
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .order-container {
@@ -548,6 +615,10 @@
             .hero h1 {
                 font-size: 42px;
             }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
@@ -555,25 +626,8 @@
                 display: block;
             }
             
-            nav ul {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: rgba(26, 26, 46, 0.95);
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: var(--transition);
-            }
-            
-            nav ul.active {
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            }
-            
-            nav ul li {
-                margin: 15px 0;
+            nav.desktop-nav {
+                display: none;
             }
             
             .hero h1 {
@@ -583,6 +637,41 @@
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .hero-content {
+                text-align: center;
+                padding-top: 60px;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .service-card, .portfolio-item, .review-card {
+                padding: 20px;
+            }
+            
+            .order-form {
+                padding: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -590,388 +679,497 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">Lil<span>cryy</span></a>
+            <a href="#" class="logo" data-page="home">Lil<span>cryy</span></a>
             <div class="mobile-toggle">
                 <i class="fas fa-bars"></i>
             </div>
-            <nav>
+            <nav class="desktop-nav">
                 <ul>
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#portfolio">Портфолио</a></li>
-                    <li><a href="#reviews">Отзывы</a></li>
-                    <li><a href="#order">Заказать</a></li>
-                    <li><a href="#contacts">Контакты</a></li>
+                    <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
+                    <li><a href="#" class="nav-link" data-page="services">Услуги</a></li>
+                    <li><a href="#" class="nav-link" data-page="portfolio">Портфолио</a></li>
+                    <li><a href="#" class="nav-link" data-page="reviews">Отзывы</a></li>
+                    <li><a href="#" class="nav-link" data-page="order">Заказать</a></li>
+                    <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
                 </ul>
             </nav>
         </div>
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
+                <li><a href="#" class="nav-link" data-page="services">Услуги</a></li>
+                <li><a href="#" class="nav-link" data-page="portfolio">Портфолио</a></li>
+                <li><a href="#" class="nav-link" data-page="reviews">Отзывы</a></li>
+                <li><a href="#" class="nav-link" data-page="order">Заказать</a></li>
+                <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
+            </ul>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Профессиональные услуги программирования</h1>
-                <p>Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.</p>
-                <div class="hero-buttons">
-                    <a href="#order" class="btn">Заказать сейчас</a>
-                    <a href="#portfolio" class="btn btn-secondary">Портфолио</a>
+    <!-- Page Sections -->
+    <main>
+        <!-- Home Page -->
+        <section class="page-section active" id="home-page">
+            <div class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Профессиональные услуги программирования</h1>
+                        <p>Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.</p>
+                        <div class="hero-buttons">
+                            <a href="#" class="btn" data-page="order">Заказать сейчас</a>
+                            <a href="#" class="btn btn-secondary" data-page="portfolio">Портфолио</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Мои Услуги</h2>
-                <p>Предоставляю широкий спектр услуг в области разработки ПО</p>
+        <!-- Services Page -->
+        <section class="page-section" id="services-page">
+            <div class="services" id="services">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Мои Услуги</h2>
+                        <p>Предоставляю широкий спектр услуг в области разработки ПО</p>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h3>Python Разработка</h3>
+                            <p>Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <h3>JavaScript & Frontend</h3>
+                            <p>Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fab fa-java"></i>
+                            </div>
+                            <h3>Java Разработка</h3>
+                            <p>Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>Работа с Базами Данных</h3>
+                            <p>Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Full Stack Разработка</h3>
+                            <p>Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-bug"></i>
+                            </div>
+                            <h3>Тестирование и Отладка</h3>
+                            <p>Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <h3>Python Разработка</h3>
-                    <p>Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-js"></i>
-                    </div>
-                    <h3>JavaScript & Frontend</h3>
-                    <p>Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fab fa-java"></i>
-                    </div>
-                    <h3>Java Разработка</h3>
-                    <p>Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Работа с Базами Данных</h3>
-                    <p>Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Full Stack Разработка</h3>
-                    <p>Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <h3>Тестирование и Отладка</h3>
-                    <p>Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-title">
-                <h2>Мое Портфолио</h2>
-                <p>Примеры моих последних работ и проектов</p>
+        <!-- Portfolio Page -->
+        <section class="page-section" id="portfolio-page">
+            <div class="portfolio" id="portfolio">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Мое Портфолио</h2>
+                        <p>Примеры моих последних работ и проектов</p>
+                    </div>
+                    <div class="portfolio-filters">
+                        <button class="active">Все</button>
+                        <button>Python</button>
+                        <button>JavaScript</button>
+                        <button>Java</button>
+                        <button>Веб-приложения</button>
+                    </div>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item">
+                            <h3>Анализ данных для e-commerce</h3>
+                            <div class="tech">
+                                <span>Python</span>
+                                <span>Pandas</span>
+                                <span>Matplotlib</span>
+                            </div>
+                            <p>Разработал систему анализа продаж для интернет-магазина, которая позволила увеличить конверсию на 15% за счет выявления ключевых метрик и паттернов поведения покупателей.</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <h3>Интерактивная карта для сайта</h3>
+                            <div class="tech">
+                                <span>JavaScript</span>
+                                <span>Leaflet.js</span>
+                                <span>API</span>
+                            </div>
+                            <p>Создал интерактивную карту с маркерами для туристического сайта, интегрировал с API геолокации и добавил фильтры по категориям объектов.</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <h3>Корпоративное приложение</h3>
+                            <div class="tech">
+                                <span>Java</span>
+                                <span>Spring Boot</span>
+                                <span>PostgreSQL</span>
+                            </div>
+                            <p>Разработал CRM-систему для управления клиентской базой и задачами с интеграцией с почтовыми сервисами и мессенджерами.</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <h3>Платформа для онлайн-курсов</h3>
+                            <div class="tech">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                            <p>Создал полный цикл платформы для онлайн-обучения с видеоуроками, тестами, системой прогресса и сертификатами.</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <h3>Автоматизация отчетов</h3>
+                            <div class="tech">
+                                <span>Python</span>
+                                <span>Django</span>
+                                <span>Celery</span>
+                            </div>
+                            <p>Разработал систему автоматической генерации отчетов для финансового отдела, сократив время на формирование документов на 80%.</p>
+                        </div>
+                        <div class="portfolio-item">
+                            <h3>Дашборд аналитики</h3>
+                            <div class="tech">
+                                <span>JavaScript</span>
+                                <span>D3.js</span>
+                                <span>Chart.js</span>
+                            </div>
+                            <p>Создал интерактивный дашборд для визуализации ключевых бизнес-метрик с возможностью фильтрации данных и экспорта отчетов.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="portfolio-filters">
-                <button class="active">Все</button>
-                <button>Python</button>
-                <button>JavaScript</button>
-                <button>Java</button>
-                <button>Веб-приложения</button>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Python проект">
-                    <div class="portfolio-overlay">
-                        <h3>Анализ данных для e-commerce</h3>
-                        <p>Python, Pandas, Matplotlib</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="JavaScript проект">
-                    <div class="portfolio-overlay">
-                        <h3>Интерактивная карта для сайта</h3>
-                        <p>JavaScript, Leaflet.js, API</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Java проект">
-                    <div class="portfolio-overlay">
-                        <h3>Корпоративное приложение</h3>
-                        <p>Java, Spring Boot, PostgreSQL</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fullstack проект">
-                    <div class="portfolio-overlay">
-                        <h3>Платформа для онлайн-курсов</h3>
-                        <p>React, Node.js, MongoDB</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Python проект">
-                    <div class="portfolio-overlay">
-                        <h3>Автоматизация отчетов</h3>
-                        <p>Python, Django, Celery</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="JavaScript проект">
-                    <div class="portfolio-overlay">
-                        <h3>Дашборд аналитики</h3>
-                        <p>JavaScript, D3.js, Chart.js</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Reviews Section -->
-    <section class="reviews" id="reviews">
-        <div class="container">
-            <div class="section-title">
-                <h2>Отзывы Клиентов</h2>
-                <p>Что говорят люди о моей работе</p>
+        <!-- Reviews Page -->
+        <section class="page-section" id="reviews-page">
+            <div class="reviews" id="reviews">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Отзывы Клиентов</h2>
+                        <p>Что говорят люди о моей работе</p>
+                    </div>
+                    <div class="reviews-container">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="review-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h4>Алексей Петров</h4>
+                                    <p>CEO, TechStart</p>
+                                </div>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p>"Разработал для нас сложную систему анализа данных. Работа была выполнена качественно и в срок. Отличное понимание задачи и проактивное решение возникающих проблем. Обязательно буду сотрудничать снова!"</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="review-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h4>Мария Иванова</h4>
+                                    <p>Директор, EduPro</p>
+                                </div>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <p>"Заказывали разработку платформы для онлайн-обучения. Не только выполнил все требования, но и предложил улучшения, о которых мы даже не думали. Результат превзошел ожидания. Профессионал высокого уровня!"</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="review-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h4>Дмитрий Смирнов</h4>
+                                    <p>CTO, FinTech Solutions</p>
+                                </div>
+                                <div class="review-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                            <p>"Отличный специалист! Разработал для нас модуль интеграции с банковскими API. Код чистый, хорошо документирован, с подробными комментариями. Все сроки были соблюдены, а цена более чем адекватная за такую сложную работу."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Add Review Section -->
+                    <div class="add-review-section">
+                        <h3>Оставить отзыв</h3>
+                        <p>Если вы уже пользовались моими услугами, поделитесь вашим опытом!</p>
+                        <form id="reviewForm">
+                            <div class="form-group">
+                                <label for="reviewName">Ваше Имя</label>
+                                <input type="text" id="reviewName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewPosition">Ваша должность/компания</label>
+                                <input type="text" id="reviewPosition" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewRating">Оценка</label>
+                                <select id="reviewRating" class="form-control" required>
+                                    <option value="5">Отлично (5 звёзд)</option>
+                                    <option value="4">Очень хорошо (4 звезды)</option>
+                                    <option value="3">Хорошо (3 звезды)</option>
+                                    <option value="2">Удовлетворительно (2 звезды)</option>
+                                    <option value="1">Плохо (1 звезда)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewText">Ваш отзыв</label>
+                                <textarea id="reviewText" class="form-control" minlength="50" required placeholder="Расскажите о вашем опыте сотрудничества..."></textarea>
+                            </div>
+                            <button type="submit" class="btn">Отправить отзыв</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="reviews-container">
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h4>Алексей Петров</h4>
-                            <p>CEO, TechStart</p>
-                        </div>
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p>"Lilcryy разработал для нас сложную систему анализа данных. Работа была выполнена качественно и в срок. Отличное понимание задачи и проактивное решение возникающих проблем. Обязательно буду сотрудничать снова!"</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h4>Мария Иванова</h4>
-                            <p>Директор, EduPro</p>
-                        </div>
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p>"Заказывали разработку платформы для онлайн-обучения. Lilcryy не только выполнил все требования, но и предложил улучшения, о которых мы даже не думали. Результат превзошел ожидания. Профессионал высокого уровня!"</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div>
-                            <h4>Дмитрий Смирнов</h4>
-                            <p>CTO, FinTech Solutions</p>
-                        </div>
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <p>"Отличный специалист! Разработал для нас модуль интеграции с банковскими API. Код чистый, хорошо документирован, с подробными комментариями. Все сроки были соблюдены, а цена более чем адекватная за такую сложную работу."</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Order Section -->
-    <section class="order-section" id="order">
-        <div class="container">
-            <div class="section-title">
-                <h2>Оформить Заказ</h2>
-                <p>Расскажите о своем проекте и получите оценку стоимости</p>
-            </div>
-            <div class="order-container">
-                <div class="order-form">
-                    <form id="orderForm">
-                        <div class="form-group">
-                            <label for="name">Ваше Имя</label>
-                            <input type="text" id="name" class="form-control" required>
+        <!-- Order Page -->
+        <section class="page-section" id="order-page">
+            <div class="order-section" id="order">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Оформить Заказ</h2>
+                        <p>Расскажите о своем проекте и получите оценку стоимости</p>
+                    </div>
+                    <div class="order-container">
+                        <div class="order-form">
+                            <form id="orderForm">
+                                <div class="form-group">
+                                    <label for="name">Ваше Имя</label>
+                                    <input type="text" id="name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telegram">Telegram (для связи)</label>
+                                    <input type="text" id="telegram" class="form-control" placeholder="@username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="language">Язык программирования</label>
+                                    <select id="language" class="form-control" required>
+                                        <option value="">Выберите язык</option>
+                                        <option value="python">Python</option>
+                                        <option value="javascript">JavaScript</option>
+                                        <option value="java">Java</option>
+                                        <option value="php">PHP</option>
+                                        <option value="csharp">C#</option>
+                                        <option value="other">Другой</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="complexity">Сложность проекта</label>
+                                    <select id="complexity" class="form-control" required>
+                                        <option value="">Выберите сложность</option>
+                                        <option value="1">Простой (до 20 часов)</option>
+                                        <option value="2">Средний (20-50 часов)</option>
+                                        <option value="3">Сложный (50-100 часов)</option>
+                                        <option value="4">Очень сложный (100+ часов)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deadline">Желаемый срок выполнения (дней)</label>
+                                    <input type="number" id="deadline" class="form-control" min="1" value="14">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Описание проекта</label>
+                                    <textarea id="description" class="form-control" placeholder="Подробно опишите ваш проект, его цели и требования..." required></textarea>
+                                </div>
+                                <div class="price-estimate">
+                                    <h3>Примерная стоимость</h3>
+                                    <div class="price-value" id="priceEstimate">0 руб.</div>
+                                    <p>Оценка на основе описания проекта и выбранных параметров</p>
+                                </div>
+                                <button type="submit" class="btn">Отправить заказ</button>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
+                        <div class="order-summary">
+                            <h3>Как работает оценка стоимости</h3>
+                            <p>Наша система анализирует ваш проект на основе:</p>
+                            <ul>
+                                <li>Выбранного языка программирования</li>
+                                <li>Сложности реализации</li>
+                                <li>Ориентировочного времени работы</li>
+                                <li>Срочности выполнения</li>
+                                <li>Сложности описанных задач</li>
+                            </ul>
+                            <div class="summary-item">
+                                <span>Базовый тариф:</span>
+                                <span>1500 руб./час</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Коэффициент языка:</span>
+                                <span id="languageFactor">x1.0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Коэффициент сложности:</span>
+                                <span id="complexityFactor">x1.0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Коэффициент срочности:</span>
+                                <span id="urgencyFactor">x1.0</span>
+                            </div>
+                            <div class="summary-total">
+                                <span>Итого:</span>
+                                <span id="totalEstimate">0 руб.</span>
+                            </div>
+                            <h3>После отправки заказа</h3>
+                            <p>1. Вы получите подтверждение на email</p>
+                            <p>2. Я свяжусь с вами в Telegram для уточнения деталей</p>
+                            <p>3. Мы согласуем точную стоимость и сроки</p>
+                            <p>4. После оплаты 30% я приступлю к работе</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</p>
+                                <p><i class="fab fa-telegram"></i> @lilcryy (Telegram)</p>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="telegram">Telegram (для связи)</label>
-                            <input type="text" id="telegram" class="form-control" placeholder="@username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="language">Язык программирования</label>
-                            <select id="language" class="form-control" required>
-                                <option value="">Выберите язык</option>
-                                <option value="python">Python</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="java">Java</option>
-                                <option value="php">PHP</option>
-                                <option value="csharp">C#</option>
-                                <option value="other">Другой</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="complexity">Сложность проекта</label>
-                            <select id="complexity" class="form-control" required>
-                                <option value="">Выберите сложность</option>
-                                <option value="1">Простой (до 20 часов)</option>
-                                <option value="2">Средний (20-50 часов)</option>
-                                <option value="3">Сложный (50-100 часов)</option>
-                                <option value="4">Очень сложный (100+ часов)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="deadline">Желаемый срок выполнения (дней)</label>
-                            <input type="number" id="deadline" class="form-control" min="1" value="14">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Описание проекта</label>
-                            <textarea id="description" class="form-control" placeholder="Подробно опишите ваш проект, его цели и требования..." required></textarea>
-                        </div>
-                        <div class="price-estimate">
-                            <h3>Примерная стоимость</h3>
-                            <div class="price-value" id="priceEstimate">0 руб.</div>
-                            <p>Оценка на основе описания проекта и выбранных параметров</p>
-                        </div>
-                        <button type="submit" class="btn">Отправить заказ</button>
-                    </form>
+                    </div>
                 </div>
-                <div class="order-summary">
-                    <h3>Как работает оценка стоимости</h3>
-                    <p>Наша система анализирует ваш проект на основе:</p>
-                    <ul>
-                        <li>Выбранного языка программирования</li>
-                        <li>Сложности реализации</li>
-                        <li>Ориентировочного времени работы</li>
-                        <li>Срочности выполнения</li>
-                        <li>Сложности описанных задач</li>
-                    </ul>
-                    <div class="summary-item">
-                        <span>Базовый тариф:</span>
-                        <span>1500 руб./час</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Коэффициент языка:</span>
-                        <span id="languageFactor">x1.0</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Коэффициент сложности:</span>
-                        <span id="complexityFactor">x1.0</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Коэффициент срочности:</span>
-                        <span id="urgencyFactor">x1.0</span>
-                    </div>
-                    <div class="summary-total">
-                        <span>Итого:</span>
-                        <span id="totalEstimate">0 руб.</span>
-                    </div>
-                    <h3>После отправки заказа</h3>
-                    <p>1. Вы получите подтверждение на email</p>
-                    <p>2. Я свяжусь с вами в Telegram для уточнения деталей</p>
-                    <p>3. Мы согласуем точную стоимость и сроки</p>
-                    <p>4. После оплаты 30% я приступлю к работе</p>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</p>
-                        <p><i class="fab fa-telegram"></i> @lilcryy (Telegram)</p>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer id="contacts">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Lilcryy</h3>
-                    <p>Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+        <!-- Contacts Page -->
+        <section class="page-section" id="contacts-page">
+            <footer id="contacts">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Контакты</h2>
+                        <p>Свяжитесь со мной удобным способом</p>
+                    </div>
+                    <div class="footer-content">
+                        <div class="footer-column">
+                            <h3>Lilcryy</h3>
+                            <p>Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-telegram"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Навигация</h3>
+                            <ul class="footer-links">
+                                <li><a href="#" data-page="home">Главная</a></li>
+                                <li><a href="#" data-page="services">Услуги</a></li>
+                                <li><a href="#" data-page="portfolio">Портфолио</a></li>
+                                <li><a href="#" data-page="reviews">Отзывы</a></li>
+                                <li><a href="#" data-page="order">Заказать</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Услуги</h3>
+                            <ul class="footer-links">
+                                <li><a href="#" data-page="services">Python Разработка</a></li>
+                                <li><a href="#" data-page="services">JavaScript & Frontend</a></li>
+                                <li><a href="#" data-page="services">Java Разработка</a></li>
+                                <li><a href="#" data-page="services">Работа с Базами Данных</a></li>
+                                <li><a href="#" data-page="services">Full Stack Разработка</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Контакты</h3>
+                            <ul class="footer-links">
+                                <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
+                                <li><i class="fab fa-telegram"></i> @lilcryy</li>
+                                <li><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Россия</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        <p>&copy; 2023 Lilcryy. Все права защищены.</p>
                     </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Навигация</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#services">Услуги</a></li>
-                        <li><a href="#portfolio">Портфолио</a></li>
-                        <li><a href="#reviews">Отзывы</a></li>
-                        <li><a href="#order">Заказать</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Услуги</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Python Разработка</a></li>
-                        <li><a href="#">JavaScript & Frontend</a></li>
-                        <li><a href="#">Java Разработка</a></li>
-                        <li><a href="#">Работа с Базами Данных</a></li>
-                        <li><a href="#">Full Stack Разработка</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
-                        <li><i class="fab fa-telegram"></i> @lilcryy</li>
-                        <li><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Россия</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Lilcryy. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
+            </footer>
+        </section>
+    </main>
 
     <script>
         // Mobile Navigation Toggle
         const mobileToggle = document.querySelector('.mobile-toggle');
-        const navMenu = document.querySelector('nav ul');
+        const mobileNav = document.getElementById('mobileNav');
         
         mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            mobileNav.classList.toggle('active');
         });
         
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+        // Page Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        
+        function switchPage(pageId) {
+            // Hide all pages
+            pageSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active link
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId.replace('-page', '')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu
+            mobileNav.classList.remove('active');
+        }
+        
+        // Add event listeners to navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = `${link.getAttribute('data-page')}-page`;
+                switchPage(pageId);
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
         
@@ -1055,7 +1253,7 @@
         // Initial calculation
         calculatePrice();
         
-        // Form submission
+        // Order Form submission
         const orderForm = document.getElementById('orderForm');
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1084,20 +1282,41 @@
             calculatePrice();
         });
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+        // Review Form submission
+        const reviewForm = document.getElementById('reviewForm');
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('reviewName').value;
+            const position = document.getElementById('reviewPosition').value;
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            const text = document.getElementById('reviewText').value;
+            
+            // Show success message
+            alert(`Спасибо, ${name}, за ваш отзыв! Ваше мнение очень важно для меня.`);
+            
+            // In a real implementation, you would send this data to your server
+            console.log('Review Details:', {
+                name, position, rating, text
             });
+            
+            // Reset form
+            reviewForm.reset();
         });
+        
+        // Initialize page based on hash
+        function initPage() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                switchPage(`${hash}-page`);
+            } else {
+                switchPage('home-page');
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', initPage);
     </script>
 </body>
-    </html>
+                                                                                        </html>
