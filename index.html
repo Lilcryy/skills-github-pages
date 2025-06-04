@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lilcryy - Профессиональные услуги программирования</title>
+    <title>Lilcryy - Professional Programming Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
@@ -113,6 +113,7 @@
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
 
         nav ul li {
@@ -152,6 +153,32 @@
             font-size: 24px;
             color: white;
             cursor: pointer;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .language-btn {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .language-btn:hover {
+            color: var(--primary);
+        }
+
+        .language-btn.active {
+            color: var(--primary);
+            background: rgba(108, 99, 255, 0.2);
         }
 
         /* Hero Section */
@@ -259,29 +286,6 @@
             background: rgba(0, 0, 0, 0.1);
         }
 
-        .portfolio-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .portfolio-filters button {
-            padding: 8px 20px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--light);
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .portfolio-filters button.active,
-        .portfolio-filters button:hover {
-            background: var(--primary);
-        }
-
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -325,55 +329,6 @@
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 14px;
-        }
-
-        /* Reviews Section */
-        .reviews-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .review-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .review-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 15px;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-        }
-
-        .review-stars {
-            color: var(--warning);
-            margin-left: auto;
-        }
-
-        .add-review-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Order Section */
@@ -441,31 +396,6 @@
         .telegram-process h3 {
             color: var(--primary);
             margin-bottom: 15px;
-        }
-
-        .telegram-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .telegram-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .step-number {
-            background: var(--primary);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
         }
 
         .telegram-bot-link {
@@ -667,14 +597,11 @@
             .hero p {
                 font-size: 16px;
             }
-            .service-card, .portfolio-item, .review-card {
+            .service-card, .portfolio-item {
                 padding: 20px;
             }
             .footer-content {
                 grid-template-columns: 1fr;
-            }
-            .telegram-step {
-                flex-direction: column;
             }
         }
     </style>
@@ -689,23 +616,33 @@
             </div>
             <nav class="desktop-nav">
                 <ul>
-                    <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
-                    <li><a href="#" class="nav-link" data-page="services">Услуги</a></li>
-                    <li><a href="#" class="nav-link" data-page="portfolio">Портфолио</a></li>
-                    <li><a href="#" class="nav-link" data-page="reviews">Отзывы</a></li>
-                    <li><a href="#" class="nav-link" data-page="order">Заказать</a></li>
-                    <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
+                    <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
+                    <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
+                    <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
+                    <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
+                    <li>
+                        <div class="language-switcher">
+                            <button class="language-btn active" data-lang="en">EN</button>
+                            <button class="language-btn" data-lang="ru">RU</button>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
         <div class="mobile-nav" id="mobileNav">
             <ul>
-                <li><a href="#" class="nav-link active" data-page="home">Главная</a></li>
-                <li><a href="#" class="nav-link" data-page="services">Услуги</a></li>
-                <li><a href="#" class="nav-link" data-page="portfolio">Портфолио</a></li>
-                <li><a href="#" class="nav-link" data-page="reviews">Отзывы</a></li>
-                <li><a href="#" class="nav-link" data-page="order">Заказать</a></li>
-                <li><a href="#" class="nav-link" data-page="contacts">Контакты</a></li>
+                <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
+                <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
+                <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
+                <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
+                <li>
+                    <div class="language-switcher" style="justify-content: center; margin-top: 15px;">
+                        <button class="language-btn active" data-lang="en">EN</button>
+                        <button class="language-btn" data-lang="ru">RU</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -717,11 +654,11 @@
             <div class="hero">
                 <div class="container">
                     <div class="hero-content">
-                        <h1>Профессиональные услуги программирования</h1>
-                        <p>Разработка качественного кода на Python, JavaScript, Java и других языках.</p>
+                        <h1 data-translate="home.title">Professional Programming Services</h1>
+                        <p data-translate="home.subtitle">Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.</p>
                         <div class="hero-buttons">
-                            <a href="#" class="btn" data-page="order">Заказать сейчас</a>
-                            <a href="#" class="btn btn-secondary" data-page="portfolio">Портфолио</a>
+                            <a href="#" class="btn" data-page="order" data-translate="home.order_btn">Order Now</a>
+                            <a href="#" class="btn btn-secondary" data-page="portfolio" data-translate="home.portfolio_btn">Portfolio</a>
                         </div>
                     </div>
                 </div>
@@ -733,57 +670,57 @@
             <div class="services" id="services">
                 <div class="container">
                     <div class="section-title">
-                        <h2>Мои Услуги</h2>
-                        <p>Предоставляю широкий спектр услуг в области разработки ПО</p>
+                        <h2 data-translate="services.title">My Services</h2>
+                        <p data-translate="services.subtitle">I provide a wide range of software development services</p>
                     </div>
                     <div class="services-grid">
                         <div class="service-card">
                             <div class="service-icon">
                                 <i class="fab fa-python"></i>
                             </div>
-                            <h3>Python Разработка</h3>
-                            <p>Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                            <h3 data-translate="services.python_title">Python Development</h3>
+                            <p data-translate="services.python_desc">Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
                         </div>
                         <div class="service-card">
                             <div class="service-icon">
                                 <i class="fab fa-js"></i>
                             </div>
-                            <h3>JavaScript & Frontend</h3>
-                            <p>Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                            <h3 data-translate="services.js_title">JavaScript & Frontend</h3>
+                            <p data-translate="services.js_desc">Development of modern web applications using React, Vue.js, interactive interfaces and animations.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
                         </div>
                         <div class="service-card">
                             <div class="service-icon">
                                 <i class="fab fa-java"></i>
                             </div>
-                            <h3>Java Разработка</h3>
-                            <p>Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                            <h3 data-translate="services.java_title">Java Development</h3>
+                            <p data-translate="services.java_desc">Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
                         </div>
                         <div class="service-card">
                             <div class="service-icon">
                                 <i class="fas fa-database"></i>
                             </div>
-                            <h3>Работа с Базами Данных</h3>
-                            <p>Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                            <h3 data-translate="services.db_title">Database Work</h3>
+                            <p data-translate="services.db_desc">Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
                         </div>
                         <div class="service-card">
                             <div class="service-icon">
                                 <i class="fas fa-mobile-alt"></i>
                             </div>
-                            <h3>Full Stack Разработка</h3>
-                            <p>Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                            <h3 data-translate="services.fullstack_title">Full Stack Development</h3>
+                            <p data-translate="services.fullstack_desc">Full cycle of web application development: from architecture design to deployment and support.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
                         </div>
                         <div class="service-card">
                             <div class="service-icon">
                                 <i class="fas fa-bug"></i>
                             </div>
-                            <h3>Тестирование и Отладка</h3>
-                            <p>Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;">Заказать услугу</a>
+                            <h3 data-translate="services.testing_title">Testing and Debugging</h3>
+                            <p data-translate="services.testing_desc">Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.</p>
+                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
                         </div>
                     </div>
                 </div>
@@ -795,165 +732,64 @@
             <div class="portfolio" id="portfolio">
                 <div class="container">
                     <div class="section-title">
-                        <h2>Мое Портфолио</h2>
-                        <p>Примеры моих последних работ и проектов</p>
+                        <h2 data-translate="portfolio.title">My Portfolio</h2>
+                        <p data-translate="portfolio.subtitle">Examples of my recent works and projects</p>
                     </div>
                     <div class="portfolio-grid">
                         <div class="portfolio-item">
-                            <h3>Анализ данных для e-commerce</h3>
+                            <h3 data-translate="portfolio.project1_title">Data analysis for e-commerce</h3>
                             <div class="tech">
                                 <span>Python</span>
                                 <span>Pandas</span>
                                 <span>Matplotlib</span>
                             </div>
-                            <p>Разработал систему анализа продаж для интернет-магазина, которая позволила увеличить конверсию на 15% за счет выявления ключевых метрик и паттернов поведения покупателей.</p>
+                            <p data-translate="portfolio.project1_desc">Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.</p>
                         </div>
                         <div class="portfolio-item">
-                            <h3>Интерактивная карта для сайта</h3>
+                            <h3 data-translate="portfolio.project2_title">Interactive map for website</h3>
                             <div class="tech">
                                 <span>JavaScript</span>
                                 <span>Leaflet.js</span>
                                 <span>API</span>
                             </div>
-                            <p>Создал интерактивную карту с маркерами для туристического сайта, интегрировал с API геолокации и добавил фильтры по категориям объектов.</p>
+                            <p data-translate="portfolio.project2_desc">Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.</p>
                         </div>
                         <div class="portfolio-item">
-                            <h3>Корпоративное приложение</h3>
+                            <h3 data-translate="portfolio.project3_title">Corporate application</h3>
                             <div class="tech">
                                 <span>Java</span>
                                 <span>Spring Boot</span>
                                 <span>PostgreSQL</span>
                             </div>
-                            <p>Разработал CRM-систему для управления клиентской базой и задачами с интеграцией с почтовыми сервисами и мессенджерами.</p>
+                            <p data-translate="portfolio.project3_desc">Developed a CRM system for managing customer base and tasks with integration with email services and messengers.</p>
                         </div>
                         <div class="portfolio-item">
-                            <h3>Платформа для онлайн-курсов</h3>
+                            <h3 data-translate="portfolio.project4_title">Online courses platform</h3>
                             <div class="tech">
                                 <span>React</span>
                                 <span>Node.js</span>
                                 <span>MongoDB</span>
                             </div>
-                            <p>Создал полный цикл платформы для онлайн-обучения с видеоуроками, тестами, системой прогресса и сертификатами.</p>
+                            <p data-translate="portfolio.project4_desc">Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.</p>
                         </div>
                         <div class="portfolio-item">
-                            <h3>Автоматизация отчетов</h3>
+                            <h3 data-translate="portfolio.project5_title">Reports automation</h3>
                             <div class="tech">
                                 <span>Python</span>
                                 <span>Django</span>
                                 <span>Celery</span>
                             </div>
-                            <p>Разработал систему автоматической генерации отчетов для финансового отдела, сократив время на формирование документов на 80%.</p>
+                            <p data-translate="portfolio.project5_desc">Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.</p>
                         </div>
                         <div class="portfolio-item">
-                            <h3>Дашборд аналитики</h3>
+                            <h3 data-translate="portfolio.project6_title">Analytics dashboard</h3>
                             <div class="tech">
                                 <span>JavaScript</span>
                                 <span>D3.js</span>
                                 <span>Chart.js</span>
                             </div>
-                            <p>Создал интерактивный дашборд для визуализации ключевых бизнес-метрик с возможностью фильтрации данных и экспорта отчетов.</p>
+                            <p data-translate="portfolio.project6_desc">Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities.</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Reviews Page -->
-        <section class="page-section" id="reviews-page">
-            <div class="reviews" id="reviews">
-                <div class="container">
-                    <div class="section-title">
-                        <h2>Отзывы Клиентов</h2>
-                        <p>Что говорят люди о моей работе</p>
-                    </div>
-                    <div class="reviews-container">
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="review-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div>
-                                    <h4>Cvaga</h4>
-                                    <p>Dokser</p>
-                                </div>
-                                <div class="review-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <p>"Написал сносер очень быстро рекомендую!"</p>
-                        </div>
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="review-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div>
-                                    <h4>Мария Иванова</h4>
-                                    <p>Директор</p>
-                                </div>
-                                <div class="review-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                            <p>"Заказывали разработку платформы для онлайн-обучения. Работа была выполнена в срок. Все очень понравилось рекомендую. "</p>
-                        </div>
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="review-avatar">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div>
-                                    <h4>Дмитрий Смирнов</h4>
-                                    <p>CTO, FinTech Solutions</p>
-                                </div>
-                                <div class="review-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                            </div>
-                            <p>"Отличный специалист! Разработал для нас модуль интеграции с банковскими API."</p>
-                        </div>
-                    </div>
-                    <!-- Add Review Section -->
-                    <div class="add-review-section">
-                        <h3>Оставить отзыв</h3>
-                        <p>Если вы уже пользовались моими услугами, поделитесь вашим опытом!</p>
-                        <form id="reviewForm">
-                            <div class="form-group">
-                                <label for="reviewName">Ваше Имя</label>
-                                <input type="text" id="reviewName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="reviewPosition">Ваша должность/компания</label>
-                                <input type="text" id="reviewPosition" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="reviewRating">Оценка</label>
-                                <select id="reviewRating" class="form-control" required>
-                                    <option value="5">Отлично (5 звёзд)</option>
-                                    <option value="4">Очень хорошо (4 звезды)</option>
-                                    <option value="3">Хорошо (3 звезды)</option>
-                                    <option value="2">Удовлетворительно (2 звезды)</option>
-                                    <option value="1">Плохо (1 звезда)</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="reviewText">Ваш отзыв</label>
-                                <textarea id="reviewText" class="form-control" minlength="50" required placeholder="Расскажите о вашем опыте сотрудничества..."></textarea>
-                            </div>
-                            <button type="submit" class="btn">Отправить отзыв (доступно только тому кто покупал услуги) </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -964,71 +800,71 @@
             <div class="order-section" id="order">
                 <div class="container">
                     <div class="section-title">
-                        <h2>Оформить Заказ</h2>
-                        <p>Расскажите о своем проекте для оценки стоимости</p>
+                        <h2 data-translate="order.title">Place an Order</h2>
+                        <p data-translate="order.subtitle">Tell us about your project to get a cost estimate</p>
                     </div>
                     <div class="order-container">
                         <div class="order-form">
                             <form id="orderForm">
                                 <div class="form-group">
-                                    <label for="name">Ваше Имя</label>
+                                    <label for="name" data-translate="order.name_label">Your Name</label>
                                     <input type="text" id="name" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email" data-translate="order.email_label">Email</label>
                                     <input type="email" id="email" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="telegram">Telegram (для связи)</label>
+                                    <label for="telegram" data-translate="order.telegram_label">Telegram (for contact)</label>
                                     <input type="text" id="telegram" class="form-control" placeholder="@username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="language">Язык программирования</label>
+                                    <label for="language" data-translate="order.language_label">Programming Language</label>
                                     <select id="language" class="form-control" required>
-                                        <option value="">Выберите язык</option>
+                                        <option value="" data-translate="order.select_language">Select language</option>
                                         <option value="Python">Python</option>
                                         <option value="JavaScript">JavaScript</option>
                                         <option value="Java">Java</option>
                                         <option value="PHP">PHP</option>
                                         <option value="C#">C#</option>
-                                        <option value="Другой">Другой</option>
+                                        <option value="Other" data-translate="order.other_language">Other</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="complexity">Сложность проекта</label>
+                                    <label for="complexity" data-translate="order.complexity_label">Project Complexity</label>
                                     <select id="complexity" class="form-control" required>
-                                        <option value="">Выберите сложность</option>
-                                        <option value="Простой">Простой (до 20 часов)</option>
-                                        <option value="Средний">Средний (20-50 часов)</option>
-                                        <option value="Сложный">Сложный (50-100 часов)</option>
-                                        <option value="Очень сложный">Очень сложный (100+ часов)</option>
+                                        <option value="" data-translate="order.select_complexity">Select complexity</option>
+                                        <option value="Simple" data-translate="order.simple_complexity">Simple (up to 20 hours)</option>
+                                        <option value="Medium" data-translate="order.medium_complexity">Medium (20-50 hours)</option>
+                                        <option value="Complex" data-translate="order.complex_complexity">Complex (50-100 hours)</option>
+                                        <option value="Very complex" data-translate="order.very_complex_complexity">Very complex (100+ hours)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="deadline">Желаемый срок выполнения (дней)</label>
+                                    <label for="deadline" data-translate="order.deadline_label">Desired completion time (days)</label>
                                     <input type="number" id="deadline" class="form-control" min="1" value="14">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Описание проекта</label>
-                                    <textarea id="description" class="form-control" placeholder="Подробно опишите ваш проект, его цели и требования..." required></textarea>
+                                    <label for="description" data-translate="order.description_label">Project Description</label>
+                                    <textarea id="description" class="form-control" placeholder="Describe your project in detail, its goals and requirements..." required data-translate="order.description_placeholder"></textarea>
                                 </div>
                                 
                                 <button type="submit" class="btn" style="background-color: var(--success); width: 100%; margin-top: 20px;">
-                                    <i class="fas fa-paper-plane"></i> Отправить заказ
+                                    <i class="fas fa-paper-plane"></i> <span data-translate="order.submit_btn">Submit Order</span>
                                 </button>
                             </form>
                             
                             <div class="telegram-process" id="telegramProcess">
-                                <h3>Ваш заказ успешно оформлен!</h3>
-                                <p>Бот <strong>@LilcryyDevloperBot</strong> напишет вам в Telegram в течение 1 минуты.</p>
-                                <p>Он предоставит:</p>
+                                <h3 data-translate="order.success_title">Your order has been successfully placed!</h3>
+                                <p data-translate="order.success_text1">The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.</p>
+                                <p data-translate="order.success_text2">It will provide:</p>
                                 <ul>
-                                    <li>Окончательную стоимость и сроки</li>
-                                    <li>Кнопку для оплаты заказа</li>
-                                    <li>Ссылку для скачивания кода после выполнения</li>
+                                    <li data-translate="order.success_item1">Final cost and terms</li>
+                                    <li data-translate="order.success_item2">Payment button for the order</li>
+                                    <li data-translate="order.success_item3">Link to download the code after completion</li>
                                 </ul>
                                 <a href="https://t.me/LilcryyDevloperBot" class="telegram-bot-link" target="_blank">
-                                    <i class="fab fa-telegram"></i> Перейти к боту @LilcryyDevloperBot
+                                    <i class="fab fa-telegram"></i> <span data-translate="order.bot_link">Go to bot @LilcryyDevloperBot</span>
                                 </a>
                             </div>
                         </div>
@@ -1042,13 +878,13 @@
             <footer id="contacts">
                 <div class="container">
                     <div class="section-title">
-                        <h2>Контакты</h2>
-                        <p>Свяжитесь со мной удобным способом</p>
+                        <h2 data-translate="contacts.title">Contacts</h2>
+                        <p data-translate="contacts.subtitle">Contact me in any convenient way</p>
                     </div>
                     <div class="footer-content">
                         <div class="footer-column">
                             <h3>Lilcryy</h3>
-                            <p>Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса.</p>
+                            <p data-translate="contacts.about">Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business.</p>
                             <div class="social-links">
                                 <a href="https://t.me/YTLILCRYY" target="_blank"><i class="fab fa-telegram"></i></a>
                                 <a href="#"><i class="fab fa-github"></i></a>
@@ -1057,37 +893,37 @@
                             </div>
                         </div>
                         <div class="footer-column">
-                            <h3>Навигация</h3>
+                            <h3 data-translate="footer.navigation">Navigation</h3>
                             <ul class="footer-links">
-                                <li><a href="#" data-page="home">Главная</a></li>
-                                <li><a href="#" data-page="services">Услуги</a></li>
-                                <li><a href="#" data-page="portfolio">Портфолио</a></li>
-                                <li><a href="#" data-page="reviews">Отзывы</a></li>
-                                <li><a href="#" data-page="order">Заказать</a></li>
+                                <li><a href="#" data-page="home" data-translate="nav.home">Home</a></li>
+                                <li><a href="#" data-page="services" data-translate="nav.services">Services</a></li>
+                                <li><a href="#" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
+                                <li><a href="#" data-page="order" data-translate="nav.order">Order</a></li>
+                                <li><a href="#" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
                             </ul>
                         </div>
                         <div class="footer-column">
-                            <h3>Услуги</h3>
+                            <h3 data-translate="footer.services">Services</h3>
                             <ul class="footer-links">
-                                <li><a href="#" data-page="services">Python Разработка</a></li>
-                                <li><a href="#" data-page="services">JavaScript & Frontend</a></li>
-                                <li><a href="#" data-page="services">Java Разработка</a></li>
-                                <li><a href="#" data-page="services">Работа с Базами Данных</a></li>
-                                <li><a href="#" data-page="services">Full Stack Разработка</a></li>
+                                <li><a href="#" data-page="services" data-translate="services.python_title">Python Development</a></li>
+                                <li><a href="#" data-page="services" data-translate="services.js_title">JavaScript & Frontend</a></li>
+                                <li><a href="#" data-page="services" data-translate="services.java_title">Java Development</a></li>
+                                <li><a href="#" data-page="services" data-translate="services.db_title">Database Work</a></li>
+                                <li><a href="#" data-page="services" data-translate="services.fullstack_title">Full Stack Development</a></li>
                             </ul>
                         </div>
                         <div class="footer-column">
-                            <h3>Контакты</h3>
+                            <h3 data-translate="footer.contacts">Contacts</h3>
                             <ul class="footer-links">
-                                <li><i class="fas fa-envelope"></i> Lilcryy@bk.ru</li>
-                                <li><i class="fab fa-telegram"></i> @YTLILCRYY (основной)</li>
-                                <li><i class="fab fa-telegram"></i> @LilcryyDevloperBot (бот)</li>
-                                <li><i class="fas fa-map-marker-alt"></i> Россия</li>
+                                <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
+                                <li><i class="fab fa-telegram"></i> @YTLILCRYY (main)</li>
+                                <li><i class="fab fa-telegram"></i> @LilcryyDevloperBot (bot)</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Russia</li>
                             </ul>
                         </div>
                     </div>
                     <div class="copyright">
-                        <p>&copy; 2025 Lilcryy. Все права защищены.</p>
+                        <p>&copy; 2023 Lilcryy. <span data-translate="footer.rights">All rights reserved.</span></p>
                     </div>
                 </div>
             </footer>
@@ -1095,6 +931,221 @@
     </main>
 
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    services: "Services",
+                    portfolio: "Portfolio",
+                    order: "Order",
+                    contacts: "Contacts"
+                },
+                home: {
+                    title: "Professional Programming Services",
+                    subtitle: "Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.",
+                    order_btn: "Order Now",
+                    portfolio_btn: "Portfolio"
+                },
+                services: {
+                    title: "My Services",
+                    subtitle: "I provide a wide range of software development services",
+                    python_title: "Python Development",
+                    python_desc: "Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.",
+                    js_title: "JavaScript & Frontend",
+                    js_desc: "Development of modern web applications using React, Vue.js, interactive interfaces and animations.",
+                    java_title: "Java Development",
+                    java_desc: "Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.",
+                    db_title: "Database Work",
+                    db_desc: "Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.",
+                    fullstack_title: "Full Stack Development",
+                    fullstack_desc: "Full cycle of web application development: from architecture design to deployment and support.",
+                    testing_title: "Testing and Debugging",
+                    testing_desc: "Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.",
+                    order_btn: "Order Service"
+                },
+                portfolio: {
+                    title: "My Portfolio",
+                    subtitle: "Examples of my recent works and projects",
+                    project1_title: "Data analysis for e-commerce",
+                    project1_desc: "Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.",
+                    project2_title: "Interactive map for website",
+                    project2_desc: "Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.",
+                    project3_title: "Corporate application",
+                    project3_desc: "Developed a CRM system for managing customer base and tasks with integration with email services and messengers.",
+                    project4_title: "Online courses platform",
+                    project4_desc: "Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.",
+                    project5_title: "Reports automation",
+                    project5_desc: "Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.",
+                    project6_title: "Analytics dashboard",
+                    project6_desc: "Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities."
+                },
+                order: {
+                    title: "Place an Order",
+                    subtitle: "Tell us about your project to get a cost estimate",
+                    name_label: "Your Name",
+                    email_label: "Email",
+                    telegram_label: "Telegram (for contact)",
+                    language_label: "Programming Language",
+                    select_language: "Select language",
+                    other_language: "Other",
+                    complexity_label: "Project Complexity",
+                    select_complexity: "Select complexity",
+                    simple_complexity: "Simple (up to 20 hours)",
+                    medium_complexity: "Medium (20-50 hours)",
+                    complex_complexity: "Complex (50-100 hours)",
+                    very_complex_complexity: "Very complex (100+ hours)",
+                    deadline_label: "Desired completion time (days)",
+                    description_label: "Project Description",
+                    description_placeholder: "Describe your project in detail, its goals and requirements...",
+                    submit_btn: "Submit Order",
+                    success_title: "Your order has been successfully placed!",
+                    success_text1: "The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.",
+                    success_text2: "It will provide:",
+                    success_item1: "Final cost and terms",
+                    success_item2: "Payment button for the order",
+                    success_item3: "Link to download the code after completion",
+                    bot_link: "Go to bot @LilcryyDevloperBot"
+                },
+                contacts: {
+                    title: "Contacts",
+                    subtitle: "Contact me in any convenient way",
+                    about: "Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business."
+                },
+                footer: {
+                    navigation: "Navigation",
+                    services: "Services",
+                    contacts: "Contacts",
+                    rights: "All rights reserved."
+                }
+            },
+            ru: {
+                nav: {
+                    home: "Главная",
+                    services: "Услуги",
+                    portfolio: "Портфолио",
+                    order: "Заказать",
+                    contacts: "Контакты"
+                },
+                home: {
+                    title: "Профессиональные услуги программирования",
+                    subtitle: "Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.",
+                    order_btn: "Заказать сейчас",
+                    portfolio_btn: "Портфолио"
+                },
+                services: {
+                    title: "Мои Услуги",
+                    subtitle: "Предоставляю широкий спектр услуг в области разработки ПО",
+                    python_title: "Python Разработка",
+                    python_desc: "Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.",
+                    js_title: "JavaScript & Frontend",
+                    js_desc: "Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.",
+                    java_title: "Java Разработка",
+                    java_desc: "Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.",
+                    db_title: "Работа с Базами Данных",
+                    db_desc: "Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.",
+                    fullstack_title: "Full Stack Разработка",
+                    fullstack_desc: "Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.",
+                    testing_title: "Тестирование и Отладка",
+                    testing_desc: "Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.",
+                    order_btn: "Заказать услугу"
+                },
+                portfolio: {
+                    title: "Мое Портфолио",
+                    subtitle: "Примеры моих последних работ и проектов",
+                    project1_title: "Анализ данных для e-commerce",
+                    project1_desc: "Разработал систему анализа продаж для интернет-магазина, которая позволила увеличить конверсию на 15% за счет выявления ключевых метрик и паттернов поведения покупателей.",
+                    project2_title: "Интерактивная карта для сайта",
+                    project2_desc: "Создал интерактивную карту с маркерами для туристического сайта, интегрировал с API геолокации и добавил фильтры по категориям объектов.",
+                    project3_title: "Корпоративное приложение",
+                    project3_desc: "Разработал CRM-систему для управления клиентской базой и задачами с интеграцией с почтовыми сервисами и мессенджерами.",
+                    project4_title: "Платформа для онлайн-курсов",
+                    project4_desc: "Создал полный цикл платформы для онлайн-обучения с видеоуроками, тестами, системой прогресса и сертификатами.",
+                    project5_title: "Автоматизация отчетов",
+                    project5_desc: "Разработал систему автоматической генерации отчетов для финансового отдела, сократив время на формирование документов на 80%.",
+                    project6_title: "Дашборд аналитики",
+                    project6_desc: "Создал интерактивный дашборд для визуализации ключевых бизнес-метрик с возможностью фильтрации данных и экспорта отчетов."
+                },
+                order: {
+                    title: "Оформить Заказ",
+                    subtitle: "Расскажите о своем проекте для оценки стоимости",
+                    name_label: "Ваше Имя",
+                    email_label: "Email",
+                    telegram_label: "Telegram (для связи)",
+                    language_label: "Язык программирования",
+                    select_language: "Выберите язык",
+                    other_language: "Другой",
+                    complexity_label: "Сложность проекта",
+                    select_complexity: "Выберите сложность",
+                    simple_complexity: "Простой (до 20 часов)",
+                    medium_complexity: "Средний (20-50 часов)",
+                    complex_complexity: "Сложный (50-100 часов)",
+                    very_complex_complexity: "Очень сложный (100+ часов)",
+                    deadline_label: "Желаемый срок выполнения (дней)",
+                    description_label: "Описание проекта",
+                    description_placeholder: "Подробно опишите ваш проект, его цели и требования...",
+                    submit_btn: "Отправить заказ",
+                    success_title: "Ваш заказ успешно оформлен!",
+                    success_text1: "Бот <strong>@LilcryyDevloperBot</strong> напишет вам в Telegram в течение 1 минуты.",
+                    success_text2: "Он предоставит:",
+                    success_item1: "Окончательную стоимость и сроки",
+                    success_item2: "Кнопку для оплаты заказа",
+                    success_item3: "Ссылку для скачивания кода после выполнения",
+                    bot_link: "Перейти к боту @LilcryyDevloperBot"
+                },
+                contacts: {
+                    title: "Контакты",
+                    subtitle: "Свяжитесь со мной удобным способом",
+                    about: "Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса."
+                },
+                footer: {
+                    navigation: "Навигация",
+                    services: "Услуги",
+                    contacts: "Контакты",
+                    rights: "Все права защищены."
+                }
+            }
+        };
+
+        // Set default language to English
+        let currentLanguage = 'en';
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const keys = element.getAttribute('data-translate').split('.');
+                let translation = translations[lang];
+                
+                for (const key of keys) {
+                    translation = translation[key];
+                    if (!translation) break;
+                }
+                
+                if (translation) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translation;
+                    } else {
+                        element.textContent = translation;
+                    }
+                }
+            });
+            
+            // Update active language button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Save language preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
         // Mobile Navigation Toggle
         const mobileToggle = document.querySelector('.mobile-toggle');
         const mobileNav = document.getElementById('mobileNav');
@@ -1157,27 +1208,26 @@
             
             console.log('Order Details:', orderData);
         });
-        
-        // Review Form submission
-        const reviewForm = document.getElementById('reviewForm');
-        
-        reviewForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('reviewName').value;
-            const position = document.getElementById('reviewPosition').value;
-            const rating = parseInt(document.getElementById('reviewRating').value);
-            const text = document.getElementById('reviewText').value;
-            
-            // Show success message
-            alert(`Спасибо, ${name}, за ваш отзыв! Ваше мнение очень важно для меня.`);
-            
-            // Reset form
-            reviewForm.reset();
+
+        // Language switcher buttons
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                changeLanguage(this.dataset.lang);
+            });
         });
-        
+
+        // Initialize page
         function initPage() {
+            // Check for saved language preference
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            if (savedLanguage) {
+                changeLanguage(savedLanguage);
+            } else {
+                // Default to English
+                changeLanguage('en');
+            }
+            
+            // Handle page based on hash
             const hash = window.location.hash.replace('#', '');
             if (hash) {
                 switchPage(`${hash}-page`);
