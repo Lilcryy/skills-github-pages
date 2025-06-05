@@ -1,1242 +1,1347 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lilcryy - Professional Programming Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6C63FF;
-            --primary-dark: #564fd6;
-            --secondary: #FF6584;
-            --dark: #2A2A3C;
-            --light: #F5F7FA;
-            --gray: #A1A1B5;
-            --success: #4CAF50;
-            --warning: #FFC107;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
-        }
-
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-        }
-
-        /* Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-toggle {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .language-switcher {
-            display: flex;
-            gap: 10px;
-            margin-left: 20px;
-        }
-
-        .language-btn {
-            background: transparent;
-            border: none;
-            color: var(--light);
-            cursor: pointer;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: var(--transition);
-        }
-
-        .language-btn:hover {
-            color: var(--primary);
-        }
-
-        .language-btn.active {
-            color: var(--primary);
-            background: rgba(108, 99, 255, 0.2);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(108, 99, 255, 0.2) 0%, rgba(108, 99, 255, 0) 70%);
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: var(--gray);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        /* Services Section */
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-size: 40px;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(108, 99, 255, 0.3);
-        }
-
-        .service-icon {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .portfolio-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-color: rgba(108, 99, 255, 0.3);
-        }
-
-        .portfolio-item h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .portfolio-item .tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .portfolio-item .tech span {
-            background: rgba(108, 99, 255, 0.1);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        /* Order Section */
-        .order-section {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .order-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 50px;
-            align-items: flex-start;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .order-form {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .telegram-process {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 30px;
-            border: 1px solid var(--primary);
-            display: none;
-        }
-
-        .telegram-process h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .telegram-bot-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #0088cc;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 10px;
-            transition: var(--transition);
-        }
-
-        .telegram-bot-link:hover {
-            background: #0077b3;
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
-        footer {
-            background: #0f0f1e;
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        /* Page Sections */
-        .page-section {
-            display: none;
-            padding-top: 100px;
-            min-height: calc(100vh - 80px);
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            transition: var(--transition);
-            padding: 20px 0;
-        }
-
-        .mobile-nav.active {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .mobile-nav ul li {
-            margin: 15px 0;
-        }
-
-        .mobile-nav ul li a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: var(--transition);
-        }
-
-        .mobile-nav ul li a:hover,
-        .mobile-nav ul li a.active {
-            background: var(--primary);
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 42px;
-            }
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-toggle {
-                display: block;
-            }
-            nav.desktop-nav {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 36px;
-            }
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            .section-title h2 {
-                font-size: 32px;
-            }
-            .hero-content {
-                text-align: center;
-                padding-top: 60px;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .order-form {
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 28px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .service-card, .portfolio-item {
-                padding: 20px;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lilcryy - Professional Programming Services</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6C63FF;
+  --primary-dark: #564fd6;
+  --secondary: #FF6584;
+  --dark: #2A2A3C;
+  --light: #F5F7FA;
+  --gray: #A1A1B5;
+  --success: #4CAF50;
+  --warning: #FFC107;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: var(--light);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+}
+
+/* Header Styles */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 0;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+nav ul li {
+  margin-left: 30px;
+}
+
+nav ul li a {
+  color: var(--light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: var(--transition);
+  position: relative;
+}
+
+nav ul li a:hover {
+  color: var(--primary);
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: var(--transition);
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+.mobile-toggle {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.language-switcher {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.language-btn {
+  background: transparent;
+  border: none;
+  color: var(--light);
+  cursor: pointer;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: var(--transition);
+}
+
+.language-btn:hover {
+  color: var(--primary);
+}
+
+.language-btn.active {
+  color: var(--primary);
+  background: rgba(108, 99, 255, 0.2);
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.2) 0%, rgba(108, 99, 255, 0) 70%);
+}
+
+.hero-content {
+  max-width: 600px;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 56px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: var(--gray);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Services Section */
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title h2 {
+  font-size: 40px;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: rgba(108, 99, 255, 0.3);
+}
+
+.service-icon {
+  font-size: 40px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Portfolio Section */
+.portfolio {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.portfolio-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(108, 99, 255, 0.3);
+}
+
+.portfolio-item h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.portfolio-item .tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.portfolio-item .tech span {
+  background: rgba(108, 99, 255, 0.1);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* Order Section */
+.order-section {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.order-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.order-form {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.telegram-process {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 30px;
+  border: 1px solid var(--primary);
+  display: none;
+}
+
+.telegram-process h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.telegram-bot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #0088cc;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  transition: var(--transition);
+}
+
+.telegram-bot-link:hover {
+  background: #0077b3;
+  transform: translateY(-3px);
+}
+
+/* Footer */
+footer {
+  background: #0f0f1e;
+  padding: 60px 0 30px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-column h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+  padding-left: 5px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  color: white;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--gray);
+  font-size: 14px;
+}
+
+/* Page Sections */
+.page-section {
+  display: none;
+  padding-top: 100px;
+  min-height: calc(100vh - 80px);
+}
+
+.page-section.active {
+  display: block;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transition: var(--transition);
+  padding: 20px 0;
+}
+
+.mobile-nav.active {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.mobile-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-nav ul li {
+  margin: 15px 0;
+}
+
+.mobile-nav ul li a {
+  color: var(--light);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: var(--transition);
+}
+
+.mobile-nav ul li a:hover,
+.mobile-nav ul li a.active {
+  background: var(--primary);
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.close-modal:hover {
+  color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 42px;
+  }
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: block;
+  }
+  nav.desktop-nav {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 36px;
+  }
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-title h2 {
+    font-size: 32px;
+  }
+  .hero-content {
+    text-align: center;
+    padding-top: 60px;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .order-form {
+    padding: 20px;
+  }
+  .modal-content img {
+    max-height: 60vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+  .hero p {
+    font-size: 16px;
+  }
+  .service-card, .portfolio-item {
+    padding: 20px;
+  }
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  .modal-content img {
+    max-height: 50vh;
+  }
+  .close-modal {
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+  }
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo" data-page="home">Lil<span>cryy</span></a>
-            <div class="mobile-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav class="desktop-nav">
-                <ul>
-                    <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
-                    <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
-                    <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
-                    <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
-                    <li>
-                        <div class="language-switcher">
-                            <button class="language-btn active" data-lang="en">EN</button>
-                            <button class="language-btn" data-lang="ru">RU</button>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+
+<!-- Donkey Modal -->
+<div id="donkeyModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img src="https://i.pinimg.com/736x/11/7f/27/117f279e8a9a7b00b0b5e0b3b4a1b1d0.jpg" alt="Funny Donkey">
+    <a href="#" class="btn" style="margin-top: 20px; width: auto;" id="closeModalBtn">Close</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="container header-container">
+    <a href="#" class="logo" id="logo">Lil<span>cryy</span></a>
+    <div class="mobile-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
+        <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
+        <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
+        <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
+        <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
+        <li>
+          <div class="language-switcher">
+            <button class="language-btn active" data-lang="en">EN</button>
+            <button class="language-btn" data-lang="ru">RU</button>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
+      <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
+      <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
+      <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
+      <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
+      <li>
+        <div class="language-switcher" style="justify-content: center; margin-top: 15px;">
+          <button class="language-btn active" data-lang="en">EN</button>
+          <button class="language-btn" data-lang="ru">RU</button>
         </div>
-        <div class="mobile-nav" id="mobileNav">
-            <ul>
-                <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
-                <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
-                <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
-                <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
-                <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
-                <li>
-                    <div class="language-switcher" style="justify-content: center; margin-top: 15px;">
-                        <button class="language-btn active" data-lang="en">EN</button>
-                        <button class="language-btn" data-lang="ru">RU</button>
-                    </div>
-                </li>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<!-- Page Sections -->
+<main>
+  <!-- Home Page -->
+  <section class="page-section active" id="home-page">
+    <div class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-translate="home.title">Professional Programming Services</h1>
+          <p data-translate="home.subtitle">Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.</p>
+          <div class="hero-buttons">
+            <a href="#" class="btn" data-page="order" data-translate="home.order_btn">Order Now</a>
+            <a href="#" class="btn btn-secondary" data-page="portfolio" data-translate="home.portfolio_btn">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Page -->
+  <section class="page-section" id="services-page">
+    <div class="services" id="services">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-translate="services.title">My Services</h2>
+          <p data-translate="services.subtitle">I provide a wide range of software development services</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fab fa-python"></i>
+            </div>
+            <h3 data-translate="services.python_title">Python Development</h3>
+            <p data-translate="services.python_desc">Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.</p>
+            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fab fa-js"></i>
+            </div>
+            <h3 data-translate="services.js_title">JavaScript & Frontend</h3>
+            <p data-translate="services.js_desc">Development of modern web applications using React, Vue.js, interactive interfaces and animations.</p>
+            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fab fa-java"></i>
+            </div>
+            <h3 data-translate="services.java_title">Java Development</h3>
+            <p data-translate="services.java_desc">Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.</p>
+            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 data-translate="services.db_title">Database Work</h3>
+            <p data-translate="services.db_desc">Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.</p>
+            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3 data-translate="services.fullstack_title">Full Stack Development</h3>
+            <p data-translate="services.fullstack_desc">Full cycle of web application development: from architecture design to deployment and support.</p>
+            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-bug"></i>
+            </div>
+            <h3 data-translate="services.testing_title">Testing and Debugging</h3>
+            <p data-translate="services.testing_desc">Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.</p>
+            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Page -->
+  <section class="page-section" id="portfolio-page">
+    <div class="portfolio" id="portfolio">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-translate="portfolio.title">My Portfolio</h2>
+          <p data-translate="portfolio.subtitle">Examples of my recent works and projects</p>
+        </div>
+        <div class="portfolio-grid">
+          <div class="portfolio-item">
+            <h3 data-translate="portfolio.project1_title">Data analysis for e-commerce</h3>
+            <div class="tech">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>Matplotlib</span>
+            </div>
+            <p data-translate="portfolio.project1_desc">Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.</p>
+          </div>
+          <div class="portfolio-item">
+            <h3 data-translate="portfolio.project2_title">Interactive map for website</h3>
+            <div class="tech">
+              <span>JavaScript</span>
+              <span>Leaflet.js</span>
+              <span>API</span>
+            </div>
+            <p data-translate="portfolio.project2_desc">Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.</p>
+          </div>
+          <div class="portfolio-item">
+            <h3 data-translate="portfolio.project3_title">Corporate application</h3>
+            <div class="tech">
+              <span>Java</span>
+              <span>Spring Boot</span>
+              <span>PostgreSQL</span>
+            </div>
+            <p data-translate="portfolio.project3_desc">Developed a CRM system for managing customer base and tasks with integration with email services and messengers.</p>
+          </div>
+          <div class="portfolio-item">
+            <h3 data-translate="portfolio.project4_title">Online courses platform</h3>
+            <div class="tech">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>MongoDB</span>
+            </div>
+            <p data-translate="portfolio.project4_desc">Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.</p>
+          </div>
+          <div class="portfolio-item">
+            <h3 data-translate="portfolio.project5_title">Reports automation</h3>
+            <div class="tech">
+              <span>Python</span>
+              <span>Django</span>
+              <span>Celery</span>
+            </div>
+            <p data-translate="portfolio.project5_desc">Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.</p>
+          </div>
+          <div class="portfolio-item">
+            <h3 data-translate="portfolio.project6_title">Analytics dashboard</h3>
+            <div class="tech">
+              <span>JavaScript</span>
+              <span>D3.js</span>
+              <span>Chart.js</span>
+            </div>
+            <p data-translate="portfolio.project6_desc">Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Page -->
+  <section class="page-section" id="order-page">
+    <div class="order-section" id="order">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-translate="order.title">Place an Order</h2>
+          <p data-translate="order.subtitle">Tell us about your project to get a cost estimate</p>
+        </div>
+        <div class="order-container">
+          <div class="order-form">
+            <form id="orderForm">
+              <div class="form-group">
+                <label for="name" data-translate="order.name_label">Your Name</label>
+                <input type="text" id="name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="email" data-translate="order.email_label">Email</label>
+                <input type="email" id="email" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="telegram" data-translate="order.telegram_label">Telegram (for contact)</label>
+                <input type="text" id="telegram" class="form-control" placeholder="@username" required>
+              </div>
+              <div class="form-group">
+                <label for="language" data-translate="order.language_label">Programming Language</label>
+                <select id="language" class="form-control" required>
+                  <option value="" data-translate="order.select_language">Select language</option>
+                  <option value="Python">Python</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="Java">Java</option>
+                  <option value="PHP">PHP</option>
+                  <option value="C#">C#</option>
+                  <option value="Other" data-translate="order.other_language">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="complexity" data-translate="order.complexity_label">Project Complexity</label>
+                <select id="complexity" class="form-control" required>
+                  <option value="" data-translate="order.select_complexity">Select complexity</option>
+                  <option value="Simple" data-translate="order.simple_complexity">Simple (up to 20 hours)</option>
+                  <option value="Medium" data-translate="order.medium_complexity">Medium (20-50 hours)</option>
+                  <option value="Complex" data-translate="order.complex_complexity">Complex (50-100 hours)</option>
+                  <option value="Very complex" data-translate="order.very_complex_complexity">Very complex (100+ hours)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="deadline" data-translate="order.deadline_label">Desired completion time (days)</label>
+                <input type="number" id="deadline" class="form-control" min="1" value="14">
+              </div>
+              <div class="form-group">
+                <label for="description" data-translate="order.description_label">Project Description</label>
+                <textarea id="description" class="form-control" placeholder="Describe your project in detail, its goals and requirements..." required data-translate="order.description_placeholder"></textarea>
+              </div>
+              <button type="submit" class="btn" style="background-color: var(--success); width: 100%; margin-top: 20px;">
+                <i class="fas fa-paper-plane"></i> <span data-translate="order.submit_btn">Submit Order</span>
+              </button>
+            </form>
+            <div class="telegram-process" id="telegramProcess">
+              <h3 data-translate="order.success_title">Your order has been successfully placed!</h3>
+              <p data-translate="order.success_text1">The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.</p>
+              <p data-translate="order.success_text2">It will provide:</p>
+              <ul>
+                <li data-translate="order.success_item1">Final cost and terms</li>
+                <li data-translate="order.success_item2">Payment button for the order</li>
+                <li data-translate="order.success_item3">Link to download the code after completion</li>
+              </ul>
+              <a href="https://t.me/LilcryyDevloperBot" class="telegram-bot-link" target="_blank">
+                <i class="fab fa-telegram"></i> <span data-translate="order.bot_link">Go to bot @LilcryyDevloperBot</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts Page -->
+  <section class="page-section" id="contacts-page">
+    <footer id="contacts">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-translate="contacts.title">Contacts</h2>
+          <p data-translate="contacts.subtitle">Contact me in any convenient way</p>
+        </div>
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Lilcryy</h3>
+            <p data-translate="contacts.about">Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business.</p>
+            <div class="social-links">
+              <a href="https://t.me/YTLILCRYY" target="_blank"><i class="fab fa-telegram"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3 data-translate="footer.navigation">Navigation</h3>
+            <ul class="footer-links">
+              <li><a href="#" data-page="home" data-translate="nav.home">Home</a></li>
+              <li><a href="#" data-page="services" data-translate="nav.services">Services</a></li>
+              <li><a href="#" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
+              <li><a href="#" data-page="order" data-translate="nav.order">Order</a></li>
+              <li><a href="#" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
             </ul>
+          </div>
+          <div class="footer-column">
+            <h3 data-translate="footer.services">Services</h3>
+            <ul class="footer-links">
+              <li><a href="#" data-page="services" data-translate="services.python_title">Python Development</a></li>
+              <li><a href="#" data-page="services" data-translate="services.js_title">JavaScript & Frontend</a></li>
+              <li><a href="#" data-page="services" data-translate="services.java_title">Java Development</a></li>
+              <li><a href="#" data-page="services" data-translate="services.db_title">Database Work</a></li>
+              <li><a href="#" data-page="services" data-translate="services.fullstack_title">Full Stack Development</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3 data-translate="footer.contacts">Contacts</h3>
+            <ul class="footer-links">
+              <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
+              <li><i class="fab fa-telegram"></i> @YTLILCRYY (main)</li>
+              <li><i class="fab fa-telegram"></i> @LilcryyDevloperBot (bot)</li>
+              <li><i class="fas fa-map-marker-alt"></i> Russia</li>
+            </ul>
+          </div>
         </div>
-    </header>
+        <div class="copyright">
+          <p>&copy; 2023 Lilcryy. <span data-translate="footer.rights">All rights reserved.</span></p>
+        </div>
+      </div>
+    </footer>
+  </section>
+</main>
 
-    <!-- Page Sections -->
-    <main>
-        <!-- Home Page -->
-        <section class="page-section active" id="home-page">
-            <div class="hero">
-                <div class="container">
-                    <div class="hero-content">
-                        <h1 data-translate="home.title">Professional Programming Services</h1>
-                        <p data-translate="home.subtitle">Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.</p>
-                        <div class="hero-buttons">
-                            <a href="#" class="btn" data-page="order" data-translate="home.order_btn">Order Now</a>
-                            <a href="#" class="btn btn-secondary" data-page="portfolio" data-translate="home.portfolio_btn">Portfolio</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<script>
+// Language translations
+const translations = {
+  en: {
+    nav: {
+      home: "Home",
+      services: "Services",
+      portfolio: "Portfolio",
+      order: "Order",
+      contacts: "Contacts"
+    },
+    home: {
+      title: "Professional Programming Services",
+      subtitle: "Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.",
+      order_btn: "Order Now",
+      portfolio_btn: "Portfolio"
+    },
+    services: {
+      title: "My Services",
+      subtitle: "I provide a wide range of software development services",
+      python_title: "Python Development",
+      python_desc: "Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.",
+      js_title: "JavaScript & Frontend",
+      js_desc: "Development of modern web applications using React, Vue.js, interactive interfaces and animations.",
+      java_title: "Java Development",
+      java_desc: "Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.",
+      db_title: "Database Work",
+      db_desc: "Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.",
+      fullstack_title: "Full Stack Development",
+      fullstack_desc: "Full cycle of web application development: from architecture design to deployment and support.",
+      testing_title: "Testing and Debugging",
+      testing_desc: "Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.",
+      order_btn: "Order Service"
+    },
+    portfolio: {
+      title: "My Portfolio",
+      subtitle: "Examples of my recent works and projects",
+      project1_title: "Data analysis for e-commerce",
+      project1_desc: "Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.",
+      project2_title: "Interactive map for website",
+      project2_desc: "Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.",
+      project3_title: "Corporate application",
+      project3_desc: "Developed a CRM system for managing customer base and tasks with integration with email services and messengers.",
+      project4_title: "Online courses platform",
+      project4_desc: "Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.",
+      project5_title: "Reports automation",
+      project5_desc: "Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.",
+      project6_title: "Analytics dashboard",
+      project6_desc: "Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities."
+    },
+    order: {
+      title: "Place an Order",
+      subtitle: "Tell us about your project to get a cost estimate",
+      name_label: "Your Name",
+      email_label: "Email",
+      telegram_label: "Telegram (for contact)",
+      language_label: "Programming Language",
+      select_language: "Select language",
+      other_language: "Other",
+      complexity_label: "Project Complexity",
+      select_complexity: "Select complexity",
+      simple_complexity: "Simple (up to 20 hours)",
+      medium_complexity: "Medium (20-50 hours)",
+      complex_complexity: "Complex (50-100 hours)",
+      very_complex_complexity: "Very complex (100+ hours)",
+      deadline_label: "Desired completion time (days)",
+      description_label: "Project Description",
+      description_placeholder: "Describe your project in detail, its goals and requirements...",
+      submit_btn: "Submit Order",
+      success_title: "Your order has been successfully placed!",
+      success_text1: "The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.",
+      success_text2: "It will provide:",
+      success_item1: "Final cost and terms",
+      success_item2: "Payment button for the order",
+      success_item3: "Link to download the code after completion",
+      bot_link: "Go to bot @LilcryyDevloperBot"
+    },
+    contacts: {
+      title: "Contacts",
+      subtitle: "Contact me in any convenient way",
+      about: "Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business."
+    },
+    footer: {
+      navigation: "Navigation",
+      services: "Services",
+      contacts: "Contacts",
+      rights: "All rights reserved."
+    }
+  },
+  ru: {
+    nav: {
+      home: "Главная",
+      services: "Услуги",
+      portfolio: "Портфолио",
+      order: "Заказать",
+      contacts: "Контакты"
+    },
+    home: {
+      title: "Профессиональные услуги программирования",
+      subtitle: "Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.",
+      order_btn: "Заказать сейчас",
+      portfolio_btn: "Портфолио"
+    },
+    services: {
+      title: "Мои Услуги",
+      subtitle: "Предоставляю широкий спектр услуг в области разработки ПО",
+      python_title: "Python Разработка",
+      python_desc: "Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.",
+      js_title: "JavaScript & Frontend",
+      js_desc: "Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.",
+      java_title: "Java Разработка",
+      java_desc: "Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.",
+      db_title: "Работа с Базами Данных",
+      db_desc: "Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.",
+      fullstack_title: "Full Stack Разработка",
+      fullstack_desc: "Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.",
+      testing_title: "Тестирование и Отладка",
+      testing_desc: "Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.",
+      order_btn: "Заказать услугу"
+    },
+    portfolio: {
+      title: "Мое Портфолио",
+      subtitle: "Примеры моих последних работ и проектов",
+      project1_title: "Анализ данных для e-commerce",
+      project1_desc: "Разработал систему анализа продаж для интернет-магазина, которая позволила увеличить конверсию на 15% за счет выявления ключевых метрик и паттернов поведения покупателей.",
+      project2_title: "Интерактивная карта для сайта",
+      project2_desc: "Создал интерактивную карту с маркерами для туристического сайта, интегрировал с API геолокации и добавил фильтры по категориям объектов.",
+      project3_title: "Корпоративное приложение",
+      project3_desc: "Разработал CRM-систему для управления клиентской базой и задачами с интеграцией с почтовыми сервисами и мессенджерами.",
+      project4_title: "Платформа для онлайн-курсов",
+      project4_desc: "Создал полный цикл платформы для онлайн-обучения с видеоуроками, тестами, системой прогресса и сертификатами.",
+      project5_title: "Автоматизация отчетов",
+      project5_desc: "Разработал систему автоматической генерации отчетов для финансового отдела, сократив время на формирование документов на 80%.",
+      project6_title: "Дашборд аналитики",
+      project6_desc: "Создал интерактивный дашборд для визуализации ключевых бизнес-метрик с возможностью фильтрации данных и экспорта отчетов."
+    },
+    order: {
+      title: "Оформить Заказ",
+      subtitle: "Расскажите о своем проекте для оценки стоимости",
+      name_label: "Ваше Имя",
+      email_label: "Email",
+      telegram_label: "Telegram (для связи)",
+      language_label: "Язык программирования",
+      select_language: "Выберите язык",
+      other_language: "Другой",
+      complexity_label: "Сложность проекта",
+      select_complexity: "Выберите сложность",
+      simple_complexity: "Простой (до 20 часов)",
+      medium_complexity: "Средний (20-50 часов)",
+      complex_complexity: "Сложный (50-100 часов)",
+      very_complex_complexity: "Очень сложный (100+ часов)",
+      deadline_label: "Желаемый срок выполнения (дней)",
+      description_label: "Описание проекта",
+      description_placeholder: "Подробно опишите ваш проект, его цели и требования...",
+      submit_btn: "Отправить заказ",
+      success_title: "Ваш заказ успешно оформлен!",
+      success_text1: "Бот <strong>@LilcryyDevloperBot</strong> напишет вам в Telegram в течение 1 минуты.",
+      success_text2: "Он предоставит:",
+      success_item1: "Окончательную стоимость и сроки",
+      success_item2: "Кнопку для оплаты заказа",
+      success_item3: "Ссылку для скачивания кода после выполнения",
+      bot_link: "Перейти к боту @LilcryyDevloperBot"
+    },
+    contacts: {
+      title: "Контакты",
+      subtitle: "Свяжитесь со мной удобным способом",
+      about: "Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса."
+    },
+    footer: {
+      navigation: "Навигация",
+      services: "Услуги",
+      contacts: "Контакты",
+      rights: "Все права защищены."
+    }
+  }
+};
 
-        <!-- Services Page -->
-        <section class="page-section" id="services-page">
-            <div class="services" id="services">
-                <div class="container">
-                    <div class="section-title">
-                        <h2 data-translate="services.title">My Services</h2>
-                        <p data-translate="services.subtitle">I provide a wide range of software development services</p>
-                    </div>
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fab fa-python"></i>
-                            </div>
-                            <h3 data-translate="services.python_title">Python Development</h3>
-                            <p data-translate="services.python_desc">Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fab fa-js"></i>
-                            </div>
-                            <h3 data-translate="services.js_title">JavaScript & Frontend</h3>
-                            <p data-translate="services.js_desc">Development of modern web applications using React, Vue.js, interactive interfaces and animations.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fab fa-java"></i>
-                            </div>
-                            <h3 data-translate="services.java_title">Java Development</h3>
-                            <p data-translate="services.java_desc">Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <h3 data-translate="services.db_title">Database Work</h3>
-                            <p data-translate="services.db_desc">Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <h3 data-translate="services.fullstack_title">Full Stack Development</h3>
-                            <p data-translate="services.fullstack_desc">Full cycle of web application development: from architecture design to deployment and support.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">
-                                <i class="fas fa-bug"></i>
-                            </div>
-                            <h3 data-translate="services.testing_title">Testing and Debugging</h3>
-                            <p data-translate="services.testing_desc">Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.</p>
-                            <a href="#" class="btn" data-page="order" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+// Set default language to English
+let currentLanguage = 'en';
 
-        <!-- Portfolio Page -->
-        <section class="page-section" id="portfolio-page">
-            <div class="portfolio" id="portfolio">
-                <div class="container">
-                    <div class="section-title">
-                        <h2 data-translate="portfolio.title">My Portfolio</h2>
-                        <p data-translate="portfolio.subtitle">Examples of my recent works and projects</p>
-                    </div>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item">
-                            <h3 data-translate="portfolio.project1_title">Data analysis for e-commerce</h3>
-                            <div class="tech">
-                                <span>Python</span>
-                                <span>Pandas</span>
-                                <span>Matplotlib</span>
-                            </div>
-                            <p data-translate="portfolio.project1_desc">Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.</p>
-                        </div>
-                        <div class="portfolio-item">
-                            <h3 data-translate="portfolio.project2_title">Interactive map for website</h3>
-                            <div class="tech">
-                                <span>JavaScript</span>
-                                <span>Leaflet.js</span>
-                                <span>API</span>
-                            </div>
-                            <p data-translate="portfolio.project2_desc">Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.</p>
-                        </div>
-                        <div class="portfolio-item">
-                            <h3 data-translate="portfolio.project3_title">Corporate application</h3>
-                            <div class="tech">
-                                <span>Java</span>
-                                <span>Spring Boot</span>
-                                <span>PostgreSQL</span>
-                            </div>
-                            <p data-translate="portfolio.project3_desc">Developed a CRM system for managing customer base and tasks with integration with email services and messengers.</p>
-                        </div>
-                        <div class="portfolio-item">
-                            <h3 data-translate="portfolio.project4_title">Online courses platform</h3>
-                            <div class="tech">
-                                <span>React</span>
-                                <span>Node.js</span>
-                                <span>MongoDB</span>
-                            </div>
-                            <p data-translate="portfolio.project4_desc">Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.</p>
-                        </div>
-                        <div class="portfolio-item">
-                            <h3 data-translate="portfolio.project5_title">Reports automation</h3>
-                            <div class="tech">
-                                <span>Python</span>
-                                <span>Django</span>
-                                <span>Celery</span>
-                            </div>
-                            <p data-translate="portfolio.project5_desc">Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.</p>
-                        </div>
-                        <div class="portfolio-item">
-                            <h3 data-translate="portfolio.project6_title">Analytics dashboard</h3>
-                            <div class="tech">
-                                <span>JavaScript</span>
-                                <span>D3.js</span>
-                                <span>Chart.js</span>
-                            </div>
-                            <p data-translate="portfolio.project6_desc">Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+// Function to change language
+function changeLanguage(lang) {
+  currentLanguage = lang;
+  
+  // Update all elements with data-translate attribute
+  document.querySelectorAll('[data-translate]').forEach(element => {
+    const keys = element.getAttribute('data-translate').split('.');
+    let translation = translations[lang];
+    
+    for (const key of keys) {
+      translation = translation[key];
+      if (!translation) break;
+    }
+    
+    if (translation) {
+      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+        element.placeholder = translation;
+      } else {
+        element.textContent = translation;
+      }
+    }
+  });
+  
+  // Update active language button
+  document.querySelectorAll('.language-btn').forEach(btn => {
+    if (btn.dataset.lang === lang) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Save language preference to localStorage
+  localStorage.setItem('preferredLanguage', lang);
+}
 
-        <!-- Order Page -->
-        <section class="page-section" id="order-page">
-            <div class="order-section" id="order">
-                <div class="container">
-                    <div class="section-title">
-                        <h2 data-translate="order.title">Place an Order</h2>
-                        <p data-translate="order.subtitle">Tell us about your project to get a cost estimate</p>
-                    </div>
-                    <div class="order-container">
-                        <div class="order-form">
-                            <form id="orderForm">
-                                <div class="form-group">
-                                    <label for="name" data-translate="order.name_label">Your Name</label>
-                                    <input type="text" id="name" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" data-translate="order.email_label">Email</label>
-                                    <input type="email" id="email" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="telegram" data-translate="order.telegram_label">Telegram (for contact)</label>
-                                    <input type="text" id="telegram" class="form-control" placeholder="@username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="language" data-translate="order.language_label">Programming Language</label>
-                                    <select id="language" class="form-control" required>
-                                        <option value="" data-translate="order.select_language">Select language</option>
-                                        <option value="Python">Python</option>
-                                        <option value="JavaScript">JavaScript</option>
-                                        <option value="Java">Java</option>
-                                        <option value="PHP">PHP</option>
-                                        <option value="C#">C#</option>
-                                        <option value="Other" data-translate="order.other_language">Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="complexity" data-translate="order.complexity_label">Project Complexity</label>
-                                    <select id="complexity" class="form-control" required>
-                                        <option value="" data-translate="order.select_complexity">Select complexity</option>
-                                        <option value="Simple" data-translate="order.simple_complexity">Simple (up to 20 hours)</option>
-                                        <option value="Medium" data-translate="order.medium_complexity">Medium (20-50 hours)</option>
-                                        <option value="Complex" data-translate="order.complex_complexity">Complex (50-100 hours)</option>
-                                        <option value="Very complex" data-translate="order.very_complex_complexity">Very complex (100+ hours)</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="deadline" data-translate="order.deadline_label">Desired completion time (days)</label>
-                                    <input type="number" id="deadline" class="form-control" min="1" value="14">
-                                </div>
-                                <div class="form-group">
-                                    <label for="description" data-translate="order.description_label">Project Description</label>
-                                    <textarea id="description" class="form-control" placeholder="Describe your project in detail, its goals and requirements..." required data-translate="order.description_placeholder"></textarea>
-                                </div>
-                                
-                                <button type="submit" class="btn" style="background-color: var(--success); width: 100%; margin-top: 20px;">
-                                    <i class="fas fa-paper-plane"></i> <span data-translate="order.submit_btn">Submit Order</span>
-                                </button>
-                            </form>
-                            
-                            <div class="telegram-process" id="telegramProcess">
-                                <h3 data-translate="order.success_title">Your order has been successfully placed!</h3>
-                                <p data-translate="order.success_text1">The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.</p>
-                                <p data-translate="order.success_text2">It will provide:</p>
-                                <ul>
-                                    <li data-translate="order.success_item1">Final cost and terms</li>
-                                    <li data-translate="order.success_item2">Payment button for the order</li>
-                                    <li data-translate="order.success_item3">Link to download the code after completion</li>
-                                </ul>
-                                <a href="https://t.me/LilcryyDevloperBot" class="telegram-bot-link" target="_blank">
-                                    <i class="fab fa-telegram"></i> <span data-translate="order.bot_link">Go to bot @LilcryyDevloperBot</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+// Mobile Navigation Toggle
+const mobileToggle = document.querySelector('.mobile-toggle');
+const mobileNav = document.getElementById('mobileNav');
 
-        <!-- Contacts Page -->
-        <section class="page-section" id="contacts-page">
-            <footer id="contacts">
-                <div class="container">
-                    <div class="section-title">
-                        <h2 data-translate="contacts.title">Contacts</h2>
-                        <p data-translate="contacts.subtitle">Contact me in any convenient way</p>
-                    </div>
-                    <div class="footer-content">
-                        <div class="footer-column">
-                            <h3>Lilcryy</h3>
-                            <p data-translate="contacts.about">Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business.</p>
-                            <div class="social-links">
-                                <a href="https://t.me/YTLILCRYY" target="_blank"><i class="fab fa-telegram"></i></a>
-                                <a href="#"><i class="fab fa-github"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                            </div>
-                        </div>
-                        <div class="footer-column">
-                            <h3 data-translate="footer.navigation">Navigation</h3>
-                            <ul class="footer-links">
-                                <li><a href="#" data-page="home" data-translate="nav.home">Home</a></li>
-                                <li><a href="#" data-page="services" data-translate="nav.services">Services</a></li>
-                                <li><a href="#" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
-                                <li><a href="#" data-page="order" data-translate="nav.order">Order</a></li>
-                                <li><a href="#" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-column">
-                            <h3 data-translate="footer.services">Services</h3>
-                            <ul class="footer-links">
-                                <li><a href="#" data-page="services" data-translate="services.python_title">Python Development</a></li>
-                                <li><a href="#" data-page="services" data-translate="services.js_title">JavaScript & Frontend</a></li>
-                                <li><a href="#" data-page="services" data-translate="services.java_title">Java Development</a></li>
-                                <li><a href="#" data-page="services" data-translate="services.db_title">Database Work</a></li>
-                                <li><a href="#" data-page="services" data-translate="services.fullstack_title">Full Stack Development</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-column">
-                            <h3 data-translate="footer.contacts">Contacts</h3>
-                            <ul class="footer-links">
-                                <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
-                                <li><i class="fab fa-telegram"></i> @YTLILCRYY (main)</li>
-                                <li><i class="fab fa-telegram"></i> @LilcryyDevloperBot (bot)</li>
-                                <li><i class="fas fa-map-marker-alt"></i> Russia</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="copyright">
-                        <p>&copy; 2023 Lilcryy. <span data-translate="footer.rights">All rights reserved.</span></p>
-                    </div>
-                </div>
-            </footer>
-        </section>
-    </main>
+mobileToggle.addEventListener('click', () => {
+  mobileNav.classList.toggle('active');
+});
 
-    <script>
-        // Language translations
-        const translations = {
-            en: {
-                nav: {
-                    home: "Home",
-                    services: "Services",
-                    portfolio: "Portfolio",
-                    order: "Order",
-                    contacts: "Contacts"
-                },
-                home: {
-                    title: "Professional Programming Services",
-                    subtitle: "Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.",
-                    order_btn: "Order Now",
-                    portfolio_btn: "Portfolio"
-                },
-                services: {
-                    title: "My Services",
-                    subtitle: "I provide a wide range of software development services",
-                    python_title: "Python Development",
-                    python_desc: "Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.",
-                    js_title: "JavaScript & Frontend",
-                    js_desc: "Development of modern web applications using React, Vue.js, interactive interfaces and animations.",
-                    java_title: "Java Development",
-                    java_desc: "Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.",
-                    db_title: "Database Work",
-                    db_desc: "Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.",
-                    fullstack_title: "Full Stack Development",
-                    fullstack_desc: "Full cycle of web application development: from architecture design to deployment and support.",
-                    testing_title: "Testing and Debugging",
-                    testing_desc: "Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.",
-                    order_btn: "Order Service"
-                },
-                portfolio: {
-                    title: "My Portfolio",
-                    subtitle: "Examples of my recent works and projects",
-                    project1_title: "Data analysis for e-commerce",
-                    project1_desc: "Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.",
-                    project2_title: "Interactive map for website",
-                    project2_desc: "Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.",
-                    project3_title: "Corporate application",
-                    project3_desc: "Developed a CRM system for managing customer base and tasks with integration with email services and messengers.",
-                    project4_title: "Online courses platform",
-                    project4_desc: "Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.",
-                    project5_title: "Reports automation",
-                    project5_desc: "Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.",
-                    project6_title: "Analytics dashboard",
-                    project6_desc: "Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities."
-                },
-                order: {
-                    title: "Place an Order",
-                    subtitle: "Tell us about your project to get a cost estimate",
-                    name_label: "Your Name",
-                    email_label: "Email",
-                    telegram_label: "Telegram (for contact)",
-                    language_label: "Programming Language",
-                    select_language: "Select language",
-                    other_language: "Other",
-                    complexity_label: "Project Complexity",
-                    select_complexity: "Select complexity",
-                    simple_complexity: "Simple (up to 20 hours)",
-                    medium_complexity: "Medium (20-50 hours)",
-                    complex_complexity: "Complex (50-100 hours)",
-                    very_complex_complexity: "Very complex (100+ hours)",
-                    deadline_label: "Desired completion time (days)",
-                    description_label: "Project Description",
-                    description_placeholder: "Describe your project in detail, its goals and requirements...",
-                    submit_btn: "Submit Order",
-                    success_title: "Your order has been successfully placed!",
-                    success_text1: "The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.",
-                    success_text2: "It will provide:",
-                    success_item1: "Final cost and terms",
-                    success_item2: "Payment button for the order",
-                    success_item3: "Link to download the code after completion",
-                    bot_link: "Go to bot @LilcryyDevloperBot"
-                },
-                contacts: {
-                    title: "Contacts",
-                    subtitle: "Contact me in any convenient way",
-                    about: "Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business."
-                },
-                footer: {
-                    navigation: "Navigation",
-                    services: "Services",
-                    contacts: "Contacts",
-                    rights: "All rights reserved."
-                }
-            },
-            ru: {
-                nav: {
-                    home: "Главная",
-                    services: "Услуги",
-                    portfolio: "Портфолио",
-                    order: "Заказать",
-                    contacts: "Контакты"
-                },
-                home: {
-                    title: "Профессиональные услуги программирования",
-                    subtitle: "Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.",
-                    order_btn: "Заказать сейчас",
-                    portfolio_btn: "Портфолио"
-                },
-                services: {
-                    title: "Мои Услуги",
-                    subtitle: "Предоставляю широкий спектр услуг в области разработки ПО",
-                    python_title: "Python Разработка",
-                    python_desc: "Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.",
-                    js_title: "JavaScript & Frontend",
-                    js_desc: "Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.",
-                    java_title: "Java Разработка",
-                    java_desc: "Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.",
-                    db_title: "Работа с Базами Данных",
-                    db_desc: "Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.",
-                    fullstack_title: "Full Stack Разработка",
-                    fullstack_desc: "Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.",
-                    testing_title: "Тестирование и Отладка",
-                    testing_desc: "Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.",
-                    order_btn: "Заказать услугу"
-                },
-                portfolio: {
-                    title: "Мое Портфолио",
-                    subtitle: "Примеры моих последних работ и проектов",
-                    project1_title: "Анализ данных для e-commerce",
-                    project1_desc: "Разработал систему анализа продаж для интернет-магазина, которая позволила увеличить конверсию на 15% за счет выявления ключевых метрик и паттернов поведения покупателей.",
-                    project2_title: "Интерактивная карта для сайта",
-                    project2_desc: "Создал интерактивную карту с маркерами для туристического сайта, интегрировал с API геолокации и добавил фильтры по категориям объектов.",
-                    project3_title: "Корпоративное приложение",
-                    project3_desc: "Разработал CRM-систему для управления клиентской базой и задачами с интеграцией с почтовыми сервисами и мессенджерами.",
-                    project4_title: "Платформа для онлайн-курсов",
-                    project4_desc: "Создал полный цикл платформы для онлайн-обучения с видеоуроками, тестами, системой прогресса и сертификатами.",
-                    project5_title: "Автоматизация отчетов",
-                    project5_desc: "Разработал систему автоматической генерации отчетов для финансового отдела, сократив время на формирование документов на 80%.",
-                    project6_title: "Дашборд аналитики",
-                    project6_desc: "Создал интерактивный дашборд для визуализации ключевых бизнес-метрик с возможностью фильтрации данных и экспорта отчетов."
-                },
-                order: {
-                    title: "Оформить Заказ",
-                    subtitle: "Расскажите о своем проекте для оценки стоимости",
-                    name_label: "Ваше Имя",
-                    email_label: "Email",
-                    telegram_label: "Telegram (для связи)",
-                    language_label: "Язык программирования",
-                    select_language: "Выберите язык",
-                    other_language: "Другой",
-                    complexity_label: "Сложность проекта",
-                    select_complexity: "Выберите сложность",
-                    simple_complexity: "Простой (до 20 часов)",
-                    medium_complexity: "Средний (20-50 часов)",
-                    complex_complexity: "Сложный (50-100 часов)",
-                    very_complex_complexity: "Очень сложный (100+ часов)",
-                    deadline_label: "Желаемый срок выполнения (дней)",
-                    description_label: "Описание проекта",
-                    description_placeholder: "Подробно опишите ваш проект, его цели и требования...",
-                    submit_btn: "Отправить заказ",
-                    success_title: "Ваш заказ успешно оформлен!",
-                    success_text1: "Бот <strong>@LilcryyDevloperBot</strong> напишет вам в Telegram в течение 1 минуты.",
-                    success_text2: "Он предоставит:",
-                    success_item1: "Окончательную стоимость и сроки",
-                    success_item2: "Кнопку для оплаты заказа",
-                    success_item3: "Ссылку для скачивания кода после выполнения",
-                    bot_link: "Перейти к боту @LilcryyDevloperBot"
-                },
-                contacts: {
-                    title: "Контакты",
-                    subtitle: "Свяжитесь со мной удобным способом",
-                    about: "Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса."
-                },
-                footer: {
-                    navigation: "Навигация",
-                    services: "Услуги",
-                    contacts: "Контакты",
-                    rights: "Все права защищены."
-                }
-            }
-        };
+// Page Navigation
+const navLinks = document.querySelectorAll('.nav-link');
+const pageSections = document.querySelectorAll('.page-section');
 
-        // Set default language to English
-        let currentLanguage = 'en';
+function switchPage(pageId) {
+  pageSections.forEach(section => {
+    section.classList.remove('active');
+  });
+  
+  document.getElementById(pageId).classList.add('active');
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('data-page') === pageId.replace('-page', '')) {
+      link.classList.add('active');
+    }
+  });
+  
+  mobileNav.classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-        // Function to change language
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            
-            // Update all elements with data-translate attribute
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const keys = element.getAttribute('data-translate').split('.');
-                let translation = translations[lang];
-                
-                for (const key of keys) {
-                    translation = translation[key];
-                    if (!translation) break;
-                }
-                
-                if (translation) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translation;
-                    } else {
-                        element.textContent = translation;
-                    }
-                }
-            });
-            
-            // Update active language button
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                if (btn.dataset.lang === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            
-            // Save language preference to localStorage
-            localStorage.setItem('preferredLanguage', lang);
-        }
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const pageId = `${link.getAttribute('data-page')}-page`;
+    switchPage(pageId);
+  });
+});
 
-        // Mobile Navigation Toggle
-        const mobileToggle = document.querySelector('.mobile-toggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-        });
-        
-        // Page Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pageSections = document.querySelectorAll('.page-section');
-        
-        function switchPage(pageId) {
-            pageSections.forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-page') === pageId.replace('-page', '')) {
-                    link.classList.add('active');
-                }
-            });
-            mobileNav.classList.remove('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = `${link.getAttribute('data-page')}-page`;
-                switchPage(pageId);
-            });
-        });
-        
-        // Order Form submission
-        const orderForm = document.getElementById('orderForm');
-        const telegramProcess = document.getElementById('telegramProcess');
-        
-        orderForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const orderData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                telegram: document.getElementById('telegram').value,
-                language: document.getElementById('language').value,
-                complexity: document.getElementById('complexity').value,
-                deadline: document.getElementById('deadline').value,
-                description: document.getElementById('description').value
-            };
-            
-            // Show success message
-            telegramProcess.style.display = 'block';
-            telegramProcess.scrollIntoView({ behavior: 'smooth' });
-            
-            // Reset form
-            orderForm.reset();
-            
-            console.log('Order Details:', orderData);
-        });
+// Order Form submission
+const orderForm = document.getElementById('orderForm');
+const telegramProcess = document.getElementById('telegramProcess');
 
-        // Language switcher buttons
-        document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                changeLanguage(this.dataset.lang);
-            });
-        });
+orderForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Get form values
+  const orderData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    telegram: document.getElementById('telegram').value,
+    language: document.getElementById('language').value,
+    complexity: document.getElementById('complexity').value,
+    deadline: document.getElementById('deadline').value,
+    description: document.getElementById('description').value
+  };
+  
+  // Show success message
+  telegramProcess.style.display = 'block';
+  telegramProcess.scrollIntoView({ behavior: 'smooth' });
+  
+  // Reset form
+  orderForm.reset();
+  
+  console.log('Order Details:', orderData);
+});
 
-        // Initialize page
-        function initPage() {
-            // Check for saved language preference
-            const savedLanguage = localStorage.getItem('preferredLanguage');
-            if (savedLanguage) {
-                changeLanguage(savedLanguage);
-            } else {
-                // Default to English
-                changeLanguage('en');
-            }
-            
-            // Handle page based on hash
-            const hash = window.location.hash.replace('#', '');
-            if (hash) {
-                switchPage(`${hash}-page`);
-            } else {
-                switchPage('home-page');
-            }
-        }
-        
-        window.addEventListener('load', initPage);
-    </script>
+// Language switcher buttons
+document.querySelectorAll('.language-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    changeLanguage(this.dataset.lang);
+  });
+});
+
+// Donkey Modal functionality
+const donkeyModal = document.getElementById('donkeyModal');
+const closeModal = document.querySelector('.close-modal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const logo = document.getElementById('logo');
+
+// Open modal when clicking logo
+logo.addEventListener('click', function(e) {
+  e.preventDefault();
+  donkeyModal.style.display = 'block';
+});
+
+// Close modal with close button
+closeModal.addEventListener('click', function() {
+  donkeyModal.style.display = 'none';
+});
+
+// Close modal with button in modal
+closeModalBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  donkeyModal.style.display = 'none';
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', function(e) {
+  if (e.target === donkeyModal) {
+    donkeyModal.style.display = 'none';
+  }
+});
+
+// Make service buttons work
+document.querySelectorAll('.service-card .btn').forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+    switchPage('order-page');
+  });
+});
+
+// Initialize page
+function initPage() {
+  // Check for saved language preference
+  const savedLanguage = localStorage.getItem('preferredLanguage');
+  if (savedLanguage) {
+    changeLanguage(savedLanguage);
+  } else {
+    // Default to English
+    changeLanguage('en');
+  }
+  
+  // Handle page based on hash
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    switchPage(`${hash}-page`);
+  } else {
+    switchPage('home-page');
+  }
+}
+
+window.addEventListener('load', initPage);
+</script>
 </body>
-    </html>
+                </html>
