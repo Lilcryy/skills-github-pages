@@ -668,7 +668,7 @@ footer {
 <div id="donkeyModal" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
-    <img src="https://foni.papik.pro/uploads/posts/2024-09/foni-papik-pro-45hm-p-kartinki-osel-iz-shreka-na-prozrachnom-fon-1.png" alt="Funny Donkey">
+    <img src="https://i.pinimg.com/736x/11/7f/27/117f279e8a9a7b00b0b5e0b3b4a1b1d0.jpg" alt="Funny Donkey">
     <a href="#" class="btn" style="margin-top: 20px; width: auto;" id="closeModalBtn">Close</a>
   </div>
 </div>
@@ -1252,7 +1252,7 @@ navLinks.forEach(link => {
 const orderForm = document.getElementById('orderForm');
 const telegramProcess = document.getElementById('telegramProcess');
 
-orderForm.addEventListener('submit', function(e) {
+orderForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   
   // Get form values
@@ -1266,14 +1266,29 @@ orderForm.addEventListener('submit', function(e) {
     description: document.getElementById('description').value
   };
   
-  // Show success message
-  telegramProcess.style.display = 'block';
-  telegramProcess.scrollIntoView({ behavior: 'smooth' });
-  
-  // Reset form
-  orderForm.reset();
-  
-  console.log('Order Details:', orderData);
+  try {
+    // Send data to Telegram bot
+    const response = await fetch('https://your-server.com/create-order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderData)
+    });
+    
+    if (!response.ok) throw new Error('Failed to send order');
+    
+    // Show success message
+    telegramProcess.style.display = 'block';
+    telegramProcess.scrollIntoView({ behavior: 'smooth' });
+    
+    // Reset form
+    orderForm.reset();
+    
+  } catch (error) {
+    console.error('Order submission error:', error);
+    alert('Error submitting order. Please try again later.');
+  }
 });
 
 // Language switcher buttons
@@ -1344,4 +1359,4 @@ function initPage() {
 window.addEventListener('load', initPage);
 </script>
 </body>
-                </html>
+              </html>
