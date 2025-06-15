@@ -1,1362 +1,1169 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lilcryy - Professional Programming Services</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --primary: #6C63FF;
-  --primary-dark: #564fd6;
-  --secondary: #FF6584;
-  --dark: #2A2A3C;
-  --light: #F5F7FA;
-  --gray: #A1A1B5;
-  --success: #4CAF50;
-  --warning: #FFC107;
-  --transition: all 0.3s ease;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: var(--light);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-section {
-  padding: 80px 0;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 30px;
-  background: var(--primary);
-  color: white;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition);
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
-}
-
-.btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 2px solid var(--primary);
-}
-
-.btn-secondary:hover {
-  background: var(--primary);
-}
-
-/* Header Styles */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  padding: 20px 0;
-  background: rgba(26, 26, 46, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.logo span {
-  color: var(--primary);
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  align-items: center;
-}
-
-nav ul li {
-  margin-left: 30px;
-}
-
-nav ul li a {
-  color: var(--light);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  transition: var(--transition);
-  position: relative;
-}
-
-nav ul li a:hover {
-  color: var(--primary);
-}
-
-nav ul li a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  transition: var(--transition);
-}
-
-nav ul li a:hover::after {
-  width: 100%;
-}
-
-.mobile-toggle {
-  display: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
-.language-switcher {
-  display: flex;
-  gap: 10px;
-  margin-left: 20px;
-}
-
-.language-btn {
-  background: transparent;
-  border: none;
-  color: var(--light);
-  cursor: pointer;
-  font-weight: 500;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: var(--transition);
-}
-
-.language-btn:hover {
-  color: var(--primary);
-}
-
-.language-btn.active {
-  color: var(--primary);
-  background: rgba(108, 99, 255, 0.2);
-}
-
-/* Hero Section */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -100px;
-  right: -100px;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(108, 99, 255, 0.2) 0%, rgba(108, 99, 255, 0) 70%);
-}
-
-.hero-content {
-  max-width: 600px;
-  z-index: 2;
-}
-
-.hero h1 {
-  font-size: 56px;
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 18px;
-  margin-bottom: 30px;
-  color: var(--gray);
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-/* Services Section */
-.section-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title h2 {
-  font-size: 40px;
-  margin-bottom: 15px;
-  position: relative;
-  display: inline-block;
-}
-
-.section-title h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 4px;
-  background: var(--primary);
-  border-radius: 2px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.service-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 30px;
-  transition: var(--transition);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-color: rgba(108, 99, 255, 0.3);
-}
-
-.service-icon {
-  font-size: 40px;
-  color: var(--primary);
-  margin-bottom: 20px;
-}
-
-.service-card h3 {
-  font-size: 22px;
-  margin-bottom: 15px;
-}
-
-/* Portfolio Section */
-.portfolio {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-}
-
-.portfolio-item {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 30px;
-  transition: var(--transition);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-}
-
-.portfolio-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border-color: rgba(108, 99, 255, 0.3);
-}
-
-.portfolio-item h3 {
-  font-size: 22px;
-  margin-bottom: 15px;
-  color: var(--primary);
-}
-
-.portfolio-item .tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 15px;
-}
-
-.portfolio-item .tech span {
-  background: rgba(108, 99, 255, 0.1);
-  color: var(--primary);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-}
-
-/* Order Section */
-.order-section {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.order-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 50px;
-  align-items: flex-start;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.order-form {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.form-control {
-  width: 100%;
-  padding: 12px 15px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: var(--primary);
-}
-
-textarea.form-control {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.telegram-process {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  padding: 30px;
-  margin-top: 30px;
-  border: 1px solid var(--primary);
-  display: none;
-}
-
-.telegram-process h3 {
-  color: var(--primary);
-  margin-bottom: 15px;
-}
-
-.telegram-bot-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #0088cc;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 500;
-  margin-top: 10px;
-  transition: var(--transition);
-}
-
-.telegram-bot-link:hover {
-  background: #0077b3;
-  transform: translateY(-3px);
-}
-
-/* Footer */
-footer {
-  background: #0f0f1e;
-  padding: 60px 0 30px;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.footer-column h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.footer-column h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--primary);
-}
-
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 10px;
-}
-
-.footer-links a {
-  color: var(--gray);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.footer-links a:hover {
-  color: var(--primary);
-  padding-left: 5px;
-}
-
-.social-links {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  color: white;
-  transition: var(--transition);
-}
-
-.social-links a:hover {
-  background: var(--primary);
-  transform: translateY(-3px);
-}
-
-.copyright {
-  text-align: center;
-  padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--gray);
-  font-size: 14px;
-}
-
-/* Page Sections */
-.page-section {
-  display: none;
-  padding-top: 100px;
-  min-height: calc(100vh - 80px);
-}
-
-.page-section.active {
-  display: block;
-}
-
-/* Mobile Navigation */
-.mobile-nav {
-  position: fixed;
-  top: 80px;
-  left: 0;
-  width: 100%;
-  background: rgba(26, 26, 46, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 999;
-  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  transition: var(--transition);
-  padding: 20px 0;
-}
-
-.mobile-nav.active {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
-.mobile-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.mobile-nav ul li {
-  margin: 15px 0;
-}
-
-.mobile-nav ul li a {
-  color: var(--light);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 30px;
-  transition: var(--transition);
-}
-
-.mobile-nav ul li a:hover,
-.mobile-nav ul li a.active {
-  background: var(--primary);
-}
-
-/* Modal Styles */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-}
-
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 90%;
-  max-height: 90%;
-  text-align: center;
-}
-
-.modal-content img {
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.close-modal {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: white;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.close-modal:hover {
-  color: var(--primary);
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .hero h1 {
-    font-size: 42px;
-  }
-  .portfolio-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .mobile-toggle {
-    display: block;
-  }
-  nav.desktop-nav {
-    display: none;
-  }
-  .hero h1 {
-    font-size: 36px;
-  }
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-  .section-title h2 {
-    font-size: 32px;
-  }
-  .hero-content {
-    text-align: center;
-    padding-top: 60px;
-  }
-  .hero-buttons {
-    justify-content: center;
-  }
-  .order-form {
-    padding: 20px;
-  }
-  .modal-content img {
-    max-height: 60vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 28px;
-  }
-  .hero p {
-    font-size: 16px;
-  }
-  .service-card, .portfolio-item {
-    padding: 20px;
-  }
-  .footer-content {
-    grid-template-columns: 1fr;
-  }
-  .modal-content img {
-    max-height: 50vh;
-  }
-  .close-modal {
-    top: 10px;
-    right: 15px;
-    font-size: 30px;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel RP - Пиксельная RPG вселенная</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #5D3FD3;
+            --accent: #FF6BEC;
+            --dark: #0F0A1E;
+            --darker: #090612;
+            --light: #E6E6FA;
+            --text: #F0F0F0;
+            --pixel-size: 2px;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(93, 63, 211, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 107, 236, 0.05) 0%, transparent 30%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="45" y="45" width="10" height="10" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover, cover, cover, 20px 20px;
+            z-index: -1;
+        }
+
+        .pixel-border {
+            position: relative;
+            border: 2px solid var(--accent);
+        }
+
+        .pixel-border::before, .pixel-border::after {
+            content: "";
+            position: absolute;
+            width: var(--pixel-size);
+            height: var(--pixel-size);
+            background: var(--accent);
+        }
+
+        .pixel-border::before {
+            top: -2px;
+            left: -2px;
+            box-shadow: 
+                0 4px 0 var(--accent),
+                4px 0 0 var(--accent),
+                4px 4px 0 var(--accent);
+        }
+
+        .pixel-border::after {
+            bottom: -2px;
+            right: -2px;
+            box-shadow: 
+                0 -4px 0 var(--accent),
+                -4px 0 0 var(--accent),
+                -4px -4px 0 var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(15, 10, 30, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(93, 63, 211, 0.2);
+            border: 1px solid rgba(255, 107, 236, 0.3);
+        }
+
+        nav a:hover {
+            background: rgba(138, 43, 226, 0.4);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        nav a i {
+            margin-right: 8px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: var(--light);
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.5);
+            border: none;
+            cursor: pointer;
+            margin: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.8);
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+        }
+
+        .cta-button i {
+            margin-right: 12px;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--secondary);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(147, 112, 219, 0.15);
+        }
+
+        /* Game Features */
+        .features {
+            padding: 100px 0;
+            background: rgba(9, 6, 18, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 2px solid var(--accent);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 70px;
+            color: var(--light);
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .section-title span {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .feature-card {
+            background: rgba(15, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 35px 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.4);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(138, 43, 226, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .feature-card p {
+            color: #c5c5e0;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .platform {
+            background: rgba(15, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 35px 30px;
+            width: 280px;
+            border: 2px solid var(--secondary);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .platform:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
+        }
+
+        .platform i {
+            font-size: 60px;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+
+        .platform:hover i {
+            color: var(--accent);
+        }
+
+        .platform h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .platform p {
+            margin-bottom: 25px;
+            color: #b0b0d0;
+        }
+
+        /* Forum Preview */
+        .forum-preview {
+            padding: 100px 0;
+            background: rgba(9, 6, 18, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 2px solid var(--accent);
+        }
+
+        .forum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .forum-card {
+            background: rgba(15, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid var(--secondary);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .forum-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(138, 43, 226, 0.4);
+            border-color: var(--accent);
+        }
+
+        .forum-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .forum-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+
+        .forum-content p {
+            color: #c5c5e0;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .forum-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            padding-top: 15px;
+            border-top: 1px solid rgba(147, 112, 219, 0.3);
+        }
+
+        .forum-meta i {
+            margin-right: 5px;
+        }
+
+        /* Online Players */
+        .online {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .online-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .server-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .server-card {
+            background: rgba(15, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 25px 30px;
+            border: 2px solid var(--secondary);
+            min-width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .server-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .server-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .server-card p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light);
+        }
+
+        .online-stats {
+            background: rgba(15, 10, 30, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            border: 2px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .online-stats::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .player-count {
+            font-size: 4.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 25px 0;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .players-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .player {
+            background: rgba(138, 43, 226, 0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            border: 1px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .player:hover {
+            background: rgba(255, 107, 236, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(9, 6, 18, 0.95);
+            padding: 70px 0 30px;
+            margin-top: 100px;
+            border-top: 2px solid var(--accent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.7rem;
+            margin-bottom: 25px;
+            color: var(--light);
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #b0b0d0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 50%;
+            color: var(--light);
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+            border: 1px solid var(--secondary);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(147, 112, 219, 0.3);
+            color: #b0b0d0;
+            font-size: 1rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid rgba(255, 107, 236, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--accent);
+            animation: spin 1s linear infinite;
+            margin: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .player-count {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            
+            nav.active {
+                max-height: 500px;
+                margin-top: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 15px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .player-count {
+                font-size: 3rem;
+            }
+            
+            .server-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .feature-card, .platform, .forum-card {
+                width: 100%;
+            }
+            
+            .player-count {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">P</div>
+                    <div class="logo-text">PIXEL RP</div>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="#features"><i class="fas fa-star"></i> Особенности</a></li>
+                        <li><a href="#download"><i class="fas fa-download"></i> Скачать</a></li>
+                        <li><a href="#forum"><i class="fas fa-comments"></i> Форум</a></li>
+                        <li><a href="#online"><i class="fas fa-users"></i> Онлайн</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-<!-- Donkey Modal -->
-<div id="donkeyModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <img src="https://i.pinimg.com/736x/11/7f/27/117f279e8a9a7b00b0b5e0b3b4a1b1d0.jpg" alt="Funny Donkey">
-    <a href="#" class="btn" style="margin-top: 20px; width: auto;" id="closeModalBtn">Close</a>
-  </div>
-</div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>ПОГРУЗИСЬ В МИР PIXEL RP</h1>
+            <p>Присоединяйся к захватывающей пиксельной вселенной, где ты можешь стать кем угодно: от отважного героя до хитроумного злодея. Создавай свою историю в этом уникальном мире!</p>
+            <div class="hero-buttons">
+                <a href="#download" class="cta-button"><i class="fas fa-download"></i> Скачать игру</a>
+                <a href="#features" class="cta-button secondary"><i class="fas fa-play-circle"></i> Узнать больше</a>
+            </div>
+        </div>
+    </section>
 
-<!-- Header -->
-<header>
-  <div class="container header-container">
-    <a href="#" class="logo" id="logo">Lil<span>cryy</span></a>
-    <div class="mobile-toggle">
-      <i class="fas fa-bars"></i>
-    </div>
-    <nav class="desktop-nav">
-      <ul>
-        <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
-        <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
-        <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
-        <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
-        <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
-        <li>
-          <div class="language-switcher">
-            <button class="language-btn active" data-lang="en">EN</button>
-            <button class="language-btn" data-lang="ru">RU</button>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="mobile-nav" id="mobileNav">
-    <ul>
-      <li><a href="#" class="nav-link active" data-page="home" data-translate="nav.home">Home</a></li>
-      <li><a href="#" class="nav-link" data-page="services" data-translate="nav.services">Services</a></li>
-      <li><a href="#" class="nav-link" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
-      <li><a href="#" class="nav-link" data-page="order" data-translate="nav.order">Order</a></li>
-      <li><a href="#" class="nav-link" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
-      <li>
-        <div class="language-switcher" style="justify-content: center; margin-top: 15px;">
-          <button class="language-btn active" data-lang="en">EN</button>
-          <button class="language-btn" data-lang="ru">RU</button>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">ПОЧЕМУ <span>PIXEL RP</span>?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>Огромный мир</h3>
+                    <p>Исследуй разнообразные локации: от шумных городов до таинственных лесов и опасных подземелий. Каждый уголок мира наполнен секретами и приключениями.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Социальная игра</h3>
+                    <p>Общайся, создавай гильдии, заводи друзей и врагов. Твои отношения определяют твой путь в этом мире. Участвуй в масштабных событиях с другими игроками.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <h3>Глубокий РП</h3>
+                    <p>Развивай персонажа через уникальные профессии, навыки и ветки развития. Каждое решение имеет значение и влияет на твою историю в мире Pixel RP.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Экономика</h3>
+                    <p>Торгуй, создавай предметы, владей собственностью. Стань влиятельным магнатом или искусным ремесленником. Управляй своим бизнесом и богатей.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3>События</h3>
+                    <p>Участвуй в глобальных событиях, влияющих на весь мир. От твоих действий зависит будущее вселенной. Стань героем или злодеем - выбор за тобой!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Кастомизация</h3>
+                    <p>Создай уникального персонажа с сотнями вариантов внешности, одежды и стиля. Вырази свою индивидуальность через неповторимый образ.</p>
+                </div>
+            </div>
         </div>
-      </li>
-    </ul>
-  </div>
-</header>
+    </section>
 
-<!-- Page Sections -->
-<main>
-  <!-- Home Page -->
-  <section class="page-section active" id="home-page">
-    <div class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1 data-translate="home.title">Professional Programming Services</h1>
-          <p data-translate="home.subtitle">Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.</p>
-          <div class="hero-buttons">
-            <a href="#" class="btn" data-page="order" data-translate="home.order_btn">Order Now</a>
-            <a href="#" class="btn btn-secondary" data-page="portfolio" data-translate="home.portfolio_btn">Portfolio</a>
-          </div>
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">СКАЧАТЬ <span>PIXEL RP</span></h2>
+            <p>Присоединяйся к тысячам игроков по всему миру! Выбери свою платформу:</p>
+            
+            <div class="platforms">
+                <div class="platform">
+                    <i class="fab fa-windows"></i>
+                    <h3>Windows</h3>
+                    <p>Версия 2.4.1 | 1.2 ГБ</p>
+                    <a href="#" class="cta-button"><i class="fas fa-download"></i> Скачать</a>
+                </div>
+                <div class="platform">
+                    <i class="fab fa-apple"></i>
+                    <h3>macOS</h3>
+                    <p>Версия 2.4.1 | 1.3 ГБ</p>
+                    <a href="#" class="cta-button"><i class="fas fa-download"></i> Скачать</a>
+                </div>
+                <div class="platform">
+                    <i class="fab fa-linux"></i>
+                    <h3>Linux</h3>
+                    <p>Версия 2.4.1 | 1.1 ГБ</p>
+                    <a href="#" class="cta-button"><i class="fas fa-download"></i> Скачать</a>
+                </div>
+            </div>
+            
+            <div class="system-requirements">
+                <h3>Системные требования:</h3>
+                <p>ОС: Windows 7+, macOS 10.12+, Ubuntu 18.04+ | Процессор: 2 ГГц | Память: 4 ГБ | Видеокарта: 1 ГБ VRAM | Место на диске: 2 ГБ</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Services Page -->
-  <section class="page-section" id="services-page">
-    <div class="services" id="services">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-translate="services.title">My Services</h2>
-          <p data-translate="services.subtitle">I provide a wide range of software development services</p>
+    <!-- Forum Preview -->
+    <section id="forum" class="forum-preview">
+        <div class="container">
+            <h2 class="section-title">ФОРУМ <span>PIXEL RP</span></h2>
+            <p>Присоединяйся к нашему сообществу, обсуждай игру, находи единомышленников и участвуй в событиях!</p>
+            
+            <div class="forum-grid">
+                <div class="forum-card">
+                    <div class="forum-header">
+                        <div class="avatar">JD</div>
+                        <div>
+                            <h4>John_Doe</h4>
+                            <small>2 часа назад</small>
+                        </div>
+                    </div>
+                    <div class="forum-content">
+                        <h3>Ищу команду для исследования Северных земель</h3>
+                        <p>Планирую экспедицию в неизведанные территории за горами. Нужны 3-4 опытных игрока с хорошим снаряжением. Ожидаются опасные встречи и ценные трофеи!</p>
+                    </div>
+                    <div class="forum-meta">
+                        <span><i class="fas fa-comment"></i> 12 ответов</span>
+                        <span><i class="fas fa-eye"></i> 87 просмотров</span>
+                    </div>
+                </div>
+                
+                <div class="forum-card">
+                    <div class="forum-header">
+                        <div class="avatar">MR</div>
+                        <div>
+                            <h4>Mystic_Rose</h4>
+                            <small>5 часов назад</small>
+                        </div>
+                    </div>
+                    <div class="forum-content">
+                        <h3>Гайд по новой системе крафта</h3>
+                        <p>Подробно разобрал все изменения в системе крафта после обновления 2.4. Рассказываю как эффективно прокачать ремесло и какие предметы сейчас самые ценные.</p>
+                    </div>
+                    <div class="forum-meta">
+                        <span><i class="fas fa-comment"></i> 24 ответа</span>
+                        <span><i class="fas fa-eye"></i> 156 просмотров</span>
+                    </div>
+                </div>
+                
+                <div class="forum-card">
+                    <div class="forum-header">
+                        <div class="avatar">AG</div>
+                        <div>
+                            <h4>Admin_Global</h4>
+                            <small>Вчера</small>
+                        </div>
+                    </div>
+                    <div class="forum-content">
+                        <h3>Анонс: Грядущее событие "Восход теней"</h3>
+                        <p>В следующую пятницу стартует глобальное событие, которое изменит мир Pixel RP! Готовьтесь к вторжению древних сил и защищайте свои земли.</p>
+                    </div>
+                    <div class="forum-meta">
+                        <span><i class="fas fa-comment"></i> 48 ответов</span>
+                        <span><i class="fas fa-eye"></i> 324 просмотра</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#" class="cta-button"><i class="fas fa-comments"></i> Перейти на форум</a>
+            </div>
         </div>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fab fa-python"></i>
-            </div>
-            <h3 data-translate="services.python_title">Python Development</h3>
-            <p data-translate="services.python_desc">Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.</p>
-            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fab fa-js"></i>
-            </div>
-            <h3 data-translate="services.js_title">JavaScript & Frontend</h3>
-            <p data-translate="services.js_desc">Development of modern web applications using React, Vue.js, interactive interfaces and animations.</p>
-            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fab fa-java"></i>
-            </div>
-            <h3 data-translate="services.java_title">Java Development</h3>
-            <p data-translate="services.java_desc">Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.</p>
-            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-database"></i>
-            </div>
-            <h3 data-translate="services.db_title">Database Work</h3>
-            <p data-translate="services.db_desc">Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.</p>
-            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3 data-translate="services.fullstack_title">Full Stack Development</h3>
-            <p data-translate="services.fullstack_desc">Full cycle of web application development: from architecture design to deployment and support.</p>
-            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">
-              <i class="fas fa-bug"></i>
-            </div>
-            <h3 data-translate="services.testing_title">Testing and Debugging</h3>
-            <p data-translate="services.testing_desc">Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.</p>
-            <a href="#" class="btn" style="margin-top: 20px;" data-translate="services.order_btn">Order Service</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Portfolio Page -->
-  <section class="page-section" id="portfolio-page">
-    <div class="portfolio" id="portfolio">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-translate="portfolio.title">My Portfolio</h2>
-          <p data-translate="portfolio.subtitle">Examples of my recent works and projects</p>
+    <!-- Online Players -->
+    <section id="online" class="online">
+        <div class="container online-container">
+            <h2 class="section-title">ИГРОКИ <span>ОНЛАЙН</span></h2>
+            <p>Присоединяйся к тысячам игроков по всему миру прямо сейчас!</p>
+            
+            <div class="server-info">
+                <div class="server-card">
+                    <h3>АДРЕС СЕРВЕРА</h3>
+                    <p>87.228.5.46:7777</p>
+                </div>
+                <div class="server-card">
+                    <h3>СТАТУС СЕРВЕРА</h3>
+                    <p id="serverStatus">Онлайн <i class="fas fa-check-circle" style="color: #4CAF50;"></i></p>
+                </div>
+                <div class="server-card">
+                    <h3>ВЕРСИЯ СЕРВЕРА</h3>
+                    <p>2.4.1</p>
+                </div>
+            </div>
+            
+            <div class="online-stats">
+                <div class="player-count"><span id="playerCount">0</span></div>
+                <p>игроков онлайн в Pixel RP</p>
+                
+                <div class="players-list" id="playersList">
+                    <div class="loading"></div>
+                    <p>Загрузка списка игроков...</p>
+                </div>
+            </div>
         </div>
-        <div class="portfolio-grid">
-          <div class="portfolio-item">
-            <h3 data-translate="portfolio.project1_title">Data analysis for e-commerce</h3>
-            <div class="tech">
-              <span>Python</span>
-              <span>Pandas</span>
-              <span>Matplotlib</span>
-            </div>
-            <p data-translate="portfolio.project1_desc">Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.</p>
-          </div>
-          <div class="portfolio-item">
-            <h3 data-translate="portfolio.project2_title">Interactive map for website</h3>
-            <div class="tech">
-              <span>JavaScript</span>
-              <span>Leaflet.js</span>
-              <span>API</span>
-            </div>
-            <p data-translate="portfolio.project2_desc">Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.</p>
-          </div>
-          <div class="portfolio-item">
-            <h3 data-translate="portfolio.project3_title">Corporate application</h3>
-            <div class="tech">
-              <span>Java</span>
-              <span>Spring Boot</span>
-              <span>PostgreSQL</span>
-            </div>
-            <p data-translate="portfolio.project3_desc">Developed a CRM system for managing customer base and tasks with integration with email services and messengers.</p>
-          </div>
-          <div class="portfolio-item">
-            <h3 data-translate="portfolio.project4_title">Online courses platform</h3>
-            <div class="tech">
-              <span>React</span>
-              <span>Node.js</span>
-              <span>MongoDB</span>
-            </div>
-            <p data-translate="portfolio.project4_desc">Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.</p>
-          </div>
-          <div class="portfolio-item">
-            <h3 data-translate="portfolio.project5_title">Reports automation</h3>
-            <div class="tech">
-              <span>Python</span>
-              <span>Django</span>
-              <span>Celery</span>
-            </div>
-            <p data-translate="portfolio.project5_desc">Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.</p>
-          </div>
-          <div class="portfolio-item">
-            <h3 data-translate="portfolio.project6_title">Analytics dashboard</h3>
-            <div class="tech">
-              <span>JavaScript</span>
-              <span>D3.js</span>
-              <span>Chart.js</span>
-            </div>
-            <p data-translate="portfolio.project6_desc">Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Order Page -->
-  <section class="page-section" id="order-page">
-    <div class="order-section" id="order">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-translate="order.title">Place an Order</h2>
-          <p data-translate="order.subtitle">Tell us about your project to get a cost estimate</p>
-        </div>
-        <div class="order-container">
-          <div class="order-form">
-            <form id="orderForm">
-              <div class="form-group">
-                <label for="name" data-translate="order.name_label">Your Name</label>
-                <input type="text" id="name" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="email" data-translate="order.email_label">Email</label>
-                <input type="email" id="email" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="telegram" data-translate="order.telegram_label">Telegram (for contact)</label>
-                <input type="text" id="telegram" class="form-control" placeholder="@username" required>
-              </div>
-              <div class="form-group">
-                <label for="language" data-translate="order.language_label">Programming Language</label>
-                <select id="language" class="form-control" required>
-                  <option value="" data-translate="order.select_language">Select language</option>
-                  <option value="Python">Python</option>
-                  <option value="JavaScript">JavaScript</option>
-                  <option value="Java">Java</option>
-                  <option value="PHP">PHP</option>
-                  <option value="C#">C#</option>
-                  <option value="Other" data-translate="order.other_language">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="complexity" data-translate="order.complexity_label">Project Complexity</label>
-                <select id="complexity" class="form-control" required>
-                  <option value="" data-translate="order.select_complexity">Select complexity</option>
-                  <option value="Simple" data-translate="order.simple_complexity">Simple (up to 20 hours)</option>
-                  <option value="Medium" data-translate="order.medium_complexity">Medium (20-50 hours)</option>
-                  <option value="Complex" data-translate="order.complex_complexity">Complex (50-100 hours)</option>
-                  <option value="Very complex" data-translate="order.very_complex_complexity">Very complex (100+ hours)</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="deadline" data-translate="order.deadline_label">Desired completion time (days)</label>
-                <input type="number" id="deadline" class="form-control" min="1" value="14">
-              </div>
-              <div class="form-group">
-                <label for="description" data-translate="order.description_label">Project Description</label>
-                <textarea id="description" class="form-control" placeholder="Describe your project in detail, its goals and requirements..." required data-translate="order.description_placeholder"></textarea>
-              </div>
-              <button type="submit" class="btn" style="background-color: var(--success); width: 100%; margin-top: 20px;">
-                <i class="fas fa-paper-plane"></i> <span data-translate="order.submit_btn">Submit Order</span>
-              </button>
-            </form>
-            <div class="telegram-process" id="telegramProcess">
-              <h3 data-translate="order.success_title">Your order has been successfully placed!</h3>
-              <p data-translate="order.success_text1">The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.</p>
-              <p data-translate="order.success_text2">It will provide:</p>
-              <ul>
-                <li data-translate="order.success_item1">Final cost and terms</li>
-                <li data-translate="order.success_item2">Payment button for the order</li>
-                <li data-translate="order.success_item3">Link to download the code after completion</li>
-              </ul>
-              <a href="https://t.me/LilcryyDevloperBot" class="telegram-bot-link" target="_blank">
-                <i class="fab fa-telegram"></i> <span data-translate="order.bot_link">Go to bot @LilcryyDevloperBot</span>
-              </a>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pixel RP</h3>
+                    <p>Погрузись в уникальный пиксельный мир, где каждый может создать свою историю. Присоединяйся к нам сегодня!</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Главная</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Особенности</a></li>
+                        <li><a href="#download"><i class="fas fa-chevron-right"></i> Скачать</a></li>
+                        <li><a href="#forum"><i class="fas fa-chevron-right"></i> Форум</a></li>
+                        <li><a href="#online"><i class="fas fa-chevron-right"></i> Онлайн</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Поддержка</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Гайды</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Техподдержка</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Правила</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Контакты</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contacts Page -->
-  <section class="page-section" id="contacts-page">
-    <footer id="contacts">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-translate="contacts.title">Contacts</h2>
-          <p data-translate="contacts.subtitle">Contact me in any convenient way</p>
-        </div>
-        <div class="footer-content">
-          <div class="footer-column">
-            <h3>Lilcryy</h3>
-            <p data-translate="contacts.about">Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business.</p>
-            <div class="social-links">
-              <a href="https://t.me/YTLILCRYY" target="_blank"><i class="fab fa-telegram"></i></a>
-              <a href="#"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pixel RP. Все права защищены. | Разработано с <i class="fas fa-heart" style="color: var(--accent);"></i> для игроков</p>
             </div>
-          </div>
-          <div class="footer-column">
-            <h3 data-translate="footer.navigation">Navigation</h3>
-            <ul class="footer-links">
-              <li><a href="#" data-page="home" data-translate="nav.home">Home</a></li>
-              <li><a href="#" data-page="services" data-translate="nav.services">Services</a></li>
-              <li><a href="#" data-page="portfolio" data-translate="nav.portfolio">Portfolio</a></li>
-              <li><a href="#" data-page="order" data-translate="nav.order">Order</a></li>
-              <li><a href="#" data-page="contacts" data-translate="nav.contacts">Contacts</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3 data-translate="footer.services">Services</h3>
-            <ul class="footer-links">
-              <li><a href="#" data-page="services" data-translate="services.python_title">Python Development</a></li>
-              <li><a href="#" data-page="services" data-translate="services.js_title">JavaScript & Frontend</a></li>
-              <li><a href="#" data-page="services" data-translate="services.java_title">Java Development</a></li>
-              <li><a href="#" data-page="services" data-translate="services.db_title">Database Work</a></li>
-              <li><a href="#" data-page="services" data-translate="services.fullstack_title">Full Stack Development</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3 data-translate="footer.contacts">Contacts</h3>
-            <ul class="footer-links">
-              <li><i class="fas fa-envelope"></i> maks.amirov.10@mail.ru</li>
-              <li><i class="fab fa-telegram"></i> @YTLILCRYY (main)</li>
-              <li><i class="fab fa-telegram"></i> @LilcryyDevloperBot (bot)</li>
-              <li><i class="fas fa-map-marker-alt"></i> Russia</li>
-            </ul>
-          </div>
         </div>
-        <div class="copyright">
-          <p>&copy; 2023 Lilcryy. <span data-translate="footer.rights">All rights reserved.</span></p>
-        </div>
-      </div>
     </footer>
-  </section>
-</main>
 
-<script>
-// Language translations
-const translations = {
-  en: {
-    nav: {
-      home: "Home",
-      services: "Services",
-      portfolio: "Portfolio",
-      order: "Order",
-      contacts: "Contacts"
-    },
-    home: {
-      title: "Professional Programming Services",
-      subtitle: "Development of high-quality code in Python, JavaScript, Java and other languages. I create effective solutions for your business tasks.",
-      order_btn: "Order Now",
-      portfolio_btn: "Portfolio"
-    },
-    services: {
-      title: "My Services",
-      subtitle: "I provide a wide range of software development services",
-      python_title: "Python Development",
-      python_desc: "Creating scripts, parsers, bots, web applications on Django/Flask, data analysis and process automation.",
-      js_title: "JavaScript & Frontend",
-      js_desc: "Development of modern web applications using React, Vue.js, interactive interfaces and animations.",
-      java_title: "Java Development",
-      java_desc: "Creating applications on Java SE/EE, Spring Framework, Android applications and enterprise solutions.",
-      db_title: "Database Work",
-      db_desc: "Design and optimization of databases (SQL, NoSQL), writing complex queries and integration with applications.",
-      fullstack_title: "Full Stack Development",
-      fullstack_desc: "Full cycle of web application development: from architecture design to deployment and support.",
-      testing_title: "Testing and Debugging",
-      testing_desc: "Finding and fixing bugs, writing unit tests, performance optimization and code refactoring.",
-      order_btn: "Order Service"
-    },
-    portfolio: {
-      title: "My Portfolio",
-      subtitle: "Examples of my recent works and projects",
-      project1_title: "Data analysis for e-commerce",
-      project1_desc: "Developed a sales analysis system for an online store that increased conversion by 15% by identifying key metrics and customer behavior patterns.",
-      project2_title: "Interactive map for website",
-      project2_desc: "Created an interactive map with markers for a travel website, integrated with geolocation API and added filters by object categories.",
-      project3_title: "Corporate application",
-      project3_desc: "Developed a CRM system for managing customer base and tasks with integration with email services and messengers.",
-      project4_title: "Online courses platform",
-      project4_desc: "Created a full cycle platform for online learning with video lessons, tests, progress system and certificates.",
-      project5_title: "Reports automation",
-      project5_desc: "Developed an automatic report generation system for the finance department, reducing document preparation time by 80%.",
-      project6_title: "Analytics dashboard",
-      project6_desc: "Created an interactive dashboard for visualizing key business metrics with data filtering and report export capabilities."
-    },
-    order: {
-      title: "Place an Order",
-      subtitle: "Tell us about your project to get a cost estimate",
-      name_label: "Your Name",
-      email_label: "Email",
-      telegram_label: "Telegram (for contact)",
-      language_label: "Programming Language",
-      select_language: "Select language",
-      other_language: "Other",
-      complexity_label: "Project Complexity",
-      select_complexity: "Select complexity",
-      simple_complexity: "Simple (up to 20 hours)",
-      medium_complexity: "Medium (20-50 hours)",
-      complex_complexity: "Complex (50-100 hours)",
-      very_complex_complexity: "Very complex (100+ hours)",
-      deadline_label: "Desired completion time (days)",
-      description_label: "Project Description",
-      description_placeholder: "Describe your project in detail, its goals and requirements...",
-      submit_btn: "Submit Order",
-      success_title: "Your order has been successfully placed!",
-      success_text1: "The bot <strong>@LilcryyDevloperBot</strong> will write to you on Telegram within 1 minute.",
-      success_text2: "It will provide:",
-      success_item1: "Final cost and terms",
-      success_item2: "Payment button for the order",
-      success_item3: "Link to download the code after completion",
-      bot_link: "Go to bot @LilcryyDevloperBot"
-    },
-    contacts: {
-      title: "Contacts",
-      subtitle: "Contact me in any convenient way",
-      about: "Professional programming services in Python, JavaScript, Java and other languages. Quality solutions for your business."
-    },
-    footer: {
-      navigation: "Navigation",
-      services: "Services",
-      contacts: "Contacts",
-      rights: "All rights reserved."
-    }
-  },
-  ru: {
-    nav: {
-      home: "Главная",
-      services: "Услуги",
-      portfolio: "Портфолио",
-      order: "Заказать",
-      contacts: "Контакты"
-    },
-    home: {
-      title: "Профессиональные услуги программирования",
-      subtitle: "Разработка качественного кода на Python, JavaScript, Java и других языках. Создаю эффективные решения для ваших бизнес-задач.",
-      order_btn: "Заказать сейчас",
-      portfolio_btn: "Портфолио"
-    },
-    services: {
-      title: "Мои Услуги",
-      subtitle: "Предоставляю широкий спектр услуг в области разработки ПО",
-      python_title: "Python Разработка",
-      python_desc: "Создание скриптов, парсеров, ботов, веб-приложений на Django/Flask, анализ данных и автоматизация процессов.",
-      js_title: "JavaScript & Frontend",
-      js_desc: "Разработка современных веб-приложений с использованием React, Vue.js, интерактивных интерфейсов и анимаций.",
-      java_title: "Java Разработка",
-      java_desc: "Создание приложений на Java SE/EE, Spring Framework, Android приложений и корпоративных решений.",
-      db_title: "Работа с Базами Данных",
-      db_desc: "Проектирование и оптимизация баз данных (SQL, NoSQL), написание сложных запросов и интеграция с приложениями.",
-      fullstack_title: "Full Stack Разработка",
-      fullstack_desc: "Полный цикл разработки веб-приложений: от проектирования архитектуры до развертывания и поддержки.",
-      testing_title: "Тестирование и Отладка",
-      testing_desc: "Поиск и устранение ошибок, написание unit-тестов, оптимизация производительности и рефакторинг кода.",
-      order_btn: "Заказать услугу"
-    },
-    portfolio: {
-      title: "Мое Портфолио",
-      subtitle: "Примеры моих последних работ и проектов",
-      project1_title: "Анализ данных для e-commerce",
-      project1_desc: "Разработал систему анализа продаж для интернет-магазина, которая позволила увеличить конверсию на 15% за счет выявления ключевых метрик и паттернов поведения покупателей.",
-      project2_title: "Интерактивная карта для сайта",
-      project2_desc: "Создал интерактивную карту с маркерами для туристического сайта, интегрировал с API геолокации и добавил фильтры по категориям объектов.",
-      project3_title: "Корпоративное приложение",
-      project3_desc: "Разработал CRM-систему для управления клиентской базой и задачами с интеграцией с почтовыми сервисами и мессенджерами.",
-      project4_title: "Платформа для онлайн-курсов",
-      project4_desc: "Создал полный цикл платформы для онлайн-обучения с видеоуроками, тестами, системой прогресса и сертификатами.",
-      project5_title: "Автоматизация отчетов",
-      project5_desc: "Разработал систему автоматической генерации отчетов для финансового отдела, сократив время на формирование документов на 80%.",
-      project6_title: "Дашборд аналитики",
-      project6_desc: "Создал интерактивный дашборд для визуализации ключевых бизнес-метрик с возможностью фильтрации данных и экспорта отчетов."
-    },
-    order: {
-      title: "Оформить Заказ",
-      subtitle: "Расскажите о своем проекте для оценки стоимости",
-      name_label: "Ваше Имя",
-      email_label: "Email",
-      telegram_label: "Telegram (для связи)",
-      language_label: "Язык программирования",
-      select_language: "Выберите язык",
-      other_language: "Другой",
-      complexity_label: "Сложность проекта",
-      select_complexity: "Выберите сложность",
-      simple_complexity: "Простой (до 20 часов)",
-      medium_complexity: "Средний (20-50 часов)",
-      complex_complexity: "Сложный (50-100 часов)",
-      very_complex_complexity: "Очень сложный (100+ часов)",
-      deadline_label: "Желаемый срок выполнения (дней)",
-      description_label: "Описание проекта",
-      description_placeholder: "Подробно опишите ваш проект, его цели и требования...",
-      submit_btn: "Отправить заказ",
-      success_title: "Ваш заказ успешно оформлен!",
-      success_text1: "Бот <strong>@LilcryyDevloperBot</strong> напишет вам в Telegram в течение 1 минуты.",
-      success_text2: "Он предоставит:",
-      success_item1: "Окончательную стоимость и сроки",
-      success_item2: "Кнопку для оплаты заказа",
-      success_item3: "Ссылку для скачивания кода после выполнения",
-      bot_link: "Перейти к боту @LilcryyDevloperBot"
-    },
-    contacts: {
-      title: "Контакты",
-      subtitle: "Свяжитесь со мной удобным способом",
-      about: "Профессиональные услуги программирования на Python, JavaScript, Java и других языках. Качественные решения для вашего бизнеса."
-    },
-    footer: {
-      navigation: "Навигация",
-      services: "Услуги",
-      contacts: "Контакты",
-      rights: "Все права защищены."
-    }
-  }
-};
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
 
-// Set default language to English
-let currentLanguage = 'en';
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mainNav').classList.remove('active');
+            });
+        });
 
-// Function to change language
-function changeLanguage(lang) {
-  currentLanguage = lang;
-  
-  // Update all elements with data-translate attribute
-  document.querySelectorAll('[data-translate]').forEach(element => {
-    const keys = element.getAttribute('data-translate').split('.');
-    let translation = translations[lang];
-    
-    for (const key of keys) {
-      translation = translation[key];
-      if (!translation) break;
-    }
-    
-    if (translation) {
-      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-        element.placeholder = translation;
-      } else {
-        element.textContent = translation;
-      }
-    }
-  });
-  
-  // Update active language button
-  document.querySelectorAll('.language-btn').forEach(btn => {
-    if (btn.dataset.lang === lang) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  });
-  
-  // Save language preference to localStorage
-  localStorage.setItem('preferredLanguage', lang);
-}
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-// Mobile Navigation Toggle
-const mobileToggle = document.querySelector('.mobile-toggle');
-const mobileNav = document.getElementById('mobileNav');
+        // Online players simulation (in a real implementation, this would connect to the server API)
+        function updateOnlinePlayers() {
+            // Simulate fetching player data
+            const playerCountElement = document.getElementById('playerCount');
+            const playersListElement = document.getElementById('playersList');
+            
+            // Generate random player count between 1000 and 2000
+            const playerCount = Math.floor(Math.random() * 1000) + 1000;
+            playerCountElement.textContent = playerCount.toLocaleString();
+            
+            // Generate random player list
+            const playerNames = [
+                "ShadowHunter", "LunaStar", "IronForge", "PixelKing", "MysticMage", 
+                "DarkKnight", "RubyRose", "NeonNinja", "CyberSamurai", "PixelPirate",
+                "QuantumQueen", "SteelStorm", "NovaKnight", "ThunderBlade", "FrostWarden",
+                "EmberPhoenix", "VoidWalker", "SolarFlare", "ToxicAvenger", "CrystalShard"
+            ];
+            
+            // Shuffle and select 20 random players
+            const shuffled = [...playerNames].sort(() => 0.5 - Math.random());
+            const selectedPlayers = shuffled.slice(0, 20);
+            
+            // Create player elements
+            playersListElement.innerHTML = '';
+            selectedPlayers.forEach(player => {
+                const playerElement = document.createElement('div');
+                playerElement.className = 'player';
+                playerElement.textContent = player;
+                playersListElement.appendChild(playerElement);
+            });
+            
+            // Add "and X more" element
+            const morePlayers = playerCount - selectedPlayers.length;
+            if (morePlayers > 0) {
+                const moreElement = document.createElement('div');
+                moreElement.className = 'player';
+                moreElement.textContent = `+${morePlayers} еще`;
+                playersListElement.appendChild(moreElement);
+            }
+        }
 
-mobileToggle.addEventListener('click', () => {
-  mobileNav.classList.toggle('active');
-});
+        // Initialize and update every 30 seconds
+        updateOnlinePlayers();
+        setInterval(updateOnlinePlayers, 30000);
 
-// Page Navigation
-const navLinks = document.querySelectorAll('.nav-link');
-const pageSections = document.querySelectorAll('.page-section');
+        // Animation for feature cards on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .platform, .forum-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight * 0.8) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
 
-function switchPage(pageId) {
-  pageSections.forEach(section => {
-    section.classList.remove('active');
-  });
-  
-  document.getElementById(pageId).classList.add('active');
-  
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('data-page') === pageId.replace('-page', '')) {
-      link.classList.add('active');
-    }
-  });
-  
-  mobileNav.classList.remove('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+        // Set initial state for animation
+        document.querySelectorAll('.feature-card, .platform, .forum-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
 
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const pageId = `${link.getAttribute('data-page')}-page`;
-    switchPage(pageId);
-  });
-});
-
-// Order Form submission
-const orderForm = document.getElementById('orderForm');
-const telegramProcess = document.getElementById('telegramProcess');
-
-orderForm.addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  // Get form values
-  const orderData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    telegram: document.getElementById('telegram').value,
-    language: document.getElementById('language').value,
-    complexity: document.getElementById('complexity').value,
-    deadline: document.getElementById('deadline').value,
-    description: document.getElementById('description').value
-  };
-  
-  try {
-    // Send data to Telegram bot
-    const response = await fetch('https://your-server.com/create-order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(orderData)
-    });
-    
-    if (!response.ok) throw new Error('Failed to send order');
-    
-    // Show success message
-    telegramProcess.style.display = 'block';
-    telegramProcess.scrollIntoView({ behavior: 'smooth' });
-    
-    // Reset form
-    orderForm.reset();
-    
-  } catch (error) {
-    console.error('Order submission error:', error);
-    alert('Error submitting order. Please try again later.');
-  }
-});
-
-// Language switcher buttons
-document.querySelectorAll('.language-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    changeLanguage(this.dataset.lang);
-  });
-});
-
-// Donkey Modal functionality
-const donkeyModal = document.getElementById('donkeyModal');
-const closeModal = document.querySelector('.close-modal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const logo = document.getElementById('logo');
-
-// Open modal when clicking logo
-logo.addEventListener('click', function(e) {
-  e.preventDefault();
-  donkeyModal.style.display = 'block';
-});
-
-// Close modal with close button
-closeModal.addEventListener('click', function() {
-  donkeyModal.style.display = 'none';
-});
-
-// Close modal with button in modal
-closeModalBtn.addEventListener('click', function(e) {
-  e.preventDefault();
-  donkeyModal.style.display = 'none';
-});
-
-// Close modal when clicking outside
-window.addEventListener('click', function(e) {
-  if (e.target === donkeyModal) {
-    donkeyModal.style.display = 'none';
-  }
-});
-
-// Make service buttons work
-document.querySelectorAll('.service-card .btn').forEach(button => {
-  button.addEventListener('click', function(e) {
-    e.preventDefault();
-    switchPage('order-page');
-  });
-});
-
-// Initialize page
-function initPage() {
-  // Check for saved language preference
-  const savedLanguage = localStorage.getItem('preferredLanguage');
-  if (savedLanguage) {
-    changeLanguage(savedLanguage);
-  } else {
-    // Default to English
-    changeLanguage('en');
-  }
-  
-  // Handle page based on hash
-  const hash = window.location.hash.replace('#', '');
-  if (hash) {
-    switchPage(`${hash}-page`);
-  } else {
-    switchPage('home-page');
-  }
-}
-
-window.addEventListener('load', initPage);
-</script>
+        // Trigger animations on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger on load as well
+        window.addEventListener('load', animateOnScroll);
+        // Also trigger immediately in case elements are already in view
+        setTimeout(animateOnScroll, 100);
+    </script>
 </body>
-              </html>
+</html>
