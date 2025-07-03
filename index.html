@@ -597,6 +597,31 @@ footer {
   color: var(--primary);
 }
 
+/* Music Control */
+.music-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: var(--transition);
+}
+
+.music-control:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(108, 99, 255, 0.4);
+}
+
 /* Responsive */
 @media (max-width: 992px) {
   .hero h1 {
@@ -672,6 +697,17 @@ footer {
     <a href="#" class="btn" style="margin-top: 20px; width: auto;" id="closeModalBtn">Close</a>
   </div>
 </div>
+
+<!-- Music Control -->
+<div class="music-control" id="musicControl">
+  <i class="fas fa-music"></i>
+</div>
+
+<!-- Audio Element -->
+<audio id="backgroundMusic" loop>
+  <source src="overseas.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 <!-- Header -->
 <header>
@@ -1336,6 +1372,41 @@ document.querySelectorAll('.service-card .btn').forEach(button => {
   });
 });
 
+// Music functionality
+const backgroundMusic = document.getElementById('backgroundMusic');
+const musicControl = document.getElementById('musicControl');
+let isMusicPlaying = false;
+
+// Function to play music
+function playMusic() {
+  backgroundMusic.play()
+    .then(() => {
+      isMusicPlaying = true;
+      musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+    })
+    .catch(error => {
+      console.log('Autoplay blocked:', error);
+      // Show button for manual start
+      musicControl.style.display = 'flex';
+    });
+}
+
+// Function to pause music
+function pauseMusic() {
+  backgroundMusic.pause();
+  isMusicPlaying = false;
+  musicControl.innerHTML = '<i class="fas fa-music"></i>';
+}
+
+// Click handler for music control
+musicControl.addEventListener('click', () => {
+  if (isMusicPlaying) {
+    pauseMusic();
+  } else {
+    playMusic();
+  }
+});
+
 // Initialize page
 function initPage() {
   // Check for saved language preference
@@ -1354,9 +1425,20 @@ function initPage() {
   } else {
     switchPage('home-page');
   }
+  
+  // Set music volume and try to play automatically
+  backgroundMusic.volume = 0.3;
+  playMusic();
+  
+  // Try to play music on first user interaction
+  document.body.addEventListener('click', () => {
+    if (!isMusicPlaying && backgroundMusic.paused) {
+      playMusic();
+    }
+  });
 }
 
 window.addEventListener('load', initPage);
 </script>
 </body>
-    </html>
+  </html>
