@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lilcryy | Россия</title>
+    <title>Lilcryy | Imperial Russia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,34 +14,25 @@
         }
         
         :root {
-            --white: #ffffff;
-            --blue: #0057b7;
-            --red: #e4181c;
-            --dark-blue: #003d82;
-            --light-blue: #e6f0ff;
-            --gray: #f5f5f7;
+            --gold: #D4AF37;
+            --dark-gold: #B8860B;
+            --imperial-red: #8B0000;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --light-text: #f0f0f0;
+            --medium-text: #c0c0c0;
         }
         
         body {
-            font-family: 'Rubik', sans-serif;
-            background: linear-gradient(135deg, var(--light-blue), var(--white));
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(rgba(5, 5, 5, 0.9), rgba(5, 5, 5, 0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 Q40,5 60,20 T100,20 Q85,40 100,60 T100,100 Q60,85 20,100 T0,100 Q5,60 0,20 T0,0 Q40,15 80,0 Z" fill="%23D4AF37" opacity="0.05"/></svg>');
+            background-size: 400px;
+            color: var(--light-text);
+            line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
-        }
-        
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23003d82" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
-            pointer-events: none;
-            z-index: -1;
         }
         
         .container {
@@ -52,406 +43,399 @@
         
         /* Header Styles */
         header {
-            background: linear-gradient(to right, var(--white) 33%, var(--blue) 33%, var(--blue) 66%, var(--red) 66%);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
         }
         
         .header-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            gap: 20px;
         }
         
         .logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-text {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 28px;
-            color: var(--dark-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .logo-icon {
-            color: var(--red);
-            font-size: 32px;
-            animation: pulse 2s infinite;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--dark-blue);
-            font-weight: 500;
-            font-size: 18px;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: var(--red);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--red);
-            transition: width 0.3s;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .social-icons {
-            display: flex;
             gap: 15px;
         }
         
-        .social-icon {
-            width: 40px;
-            height: 40px;
+        .logo-icon {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: var(--blue);
-            color: white;
+            border: 2px solid var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 3s infinite;
         }
         
-        .social-icon:hover {
-            transform: translateY(-5px);
-            background: var(--red);
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 40%, var(--gold) 150%);
+            opacity: 0.3;
+        }
+        
+        .logo-icon i {
+            font-size: 40px;
+            color: var(--gold);
+        }
+        
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            position: relative;
+        }
+        
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        
+        .tagline {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--medium-text);
+            letter-spacing: 3px;
+            text-align: center;
+            margin-top: 10px;
         }
         
         /* Hero Section */
         .hero {
-            padding: 80px 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,30 Q50,80 100,30 L100,100 L0,100 Z" fill="%230057b7" opacity="0.1"/></svg>') bottom/100% 20% no-repeat, linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(230,240,255,0.7));
+            padding: 80px 0 40px;
             text-align: center;
+            position: relative;
         }
         
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--dark-blue);
-            font-family: 'Montserrat', sans-serif;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            letter-spacing: 2px;
+            line-height: 1.1;
         }
         
         .hero h1 span {
-            color: var(--red);
+            display: block;
+            font-size: 1.8rem;
+            color: var(--medium-text);
+            margin-top: 15px;
+            letter-spacing: 4px;
             position: relative;
         }
         
         .hero h1 span::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--blue), var(--red));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.6;
         }
         
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 30px;
-            color: #444;
+            font-size: 1.3rem;
+            margin: 40px auto;
+            max-width: 600px;
+            color: var(--medium-text);
+            font-weight: 300;
         }
         
-        .cta-button {
+        .imperial-symbol {
+            position: absolute;
+            opacity: 0.05;
+            z-index: 1;
+        }
+        
+        .symbol-1 {
+            top: 10%;
+            left: 10%;
+            font-size: 150px;
+            color: var(--gold);
+            transform: rotate(15deg);
+        }
+        
+        .symbol-2 {
+            bottom: 10%;
+            right: 10%;
+            font-size: 120px;
+            color: var(--gold);
+            transform: rotate(-10deg);
+        }
+        
+        /* Telegram Section */
+        .telegram-section {
+            padding: 60px 0;
+            margin: 60px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+        
+        .telegram-container {
+            background: linear-gradient(to right, rgba(10, 10, 10, 0.8), rgba(20, 20, 20, 0.8));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .telegram-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.05"/></svg>');
+        }
+        
+        .telegram-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .telegram-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--imperial-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--gold);
+        }
+        
+        .telegram-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+        
+        .telegram-message {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .telegram-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold);
+        }
+        
+        .telegram-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--medium-text);
+        }
+        
+        .telegram-message .highlight {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .telegram-link {
             display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(to right, var(--blue), var(--dark-blue));
-            color: white;
+            padding: 15px 35px;
+            background: linear-gradient(to right, var(--dark-gold), var(--gold));
+            color: var(--dark-bg);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            border-radius: 50px;
+            border-radius: 5px;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 87, 183, 0.3);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
             position: relative;
             overflow: hidden;
             border: none;
             cursor: pointer;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
         }
         
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 87, 183, 0.4);
+        .telegram-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
         
-        .cta-button::before {
+        .telegram-link::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: 0.5s;
         }
         
-        .cta-button:hover::before {
+        .telegram-link:hover::before {
             left: 100%;
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-            background: var(--gray);
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: var(--dark-blue);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--blue), var(--red));
-            border-radius: 2px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .feature-icon {
-            font-size: 48px;
-            color: var(--blue);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark-blue);
-        }
-        
-        /* Gallery Section */
-        .gallery {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            height: 250px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0, 87, 183, 0.7), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-        
-        /* About Section */
-        .about {
-            padding: 80px 0;
-            background: linear-gradient(to bottom, var(--light-blue), var(--white));
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text h2 {
-            font-size: 2.5rem;
-            color: var(--dark-blue);
-            margin-bottom: 20px;
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-        }
-        
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--blue), var(--red));
-            opacity: 0.1;
-            z-index: 1;
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
         
         /* Footer */
         footer {
-            background: linear-gradient(to right, var(--white) 33%, var(--blue) 33%, var(--blue) 66%, var(--red) 66%);
-            padding: 40px 0 20px;
-            color: white;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column h3 {
-            color: var(--dark-blue);
-            margin-bottom: 20px;
-            font-size: 1.4rem;
+            padding: 50px 0 30px;
+            text-align: center;
             position: relative;
         }
         
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
+        .footer-content {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .footer-text {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .social-icon {
             width: 50px;
-            height: 3px;
-            background: var(--red);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
-        .footer-links a:hover {
-            color: var(--red);
-        }
-        
-        .footer-links i {
-            color: var(--blue);
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
         
         .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #333;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            color: var(--medium-text);
             font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .music-info {
+            font-size: 0.9rem;
+            color: var(--medium-text);
+            min-width: 150px;
+        }
+        
+        .music-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .music-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .music-btn:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: scale(1.1);
         }
         
         /* Animations */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
         
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
         
@@ -461,27 +445,46 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero h1 {
+            .logo-text {
                 font-size: 2.5rem;
             }
             
-            .about-content {
-                flex-direction: column;
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .telegram-container {
+                padding: 25px;
+            }
+            
+            .symbol-1, .symbol-2 {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Audio for background music (autoplay) -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Music Player Controls -->
+    <div class="music-player">
+        <div class="music-info">Imperial Anthem</div>
+        <div class="music-controls">
+            <button class="music-btn" id="playBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="music-btn" id="pauseBtn">
+                <i class="fas fa-pause"></i>
+            </button>
+            <button class="music-btn" id="volUpBtn">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
+    </div>
+    
     <!-- Header -->
     <header>
         <div class="container">
@@ -490,29 +493,8 @@
                     <div class="logo-icon">
                         <i class="fas fa-crown"></i>
                     </div>
-                    <div class="logo-text">Lilcryy</div>
-                </div>
-                
-                <nav>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
-                        <li><a href="#"><i class="fas fa-user"></i> Обо мне</a></li>
-                        <li><a href="#"><i class="fas fa-image"></i> Галерея</a></li>
-                        <li><a href="#"><i class="fas fa-music"></i> Музыка</a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> Контакты</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="social-icons">
-                    <div class="social-icon">
-                        <i class="fab fa-vk"></i>
-                    </div>
-                    <div class="social-icon">
-                        <i class="fab fa-telegram"></i>
-                    </div>
-                    <div class="social-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
+                    <h1 class="logo-text">Lilcryy</h1>
+                    <div class="tagline">IMPERIAL HERITAGE • MODERN SOUL</div>
                 </div>
             </div>
         </div>
@@ -522,80 +504,41 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Привет, я <span>Lilcryy</span></h1>
-                <p>Российский подросток, который создаёт крутой контент и вдохновляет других</p>
-                <button class="cta-button">Узнать больше</button>
+                <h1>MY NAME<span>MY COUNTRY</span></h1>
+                <p>In the heart of imperial legacy, I carve my path. The grandeur of Russia's history flows through my veins, inspiring my art and vision. I stand at the crossroads of tradition and modernity, creating with passion and purpose.</p>
             </div>
+        </div>
+        
+        <div class="imperial-symbol symbol-1">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="imperial-symbol symbol-2">
+            <i class="fas fa-shield-alt"></i>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
+    <!-- Telegram Section -->
+    <section class="telegram-section">
         <div class="container">
-            <h2 class="section-title">Мои интересы</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-music floating"></i>
+            <div class="telegram-container">
+                <div class="telegram-header">
+                    <div class="telegram-icon">
+                        <i class="fab fa-telegram"></i>
                     </div>
-                    <h3>Музыка</h3>
-                    <p>Слушаю и создаю современную музыку в стиле рэп и хип-хоп. Пишу тексты и записываю треки.</p>
+                    <h2>IMPERIAL TELEGRAPH</h2>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-gamepad floating"></i>
-                    </div>
-                    <h3>Гейминг</h3>
-                    <p>Люблю играть в компьютерные игры, особенно в шутеры и стратегии. Часто стримлю на Twitch.</p>
+                <div class="telegram-message">
+                    <p>To the esteemed Lilcryy,</p>
+                    <p>Your creative spirit resonates through the empire's corridors. Your work captures the <span class="highlight">majesty of our heritage</span> while forging new paths in the modern age.</p>
+                    <p>We invite you to join our exclusive circle of visionaries where tradition meets innovation. Share your creations with fellow artists and patrons who appreciate the depth of Russian culture.</p>
+                    <p>Connect with us through the Imperial Telegraph to access exclusive content, collaborations, and a community that values the legacy we carry forward.</p>
+                    <p style="margin-top: 20px;">With admiration,<br>The Imperial Circle</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-camera floating"></i>
-                    </div>
-                    <h3>Фотография</h3>
-                    <p>Увлекаюсь фотографией, особенно люблю снимать городские пейзажи и природу России.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery">
-        <div class="container">
-            <h2 class="section-title">Россия в объективе</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1547448415-e9f5b28e570d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Москва">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Санкт-Петербург">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1590418606746-018840f9cd0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Природа России">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Архитектура">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Обо мне</h2>
-                    <p>Привет! Меня зовут Lilcryy, я подросток из России, который любит создавать крутой контент и делиться им с миром. Я увлекаюсь музыкой, видеомонтажом, фотографией и геймингом.</p>
-                    <p>На этом сайте я делюсь своими работами, мыслями и вдохновением. Россия - моя родина, и я горжусь её богатой культурой и историей. В своих работах я стараюсь показать современную Россию глазами молодого поколения.</p>
-                    <p>Присоединяйся ко мне в этом путешествии! Давай вместе создавать что-то удивительное и вдохновляющее.</p>
-                    <button class="cta-button" style="margin-top: 20px;">Связаться со мной</button>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Lilcryy">
-                </div>
+                <a href="#" class="telegram-link">
+                    <i class="fab fa-telegram"></i> JOIN THE CIRCLE
+                </a>
             </div>
         </div>
     </section>
@@ -604,79 +547,95 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Lilcryy</h3>
-                    <p>Создаю контент, которым горжусь. Россия - это сила и вдохновение!</p>
-                    <div class="social-icons" style="margin-top: 20px;">
-                        <div class="social-icon">
-                            <i class="fab fa-vk"></i>
-                        </div>
-                        <div class="social-icon">
-                            <i class="fab fa-telegram"></i>
-                        </div>
-                        <div class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <div class="social-icon">
-                            <i class="fab fa-youtube"></i>
-                        </div>
+                <div class="footer-text">
+                    "In the soul of every Russian artist lies the echo of our imperial past and the vision of our future. I create at this intersection."
+                </div>
+                
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-spotify"></i>
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Ссылки</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Главная</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Обо мне</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Галерея</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Музыка</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Контакты</a></li>
-                    </ul>
+                <div class="copyright">
+                    &copy; 2023 LILCRYY | IMPERIAL CREATIONS
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-envelope"></i> lilcryy@example.com</a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> +7 (999) 123-45-67</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Москва, Россия</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 Lilcryy. Все права защищены. С любовью к России!</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Простая анимация при скролле
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
+        // Music player functionality
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const volUpBtn = document.getElementById('volUpBtn');
+        
+        // Autoplay music with user interaction requirement
+        document.addEventListener('click', function initAudio() {
+            // Try to play audio
+            bgMusic.volume = 0.3;
+            bgMusic.play().catch(e => console.log("Autoplay prevented: ", e));
             
-            document.querySelectorAll('.feature-card, .gallery-item, .about-image').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Плавная прокрутка
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
+            // Remove this event listener after first interaction
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+        
+        // Play button
+        playBtn.addEventListener('click', () => {
+            bgMusic.play();
+        });
+        
+        // Pause button
+        pauseBtn.addEventListener('click', () => {
+            bgMusic.pause();
+        });
+        
+        // Volume up button
+        volUpBtn.addEventListener('click', () => {
+            if(bgMusic.volume < 0.9) {
+                bgMusic.volume += 0.1;
+            } else {
+                bgMusic.volume = 1.0;
+            }
+        });
+        
+        // Parallax effect for imperial symbols
+        document.addEventListener('mousemove', (e) => {
+            const symbols = document.querySelectorAll('.imperial-symbol');
+            symbols.forEach(symbol => {
+                const speed = symbol.getAttribute('data-speed') || 5;
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                symbol.style.transform = `translate(${x}px, ${y}px) rotate(${symbol.style.transform ? parseFloat(symbol.style.transform.split('rotate(')[1]) || 0 : 0}deg)`;
             });
         });
+        
+        // Typewriter effect for hero text
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.innerHTML;
+        heroTitle.innerHTML = '';
+        
+        let charIndex = 0;
+        const typeWriter = () => {
+            if(charIndex < originalText.length) {
+                heroTitle.innerHTML += originalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 50);
+            }
+        };
+        
+        // Start typewriter effect after a delay
+        setTimeout(typeWriter, 500);
     </script>
 </body>
     </html>
