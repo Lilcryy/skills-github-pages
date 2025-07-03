@@ -3,150 +3,680 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lilcryy Bio</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <title>Lilcryy | Россия</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #E6F7FF, #B3D9FF); /* Нежный градиентный фон */
-            color: #333;
-            text-align: center;
-            overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+            box-sizing: border-box;
         }
-
-        header {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0 0 20px 20px;
+        
+        :root {
+            --white: #ffffff;
+            --blue: #0057b7;
+            --red: #e4181c;
+            --dark-blue: #003d82;
+            --light-blue: #e6f0ff;
+            --gray: #f5f5f7;
         }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            color: #007BFF; /* Яркий синий цвет */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-
-        section {
-            padding: 40px;
-            margin: 30px auto;
-            max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease-in-out; /* Плавная анимация при наведении */
-        }
-
-        section:hover {
-            transform: translateY(-5px); /* Небольшое поднятие при наведении */
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: rgba(240, 240, 240, 0.7);
-            border-radius: 8px;
-            text-align: left;
-        }
-
-        audio {
-            margin-top: 30px;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        footer {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
-            position: relative; /* Важно, чтобы footer не был fixed */
-            width: 100%;
-            bottom: 0;
-            border-radius: 20px 20px 0 0;
-            margin-top: 50px;
-        }
-
-        /* Анимация для фона */
-        @keyframes backgroundAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        
         body {
-          /* Добавляем фон с российским флагом, но более тонкий */
-          background: linear-gradient(135deg, #fff 25%, #005291 25%, #005291 50%, #fff 50%, #fff 75%, #d92121 75%, #d92121 100%);
-          background-size: 40px 40px; /* Уменьшаем размер полос */
-          animation: backgroundAnimation 15s infinite linear; /* Добавляем анимацию */
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, var(--light-blue), var(--white));
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
-
-
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23003d82" stroke-width="0.5" stroke-opacity="0.1"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--white) 33%, var(--blue) 33%, var(--blue) 66%, var(--red) 66%);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: var(--dark-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .logo-icon {
+            color: var(--red);
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            font-size: 18px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--red);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background: var(--red);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,30 Q50,80 100,30 L100,100 L0,100 Z" fill="%230057b7" opacity="0.1"/></svg>') bottom/100% 20% no-repeat, linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(230,240,255,0.7));
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-blue);
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero h1 span {
+            color: var(--red);
+            position: relative;
+        }
+        
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--blue), var(--red));
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #444;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(to right, var(--blue), var(--dark-blue));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 87, 183, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 87, 183, 0.4);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark-blue);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--blue), var(--red));
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            color: var(--blue);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-blue);
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 87, 183, 0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--light-blue), var(--white));
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--blue), var(--red));
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--white) 33%, var(--blue) 33%, var(--blue) 66%, var(--red) 66%);
+            padding: 40px 0 20px;
+            color: white;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--red);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--red);
+        }
+        
+        .footer-links i {
+            color: var(--blue);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-
+    <!-- Header -->
     <header>
-        <h1>Lilcryy Bio</h1>
-        <p>Добро пожаловать на мою личную страницу!</p>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="logo-text">Lilcryy</div>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="#"><i class="fas fa-user"></i> Обо мне</a></li>
+                        <li><a href="#"><i class="fas fa-image"></i> Галерея</a></li>
+                        <li><a href="#"><i class="fas fa-music"></i> Музыка</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> Контакты</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <i class="fab fa-vk"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <section>
-        <h2>Обо мне</h2>
-        <p>Здесь вы можете написать немного о себе, о своих интересах и увлечениях. Например: Я родился и вырос в [город]. С детства увлекаюсь [интерес].  Люблю природу, технологии и создавать что-то новое.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Привет, я <span>Lilcryy</span></h1>
+                <p>Российский подросток, который создаёт крутой контент и вдохновляет других</p>
+                <button class="cta-button">Узнать больше</button>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>Языки</h2>
-        <p>Я владею следующими языками:</p>
-        <ul>
-            <li>Русский (родной)</li>
-            <li>Английский (средний)</li>
-            <li>[Добавьте другие языки, которыми владеете]</li>
-        </ul>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Мои интересы</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-music floating"></i>
+                    </div>
+                    <h3>Музыка</h3>
+                    <p>Слушаю и создаю современную музыку в стиле рэп и хип-хоп. Пишу тексты и записываю треки.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad floating"></i>
+                    </div>
+                    <h3>Гейминг</h3>
+                    <p>Люблю играть в компьютерные игры, особенно в шутеры и стратегии. Часто стримлю на Twitch.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera floating"></i>
+                    </div>
+                    <h3>Фотография</h3>
+                    <p>Увлекаюсь фотографией, особенно люблю снимать городские пейзажи и природу России.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>Образование</h2>
-        <p>Здесь можно указать информацию об образовании:</p>
-        <ul>
-            <li>[Учебное заведение], [Год окончания] - [Специальность]</li>
-            <li>[Другое учебное заведение], [Год окончания] - [Специальность]</li>
-        </ul>
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Россия в объективе</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1547448415-e9f5b28e570d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Москва">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Санкт-Петербург">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590418606746-018840f9cd0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Природа России">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Архитектура">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>Навыки</h2>
-        <p>Перечислите свои ключевые навыки:</p>
-        <ul>
-            <li>Разработка веб-сайтов (HTML, CSS, JavaScript)</li>
-            <li>Графический дизайн (Photoshop, Illustrator)</li>
-            <li>Видеомонтаж (Adobe Premiere Pro)</li>
-            <li>[Добавьте другие навыки]</li>
-        </ul>
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Обо мне</h2>
+                    <p>Привет! Меня зовут Lilcryy, я подросток из России, который любит создавать крутой контент и делиться им с миром. Я увлекаюсь музыкой, видеомонтажом, фотографией и геймингом.</p>
+                    <p>На этом сайте я делюсь своими работами, мыслями и вдохновением. Россия - моя родина, и я горжусь её богатой культурой и историей. В своих работах я стараюсь показать современную Россию глазами молодого поколения.</p>
+                    <p>Присоединяйся ко мне в этом путешествии! Давай вместе создавать что-то удивительное и вдохновляющее.</p>
+                    <button class="cta-button" style="margin-top: 20px;">Связаться со мной</button>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Lilcryy">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <audio controls autoplay loop>
-        <source src="your_music.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудиоэлемент.
-    </audio>
-
+    <!-- Footer -->
     <footer>
-        &copy; 2023 Lilcryy Bio
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Lilcryy</h3>
+                    <p>Создаю контент, которым горжусь. Россия - это сила и вдохновение!</p>
+                    <div class="social-icons" style="margin-top: 20px;">
+                        <div class="social-icon">
+                            <i class="fab fa-vk"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Главная</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Обо мне</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Галерея</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Музыка</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-envelope"></i> lilcryy@example.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +7 (999) 123-45-67</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Москва, Россия</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Lilcryy. Все права защищены. С любовью к России!</p>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        // Простая анимация при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.feature-card, .gallery-item, .about-image').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Плавная прокрутка
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
-</html>
+    </html>
